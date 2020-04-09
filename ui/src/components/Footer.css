@@ -1,0 +1,15 @@
+.CustomNavbar {
+  padding: 6px 12px;
+}
+
+.CustomDropdownMenu {
+  background-color: #343a40;
+}
+
+.CustomDropdownToggle {
+  padding: 6px 9px;
+}
+
+.CustomDropdownItem {
+  color: #fff;
+}

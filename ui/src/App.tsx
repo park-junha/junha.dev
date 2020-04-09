@@ -1,17 +1,27 @@
-import React from 'react';
-import Main from './components/Main';
+import React, {
+  Component
+} from 'react';
 import Footer from './components/Footer';
+import Main from './components/Main';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <Main />
-      <div className="AppFooter">
+interface State {
+  component: string
+}
+
+class App extends Component<{}, State> {
+  state: State = {
+    component: 'LandingPage'
+  };
+
+  public render (): JSX.Element {
+    return (
+      <div className='App'>
+        <Main component={this.state.component} />
         <Footer />
       </div>
-    </div>
-  );
+    );
+  };
 }
 
 export default App;

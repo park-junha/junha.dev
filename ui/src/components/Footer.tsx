@@ -1,16 +1,44 @@
 import React, { Component } from 'react';
-import { Nav, Navbar } from "react-bootstrap";
+import {
+  Dropdown,
+  Nav,
+  Navbar
+} from 'react-bootstrap';
+import './Footer.css';
 
 export default class Footer extends Component {
   render () {
     return (
       <div>
-        <Navbar expand="md" fixed="bottom" bg="dark" variant="dark">
-          <Nav className="justify-content-left" variant="pills">
+        <Navbar
+          className='CustomNavbar'
+          fixed='bottom'
+          bg='dark'
+          variant='dark'
+        >
+          <Nav className='justify-content-left'>
             <Nav.Item>
-              <Nav.Link disabled>
-                Disabled
-              </Nav.Link>
+              <Dropdown
+                drop='up'
+              >
+                <Dropdown.Toggle
+                  id='navbar-main'
+                  variant='dark'
+                  title='Main'
+                  className='CustomDropdownToggle'
+                >
+                  Home
+                </Dropdown.Toggle>
+                <Dropdown.Menu
+                  className='CustomDropdownMenu'
+                >
+                  <Dropdown.Item
+                    className='CustomDropdownItem'
+                  >
+                    About Me
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </Nav.Item>
           </Nav>
         </Navbar>
