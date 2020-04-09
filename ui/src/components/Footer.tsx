@@ -6,7 +6,11 @@ import {
 } from 'react-bootstrap';
 import './Footer.css';
 
-export default class Footer extends Component {
+interface Props {
+  changeComponent: (newComponent: string) => void;
+}
+
+export default class Footer extends Component<Props, {}> {
   render () {
     return (
       <div>
@@ -34,6 +38,7 @@ export default class Footer extends Component {
                 >
                   <Dropdown.Item
                     className='CustomDropdownItem'
+                    onClick={() => this.props.changeComponent('AboutMe')}
                   >
                     About Me
                   </Dropdown.Item>

@@ -3,7 +3,7 @@ import React, {
   Suspense,
   lazy
 } from 'react';
-import LoadingPage from './LoadingPage';
+import LoadingScreen from './LoadingScreen';
 import './Main.css';
 
 interface Props {
@@ -30,7 +30,7 @@ export default class Main extends Component<Props> {
   render (): JSX.Element {
     return (
       <div>
-        <Suspense fallback={<LoadingPage />}>
+        <Suspense fallback={<LoadingScreen />}>
           { renderComponent(this.props.component) }
         </Suspense>
       </div>
