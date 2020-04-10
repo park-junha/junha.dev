@@ -4,13 +4,13 @@ import React, {
   lazy
 } from 'react';
 import LoadingScreen from './LoadingScreen';
-import './Main.css';
 
 interface Props {
   component: string;
 }
 
 const LandingPage = lazy( () => import('./LandingPage'));
+const AboutMe = lazy( () => import('./Home/AboutMe'));
 const NotFound = lazy( () => import('./404'));
 
 function renderComponent (component: string): JSX.Element {
@@ -18,6 +18,10 @@ function renderComponent (component: string): JSX.Element {
     case 'LandingPage':
       return (
         <LandingPage />
+      );
+    case 'AboutMe':
+      return (
+        <AboutMe />
       );
     default:
       return (

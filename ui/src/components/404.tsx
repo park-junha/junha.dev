@@ -5,8 +5,8 @@ import React, {
 export default class NotFound extends Component {
   render () {
     return (
-      <div>
-        <h2>404</h2>
+      <div className='fadein centered'>
+        <h1>404</h1>
       </div>
     );
   };

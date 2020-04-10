@@ -5,7 +5,7 @@ import React, {
 export default class LandingPage extends Component {
   render () {
     return (
-      <div>
+      <div className='fadein'>
         <h2>Welcome.</h2>
       </div>
     );

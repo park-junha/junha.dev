@@ -1,3 +1,57 @@
-.App {
+body {
+  color: #fff;
+  margin: 8px;
+}
+
+h1, h2 {
   text-align: center;
+}
+
+/* For content to be fixed at center of page */
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+/* Fade in contents */
+.fadein {
+  animation: fadeinanim .5s;
+
+  /* Preserve style before and after animation */
+  animation-fill-mode: both;
+}
+
+/* Delay fade in animation on loading spinner */
+.spinner {
+  animation-delay: 1s;
+}
+
+/* Fade in animation for spinner */
+@keyframes fadeinanim {
+  from {
+    opacity: 0;
+    transform: translate(0, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Footer */
+.CustomNavbar {
+  padding: 6px 12px;
+}
+
+.CustomDropdownMenu {
+  background-color: #343a40;
+}
+
+.CustomDropdownToggle {
+  padding: 6px 9px;
+}
+
+.CustomDropdownItem {
+  color: #fff;
 }

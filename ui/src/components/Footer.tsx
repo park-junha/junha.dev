@@ -4,7 +4,6 @@ import {
   Nav,
   Navbar
 } from 'react-bootstrap';
-import './Footer.css';
 
 interface Props {
   changeComponent: (newComponent: string) => void;
@@ -41,6 +40,13 @@ export default class Footer extends Component<Props, {}> {
                     onClick={() => this.props.changeComponent('AboutMe')}
                   >
                     About Me
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    className='CustomDropdownItem'
+                    disabled
+                  >
+                    More to Come!
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
