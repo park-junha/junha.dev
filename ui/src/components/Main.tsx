@@ -33,7 +33,7 @@ function renderComponent (component: string): JSX.Element {
 export default class Main extends Component<Props> {
   render (): JSX.Element {
     return (
-      <div>
+      <div className='Main'>
         <Suspense fallback={<LoadingScreen />}>
           { renderComponent(this.props.component) }
         </Suspense>

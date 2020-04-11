@@ -52,6 +52,11 @@ export default class Footer extends Component<Props, {}> {
               </Dropdown>
             </Nav.Item>
           </Nav>
+          <Navbar.Collapse className='justify-content-end'>
+            <Navbar.Text>
+              1.0.0
+            </Navbar.Text>
+          </Navbar.Collapse>
         </Navbar>
       </div>
     );

@@ -1,9 +1,13 @@
-body {
+.Main {
   color: #fff;
-  margin: 8px;
+  margin: 8px 8px 75px 8px;
 }
 
-h1, h2 {
+.page-padding {
+  padding-top: 30px;
+}
+
+.centered-text {
   text-align: center;
 }
 
@@ -14,9 +18,17 @@ h1, h2 {
   left: 50%;
 }
 
-/* Fade in contents */
+/* Fade in contents from top */
 .fadein {
-  animation: fadeinanim .5s;
+  animation: fadeintop .5s;
+
+  /* Preserve style before and after animation */
+  animation-fill-mode: both;
+}
+
+/* Fade in contents from bottom */
+.fadein-bottom {
+  animation: fadeinbottom .5s;
 
   /* Preserve style before and after animation */
   animation-fill-mode: both;
@@ -27,8 +39,8 @@ h1, h2 {
   animation-delay: 1s;
 }
 
-/* Fade in animation for spinner */
-@keyframes fadeinanim {
+/* Fade in from top */
+@keyframes fadeintop {
   from {
     opacity: 0;
     transform: translate(0, -10px);
@@ -36,6 +48,30 @@ h1, h2 {
   to {
     opacity: 1;
     transform: translate(0, 0);
+  }
+}
+
+/* Fade in from bottom */
+@keyframes fadeinbottom {
+  from {
+    opacity: 0;
+    transform: translate(0, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Fade out to bottom */
+@keyframes fadeoutbottom {
+  from {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, -10px);
   }
 }
 
