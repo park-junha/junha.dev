@@ -11,6 +11,7 @@ interface Props {
 
 const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Home/AboutMe'));
+const Portfolio = lazy( () => import('./Home/Portfolio'));
 const NotFound = lazy( () => import('./404'));
 
 function renderComponent (component: string): JSX.Element {
@@ -22,6 +23,10 @@ function renderComponent (component: string): JSX.Element {
     case 'AboutMe':
       return (
         <AboutMe />
+      );
+    case 'Portfolio':
+      return (
+        <Portfolio />
       );
     default:
       return (
