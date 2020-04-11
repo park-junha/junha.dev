@@ -11,7 +11,7 @@ import {
 Note: Using target="_blank" without rel="noopener noreferrer" is a security risk: see https://mathiasbynens.github.io/rel-noopener
 */
 
-export default class Portfolio extends Component {
+export default class Experience extends Component {
   render (): JSX.Element {
     return (
       <div className='fadein page-padding'>

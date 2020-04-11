@@ -30,7 +30,7 @@ export default class Footer extends Component<Props, {}> {
                   title='Main'
                   className='CustomDropdownToggle'
                 >
-                  Home
+                  Portfolio
                 </Dropdown.Toggle>
                 <Dropdown.Menu
                   className='CustomDropdownMenu'
@@ -43,9 +43,9 @@ export default class Footer extends Component<Props, {}> {
                   </Dropdown.Item>
                   <Dropdown.Item
                     className='CustomDropdownItem'
-                    onClick={() => this.props.changeComponent('Portfolio')}
+                    onClick={() => this.props.changeComponent('Experience')}
                   >
-                    Portfolio
+                    Experience
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item
