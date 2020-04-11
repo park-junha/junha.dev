@@ -77,10 +77,10 @@ export default class Portfolio extends Component {
                       <Card.Text>
                         <i>Founding Engineer</i> and <i>Technical Advisor</i> to the Board of Directors
                         <ul>
-                          <li>Created a <strong>Flask</strong> and <strong>MySQL</strong> Web <a href='http://gradplanner.herokuapp.com/' target='_blank' rel='noopener noreferrer'>resource</a> to assist undergraduate students graduate on time from the ground up</li>
-                          <li>Developed a unique <strong>Python</strong> algorithm to determine a student&#39;s remaining classes and schedule them for timely graduation</li>
+                          <li>Created a Web <a href='http://gradplanner.herokuapp.com/' target='_blank' rel='noopener noreferrer'>resource</a> to assist undergraduate students graduate on time, prototyped with <strong>Flask</strong> and <strong>MySQL</strong></li>
+                          <li>Directed a team of 5 engineers to migrate the software to an MVC model with <strong>React</strong> (a <strong>JavaScript</strong> framework), <strong>PostgreSQL</strong>, and <strong>NodeJS</strong></li>
                           <li>Performed code reviews, merge conflicts, task management, and interactive rebases using <strong>Git</strong> and <strong>GitHub</strong></li>
-                          <li>Deployed the live application on <strong>AWS</strong> and <strong>Heroku</strong> to deliver to students</li>
+                          <li>Conducted technical interviews to onboard new interns and employees</li>
                         </ul>
                         <i>Technologies Used:</i>
                         <ul>
