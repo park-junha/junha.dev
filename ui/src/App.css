@@ -76,18 +76,23 @@
 }
 
 /* Footer */
-.CustomNavbar {
+.footer-custom {
   padding: 6px 12px;
 }
 
-.CustomDropdownMenu {
+.footer-dropdown {
   background-color: #343a40;
 }
 
-.CustomDropdownToggle {
+.footer-button {
+  margin: 0px 3px;
   padding: 6px 9px;
 }
 
-.CustomDropdownItem {
+.footer-mdicon {
+  padding: 0px 0px 2px 0px;
+}
+
+.footer-item {
   color: #fff;
 }

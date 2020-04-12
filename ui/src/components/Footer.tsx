@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import {
   Dropdown,
   Nav,
-  Navbar
+  Navbar,
+  Button
 } from 'react-bootstrap';
+import {
+  MdHome
+} from 'react-icons/md';
 
 interface Props {
   changeComponent: (newComponent: string) => void;
@@ -14,12 +18,21 @@ export default class Footer extends Component<Props, {}> {
     return (
       <div>
         <Navbar
-          className='CustomNavbar'
+          className='footer-custom'
           fixed='bottom'
           bg='dark'
           variant='dark'
         >
           <Nav className='justify-content-left'>
+            <Nav.Item>
+              <Button
+                variant='dark'
+                className='footer-button'
+                onClick={() => this.props.changeComponent('LandingPage')}
+              >
+                <MdHome className='footer-mdicon' />
+              </Button>
+            </Nav.Item>
             <Nav.Item>
               <Dropdown
                 drop='up'
@@ -28,28 +41,28 @@ export default class Footer extends Component<Props, {}> {
                   id='navbar-main'
                   variant='dark'
                   title='Main'
-                  className='CustomDropdownToggle'
+                  className='footer-button'
                 >
                   Portfolio
                 </Dropdown.Toggle>
                 <Dropdown.Menu
-                  className='CustomDropdownMenu'
+                  className='footer-dropdown'
                 >
                   <Dropdown.Item
-                    className='CustomDropdownItem'
+                    className='footer-item'
                     onClick={() => this.props.changeComponent('AboutMe')}
                   >
                     About Me
                   </Dropdown.Item>
                   <Dropdown.Item
-                    className='CustomDropdownItem'
+                    className='footer-item'
                     onClick={() => this.props.changeComponent('Experience')}
                   >
                     Experience
                   </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item
-                    className='CustomDropdownItem'
+                    className='footer-item'
                     disabled
                   >
                     More to Come!
