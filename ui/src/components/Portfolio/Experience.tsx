@@ -24,8 +24,17 @@ export default class Experience extends Component {
                 <Card
                   bg='dark'
                 >
-                  <Accordion.Toggle as={Card.Header} eventKey='HCL'>
-                    <strong>Software Engineer</strong>, HCL Technologies
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    className='card-header'
+                    eventKey='HCL'
+                  >
+                    <div className='card-header-left'>
+                      <strong>Software Engineer</strong>, HCL Technologies
+                    </div>
+                    <div className='card-header-right'>
+                      May &#39;20 - Current
+                    </div>
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey='HCL'>
                     <Card.Body>
@@ -36,8 +45,17 @@ export default class Experience extends Component {
                 <Card
                   bg='dark'
                 >
-                  <Accordion.Toggle as={Card.Header} eventKey='IO'>
-                    <strong>Full Stack Software Engineer</strong>, Infinite Options
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    className='card-header'
+                    eventKey='IO'
+                  >
+                    <div className='card-header-left'>
+                      <strong>Full Stack Software Engineer</strong>, Infinite Options
+                    </div>
+                    <div className='card-header-right'>
+                      Sep &#39;19 - May &#39;20
+                    </div>
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey='IO'>
                     <Card.Body>
@@ -69,8 +87,17 @@ export default class Experience extends Component {
                 <Card
                   bg='dark'
                 >
-                  <Accordion.Toggle as={Card.Header} eventKey='GP'>
-                    <strong>Advisor to the Board</strong>, Grad Planner
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    className='card-header'
+                    eventKey='GP'
+                  >
+                    <div className='card-header-left'>
+                      <strong>Advisor to the Board</strong>, Grad Planner
+                    </div>
+                    <div className='card-header-right'>
+                      Sep &#39;19 - Current
+                    </div>
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey='GP'>
                     <Card.Body>

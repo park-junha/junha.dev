@@ -1,12 +1,15 @@
+/* Add margin to scroll past footer */
 .Main {
   color: #fff;
   margin: 8px 8px 75px 8px;
 }
 
+/* Extra padding for text pages */
 .page-padding {
   padding-top: 30px;
 }
 
+/* Align to center */
 .centered-text {
   text-align: center;
 }
@@ -16,6 +19,28 @@
   position: fixed;
   top: 50%;
   left: 50%;
+}
+
+/* React Bootstrap Card Header with inline text */
+.card-header {
+  clear: both;
+  transition: .3s;
+}
+
+/* Animate Card Header on hover */
+.card-header:hover {
+  background-color: rgba(255,255,255,0.15);
+}
+
+/* Left-aligned text of Card Header */
+.card-header-left {
+  float: left;
+}
+
+/* Right-aligned text of Card Header */
+.card-header-right {
+  float: right;
+  opacity: 60%;
 }
 
 /* Fade in contents from top */
