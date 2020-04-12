@@ -49,10 +49,10 @@ export default class Experience extends Component {
                       <Card.Text>
                         <i>Software Team Lead</i> and <i>Full Stack Developer</i> for a Web-based, customer-facing e-commerce <a href='https://preptoyourdoor.netlify.com/' target='_blank' rel='noopener noreferrer'>platform</a>
                         <ul>
-                          <li>Actively developed and scaled the web UI with <strong>React</strong> (a <strong>JavaScript</strong> web UI framework) and web APIs with <strong>Flask</strong> (a <strong>Python</strong> web framework)</li>
+                          <li>Developed and scaled the web UI with <strong>React</strong> (a <strong>JavaScript</strong> web UI framework) and web APIs with <strong>Flask</strong> (a <strong>Python</strong> web framework)</li>
                           <li>Designed and developed a <strong>MySQL</strong> database and hosted it on <strong>AWS RDS</strong></li>
-                          <li>Populated the database from existing data with <strong>Python</strong> and <strong>Shell</strong> scripts</li>
-                          <li>Performed <a href='https://github.com/infinite-options/Prep-To-Your-Door' target='_blank' rel='noopener noreferrer'>code</a> reviews, merge conflicts, and interactive rebases using <strong>Git</strong></li>
+                          <li>Automated procedures and platform services with <strong>Python</strong> and <strong>Shell</strong> scripts</li>
+                          <li>Performed <a href='https://github.com/infinite-options/Prep-To-Your-Door' target='_blank' rel='noopener noreferrer'>code</a> reviews, merge conflict resolutions, and rebases using <strong>Git</strong></li>
                           <li>Deployed APIs to a serverless <strong>AWS Lambda</strong> infrastructure using <strong>Zappa</strong> and the web UI to <strong>Netlify</strong></li>
                         </ul>
                         <i>Technologies Used:</i>
@@ -77,9 +77,9 @@ export default class Experience extends Component {
                       <Card.Text>
                         <i>Founding Engineer</i> and <i>Technical Advisor</i> to the Board of Directors
                         <ul>
-                          <li>Created a Web <a href='http://gradplanner.herokuapp.com/' target='_blank' rel='noopener noreferrer'>resource</a> to assist undergraduate students graduate on time, prototyped with <strong>Flask</strong> and <strong>MySQL</strong></li>
-                          <li>Directed a team of 5 engineers to migrate the software to an MVC model with <strong>React</strong> (a <strong>JavaScript</strong> framework), <strong>PostgreSQL</strong>, and <strong>NodeJS</strong></li>
-                          <li>Performed code reviews, merge conflicts, task management, and interactive rebases using <strong>Git</strong> and <strong>GitHub</strong></li>
+                          <li>Created a Web <a href='http://gradplanner.herokuapp.com/' target='_blank' rel='noopener noreferrer'>resource</a> to assist undergraduate students graduate on time, prototyped using the <strong>LAMP</strong> (<strong>Python</strong>) stack</li>
+                          <li>Directed the team to migrate the software to an MVC model with a <strong>React</strong> UI, <strong>Flask</strong> APIs, and a <strong>PostgreSQL</strong> database</li>
+                          <li>Performed code reviews, merge conflict resolutions, task management, and interactive rebases using <strong>Git</strong> and <strong>GitHub</strong></li>
                           <li>Conducted technical interviews to onboard new interns and employees</li>
                         </ul>
                         <i>Technologies Used:</i>
