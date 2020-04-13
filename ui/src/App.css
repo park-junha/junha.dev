@@ -4,6 +4,24 @@
   margin: 8px 8px 75px 8px;
 }
 
+/* Landing page big button */
+.landing-button-big {
+  margin: 2px;
+  min-width: 244px;
+  max-width: 244px;
+  min-height: 120px;
+  max-height: 120px;
+}
+
+/* Landing page regular button */
+.landing-button {
+  margin: 2px;
+  min-width: 120px;
+  max-width: 120px;
+  min-height: 120px;
+  max-height: 120px;
+}
+
 /* Extra padding for text pages */
 .page-padding {
   padding-top: 30px;

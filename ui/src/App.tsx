@@ -23,8 +23,13 @@ class App extends Component<{}, State> {
   public render (): JSX.Element {
     return (
       <div className='App'>
-        <Main component={this.state.component} />
-        <Footer changeComponent={this.changeComponent}/>
+        <Main
+          component={this.state.component}
+          changeComponent={this.changeComponent}
+        />
+        <Footer
+          changeComponent={this.changeComponent}
+        />
       </div>
     );
   };
