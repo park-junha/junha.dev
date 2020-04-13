@@ -1,38 +1,141 @@
-.App {
+/* Add margin to scroll past footer */
+.Main {
+  color: #fff;
+  margin: 8px 8px 75px 8px;
+}
+
+/* Landing page big button */
+.landing-button-big {
+  margin: 2px;
+  min-width: 244px;
+  max-width: 244px;
+  min-height: 120px;
+  max-height: 120px;
+}
+
+/* Landing page regular button */
+.landing-button {
+  margin: 2px;
+  min-width: 120px;
+  max-width: 120px;
+  min-height: 120px;
+  max-height: 120px;
+}
+
+/* Extra padding for text pages */
+.page-padding {
+  padding-top: 30px;
+}
+
+/* Align to center */
+.centered-text {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* For content to be fixed at center of page */
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* React Bootstrap Card Header with inline text */
+.card-header {
+  clear: both;
+  transition: .3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* Animate Card Header on hover */
+.card-header:hover {
+  background-color: rgba(255,255,255,0.15);
 }
 
-.App-link {
-  color: #61dafb;
+/* Left-aligned text of Card Header */
+.card-header-left {
+  float: left;
 }
 
-@keyframes App-logo-spin {
+/* Right-aligned text of Card Header */
+.card-header-right {
+  float: right;
+  opacity: 60%;
+}
+
+/* Fade in contents from top */
+.fadein {
+  animation: fadeintop .5s;
+
+  /* Preserve style before and after animation */
+  animation-fill-mode: both;
+}
+
+/* Fade in contents from bottom */
+.fadein-bottom {
+  animation: fadeinbottom .5s;
+
+  /* Preserve style before and after animation */
+  animation-fill-mode: both;
+}
+
+/* Delay fade in animation on loading spinner */
+.spinner {
+  animation-delay: 1s;
+}
+
+/* Fade in from top */
+@keyframes fadeintop {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translate(0, -10px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translate(0, 0);
   }
+}
+
+/* Fade in from bottom */
+@keyframes fadeinbottom {
+  from {
+    opacity: 0;
+    transform: translate(0, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+/* Fade out to bottom */
+@keyframes fadeoutbottom {
+  from {
+    opacity: 1;
+    transform: translate(0, 0px);
+  }
+  to {
+    opacity: 0;
+    transform: translate(0, -10px);
+  }
+}
+
+/* Footer */
+.footer-custom {
+  padding: 6px 12px;
+}
+
+.footer-dropdown {
+  background-color: #343a40;
+}
+
+.footer-button {
+  margin: 0px 3px;
+  padding: 6px 9px;
+}
+
+.footer-mdicon {
+  padding: 0px 0px 2px 0px;
+}
+
+.footer-item {
+  color: #fff;
 }
