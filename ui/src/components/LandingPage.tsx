@@ -47,7 +47,7 @@ export default class LandingPage extends Component<Props> {
                   variant='secondary'
                   onClick={() => this.props.changeComponent('Experience')}
                 >
-                  Portfolio
+                  Experience
                 </Button>
               </div>
             </Col>
