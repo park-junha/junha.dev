@@ -10,10 +10,10 @@ export default class AboutMe extends Component {
   render (): JSX.Element {
     return (
       <div className='fadein page-padding'>
-        <Container>
+        <Container fluid>
           <Row>
             <Col />
-            <Col xs={6}>
+            <Col sm={10} md={8} lg={6}>
               <h2 className='centered-text'>About Me</h2>
               <Card
                 bg='dark'

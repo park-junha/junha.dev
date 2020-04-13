@@ -18,7 +18,7 @@ export default class Experience extends Component {
         <Container>
           <Row>
             <Col />
-            <Col xs={7}>
+            <Col sm={12} md={9} lg={7}>
               <h2 className='centered-text'>Professional Experience</h2>
               <Accordion defaultActiveKey='IO'>
                 <Card
