@@ -73,7 +73,7 @@ export default class Footer extends Component<Props, {}> {
           </Nav>
           <Navbar.Collapse className='justify-content-end'>
             <Navbar.Text>
-              1.0.0
+              1.0.1
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>
