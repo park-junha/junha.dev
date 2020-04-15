@@ -13,6 +13,7 @@ interface Props {
 const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
 const Experience = lazy( () => import('./Portfolio/Experience'));
+const Skills = lazy( () => import('./Portfolio/Skills'));
 const NotFound = lazy( () => import('./404'));
 
 export default class Main extends Component<Props> {
@@ -31,6 +32,10 @@ export default class Main extends Component<Props> {
       case 'Experience':
         return (
           <Experience />
+        );
+      case 'Skills':
+        return (
+          <Skills />
         );
       default:
         return (
