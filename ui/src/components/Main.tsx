@@ -5,6 +5,8 @@ import React, {
 } from 'react';
 import LoadingScreen from './LoadingScreen';
 
+import { Api } from '../interfaces/Api';
+
 //  Not real API, storing data in JSON file for now
 import data from '../data';
 
@@ -16,7 +18,7 @@ interface Props {
 interface State {
   api: Api;
 }
-
+/*
 //  API interfaces
 interface Api {
   TechnicalSkills: Skillsets;
@@ -51,7 +53,7 @@ interface Skill {
 interface Skillsets extends Array<Skillset>{};
 interface Skills extends Array<Skill>{};
 interface Experiences extends Array<Experience>{};
-
+*/
 const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
 const ProfessionalExperience = lazy( () => import('./Portfolio/Experience'));

@@ -6,23 +6,11 @@ import {
 //, Card
 } from 'react-bootstrap';
 
+import { Skillsets } from '../../interfaces/Api';
+
 interface Props {
   technicalSkills: Skillsets;
 }
-
-interface Skillset {
-  skillset: string;
-  skills: Skills;
-}
-
-interface Skill {
-  name: string;
-  level: number;
-  desc: string;
-}
-
-interface Skillsets extends Array<Skillset>{};
-interface Skills extends Array<Skill>{};
 
 export default class TechnicalSkills extends Component<Props> {
   render (): JSX.Element {

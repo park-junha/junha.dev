@@ -7,21 +7,12 @@ import {
 , Accordion
 } from 'react-bootstrap';
 
+import { Experiences } from '../../interfaces/Api';
+
 interface Props {
   defaultKey: string;
   experience: Experiences;
 }
-
-interface Experience {
-  id: string;
-  title: string;
-  company: string;
-  start: string;
-  end: string;
-  body: string;
-}
-
-interface Experiences extends Array<Experience>{};
 
 export default class ProfessionalExperience extends Component<Props> {
   render (): JSX.Element {
