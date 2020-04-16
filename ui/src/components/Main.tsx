@@ -20,6 +20,21 @@ interface State {
 //  API interfaces
 interface Api {
   TechnicalSkills: Skillsets;
+  ProfessionalExperience: ExperienceData;
+}
+
+interface ExperienceData {
+  defaultKey: string;
+  experience: Experiences;
+}
+
+interface Experience {
+  id: string;
+  title: string;
+  company: string;
+  start: string;
+  end: string;
+  body: string;
 }
 
 interface Skillset {
@@ -35,17 +50,22 @@ interface Skill {
 
 interface Skillsets extends Array<Skillset>{};
 interface Skills extends Array<Skill>{};
+interface Experiences extends Array<Experience>{};
 
 const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
-const Experience = lazy( () => import('./Portfolio/Experience'));
-const Skills = lazy( () => import('./Portfolio/Skills'));
+const ProfessionalExperience = lazy( () => import('./Portfolio/Experience'));
+const TechnicalSkills = lazy( () => import('./Portfolio/Skills'));
 const NotFound = lazy( () => import('./404'));
 
 export default class Main extends Component<Props> {
   state: State = {
     api: {
       TechnicalSkills: [],
+      ProfessionalExperience: {
+        defaultKey: '',
+        experience: [],
+      },
     },
   };
 
@@ -73,11 +93,13 @@ export default class Main extends Component<Props> {
         );
       case 'Experience':
         return (
-          <Experience />
+          <ProfessionalExperience
+            {...this.state.api.ProfessionalExperience}
+          />
         );
       case 'Skills':
         return (
-          <Skills
+          <TechnicalSkills
             technicalSkills={this.state.api.TechnicalSkills}
           />
         );

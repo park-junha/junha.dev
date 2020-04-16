@@ -24,7 +24,7 @@ interface Skill {
 interface Skillsets extends Array<Skillset>{};
 interface Skills extends Array<Skill>{};
 
-export default class AboutMe extends Component<Props> {
+export default class TechnicalSkills extends Component<Props> {
   render (): JSX.Element {
     return (
       <div className='fadein page-padding'>
