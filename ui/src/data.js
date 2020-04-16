@@ -10,7 +10,7 @@ const data = {
         },
         {
           'name': 'JavaScript',
-          'level': 4,
+          'level': 5,
           'desc': 'My primary web development language.'
         },
         {
@@ -55,7 +55,7 @@ const data = {
       'skills': [
         {
           'name': 'Flask',
-          'level': 4,
+          'level': 5,
           'desc': 'My primary web backend framework. I also sometimes develop view controllers in Flask as well.'
         },
         {
@@ -115,7 +115,7 @@ const data = {
         },
         {
           'name': 'VIM',
-          'level': 5,
+          'level': 4,
           'desc': 'My editor of choice.'
         }
       ]

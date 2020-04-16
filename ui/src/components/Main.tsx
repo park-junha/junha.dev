@@ -13,6 +13,10 @@ interface Props {
   changeComponent: (newComponent: string) => void;
 }
 
+interface State {
+  api: Api;
+}
+
 //  API interfaces
 interface Api {
   TechnicalSkills: Skillsets;
@@ -39,12 +43,19 @@ const Skills = lazy( () => import('./Portfolio/Skills'));
 const NotFound = lazy( () => import('./404'));
 
 export default class Main extends Component<Props> {
+  state: State = {
+    api: {
+      TechnicalSkills: [],
+    },
+  };
+
   async componentDidMount(): Promise<void> {
-    this.fetchApi();
-  }
+    await this.setState({
+      api: this.fetchApi(),
+    });
+  };
 
   fetchApi = (): Api => {
-    console.log(data);
     return data;
   };
 
@@ -66,7 +77,9 @@ export default class Main extends Component<Props> {
         );
       case 'Skills':
         return (
-          <Skills />
+          <Skills
+            technicalSkills={this.state.api.TechnicalSkills}
+          />
         );
       default:
         return (
