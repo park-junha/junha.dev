@@ -78,7 +78,10 @@ export default class Footer extends Component<Props, {}> {
             </Nav.Item>
           </Nav>
           <Navbar.Collapse className='justify-content-end'>
-            <Navbar.Text>
+            <Navbar.Text
+              className='footer-version'
+              onClick={() => this.props.changeComponent('VersionLog')}
+            >
               1.1.0
             </Navbar.Text>
           </Navbar.Collapse>

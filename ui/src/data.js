@@ -1,4 +1,49 @@
 const data = {
+  'Versions': [
+    {
+      'version': '1.1.0',
+      'notes': [
+        {
+          'label': 'Feature',
+          'desc': 'Added a Skills section.'
+        },
+        {
+          'label': 'Feature',
+          'desc': 'Separated data from codebase into a single file.'
+        },
+        {
+          'label': 'Feature',
+          'desc': 'Added Release Notes, accessible via footer.'
+        }
+      ]
+    },
+    {
+      'version': '1.0.1',
+      'notes': [
+        {
+          'label': 'Feature',
+          'desc': 'Added mobile device viewability.'
+        }
+      ]
+    },
+    {
+      'version': '1.0.0',
+      'notes': [
+        {
+          'label': 'Feature',
+          'desc': 'First public release.'
+        },
+        {
+          'label': 'Feature',
+          'desc': 'Added About Me and Experience sections.'
+        },
+        {
+          'label': 'Feature',
+          'desc': 'Added links to GitHub and LinkedIn.'
+        }
+      ]
+    }
+  ],
   'TechnicalSkills': [
     {
       'skillset': 'Codebases',
