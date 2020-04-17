@@ -171,6 +171,52 @@ const data = {
       ]
     }
   ],
+  'Projects': [
+    {
+      'name': 'Prep To Your Door',
+      'employer': 'Infinite Options',
+      'codebases': [
+        'Python',
+        'JavaScript'
+      ],
+      'databases': [
+        'MySQL'
+      ],
+      'frameworks': [
+        'React',
+        'Flask'
+      ],
+    },
+    {
+      'name': 'Grad Planner',
+      'employer': 'Grad Planner',
+      'codebases': [
+        'Python',
+        'JavaScript'
+      ],
+      'databases': [
+        'MySQL',
+        'PostgreSQL'
+      ],
+      'frameworks': [
+        'Flask',
+        'React'
+      ]
+    },
+    {
+      'name': 'Personal Website',
+      'employer': 'Self-employed',
+      'codebases': [
+        'TypeScript',
+        'JavaScript'
+      ],
+      'databases': [
+      ],
+      'frameworks': [
+        'React'
+      ]
+    }
+  ],
   'ProfessionalExperience': {
     'defaultKey': 'IO',
     'experience': [
