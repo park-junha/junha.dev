@@ -146,3 +146,13 @@
 .footer-item {
   color: #fff;
 }
+
+.footer-version {
+  opacity: 50%;
+  transition: .3s;
+}
+
+/* Animate Card Header & Nav tab on hover */
+.footer-version:hover {
+  opacity: 100%;
+}
