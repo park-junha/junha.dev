@@ -33,7 +33,7 @@ export default class TechnicalSkills extends Component<Props, State> {
           <div>
             <h5>{skill.name}</h5>
             <ul>
-              <li>Proficiency Level: {skill.level}</li>
+              {/*<li>Proficiency Level: {skill.level}</li>*/}
               <li>{skill.desc}</li>
             </ul>
           </div>
@@ -54,33 +54,22 @@ export default class TechnicalSkills extends Component<Props, State> {
         <Container>
           <Row>
             <Col />
-            <Col sm={12} md={10} lg={8}>
+            <Col sm={12} md={10} xl={8}>
               <h2 className='centered-text'>Technical Skills</h2>
               <Card
                 bg='dark'
               >
                 <Card.Header>
-                  <Nav variant='tabs'>
+                  <Nav fill variant='tabs'>
                   {this.props.technicalSkills.map(technicalSkill => (
-                    <Nav.Item>
+                    <Nav.Item
+                    >
                       <Nav.Link
                         onClick={() => this.changeBody(technicalSkill.skills)}
+                        className='navtab-custom'
                       >
                         {technicalSkill.skillset}
                       </Nav.Link>
-                    {/*
-                      <ul>
-                        {technicalSkill.skills.map(skill => (
-                          <div>
-                            <li>{skill.name}</li>
-                            <ul>
-                              <li>Proficiency Level: {skill.level}</li>
-                              <li>{skill.desc}</li>
-                            </ul>
-                          </div>
-                        ))}
-                      </ul>
-                    */}
                     </Nav.Item>
                   ))}
                   </Nav>

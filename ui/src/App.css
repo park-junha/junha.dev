@@ -45,8 +45,15 @@
   transition: .3s;
 }
 
-/* Animate Card Header on hover */
-.card-header-custom:hover {
+/* React Nav tab white text */
+.navtab-custom {
+  color: #fff;
+  transition: .3s;
+}
+
+/* Animate Card Header & Nav tab on hover */
+.card-header-custom:hover, .navtab-custom:hover {
+  color: #fff;
   background-color: rgba(255,255,255,0.15);
 }
 

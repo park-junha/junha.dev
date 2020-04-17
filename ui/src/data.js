@@ -6,12 +6,12 @@ const data = {
         {
           'name': 'Python',
           'level': 5,
-          'desc': 'My primary general-purpose, high-level software development language.'
+          'desc': 'My primary general-purpose, high-level software development language. I do all sorts of things with Python, including Backend Web Development, Automation, and Data Scraping.'
         },
         {
           'name': 'JavaScript',
           'level': 5,
-          'desc': 'My primary web development language.'
+          'desc': 'My primary web development language. I also use JavaScript frameworks extensively, particularly React and Express.'
         },
         {
           'name': 'TypeScript',
@@ -26,7 +26,7 @@ const data = {
         {
           'name': 'C++',
           'level': 3,
-          'desc': 'The first programming language I learned.'
+          'desc': 'The language I used at university.'
         }
       ]
     },
@@ -35,18 +35,18 @@ const data = {
       'skills': [
         {
           'name': 'React / JSX',
-          'level': 5,
-          'desc': 'My primary web frontend framework.'
+          'level': 4,
+          'desc': 'My primary web frontend framework. I also sometimes pair TypeScript with React (this website was written with TypeScript!)'
+        },
+        {
+          'name': 'HTML / CSS',
+          'level': 4,
+          'desc': 'Kinda need to know these for any kind of web development.'
         },
         {
           'name': 'Bootstrap',
           'level': 4,
           'desc': 'CSS is awful.'
-        },
-        {
-          'name': 'HTML / CSS',
-          'level': 4,
-          'desc': 'I sometimes develop vanilla websites.'
         }
       ]
     },
@@ -54,14 +54,14 @@ const data = {
       'skillset': 'Backend',
       'skills': [
         {
-          'name': 'Flask',
-          'level': 5,
-          'desc': 'My primary web backend framework. I also sometimes develop view controllers in Flask as well.'
+          'name': 'Flask (Python)',
+          'level': 4,
+          'desc': 'My primary web backend framework. I generally deploy Flask apps via Apache or to a serverless AWS Lambda architecture using Zappa.'
         },
         {
-          'name': 'Express',
+          'name': 'Express (JavaScript)',
           'level': 3,
-          'desc': 'The other web backend framework I use.'
+          'desc': 'The other web backend framework I use. I run Express apps on NodeJS.'
         },
         {
           'name': 'HTTP',
@@ -76,7 +76,7 @@ const data = {
         {
           'name': 'MySQL',
           'level': 4,
-          'desc': 'My primary relational database management system.'
+          'desc': 'My primary relational database management system. I think it\'s dumb that you can\'t directly do a Full Outer Join in MySQL.'
         },
         {
           'name': 'PostgreSQL',
@@ -86,7 +86,7 @@ const data = {
         {
           'name': 'MongoDB',
           'level': 3,
-          'desc': 'Non-relational database service I use.'
+          'desc': 'Non-relational database service I use for personal projects.'
         }
       ]
     },
@@ -96,7 +96,7 @@ const data = {
         {
           'name': 'Amazon Web Services',
           'level': 4,
-          'desc': 'Especially experienced with EC2, RDS, and S3 services.'
+          'desc': 'Especially experienced with EC2, Lambda, RDS, and S3 services. Deployed both LAMP stack apps and MERN stack apps (I haven\'t used enough Angular).'
         },
         {
           'name': 'GitHub',
@@ -106,12 +106,17 @@ const data = {
       ]
     },
     {
-      'skillset': 'Miscellaneous',
+      'skillset': 'Other',
       'skills': [
         {
           'name': 'Git',
           'level': 5,
-          'desc': 'I\'ve done hundreds of merges, interactive rebases, and conflict resolutions. I also sometimes use bisect and reflog.'
+          'desc': 'I\'ve done hundreds of Merge Conflicts, Interactive Rebases, and Commit Squashes. I also sometimes use Bisect and Reflog.'
+        },
+        {
+          'name': 'Linux',
+          'level': 4,
+          'desc': 'Very comfortable using and navigating the Linux operating system, particularly Ubuntu and Debian.'
         },
         {
           'name': 'VIM',
