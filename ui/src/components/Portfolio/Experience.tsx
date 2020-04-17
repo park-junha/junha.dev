@@ -30,13 +30,13 @@ export default class ProfessionalExperience extends Component<Props> {
                   >
                     <Accordion.Toggle
                       as={Card.Header}
-                      className='card-header'
+                      className='card-header-custom'
                       eventKey={exp.id}
                     >
-                      <div className='card-header-left'>
+                      <div className='card-header-custom-left'>
                         <strong>{exp.title}</strong>, {exp.company}
                       </div>
-                      <div className='card-header-right'>
+                      <div className='card-header-custom-right'>
                         {exp.start} - {exp.end}
                       </div>
                     </Accordion.Toggle>

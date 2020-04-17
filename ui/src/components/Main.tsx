@@ -18,49 +18,14 @@ interface Props {
 interface State {
   api: Api;
 }
-/*
-//  API interfaces
-interface Api {
-  TechnicalSkills: Skillsets;
-  ProfessionalExperience: ExperienceData;
-}
 
-interface ExperienceData {
-  defaultKey: string;
-  experience: Experiences;
-}
-
-interface Experience {
-  id: string;
-  title: string;
-  company: string;
-  start: string;
-  end: string;
-  body: string;
-}
-
-interface Skillset {
-  skillset: string;
-  skills: Skills;
-}
-
-interface Skill {
-  name: string;
-  level: number;
-  desc: string;
-}
-
-interface Skillsets extends Array<Skillset>{};
-interface Skills extends Array<Skill>{};
-interface Experiences extends Array<Experience>{};
-*/
 const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
 const ProfessionalExperience = lazy( () => import('./Portfolio/Experience'));
 const TechnicalSkills = lazy( () => import('./Portfolio/Skills'));
 const NotFound = lazy( () => import('./404'));
 
-export default class Main extends Component<Props> {
+export default class Main extends Component<Props, State> {
   state: State = {
     api: {
       TechnicalSkills: [],

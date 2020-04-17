@@ -3,40 +3,92 @@ import {
   Container
 , Row
 , Col
-//, Card
+, Card
+, Nav
 } from 'react-bootstrap';
 
-import { Skillsets } from '../../interfaces/Api';
+import {
+  Skillsets
+, Skills
+} from '../../interfaces/Api';
 
 interface Props {
   technicalSkills: Skillsets;
 }
 
-export default class TechnicalSkills extends Component<Props> {
+interface State {
+  skills: Skills;
+}
+
+export default class TechnicalSkills extends Component<Props, State> {
+  state: State = {
+//  skills: this.props.technicalSkills[0].skills,
+    skills: []
+  };
+
+  displaySkills = (skills: Skills): JSX.Element => {
+    return (
+      <div>
+        {skills.map(skill => (
+          <div>
+            <h5>{skill.name}</h5>
+            <ul>
+              <li>Proficiency Level: {skill.level}</li>
+              <li>{skill.desc}</li>
+            </ul>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  changeBody = (newSkills: Skills): void => {
+    this.setState({
+      skills: newSkills,
+    });
+  };
+
   render (): JSX.Element {
     return (
       <div className='fadein page-padding'>
-        <Container fluid>
+        <Container>
           <Row>
             <Col />
-            <Col sm={12} md={9} lg={7}>
+            <Col sm={12} md={10} lg={8}>
               <h2 className='centered-text'>Technical Skills</h2>
-              {this.props.technicalSkills.map(technicalSkill => (
-                <div>
-                  <h4>{technicalSkill.skillset}</h4>
-                  <ul>
-                    {technicalSkill.skills.map(skill => (
-                      <div>
-                        <li>{skill.name}</li>
-                        <ul>
-                          <li>Proficiency Level: {skill.level}</li>
-                          <li>{skill.desc}</li>
-                        </ul>
-                      </div>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+              <Card
+                bg='dark'
+              >
+                <Card.Header>
+                  <Nav variant='tabs'>
+                  {this.props.technicalSkills.map(technicalSkill => (
+                    <Nav.Item>
+                      <Nav.Link
+                        onClick={() => this.changeBody(technicalSkill.skills)}
+                      >
+                        {technicalSkill.skillset}
+                      </Nav.Link>
+                    {/*
+                      <ul>
+                        {technicalSkill.skills.map(skill => (
+                          <div>
+                            <li>{skill.name}</li>
+                            <ul>
+                              <li>Proficiency Level: {skill.level}</li>
+                              <li>{skill.desc}</li>
+                            </ul>
+                          </div>
+                        ))}
+                      </ul>
+                    */}
+                    </Nav.Item>
+                  ))}
+                  </Nav>
+                </Card.Header>
+                <Card.Body>
+                  { this.displaySkills(this.state.skills) }
+                </Card.Body>
+              </Card>
             </Col>
             <Col />
           </Row>

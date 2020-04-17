@@ -40,23 +40,23 @@
 }
 
 /* React Bootstrap Card Header with inline text */
-.card-header {
+.card-header-custom {
   clear: both;
   transition: .3s;
 }
 
 /* Animate Card Header on hover */
-.card-header:hover {
+.card-header-custom:hover {
   background-color: rgba(255,255,255,0.15);
 }
 
 /* Left-aligned text of Card Header */
-.card-header-left {
+.card-header-custom-left {
   float: left;
 }
 
 /* Right-aligned text of Card Header */
-.card-header-right {
+.card-header-custom-right {
   float: right;
   opacity: 60%;
 }
