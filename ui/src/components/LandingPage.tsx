@@ -57,6 +57,14 @@ export default class LandingPage extends Component<Props> {
             <Col />
             <Col xs={12}>
               <div>
+                <Button
+                  className='landing-button-big'
+                  size='lg'
+                  variant='secondary'
+                  onClick={() => this.props.changeComponent('Skills')}
+                >
+                  Skills
+                </Button>
                 <a
                   href='https://github.com/park-junha'
                   target='_blank'

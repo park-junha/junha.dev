@@ -20,8 +20,8 @@ export default class AboutMe extends Component {
               >
                 <Card.Body>
                   <h4>Hi. My name is Junha Park.</h4>
-                  <p>I&#39;m a software engineer interested in Full Stack Development, Process Automation, and Cloud Computing. My primary technologies are Python and JavaScript, but I have a variety of niche skills as well, including React, TypeScript, Shell Scripting, and the many variations of SQL.</p>
-                  <p>Outside of software development, I love browsing YouTube / Netflix, listening to music, playing video games, and speedcubing.</p>
+                  <p>I&#39;m a seasoned software engineer based in the Bay Area. My primary technologies are <strong>Python</strong> and <strong>JavaScript</strong>, and I specialize in <strong>Full Stack Development</strong>, <strong>Process Automation</strong>, and <strong>Cloud Computing</strong>.</p>
+                  <p>These are my interests and hobbies: <i>listening to music</i>, <i>fashion</i>, <i>twisty cube puzzles</i>, and <i>video games</i>.</p>
                   <p>That&#39;s all for now, more to come soon!</p>
                 </Card.Body>
               </Card>

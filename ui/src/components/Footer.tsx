@@ -60,6 +60,12 @@ export default class Footer extends Component<Props, {}> {
                   >
                     Experience
                   </Dropdown.Item>
+                  <Dropdown.Item
+                    className='footer-item'
+                    onClick={() => this.props.changeComponent('Skills')}
+                  >
+                    Skills
+                  </Dropdown.Item>
                   <Dropdown.Divider />
                   <Dropdown.Item
                     className='footer-item'
@@ -72,8 +78,11 @@ export default class Footer extends Component<Props, {}> {
             </Nav.Item>
           </Nav>
           <Navbar.Collapse className='justify-content-end'>
-            <Navbar.Text>
-              1.0.1
+            <Navbar.Text
+              className='footer-version'
+              onClick={() => this.props.changeComponent('VersionLog')}
+            >
+              1.1.0
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>
