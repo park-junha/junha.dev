@@ -110,7 +110,7 @@ const data = {
         {
           'name': 'Flask (Python)',
           'level': 4,
-          'desc': 'My primary web backend framework. I generally deploy Flask apps via Apache or to a serverless AWS Lambda architecture using Zappa.'
+          'desc': 'My primary web backend framework. I generally use Flask to write web APIs / middleware.'
         },
         {
           'name': 'Express (JavaScript)',
@@ -130,7 +130,7 @@ const data = {
         {
           'name': 'MySQL',
           'level': 4,
-          'desc': 'My primary relational database management system. I think it\'s dumb that you can\'t directly do a Full Outer Join in MySQL.'
+          'desc': 'My primary relational database management system.'
         },
         {
           'name': 'PostgreSQL',
@@ -150,12 +150,7 @@ const data = {
         {
           'name': 'Amazon Web Services',
           'level': 4,
-          'desc': 'Especially experienced with EC2, Lambda, RDS, and S3 services. Deployed both LAMP stack apps and MERN stack apps (I haven\'t used enough Angular).'
-        },
-        {
-          'name': 'GitHub',
-          'level': 3,
-          'desc': 'Primarily used for codebases and lightweight task management.'
+          'desc': 'Especially experienced with EC2, Lambda, RDS, and S3 services.'
         }
       ]
     },
