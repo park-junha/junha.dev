@@ -23,6 +23,8 @@ const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
 const ProfessionalExperience = lazy( () => import('./Portfolio/Experience'));
 const TechnicalSkills = lazy( () => import('./Portfolio/Skills'));
+const Projects = lazy( () => import('./Portfolio/Projects'));
+
 const VersionLog = lazy( () => import('./VersionLog'));
 const NotFound = lazy( () => import('./404'));
 
@@ -31,6 +33,7 @@ export default class Main extends Component<Props, State> {
     api: {
       Versions: [],
       TechnicalSkills: [],
+      Projects: [],
       ProfessionalExperience: {
         defaultKey: '',
         experience: [],
@@ -70,6 +73,12 @@ export default class Main extends Component<Props, State> {
         return (
           <TechnicalSkills
             technicalSkills={this.state.api.TechnicalSkills}
+          />
+        );
+      case 'Projects':
+        return (
+          <Projects
+            projects={this.state.api.Projects}
           />
         );
       case 'VersionLog':

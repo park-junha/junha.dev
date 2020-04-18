@@ -3,6 +3,7 @@
 export interface Api {
   Versions: VersionData;
   TechnicalSkills: Skillsets;
+  Projects: ProjectData;
   ProfessionalExperience: ExperienceData;
 }
 
@@ -19,6 +20,17 @@ export interface VersionNote {
 
 export interface VersionData extends Array<Version>{};
 export interface VersionNotes extends Array<VersionNote>{};
+
+//  Projects
+export interface Project {
+  name: string;
+  employer: string;
+  codebases: string[];
+  databases: string[];
+  frameworks: string[];
+}
+
+export interface ProjectData extends Array<Project>{};
 
 //  Experience
 export interface ExperienceData {
