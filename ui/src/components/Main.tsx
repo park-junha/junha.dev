@@ -7,16 +7,10 @@ import LoadingScreen from './LoadingScreen';
 
 import { Api } from '../interfaces/Api';
 
-//  Not real API, storing data in JSON file for now
-import data from '../data';
-
 interface Props {
+  api: Api;
   component: string;
   changeComponent: (newComponent: string) => void;
-}
-
-interface State {
-  api: Api;
 }
 
 const LandingPage = lazy( () => import('./LandingPage'));
@@ -28,29 +22,7 @@ const Projects = lazy( () => import('./Portfolio/Projects'));
 const VersionLog = lazy( () => import('./VersionLog'));
 const NotFound = lazy( () => import('./404'));
 
-export default class Main extends Component<Props, State> {
-  state: State = {
-    api: {
-      Versions: [],
-      TechnicalSkills: [],
-      Projects: [],
-      ProfessionalExperience: {
-        defaultKey: '',
-        experience: [],
-      },
-    },
-  };
-
-  async componentDidMount(): Promise<void> {
-    await this.setState({
-      api: this.fetchApi(),
-    });
-  };
-
-  fetchApi = (): Api => {
-    return data;
-  };
-
+export default class Main extends Component<Props> {
   renderComponent = (component: string): JSX.Element => {
     switch (component) {
       case 'LandingPage':
@@ -66,25 +38,25 @@ export default class Main extends Component<Props, State> {
       case 'Experience':
         return (
           <ProfessionalExperience
-            {...this.state.api.ProfessionalExperience}
+            {...this.props.api.ProfessionalExperience}
           />
         );
       case 'Skills':
         return (
           <TechnicalSkills
-            technicalSkills={this.state.api.TechnicalSkills}
+            technicalSkills={this.props.api.TechnicalSkills}
           />
         );
       case 'Projects':
         return (
           <Projects
-            projects={this.state.api.Projects}
+            projects={this.props.api.Projects}
           />
         );
       case 'VersionLog':
         return (
           <VersionLog
-            versionData={this.state.api.Versions}
+            versionData={this.props.api.Versions}
           />
         );
       default:

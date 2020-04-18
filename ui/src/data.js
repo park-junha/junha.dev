@@ -1,6 +1,15 @@
 const data = {
   'Versions': [
     {
+      'version': '1.2.0',
+      'notes': [
+        {
+          'label': 'Feature',
+          'desc': 'Added Projects section and link to resume.'
+        }
+      ]
+    },
+    {
       'version': '1.1.1',
       'notes': [
         {
