@@ -54,18 +54,19 @@
 /* Animate Card Header & Nav tab on hover */
 .card-header-custom:hover, .navtab-custom:hover {
   color: #fff;
-  background-color: rgba(255,255,255,0.15);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Left-aligned text of Card Header */
 .card-header-custom-left {
+  margin: 0px 8px 0px 0px;
   float: left;
 }
 
 /* Right-aligned text of Card Header */
 .card-header-custom-right {
+  color: rgba(255, 255, 255, 0.5);
   float: right;
-  opacity: 60%;
 }
 
 /* Fade in contents from top */
@@ -148,11 +149,10 @@
 }
 
 .footer-version {
-  opacity: 50%;
   transition: .3s;
 }
 
 /* Animate Card Header & Nav tab on hover */
 .footer-version:hover {
-  opacity: 100%;
+  color: rgba(255, 255, 255, 1);
 }
