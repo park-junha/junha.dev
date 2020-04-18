@@ -82,7 +82,7 @@ export default class Footer extends Component<Props, {}> {
               className='footer-version'
               onClick={() => this.props.changeComponent('VersionLog')}
             >
-              1.1.0
+              1.1.1
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>

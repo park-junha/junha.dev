@@ -1,6 +1,15 @@
 const data = {
   'Versions': [
     {
+      'version': '1.1.1',
+      'notes': [
+        {
+          'label': 'Bugfix',
+          'desc': 'Fixed CSS issue causing unexpected 1% opacity for some labels.'
+        }
+      ]
+    },
+    {
       'version': '1.1.0',
       'notes': [
         {
