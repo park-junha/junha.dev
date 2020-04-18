@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-  Dropdown,
-  Nav,
-  Navbar,
-  Button
+  Dropdown
+, Nav
+, Navbar
+, Button
 } from 'react-bootstrap';
 import {
   MdHome
@@ -54,6 +54,7 @@ export default class Footer extends Component<Props, {}> {
                   >
                     About Me
                   </Dropdown.Item>
+                  <Dropdown.Divider />
                   <Dropdown.Item
                     className='footer-item'
                     onClick={() => this.props.changeComponent('Experience')}
@@ -71,13 +72,6 @@ export default class Footer extends Component<Props, {}> {
                     onClick={() => this.props.changeComponent('Projects')}
                   >
                     Projects
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item
-                    className='footer-item'
-                    disabled
-                  >
-                    More to Come!
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

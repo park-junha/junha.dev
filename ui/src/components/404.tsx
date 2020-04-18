@@ -2,10 +2,10 @@ import React, {
   Component
 } from 'react';
 import {
-  Container,
-  Row,
-  Col,
-  Card
+  Container
+, Row
+, Col
+, Card
 } from 'react-bootstrap';
 
 export default class NotFound extends Component {

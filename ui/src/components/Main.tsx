@@ -1,7 +1,7 @@
 import React, {
-  Component,
-  Suspense,
-  lazy
+  Component
+, Suspense
+, lazy
 } from 'react';
 import LoadingScreen from './LoadingScreen';
 
