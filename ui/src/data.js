@@ -1,6 +1,15 @@
 const data = {
   'Versions': [
     {
+      'version': '1.1.2',
+      'notes': [
+        {
+          'label': 'Feature',
+          'desc': 'Added link to resume.'
+        }
+      ]
+    },
+    {
       'version': '1.1.1',
       'notes': [
         {
@@ -110,7 +119,7 @@ const data = {
         {
           'name': 'Flask (Python)',
           'level': 4,
-          'desc': 'My primary web backend framework. I generally deploy Flask apps via Apache or to a serverless AWS Lambda architecture using Zappa.'
+          'desc': 'My primary web backend framework. I generally use Flask to write web APIs / middleware.'
         },
         {
           'name': 'Express (JavaScript)',
@@ -130,7 +139,7 @@ const data = {
         {
           'name': 'MySQL',
           'level': 4,
-          'desc': 'My primary relational database management system. I think it\'s dumb that you can\'t directly do a Full Outer Join in MySQL.'
+          'desc': 'My primary relational database management system.'
         },
         {
           'name': 'PostgreSQL',
@@ -150,12 +159,7 @@ const data = {
         {
           'name': 'Amazon Web Services',
           'level': 4,
-          'desc': 'Especially experienced with EC2, Lambda, RDS, and S3 services. Deployed both LAMP stack apps and MERN stack apps (I haven\'t used enough Angular).'
-        },
-        {
-          'name': 'GitHub',
-          'level': 3,
-          'desc': 'Primarily used for codebases and lightweight task management.'
+          'desc': 'Especially experienced with EC2, Lambda, RDS, and S3 services.'
         }
       ]
     },
@@ -177,6 +181,52 @@ const data = {
           'level': 4,
           'desc': 'My editor of choice.'
         }
+      ]
+    }
+  ],
+  'Projects': [
+    {
+      'name': 'Prep To Your Door',
+      'employer': 'Infinite Options',
+      'codebases': [
+        'Python',
+        'JavaScript'
+      ],
+      'databases': [
+        'MySQL'
+      ],
+      'frameworks': [
+        'React',
+        'Flask'
+      ],
+    },
+    {
+      'name': 'Grad Planner',
+      'employer': 'Grad Planner',
+      'codebases': [
+        'Python',
+        'JavaScript'
+      ],
+      'databases': [
+        'MySQL',
+        'PostgreSQL'
+      ],
+      'frameworks': [
+        'Flask',
+        'React'
+      ]
+    },
+    {
+      'name': 'Personal Website',
+      'employer': 'Self-employed',
+      'codebases': [
+        'TypeScript',
+        'JavaScript'
+      ],
+      'databases': [
+      ],
+      'frameworks': [
+        'React'
       ]
     }
   ],
