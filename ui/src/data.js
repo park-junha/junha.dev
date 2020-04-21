@@ -5,7 +5,7 @@ const data = {
       'notes': [
         {
           'label': 'Feature',
-          'desc': 'Added Projects section and link to resume.'
+          'desc': 'Added Projects section.'
         }
       ]
     },

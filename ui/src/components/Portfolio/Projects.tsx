@@ -3,6 +3,7 @@ import {
   Container
 , Row
 , Col
+, Card
 } from 'react-bootstrap';
 
 import { ProjectData } from '../../interfaces/Api';
@@ -20,6 +21,10 @@ export default class Projects extends Component<Props> {
             <Col />
             <Col sm={10} md={8} lg={6}>
               <h2 className='centered-text'>Projects</h2>
+              <Card
+                bg='dark'
+              >
+              </Card>
             </Col>
             <Col />
           </Row>
