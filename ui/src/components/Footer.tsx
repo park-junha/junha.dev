@@ -70,8 +70,9 @@ export default class Footer extends Component<Props, {}> {
                   <Dropdown.Item
                     className='footer-item'
                     onClick={() => this.props.changeComponent('Projects')}
+                    disabled
                   >
-                    Projects
+                    Coming Soon!
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -82,7 +83,7 @@ export default class Footer extends Component<Props, {}> {
               className='footer-version'
               onClick={() => this.props.changeComponent('VersionLog')}
             >
-              1.2.0
+              1.1.2
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>

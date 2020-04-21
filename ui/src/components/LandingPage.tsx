@@ -71,8 +71,9 @@ export default class LandingPage extends Component<Props> {
                   size='lg'
                   variant='secondary'
                   onClick={() => this.props.changeComponent('Projects')}
+                  disabled
                 >
-                  Projects
+                  Coming Soon!
                 </Button>
               </div>
             </Col>
