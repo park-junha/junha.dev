@@ -51,6 +51,7 @@ export default class Main extends Component<Props> {
         return (
           <Projects
             projects={this.props.api.Projects}
+            languages={this.props.api.language_ids}
           />
         );
       case 'VersionLog':

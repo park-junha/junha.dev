@@ -4,6 +4,7 @@ export interface Api {
   Versions: VersionData;
   TechnicalSkills: Skillsets;
   Projects: ProjectData;
+  language_ids: LanguageIds;
   ProfessionalExperience: ExperienceData;
 }
 
@@ -24,13 +25,23 @@ export interface VersionNotes extends Array<VersionNote>{};
 //  Projects
 export interface Project {
   name: string;
-  employer: string;
-  codebases: string[];
-  databases: string[];
-  frameworks: string[];
+  employer: string | null;
+  languages: string[];
+//desc: string;
 }
 
 export interface ProjectData extends Array<Project>{};
+
+//  Language IDs
+export interface LanguageIds {
+  [key: string]: LanguageId;
+}
+
+export interface LanguageId {
+  name: string;
+  color: string;
+}
+
 
 //  Experience
 export interface ExperienceData {

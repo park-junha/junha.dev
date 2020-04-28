@@ -6,10 +6,14 @@ import {
 , Card
 } from 'react-bootstrap';
 
-import { ProjectData } from '../../interfaces/Api';
+import {
+  ProjectData
+, LanguageIds
+} from '../../interfaces/Api';
 
 interface Props {
-  projects: ProjectData
+  projects: ProjectData;
+  languages: LanguageIds;
 }
 
 export default class Projects extends Component<Props> {

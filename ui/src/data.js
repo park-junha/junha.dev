@@ -1,4 +1,4 @@
-const data = {
+export const data = {
   'Versions': [
     {
       'version': '1.2.0',
@@ -188,48 +188,54 @@ const data = {
     {
       'name': 'Prep To Your Door',
       'employer': 'Infinite Options',
-      'codebases': [
-        'Python',
-        'JavaScript'
-      ],
-      'databases': [
-        'MySQL'
-      ],
-      'frameworks': [
-        'React',
-        'Flask'
-      ],
+      'languages': [
+        'la01',
+        'la02',
+        'la03'
+      ]
     },
     {
       'name': 'Grad Planner',
       'employer': 'Grad Planner',
-      'codebases': [
-        'Python',
-        'JavaScript'
-      ],
-      'databases': [
-        'MySQL',
-        'PostgreSQL'
-      ],
-      'frameworks': [
-        'Flask',
-        'React'
+      'languages': [
+        'la01',
+        'la02',
+        'la03'
       ]
     },
     {
       'name': 'Personal Website',
-      'employer': 'Self-employed',
-      'codebases': [
-        'TypeScript',
-        'JavaScript'
-      ],
-      'databases': [
-      ],
-      'frameworks': [
-        'React'
+      'employer': null,
+      'languages': [
+        'la04'
+      ]
+    },
+    {
+      'name': 'CovidSweeper',
+      'employer': null,
+      'languages': [
+        'la02'
       ]
     }
   ],
+  'language_ids': {
+    'la01': {
+      'name': 'Python',
+      'color': '#29577e'
+    },
+    'la02': {
+      'name': 'JavaScript',
+      'color': '#8a7c0c'
+    },
+    'la03': {
+      'name': 'SQL',
+      'color': '#a03115'
+    },
+    'la04': {
+      'name': 'TypeScript',
+      'color': '#286c7f'
+    }
+  },
   'ProfessionalExperience': {
     'defaultKey': 'IO',
     'experience': [
@@ -260,5 +266,3 @@ const data = {
     ]
   }
 };
-
-export default data;

@@ -6,7 +6,7 @@ import Main from './components/Main';
 import { Api } from './interfaces/Api';
 
 //  Not real API, storing data in JSON file for now
-import data from './data';
+import { data } from './data';
 
 import './App.css';
 
