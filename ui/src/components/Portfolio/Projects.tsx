@@ -4,6 +4,7 @@ import {
 , Row
 , Col
 , Card
+, CardDeck
 } from 'react-bootstrap';
 
 import {
@@ -23,12 +24,24 @@ export default class Projects extends Component<Props> {
         <Container>
           <Row>
             <Col />
-            <Col sm={10} md={8} lg={6}>
-              <h2 className='centered-text'>Projects</h2>
-              <Card
-                bg='dark'
+            <Col xs={12}>
+              <h2>Projects</h2>
+              <br />
+              <CardDeck
               >
-              </Card>
+                {this.props.projects.map(project => (
+                  <Card
+                    bsPrefix='project-card'
+                    bg='secondary'
+                  >
+                    <Card.Body>
+                      <Card.Title>
+                        {project.name}
+                      </Card.Title>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </CardDeck>
             </Col>
             <Col />
           </Row>

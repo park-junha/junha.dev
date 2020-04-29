@@ -4,6 +4,15 @@
   margin: 8px 8px 75px 8px;
 }
 
+.project-card {
+  margin: 2px 2px 2px 2px;
+  min-width: 364px;
+  max-width: 364px;
+  min-height: 120px;
+  max-height: 120px;
+  border-radius: .25rem;
+}
+
 /* Landing page big button */
 .landing-button-big {
   margin: 2px;
