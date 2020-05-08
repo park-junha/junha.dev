@@ -5,12 +5,16 @@
 }
 
 .project-card {
-  margin: 2px 2px 2px 2px;
+  margin: 2px !important;
   min-width: 364px;
   max-width: 364px;
   min-height: 120px;
   max-height: 120px;
   border-radius: .25rem;
+}
+
+.project-card-text {
+  font-size: 14px;
 }
 
 /* Landing page big button */

@@ -31,13 +31,18 @@ export default class Projects extends Component<Props> {
               >
                 {this.props.projects.map(project => (
                   <Card
-                    bsPrefix='project-card'
+                    className='project-card'
                     bg='secondary'
                   >
                     <Card.Body>
-                      <Card.Title>
-                        {project.name}
-                      </Card.Title>
+                      <Card.Text>
+                        <h6>{project.name}</h6>
+                        <div
+                          className='project-card-text'
+                        >
+                          {project.desc}
+                        </div>
+                      </Card.Text>
                     </Card.Body>
                   </Card>
                 ))}

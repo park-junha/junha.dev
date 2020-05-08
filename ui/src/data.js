@@ -187,6 +187,7 @@ export const data = {
   'Projects': [
     {
       'name': 'Prep To Your Door',
+      'desc': 'A web e-commerce platform for a meal prep business based in Austin.',
       'employer': 'Infinite Options',
       'languages': [
         'la01',
@@ -196,6 +197,7 @@ export const data = {
     },
     {
       'name': 'Grad Planner',
+      'desc': 'Helping students graduate on time.',
       'employer': 'Grad Planner',
       'languages': [
         'la01',
@@ -205,6 +207,7 @@ export const data = {
     },
     {
       'name': 'Personal Website',
+      'desc': 'This site!',
       'employer': null,
       'languages': [
         'la04'
@@ -212,6 +215,7 @@ export const data = {
     },
     {
       'name': 'CovidSweeper',
+      'desc': 'Minesweeper, but with a twist.',
       'employer': null,
       'languages': [
         'la02'
@@ -237,7 +241,7 @@ export const data = {
     }
   },
   'ProfessionalExperience': {
-    'defaultKey': 'IO',
+    'defaultKey': 'HCL',
     'experience': [
       {
         'id': 'HCL',
@@ -245,7 +249,7 @@ export const data = {
         'company': 'HCL Technologies',
         'start': 'May \'20',
         'end': 'Current',
-        'body': '<div>Starting May 2020.</div>'
+        'body': '<div><i>Full Stack Software Engineer</i> for BigFix, a B2B software product that allows administrators to maintain hundreds of thousands of computers.</div>'
       },
       {
         'id': 'IO',
@@ -257,11 +261,11 @@ export const data = {
       },
       {
         'id': 'GP',
-        'title': 'Advisor to the Board',
+        'title': 'Founding Engineer',
         'company': 'Grad Planner',
         'start': 'Sep \'19',
         'end': 'Current',
-        'body': '<div><i>Founding Engineer</i> and <i>Technical Advisor</i> to the Board of Directors<ul><li>Created a Web <a href=\'http://gradplanner.herokuapp.com/\' target=\'_blank\' rel=\'noopener noreferrer\'>resource</a> to assist undergraduate students graduate on time, prototyped using the <strong>LAMP</strong> (<strong>Python</strong>) stack</li><li>Directed the team to migrate the software to an MVC model with a <strong>React</strong> UI, <strong>Flask</strong> APIs, and a <strong>PostgreSQL</strong> database</li><li>Performed code reviews, merge conflict resolutions, task management, and interactive rebases using <strong>Git</strong> and <strong>GitHub</strong></li><li>Conducted technical interviews to onboard new interns and employees</li></ul><i>Technologies Used:</i><ul><li><strong>Codebases</strong>: Python, JavaScript</li><li><strong>Databases</strong>: MySQL, PostgreSQL</li><li><strong>Web Frameworks</strong>: Flask, React</li><li><strong>Cloud Services</strong>: AWS, Heroku</li></ul></div>'
+        'body': '<div><i>Founding Engineer</i> and <i>Technical Advisor</i> to the Board of Directors<ul><li>Created a Web <a href=\'http://gradplanner.herokuapp.com/\' target=\'_blank\' rel=\'noopener noreferrer\'>resource</a> to assist undergraduate students graduate on time, prototyped using the <strong>LAMP</strong> (<strong>Python</strong>) stack</li><li>Directed the team to migrate the software to an MVC model with a <strong>React</strong> UI, <strong>Flask</strong> APIs, and a <strong>PostgreSQL</strong> database</li><li>Performed code reviews, merge conflict resolutions, task management, and interactive rebases using <strong>Git</strong> and <strong>GitHub</strong></li><li>Conducted technical interviews to onboard new interns and employees</li></ul><i>Technologies Used:</i><ul><li><strong>Codebases</strong>: Python, JavaScript, Bash</li><li><strong>Databases</strong>: MySQL, PostgreSQL</li><li><strong>Web Frameworks</strong>: Flask, React</li><li><strong>Cloud Services</strong>: AWS, Heroku</li></ul></div>'
       }
     ]
   }

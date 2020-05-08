@@ -11,7 +11,7 @@ export interface Api {
 //  Versions
 export interface Version {
   version: string;
-  notes: VersionNotes
+  notes: VersionNotes;
 }
 
 export interface VersionNote {
@@ -27,7 +27,7 @@ export interface Project {
   name: string;
   employer: string | null;
   languages: string[];
-//desc: string;
+  desc: string;
 }
 
 export interface ProjectData extends Array<Project>{};
