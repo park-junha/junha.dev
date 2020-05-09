@@ -188,17 +188,22 @@ export const data = {
     {
       'name': 'Prep To Your Door',
       'desc': 'A web e-commerce platform for a meal prep business based in Austin.',
-      'employer': 'Infinite Options',
+      'about': 'This application consists of a web UI, a MySQL database, and an API that facilitates data flow between the frontend and backend. The UI is written with React, a JavaScript web frontend framework, and deployed to Netlify. The API is written with Flask, a Python web backend framework and is deployed to AWS Lambda. User subscription billing is automated with Python and Shell scripts on AWS EC2.',
+      'app': 'https://preptoyourdoor.netlify.app/',
+      'src': 'https://github.com/infinite-options/Prep-To-Your-Door',
       'languages': [
         'la01',
         'la02',
-        'la03'
+        'la03',
+        'la07'
       ]
     },
     {
       'name': 'Grad Planner',
       'desc': 'Helping students graduate on time.',
-      'employer': 'Grad Planner',
+      'about': 'This software allows students to generate a four-year undergraduate plan within seconds. All they have to do is tell the application their major and classes taken, and then our super smart algorithm will give them a roadmap of their classes. Web platform developed with a React UI, a Flask API, and a PostgreSQL database, supported by a unique Python scheduling algorithm.',
+      'app': 'http://gradplanner.us/',
+      'src': null,
       'languages': [
         'la01',
         'la02',
@@ -208,17 +213,32 @@ export const data = {
     {
       'name': 'Personal Website',
       'desc': 'This site!',
-      'employer': null,
+      'about': 'This website was created using React and with the intent of teaching myself TypeScript.',
+      'app': 'https://junha.netlify.app/',
+      'src': 'https://github.com/park-junha/PersonalWebsite',
       'languages': [
-        'la04'
+        'la04',
+        'la05'
       ]
     },
     {
       'name': 'CovidSweeper',
       'desc': 'Minesweeper, but with a twist.',
-      'employer': null,
+      'about': 'This is a variation of Minesweeper I developed during the early stages of the COVID-19 pandemic, mostly intended to familiarize myself with manipulating canvas with JavaScript and also entertain myself and others.',
+      'app': 'https://park-junha.github.io/CovidSweeper/',
+      'src': 'https://github.com/park-junha/CovidSweeper',
       'languages': [
         'la02'
+      ]
+    },
+    {
+      'name': 'Leetcode',
+      'desc': 'My solutions to various Leetcode problems.',
+      'about': null, 
+      'app': null,
+      'src': 'https://github.com/park-junha/Leetcode',
+      'languages': [
+        'la06'
       ]
     }
   ],
@@ -238,6 +258,18 @@ export const data = {
     'la04': {
       'name': 'TypeScript',
       'color': '#286c7f'
+    },
+    'la05': {
+      'name': 'CSS',
+      'color': '#473367'
+    },
+    'la06': {
+      'name': 'Java',
+      'color': '#a26917'
+    },
+    'la07': {
+      'name': 'Shell',
+      'color': '#428417'
     }
   },
   'ProfessionalExperience': {

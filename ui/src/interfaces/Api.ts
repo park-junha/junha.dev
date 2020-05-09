@@ -25,9 +25,11 @@ export interface VersionNotes extends Array<VersionNote>{};
 //  Projects
 export interface Project {
   name: string;
-  employer: string | null;
   languages: string[];
   desc: string;
+  about: string | null;
+  app: string | null;
+  src: string | null;
 }
 
 export interface ProjectData extends Array<Project>{};
