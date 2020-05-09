@@ -4,6 +4,52 @@
   margin: 8px 8px 75px 8px;
 }
 
+/* Project Component */
+.project-card {
+  margin: 2px !important;
+  min-width: 364px;
+  max-width: 364px;
+  min-height: 120px;
+  max-height: 120px;
+}
+
+.project-card-contents {
+  min-width: 340px;
+  max-width: 340px;
+  min-height: 96px;
+  max-height: 96px;
+}
+
+.project-card-header {
+  text-align: left;
+  margin: 16px 8px 8px 8px;
+}
+
+.project-card-text {
+  font-size: 14px;
+  text-align: left;
+  margin: 8px 8px;
+}
+
+.project-modal {
+  background-color: #343a40;
+  border-color: #2a2a2a;
+  color: #fff;
+}
+
+.project-modal-src-link {
+  font-size: 12px;
+}
+
+.project-language-color {
+  position: relative;
+  margin: 1px 2px -1px 0px;
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
 /* Landing page big button */
 .landing-button-big {
   margin: 2px;

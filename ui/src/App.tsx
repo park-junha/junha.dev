@@ -6,7 +6,7 @@ import Main from './components/Main';
 import { Api } from './interfaces/Api';
 
 //  Not real API, storing data in JSON file for now
-import data from './data';
+import { data } from './data';
 
 import './App.css';
 
@@ -17,14 +17,14 @@ interface State {
 
 class App extends Component<{}, State> {
   state: State = {
-    component: 'LandingPage',
-    api: data,
+    component: 'LandingPage'
+  , api: data
   };
 
 /*
   async componentDidMount(): Promise<void> {
     await this.setState({
-      api: this.fetchApi(),
+      api: this.fetchApi()
     });
   };
 
@@ -35,7 +35,7 @@ class App extends Component<{}, State> {
 
   changeComponent = (newComponent: string): void => {
     this.setState({
-      component: newComponent,
+      component: newComponent
     });
   };
 

@@ -62,18 +62,17 @@ export default class LandingPage extends Component<Props> {
                   className='landing-button-big'
                   size='lg'
                   variant='secondary'
-                  onClick={() => this.props.changeComponent('Skills')}
+                  onClick={() => this.props.changeComponent('Projects')}
                 >
-                  Skills
+                  Projects
                 </Button>
                 <Button
                   className='landing-button-big'
                   size='lg'
                   variant='secondary'
-                  onClick={() => this.props.changeComponent('Projects')}
-                  disabled
+                  onClick={() => this.props.changeComponent('Skills')}
                 >
-                  Coming Soon!
+                  Skills
                 </Button>
               </div>
             </Col>
