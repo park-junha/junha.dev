@@ -74,11 +74,19 @@ export default class Projects extends Component<Props, State> {
             <Col />
           </Row>
         </Container>
-        <Modal show={this.state.showModal} onHide={this.hideModal}>
-          <Modal.Header closeButton>
+        <Modal
+          show={this.state.showModal}
+          onHide={this.hideModal}
+        >
+          <Modal.Header
+            className='project-modal'
+            closeButton
+          >
             <h4>{this.state.onDisplay.name}</h4>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body
+            className='project-modal'
+          >
             <h5>About</h5>
             <p>
               {this.state.onDisplay.about ?

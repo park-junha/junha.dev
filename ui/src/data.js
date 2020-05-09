@@ -207,7 +207,19 @@ export const data = {
       'languages': [
         'la01',
         'la02',
-        'la03'
+        'la10'
+      ]
+    },
+    {
+      'name': 'Serving Now',
+      'desc': 'A web and mobile meal ordering platform.',
+      'about': 'Farmers can upload their menu via the web platform and customers can order from farmers through the mobile application. Web platform is written with Flask and the mobile app is written in C# with Xamarin.',
+      'app': 'https://servingnow.me/home',
+      'src': 'https://github.com/infinite-options/serving-now-webapp',
+      'languages': [
+        'la01',
+        'la09',
+        'la08'
       ]
     },
     {
@@ -228,7 +240,21 @@ export const data = {
       'app': 'https://park-junha.github.io/CovidSweeper/',
       'src': 'https://github.com/park-junha/CovidSweeper',
       'languages': [
-        'la02'
+        'la02',
+        'la05',
+        'la09'
+      ]
+    },
+    {
+      'name': 'Web App Template (FARM)',
+      'desc': 'A full stack web application template that uses a Python backend and a React frontend.',
+      'about': 'This is a template web application that uses what I like to call the FARM stack: a Flask API, Amazon Web Services, a React UI, and a MySQL database. It is designed for developers to use and build on top of this template.',
+      'app': null,
+      'src': 'https://github.com/park-junha/WebAppTemplate-FARM',
+      'languages': [
+        'la01',
+        'la02',
+        'la03'
       ]
     },
     {
@@ -245,15 +271,15 @@ export const data = {
   'language_ids': {
     'la01': {
       'name': 'Python',
-      'color': '#29577e'
+      'color': '#3572ae'
     },
     'la02': {
       'name': 'JavaScript',
-      'color': '#8a7c0c'
+      'color': '#f1e05a'
     },
     'la03': {
-      'name': 'SQL',
-      'color': '#a03115'
+      'name': 'MySQL',
+      'color': '#f18e33'
     },
     'la04': {
       'name': 'TypeScript',
@@ -261,7 +287,7 @@ export const data = {
     },
     'la05': {
       'name': 'CSS',
-      'color': '#473367'
+      'color': '#563d7c'
     },
     'la06': {
       'name': 'Java',
@@ -269,7 +295,23 @@ export const data = {
     },
     'la07': {
       'name': 'Shell',
-      'color': '#428417'
+      'color': '#178600'
+    },
+    'la08': {
+      'name': 'C#',
+      'color': '#473367'
+    },
+    'la09': {
+      'name': 'HTML',
+      'color': '#a03115'
+    },
+    'la10': {
+      'name': 'PostgreSQL',
+      'color': '#438eff'
+    },
+    'la11': {
+      'name': 'MongoDB',
+      'color': '#89e051'
     }
   },
   'ProfessionalExperience': {
