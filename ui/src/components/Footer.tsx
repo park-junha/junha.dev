@@ -11,6 +11,7 @@ import {
 
 interface Props {
   changeComponent: (newComponent: string) => void;
+  currentVersion: string;
 }
 
 export default class Footer extends Component<Props, {}> {
@@ -82,7 +83,7 @@ export default class Footer extends Component<Props, {}> {
               className='footer-version'
               onClick={() => this.props.changeComponent('VersionLog')}
             >
-              1.2.0
+              {this.props.currentVersion}
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>

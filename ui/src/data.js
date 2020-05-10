@@ -1,6 +1,19 @@
 export const data = {
   'Versions': [
     {
+      'version': '1.3.0',
+      'notes': [
+        {
+          'label': 'Feature',
+          'desc': 'Added New Resume.'
+        },
+        {
+          'label': 'Feature',
+          'desc': 'Footer now automatically gets most up to date version.'
+        }
+      ]
+    },
+    {
       'version': '1.2.0',
       'notes': [
         {
