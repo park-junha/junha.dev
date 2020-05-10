@@ -321,7 +321,7 @@ export const data = {
     },
     'la08': {
       'name': 'C#',
-      'color': '#473367'
+      'color': '#b845fc'
     },
     'la09': {
       'name': 'HTML',
