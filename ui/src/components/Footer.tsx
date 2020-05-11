@@ -58,21 +58,15 @@ export default class Footer extends Component<Props, {}> {
                   <Dropdown.Divider />
                   <Dropdown.Item
                     className='footer-item'
-                    onClick={() => this.props.changeComponent('Experience')}
+                    onClick={() => this.props.changeComponent('Resume')}
                   >
-                    Experience
+                    Resume
                   </Dropdown.Item>
                   <Dropdown.Item
                     className='footer-item'
                     onClick={() => this.props.changeComponent('Projects')}
                   >
                     Projects
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className='footer-item'
-                    onClick={() => this.props.changeComponent('Skills')}
-                  >
-                    Skills
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

@@ -7,18 +7,39 @@ import {
 , Nav
 } from 'react-bootstrap';
 
-import {
-  Skillsets
-, Skills
-} from '../../interfaces/Api';
+//  Deprecated CSS for Skills component
+import './Skills.css';
 
 interface Props {
   technicalSkills: Skillsets;
 }
 
+/*  Deprecated interfaces in Api.ts
+import {
+  Skillsets
+, Skills
+} from '../../interfaces/Api';
+*/
+
+//  Originally from Api.ts
 interface State {
   skills: Skills;
 }
+
+interface Skillset {
+  skillset: string;
+  skills: Skills;
+}
+
+interface Skill {
+  name: string;
+  level: number;
+  desc: string;
+}
+
+interface Skillsets extends Array<Skillset>{};
+interface Skills extends Array<Skill>{};
+//  End of former Api.ts contents
 
 export default class TechnicalSkills extends Component<Props, State> {
   state: State = {

@@ -4,6 +4,80 @@
   margin: 8px 8px 75px 8px;
 }
 
+/* Resume */
+.resume {
+  position: relative;
+  margin: auto;
+  background-color: #24282c;
+  padding: 8px;
+  width: 8.5in;
+  height: 11in;
+}
+
+.resume-header {
+  margin: 0px 0px 4px;
+  padding: 8px;
+  clear: both;
+}
+
+.resume-header-left {
+  width: 33%;
+  float: left;
+}
+
+.resume-header-right {
+  width: 67%;
+  float: right;
+  font-size: 15px;
+}
+
+.resume-header-right-left {
+  width: 50%;
+  float: left;
+}
+
+.resume-header-right-right {
+  width: 50%;
+  float: right;
+}
+
+.resume-header-logo {
+  margin: -2px 4px 2px 0px;
+}
+
+.resume-text {
+  font-size: 14px;
+}
+
+h5.resume-body-header {
+  color: #dc3545;
+}
+
+.resume-body {
+  clear: both;
+}
+
+.resume-body-left {
+  padding: 8px;
+  width: 25%;
+  float: left;
+}
+
+.resume-body-right {
+  padding: 8px;
+  width: 75%;
+  float: right;
+}
+
+.resume-date-range {
+  color: rgba(255, 255, 255, 0.5);
+  float: right;
+}
+
+ul.resume-text {
+  padding: 0px 0px 0px 20px;
+}
+
 /* Project Component */
 .project-card {
   margin: 2px !important;
@@ -83,36 +157,6 @@
   position: fixed;
   top: 50%;
   left: 50%;
-}
-
-/* React Bootstrap Card Header with inline text */
-.card-header-custom {
-  clear: both;
-  transition: .3s;
-}
-
-/* React Nav tab white text */
-.navtab-custom {
-  color: #fff;
-  transition: .3s;
-}
-
-/* Animate Card Header & Nav tab on hover */
-.card-header-custom:hover, .navtab-custom:hover {
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.15);
-}
-
-/* Left-aligned text of Card Header */
-.card-header-custom-left {
-  margin: 0px 8px 0px 0px;
-  float: left;
-}
-
-/* Right-aligned text of Card Header */
-.card-header-custom-right {
-  color: rgba(255, 255, 255, 0.5);
-  float: right;
 }
 
 /* Fade in contents from top */
