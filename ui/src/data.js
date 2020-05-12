@@ -10,6 +10,10 @@ export const data = {
         {
           'label': 'Feature',
           'desc': 'Footer now automatically gets most up to date version.'
+        },
+        {
+          'label': 'Known Issue',
+          'desc': 'Resume does not render as expected on some mobile browsers.'
         }
       ]
     },
