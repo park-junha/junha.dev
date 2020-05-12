@@ -5,7 +5,7 @@ export const data = {
       'notes': [
         {
           'label': 'Bugfix',
-          'desc': 'Fixed unexpected button styling issues on landing page.'
+          'desc': 'Temporarily fixed unexpected button styling issues on landing page.'
         }
       ]
     },
