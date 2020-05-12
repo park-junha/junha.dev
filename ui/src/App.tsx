@@ -49,6 +49,7 @@ class App extends Component<{}, State> {
         />
         <Footer
           changeComponent={this.changeComponent}
+          currentVersion={this.state.api.Versions[0].version}
         />
       </div>
     );

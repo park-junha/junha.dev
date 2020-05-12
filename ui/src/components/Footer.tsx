@@ -11,6 +11,7 @@ import {
 
 interface Props {
   changeComponent: (newComponent: string) => void;
+  currentVersion: string;
 }
 
 export default class Footer extends Component<Props, {}> {
@@ -57,21 +58,15 @@ export default class Footer extends Component<Props, {}> {
                   <Dropdown.Divider />
                   <Dropdown.Item
                     className='footer-item'
-                    onClick={() => this.props.changeComponent('Experience')}
+                    onClick={() => this.props.changeComponent('Resume')}
                   >
-                    Experience
+                    Resume
                   </Dropdown.Item>
                   <Dropdown.Item
                     className='footer-item'
                     onClick={() => this.props.changeComponent('Projects')}
                   >
                     Projects
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className='footer-item'
-                    onClick={() => this.props.changeComponent('Skills')}
-                  >
-                    Skills
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -82,7 +77,7 @@ export default class Footer extends Component<Props, {}> {
               className='footer-version'
               onClick={() => this.props.changeComponent('VersionLog')}
             >
-              1.2.0
+              {this.props.currentVersion}
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar>

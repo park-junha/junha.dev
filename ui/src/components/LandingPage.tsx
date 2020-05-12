@@ -10,7 +10,6 @@ import {
 import {
   IoLogoGithub
 , IoLogoLinkedin
-, IoIosDocument
 } from 'react-icons/io';
 
 interface Props {
@@ -46,9 +45,9 @@ export default class LandingPage extends Component<Props> {
                   className='landing-button-big'
                   size='lg'
                   variant='secondary'
-                  onClick={() => this.props.changeComponent('Experience')}
+                  onClick={() => this.props.changeComponent('Resume')}
                 >
-                  Experience
+                  Resume
                 </Button>
               </div>
             </Col>
@@ -66,22 +65,6 @@ export default class LandingPage extends Component<Props> {
                 >
                   Projects
                 </Button>
-                <Button
-                  className='landing-button-big'
-                  size='lg'
-                  variant='secondary'
-                  onClick={() => this.props.changeComponent('Skills')}
-                >
-                  Skills
-                </Button>
-              </div>
-            </Col>
-            <Col />
-          </Row>
-          <Row>
-            <Col />
-            <Col xs={12}>
-              <div>
                 <a
                   href='https://github.com/park-junha'
                   target='_blank'
@@ -106,19 +89,6 @@ export default class LandingPage extends Component<Props> {
                     variant='dark'
                   >
                     <IoLogoLinkedin />
-                  </Button>
-                </a>
-                <a
-                  href='https://www.linkedin.com/in/park-junha/detail/overlay-view/urn:li:fsd_profileTreasuryMedia:(ACoAAB-zIekBeFHkj6P_5coHKvtZ9HE6uuCdvnQ,1581373782830)/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <Button
-                    className='landing-button'
-                    size='lg'
-                    variant='dark'
-                  >
-                    <IoIosDocument />
                   </Button>
                 </a>
               </div>

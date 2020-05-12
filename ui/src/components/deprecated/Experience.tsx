@@ -7,12 +7,35 @@ import {
 , Accordion
 } from 'react-bootstrap';
 
-import { Experiences } from '../../interfaces/Api';
+//  Deprecated CSS for Experience component
+import './Experience.css';
 
 interface Props {
   defaultKey: string;
   experience: Experiences;
 }
+
+/* Deprecated interfaces in Api.ts
+import { Experiences } from '../../interfaces/Api';
+*/
+
+//  Originally from Api.ts
+interface ExperienceData {
+  defaultKey: string;
+  experience: Experiences;
+}
+
+interface Experience {
+  id: string;
+  title: string;
+  company: string;
+  start: string;
+  end: string;
+  body: string;
+}
+
+interface Experiences extends Array<Experience>{};
+//  End of former Api.ts content
 
 export default class ProfessionalExperience extends Component<Props> {
   render (): JSX.Element {

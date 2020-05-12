@@ -1,0 +1,9 @@
+.navtab-custom {
+  color: #fff;
+  transition: .3s;
+}
+
+.navtab-custom:hover{
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.15);
+}
