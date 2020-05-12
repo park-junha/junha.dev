@@ -33,64 +33,70 @@ export default class LandingPage extends Component<Props> {
             <Col />
             <Col xs={12}>
               <div>
-                <Button
-                  className='landing-button-big'
-                  size='lg'
-                  variant='secondary'
-                  onClick={() => this.props.changeComponent('AboutMe')}
-                >
-                  About Me
-                </Button>
-                <Button
-                  className='landing-button-big'
-                  size='lg'
-                  variant='secondary'
-                  onClick={() => this.props.changeComponent('Resume')}
-                >
-                  Resume
-                </Button>
-              </div>
-            </Col>
-            <Col />
-          </Row>
-          <Row>
-            <Col />
-            <Col xs={12}>
-              <div>
-                <Button
-                  className='landing-button-big'
-                  size='lg'
-                  variant='secondary'
-                  onClick={() => this.props.changeComponent('Projects')}
-                >
-                  Projects
-                </Button>
-                <a
-                  href='https://github.com/park-junha'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
+                <div>
                   <Button
-                    className='landing-button'
+                    className='landing-button-big'
                     size='lg'
-                    variant='dark'
+                    variant='secondary'
+                    onClick={() => this.props.changeComponent('AboutMe')}
                   >
-                    <IoLogoGithub />
+                    About Me
                   </Button>
-                </a>
-                <a
-                  href='https://www.linkedin.com/in/park-junha/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
                   <Button
-                    className='landing-button'
+                    className='landing-button-big'
                     size='lg'
-                    variant='dark'
+                    variant='secondary'
+                    onClick={() => this.props.changeComponent('Resume')}
                   >
-                    <IoLogoLinkedin />
+                    Resume
                   </Button>
-                </a>
+                </div>
+                <div>
+                  <Button
+                    className='landing-button-big'
+                    size='lg'
+                    variant='secondary'
+                    onClick={() => this.props.changeComponent('Projects')}
+                  >
+                    Projects
+                  </Button>
+                  <Button
+                    className='landing-button-big'
+                    size='lg'
+                    variant='secondary'
+                    disabled
+                  >
+                    Coming Soon!
+                  </Button>
+                </div>
+                <div>
+                  <a
+                    href='https://github.com/park-junha'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <Button
+                      className='landing-button'
+                      size='lg'
+                      variant='dark'
+                    >
+                      <IoLogoGithub />
+                    </Button>
+                  </a>
+                  <a
+                    href='https://www.linkedin.com/in/park-junha/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <Button
+                      className='landing-button'
+                      size='lg'
+                      variant='dark'
+                    >
+                      <IoLogoLinkedin />
+                    </Button>
+                  </a>
+                </div>
               </div>
             </Col>
             <Col />

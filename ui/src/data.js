@@ -1,6 +1,15 @@
 export const data = {
   'Versions': [
     {
+      'version': '1.3.1',
+      'notes': [
+        {
+          'label': 'Bugfix',
+          'desc': 'Temporarily fixed unexpected button styling issues on landing page.'
+        }
+      ]
+    },
+    {
       'version': '1.3.0',
       'notes': [
         {
