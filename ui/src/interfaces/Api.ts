@@ -1,10 +1,17 @@
 //  API interfaces
 
 export interface Api {
+  message: string;
+  result: ApiResults;
+}
+
+export interface ApiData {
   Versions: VersionData;
   Projects: ProjectData;
   language_ids: LanguageIds;
 }
+
+export interface ApiResults extends Array<ApiData>{};
 
 //  Versions
 export interface Version {

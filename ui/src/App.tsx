@@ -3,17 +3,21 @@ import React, {
 } from 'react';
 import Footer from './components/Footer';
 import Main from './components/Main';
-import { Api } from './interfaces/Api';
+import {
+  Api
+, ApiData
+} from './interfaces/Api';
 
 //  Not real API, storing data in JSON file for now
 import { data } from './data';
-
 import './App.css';
 
 interface State {
   component: string;
-  api: Api;
+  api: ApiData;
 }
+
+const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
 
 class App extends Component<{}, State> {
   state: State = {
@@ -21,17 +25,20 @@ class App extends Component<{}, State> {
   , api: data
   };
 
-/*
   async componentDidMount(): Promise<void> {
-    await this.setState({
-      api: this.fetchApi()
+    const api = await this.fetchApi<Api>(API_URL);
+    this.setState({
+      api: api.result[0]
     });
   };
 
-  fetchApi = (): Api => {
-    return data;
-  };
-*/
+  async fetchApi<T>(
+    request: RequestInfo
+  ): Promise<T> {
+    const res = await fetch(request);
+    const api = await res.json();
+    return api;
+  }
 
   changeComponent = (newComponent: string): void => {
     this.setState({

@@ -5,10 +5,10 @@ import React, {
 } from 'react';
 import LoadingScreen from './LoadingScreen';
 
-import { Api } from '../interfaces/Api';
+import { ApiData } from '../interfaces/Api';
 
 interface Props {
-  api: Api;
+  api: ApiData;
   component: string;
   changeComponent: (newComponent: string) => void;
 }
