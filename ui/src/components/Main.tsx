@@ -64,7 +64,11 @@ export default class Main extends Component<Props> {
   render (): JSX.Element {
     return (
       <div className='Main'>
-        <Suspense fallback={<LoadingScreen />}>
+        <Suspense fallback={
+          <div>
+            <LoadingScreen centered/>
+          </div>
+        }>
           { this.renderComponent(this.props.component) }
         </Suspense>
       </div>
