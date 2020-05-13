@@ -1,1 +1,4 @@
 *.swp
+
+# Personal JSON file containing backend data
+data.json

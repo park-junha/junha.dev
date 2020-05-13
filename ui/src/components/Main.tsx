@@ -5,10 +5,11 @@ import React, {
 } from 'react';
 import LoadingScreen from './LoadingScreen';
 
-import { Api } from '../interfaces/Api';
+import { ApiData } from '../interfaces/Api';
 
 interface Props {
-  api: Api;
+  api: ApiData;
+  api_status: number;
   component: string;
   changeComponent: (newComponent: string) => void;
 }
@@ -41,6 +42,7 @@ export default class Main extends Component<Props> {
       case 'Projects':
         return (
           <Projects
+            api_status={this.props.api_status}
             projects={this.props.api.Projects}
             languages={this.props.api.language_ids}
           />
@@ -48,6 +50,7 @@ export default class Main extends Component<Props> {
       case 'VersionLog':
         return (
           <VersionLog
+            api_status={this.props.api_status}
             versionData={this.props.api.Versions}
           />
         );
@@ -61,7 +64,11 @@ export default class Main extends Component<Props> {
   render (): JSX.Element {
     return (
       <div className='Main'>
-        <Suspense fallback={<LoadingScreen />}>
+        <Suspense fallback={
+          <div>
+            <LoadingScreen centered/>
+          </div>
+        }>
           { this.renderComponent(this.props.component) }
         </Suspense>
       </div>

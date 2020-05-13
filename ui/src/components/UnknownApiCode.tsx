@@ -8,7 +8,11 @@ import {
 , Card
 } from 'react-bootstrap';
 
-export default class NotFound extends Component {
+interface Props {
+  status?: number;
+}
+
+export default class UnknownApiCode extends Component<Props> {
   render (): JSX.Element {
     return (
       <div className='fadein page-padding centered-text'>
@@ -16,12 +20,12 @@ export default class NotFound extends Component {
           <Row>
             <Col />
             <Col xs={5}>
-              <h1>404</h1>
+              <h1>{this.props.status ? this.props.status : 'Error'}</h1>
               <Card
-                bg='danger'
+                bg='warning'
               >
                 <Card.Body>
-                  <h4>Oops. We couldn&#39;t find anything.</h4>
+                  <h4>We&#39;re not sure what happened.</h4>
                 </Card.Body>
               </Card>
             </Col>
