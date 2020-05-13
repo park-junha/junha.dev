@@ -7,6 +7,7 @@ import {
 , Modal
 } from 'react-bootstrap';
 
+import HandleApi from '../HandleApi';
 import {
   ProjectData
 , Project
@@ -14,6 +15,7 @@ import {
 } from '../../interfaces/Api';
 
 interface Props {
+  api_status: number;
   projects: ProjectData;
   languages: LanguageIds;
 }
@@ -60,24 +62,32 @@ export default class Projects extends Component<Props, State> {
             <Col xs={12}>
               <h2>Projects</h2>
               <br />
-              {this.props.projects.map((project, index: number) => (
-                <Button
-                  className='project-card'
-                  variant='secondary'
-                  onClick={() => this.showModal(index)}
-                >
-                  <div className='project-card-contents'>
-                    <h6
-                      className='project-card-header'
-                    >{project.name}</h6>
-                    <div
-                      className='project-card-text'
-                    >
-                      {project.desc}
+              {/* Handle empty projects prop */}
+              {this.props.projects.length > 0 ? (
+                this.props.projects.map((project, index: number) => (
+                  <Button
+                    className='project-card'
+                    variant='secondary'
+                    onClick={() => this.showModal(index)}
+                  >
+                    <div className='project-card-contents'>
+                      <h6
+                        className='project-card-header'
+                      >{project.name}</h6>
+                      <div
+                        className='project-card-text'
+                      >
+                        {project.desc}
+                      </div>
                     </div>
-                  </div>
-                </Button>
-              ))}
+                  </Button>
+                ))
+              ) : (
+                <HandleApi
+                  status={this.props.api_status}
+                  success_msg='No data found.'
+                />
+              )}
             </Col>
             <Col />
           </Row>

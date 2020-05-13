@@ -9,6 +9,7 @@ import { ApiData } from '../interfaces/Api';
 
 interface Props {
   api: ApiData;
+  api_status: number;
   component: string;
   changeComponent: (newComponent: string) => void;
 }
@@ -41,6 +42,7 @@ export default class Main extends Component<Props> {
       case 'Projects':
         return (
           <Projects
+            api_status={this.props.api_status}
             projects={this.props.api.Projects}
             languages={this.props.api.language_ids}
           />
