@@ -26,8 +26,16 @@ interface State {
 export default class Projects extends Component<Props, State> {
   state: State = {
     showModal: false
-  //  Warning - Won't work if projects is empty
-  , onDisplay: this.props.projects[0]
+    //  Fill in with empty Project interface
+    //  Is there a better way to do this?
+  , onDisplay: {
+      name: ''
+    , languages: []
+    , desc: ''
+    , about: null
+    , app: null
+    , src: null
+    }
   }
 
   showModal = (id: number): void => {
