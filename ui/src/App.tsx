@@ -8,9 +8,10 @@ import {
 , ApiData
 } from './interfaces/Api';
 
-//  Not real API, storing data in JSON file for now
-import { data } from './data';
 import './App.css';
+
+const currentVersion = '1.4.0';
+const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
 
 interface State {
   component: string;
@@ -18,13 +19,16 @@ interface State {
   api_status: number;
 }
 
-//const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
-const API_URL = 'http://localhost:3080';
-
 class App extends Component<{}, State> {
   state: State = {
     component: 'LandingPage'
-  , api: data
+    //  Initializing API data state
+    //  Is there a better way to do this?
+  , api: {
+      'Versions': []
+    , 'Projects': []
+    , 'language_ids': {}
+    }
   , api_status: 0
   };
 
@@ -68,7 +72,7 @@ class App extends Component<{}, State> {
         />
         <Footer
           changeComponent={this.changeComponent}
-          currentVersion={this.state.api.Versions[0].version}
+          currentVersion={currentVersion}
         />
       </div>
     );

@@ -50,6 +50,7 @@ export default class Main extends Component<Props> {
       case 'VersionLog':
         return (
           <VersionLog
+            api_status={this.props.api_status}
             versionData={this.props.api.Versions}
           />
         );

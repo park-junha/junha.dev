@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import NotFound from './404';
 import BadRequest from './400';
+import Forbidden from './403';
+import NotFound from './404';
 import ServerError from './500';
+import LoadingScreen from './LoadingScreen';
+import UnknownApiCode from './UnknownApiCode';
 
 interface Props {
   status: number;
@@ -13,11 +16,15 @@ export default class HandleApiStatus extends Component<Props> {
     switch (this.props.status) {
       case 0:
         return (
-          <h4>Loading...</h4>
+          <LoadingScreen />
         );
       case 400:
         return (
           <BadRequest />
+        );
+      case 403:
+        return (
+          <Forbidden />
         );
       case 404:
         return (
@@ -40,7 +47,7 @@ export default class HandleApiStatus extends Component<Props> {
         }
       default:
         return (
-          <h4>Unknown API response code.</h4>
+          <UnknownApiCode status={this.props.status}/>
         );
     }
   };
