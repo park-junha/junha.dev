@@ -1,0 +1,10 @@
+{
+    "dev": {
+        "app_function": "api.app",
+        "aws_region": "us-west-1",
+        "profile_name": "default",
+        "project_name": "api",
+        "runtime": "python3.7",
+        "s3_bucket": "zappa-personal-website"
+    }
+}
