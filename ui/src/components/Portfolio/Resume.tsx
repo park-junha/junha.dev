@@ -138,6 +138,7 @@ export default class Resume extends Component {
           </div>
           <div className='resume-body-right'>
             <h5 className='resume-body-header'>Professional Experience</h5>
+            {/*
             <h6>
               <strong>Full Stack Software Engineer</strong>, HCL Technologies
               <span className='resume-date-range'>5/20 - Now</span>
@@ -148,9 +149,10 @@ export default class Resume extends Component {
             <ul className='resume-text'>
               <li><i>Full Stack Software Engineer</i> for a B2B software product facilitating administrators to maintain hundreds of thousands of computers.</li>
             </ul>
+            */}
             <h6>
               <strong>Full Stack Software Engineer</strong>, Infinite Options
-              <span className='resume-date-range'>9/19 - 5/20</span>
+              <span className='resume-date-range'>9/19 - Now</span>
             </h6>
             <strong className='resume-text'>
               Prep To Your Door
@@ -162,6 +164,7 @@ export default class Resume extends Component {
               <li><strong>Database</strong>: Designed schema and developed a <strong>MySQL</strong> database.</li>
               <li><strong>Automation</strong>: Created a <strong>Python</strong> script to automate user subscription renewal and deployed it to run in the background of a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
               <li><strong>Cloud</strong>: Delivered the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
+              <li><strong>Other</strong>: Performed 100+ code reviews, merges, and interactive rebases with <strong>Git</strong> to ensure high quality code across a cross-functional team of 10+ engineers.</li>
             </ul>
             <strong className='resume-text'>
               Serving Now
@@ -172,6 +175,7 @@ export default class Resume extends Component {
               <li><strong>Web</strong>: Developed <strong>Flask</strong> REST APIs to facilitate data flow between the database, web, and mobile interfaces.</li>
               <li><strong>Database</strong>: Scaled and manipulated a <strong>DynamoDB</strong> database.</li>
               <li><strong>Mobile</strong>: Developed a cross-platform <strong>Xamarin</strong> mobile user interface and delivered it to the <a href='https://apps.apple.com/us/app/serving-now/id1467700794' target='_blank' rel='noopener noreferrer'>Apple</a> and <a href='https://play.google.com/store/apps/details?id=com.infiniteoptions.tiffen.InfiniteMeals&hl=en_US' target='_blank' rel='noopener noreferrer'>Play</a> Stores.</li>
+              <li><strong>Other</strong>: Resolved merge conflicts on <strong>Git</strong> as necessary.</li>
             </ul>
             <h6>
               <strong>IT Technician</strong>, Kett Engineering
@@ -182,7 +186,7 @@ export default class Resume extends Component {
             </strong>
             <ul className='resume-text'>
               <li><i>Software Tester</i> and <i>Technician</i> for an important, confidential project.</li>
-              <li><strong>Automation</strong>: Performed software utility checks with <strong>Python</strong> and <strong>Shell</strong> scripts.</li>
+              <li><strong>Automation</strong>: Developed unique <strong>Python</strong> and <strong>Shell</strong> scripts to assist other technicians with performing software utility checks.</li>
             </ul>
             <h5 className='resume-body-header'>Projects</h5>
             <h6>
@@ -197,7 +201,8 @@ export default class Resume extends Component {
               <span className='resume-date-range'>9/19 - Now</span>
             </h6>
             <ul className='resume-text'>
-              <li><i>Creator</i> and <i>Full Stack Developer</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation. Deployed to <strong>AWS EC2</strong> and <strong>RDS</strong> with <strong>Linux</strong> and <strong>Apache</strong>.</li>
+              <li><i>Creator</i> and <i>Full Stack Developer</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
+              <li>Developed with <strong>Flask</strong> and delivered to the web with <strong>Linux</strong> and <strong>Apache</strong> via <strong>AWS</strong>.</li>
             </ul>
             <h6>
               <strong>CovidSweeper</strong>, JavaScript
