@@ -16,7 +16,7 @@ interface Props {
 
 const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
-const Resume = lazy( () => import('./Portfolio/Resume'));
+const ResumePage = lazy( () => import('./Portfolio/ResumePage'));
 const Projects = lazy( () => import('./Portfolio/Projects'));
 
 const VersionLog = lazy( () => import('./VersionLog'));
@@ -37,7 +37,7 @@ export default class Main extends Component<Props> {
         );
       case 'Resume':
         return (
-          <Resume />
+          <ResumePage />
         );
       case 'Projects':
         return (
