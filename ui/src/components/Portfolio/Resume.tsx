@@ -10,10 +10,14 @@ import {
 , MdPhone
 } from 'react-icons/md';
 
-export default class Resume extends Component {
+interface Props {
+  id: string;
+}
+
+export default class Resume extends Component<Props> {
   render (): JSX.Element {
     return (
-      <div className='resume'>
+      <div className='resume' id={this.props.id}>
         <div className='resume-header'>
           <div className='resume-header-left'>
             <h2>Junha Park</h2>
@@ -94,10 +98,12 @@ export default class Resume extends Component {
               <ul className='resume-text'>
                 <li>React</li>
                 <li>HTML / CSS</li>
+                <li>Bootstrap</li>
               </ul>
               <li>Web API</li>
               <ul className='resume-text'>
                 <li>Flask</li>
+                <li>Express</li>
                 <li>REST / HTTP</li>
                 <li>JSON / XML</li>
               </ul>
@@ -134,6 +140,8 @@ export default class Resume extends Component {
             <ul className='resume-text'>
               <li>Linux / POSIX</li>
               <li>Git</li>
+              <li>VIM</li>
+              <li>JIRA</li>
             </ul>
           </div>
           <div className='resume-body-right'>
@@ -203,6 +211,13 @@ export default class Resume extends Component {
             <ul className='resume-text'>
               <li><i>Creator</i> and <i>Full Stack Developer</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
               <li>Developed with <strong>Flask</strong> and delivered to the web with <strong>Linux</strong> and <strong>Apache</strong> via <strong>AWS</strong>.</li>
+            </ul>
+            <h6>
+              <strong>Personal Website</strong>, TypeScript
+              <span className='resume-date-range'>4/20</span>
+            </h6>
+            <ul className='resume-text'>
+              <li>Developed with <strong>React</strong> and connected to a <strong>MongoDB</strong> backend through <strong>Flask</strong> APIs.</li>
             </ul>
             <h6>
               <strong>CovidSweeper</strong>, JavaScript
