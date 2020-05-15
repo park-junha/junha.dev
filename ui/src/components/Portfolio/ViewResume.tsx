@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Resume from './Resume';
 
-import Doc from '../DocService';
-import PdfContainer from '../PdfContainer';
+import Doc from '../PdfExporter/DocService';
+import PdfContainer from '../PdfExporter/PdfContainer';
 
 export default class ViewResume extends Component {
 
