@@ -195,13 +195,6 @@ export default class Resume extends Component<Props> {
             </ul>
             <h5 className='resume-body-header'>Projects</h5>
             <h6>
-              <strong>Google Chrome V8 Engine</strong>, C++
-              <span className='resume-date-range'>4/20 - Now</span>
-            </h6>
-            <ul className='resume-text'>
-              <li><i>Open Source Contributor</i> for Google Chrome&#39;s JavaScript engine.</li>
-            </ul>
-            <h6>
               <strong>Grad Planner</strong>, Python
               <span className='resume-date-range'>9/19 - Now</span>
             </h6>
@@ -210,10 +203,17 @@ export default class Resume extends Component<Props> {
             </ul>
             <h6>
               <strong>Personal Website</strong>, TypeScript
-              <span className='resume-date-range'>4/20</span>
+              <span className='resume-date-range'>4/20 - Now</span>
             </h6>
             <ul className='resume-text'>
               <li>Developed with <strong>React</strong> and connected to a <strong>MongoDB</strong> backend through <strong>Flask</strong> APIs.</li>
+            </ul>
+            <h6>
+              <strong>Google Chrome V8 Engine</strong>, C++
+              <span className='resume-date-range'>4/20 - Now</span>
+            </h6>
+            <ul className='resume-text'>
+              <li><i>Open Source Contributor</i> for Google Chrome&#39;s JavaScript engine.</li>
             </ul>
             <h6>
               <strong>CovidSweeper</strong>, JavaScript

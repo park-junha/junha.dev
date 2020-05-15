@@ -1,4 +1,5 @@
 import { savePDF } from '@progress/kendo-react-pdf';
+import canvg from 'canvg';
 
 class DocService {
   createPdf = (html) => {
@@ -7,7 +8,7 @@ class DocService {
     , creator: 'Junha Park'
     , paperSize: 'Letter'
     , fileName: 'resume.pdf'
-    , scale: 0.75
+    , scale: 0.75     //  Hard coded
     , margin: 0
     })
   }

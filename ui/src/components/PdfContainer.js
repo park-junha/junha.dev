@@ -5,8 +5,9 @@ export default (props) => {
   const createPdf = () => props.createPdf(bodyRef.current);
   return (
     <section className="pdf-container">
-      <section className="pdf-toolbar">
-        <button onClick={createPdf}>Create PDF</button>
+      <div className="centered-text">(Note: The Download as PDF feature is still experimental and may not work as expected.)</div>
+      <section className="pdf-toolbar centered-horizontally">
+        <button onClick={createPdf}>Download as PDF</button>
       </section>
       <section className="pdf-body" ref={bodyRef}>
         {props.children}
