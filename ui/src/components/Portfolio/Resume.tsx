@@ -105,7 +105,6 @@ export default class Resume extends Component<Props> {
                 <li>Flask</li>
                 <li>Express</li>
                 <li>REST / HTTP</li>
-                <li>JSON / XML</li>
               </ul>
               <li>Web Server</li>
               <ul className='resume-text'>
@@ -140,8 +139,6 @@ export default class Resume extends Component<Props> {
             <ul className='resume-text'>
               <li>Linux / POSIX</li>
               <li>Git</li>
-              <li>VIM</li>
-              <li>JIRA</li>
             </ul>
           </div>
           <div className='resume-body-right'>
@@ -209,8 +206,7 @@ export default class Resume extends Component<Props> {
               <span className='resume-date-range'>9/19 - Now</span>
             </h6>
             <ul className='resume-text'>
-              <li><i>Creator</i> and <i>Full Stack Developer</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
-              <li>Developed with <strong>Flask</strong> and delivered to the web with <strong>Linux</strong> and <strong>Apache</strong> via <strong>AWS</strong>.</li>
+              <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
             </ul>
             <h6>
               <strong>Personal Website</strong>, TypeScript
