@@ -1,0 +1,12 @@
+/*  WORKAROUND:
+    Required for rendering bullet points when exporting resume to PDF
+ */
+@font-face {
+  font-family: 'DejaVu Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: local('DejaVu Serif'), local('DejaVuSerif-Book'),
+      url(http://allfont.ru/cache/fonts/dejavu-serif_97c4a26bcd4f3368944919cae1aa1b73.woff) format('woff'),
+      url(http://allfont.ru/cache/fonts/dejavu-serif_97c4a26bcd4f3368944919cae1aa1b73.ttf) format('truetype');
+}
+/* END WORKAROUND */

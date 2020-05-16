@@ -3,6 +3,7 @@ import Resume from './Resume';
 
 import Doc from '../PdfExporter/DocService';
 import PdfContainer from '../PdfExporter/PdfContainer';
+import './DejaVuSerif.css';
 
 export default class ViewResume extends Component {
 
