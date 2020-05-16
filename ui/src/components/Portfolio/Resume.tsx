@@ -77,7 +77,7 @@ class Resume extends Component<Props> {
   }
 
   componentDidMount() {
-    this.convertSvgToImg();
+//  this.convertSvgToImg();
   }
 
   convertSvgToImg() {
