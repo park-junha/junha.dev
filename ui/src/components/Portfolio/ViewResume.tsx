@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import Resume from './Resume';
 
-import downloadAsPdf from '../downloadAsPdf';
+import Doc from '../PdfExporter/DocService';
+import PdfContainer from '../PdfExporter/PdfContainer';
+import './DejaVuSerif.css';
 
 export default class ViewResume extends Component {
+  createPdf = (html: HTMLElement) => Doc.createPdf(html);
+
   render (): JSX.Element {
     return (
       <div className='fadein'>
-        {/* Experimental Download as PDF
-        <button onClick={() => downloadAsPdf('the-resume')}>Download as PDF</button>
-        */}
-        <Resume id='the-resume' />
+        <PdfContainer createPdf={this.createPdf}>
+          <Resume id='the-resume' />
+        </PdfContainer>
       </div>
     );
   };

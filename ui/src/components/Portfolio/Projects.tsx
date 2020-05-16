@@ -7,7 +7,7 @@ import {
 , Modal
 } from 'react-bootstrap';
 
-import HandleApi from '../HandleApi';
+import HandleApi from '../ApiHandlers/HandleApi';
 import {
   ProjectData
 , Project

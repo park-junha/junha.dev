@@ -5,13 +5,18 @@
 }
 
 /* Resume */
+.pdf-toolbar {
+  margin: 8px 0px 12px 0px;
+}
+
 .resume {
   position: relative;
   margin: auto;
+  font-family: Arial;
   background-color: #24282c;
   padding: 8px;
-  width: 210mm;
-  height: 297mm;
+  width: 8.5in;
+  height: 11in;
 }
 
 .resume-header {
@@ -157,6 +162,12 @@ ul.resume-text {
   position: fixed;
   top: 50%;
   left: 50%;
+}
+
+.centered-horizontally {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Fade in contents from top */

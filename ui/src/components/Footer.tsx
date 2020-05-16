@@ -57,19 +57,6 @@ export default class Footer extends Component<Props, {}> {
                   </Dropdown.Item>
                   <Dropdown.Item
                     className='footer-item'
-                    onClick={() => this.props.changeComponent('Resume')}
-                  >
-                    Resume
-                  </Dropdown.Item>
-                  <Dropdown.Item
-                    className='footer-item'
-                    onClick={() => this.props.changeComponent('Projects')}
-                  >
-                    Projects
-                  </Dropdown.Item>
-                  <Dropdown.Divider />
-                  <Dropdown.Item
-                    className='footer-item'
                     href='https://github.com/park-junha'
                     target='_blank'
                   >
@@ -81,6 +68,19 @@ export default class Footer extends Component<Props, {}> {
                     target='_blank'
                   >
                     LinkedIn
+                  </Dropdown.Item>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    className='footer-item'
+                    onClick={() => this.props.changeComponent('Resume')}
+                  >
+                    Resume
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    className='footer-item'
+                    onClick={() => this.props.changeComponent('Projects')}
+                  >
+                    Projects
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 
 import { VersionData } from '../interfaces/Api';
-import HandleApi from './HandleApi';
+import HandleApi from './ApiHandlers/HandleApi';
 
 interface Props {
   api_status: number;

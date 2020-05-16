@@ -20,7 +20,7 @@ const ViewResume = lazy( () => import('./Portfolio/ViewResume'));
 const Projects = lazy( () => import('./Portfolio/Projects'));
 
 const VersionLog = lazy( () => import('./VersionLog'));
-const NotFound = lazy( () => import('./404'));
+const NotFound = lazy( () => import('./ApiHandlers/404'));
 
 export default class Main extends Component<Props> {
   renderComponent = (component: string): JSX.Element => {

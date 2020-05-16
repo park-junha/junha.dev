@@ -3,7 +3,7 @@ import BadRequest from './400';
 import Forbidden from './403';
 import NotFound from './404';
 import ServerError from './500';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../LoadingScreen';
 import UnknownApiCode from './UnknownApiCode';
 
 interface Props {
