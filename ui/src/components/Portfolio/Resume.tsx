@@ -1,20 +1,108 @@
 import React, { Component } from 'react';
+import ReactDOMServer from 'react-dom/server';
 import {
-  IoLogoGithub
-, IoLogoLinkedin
-, IoIosMail
+  IoLogoLinkedin
+, IoLogoGithub
 , IoIosGlobe
+, IoIosMail
 } from 'react-icons/io';
 import {
-  MdWork
-, MdPhone
+  MdPhone
+, MdWork
 } from 'react-icons/md';
+import canvg, { Parser } from 'canvg';
 
 interface Props {
   id: string;
 }
 
-export default class Resume extends Component<Props> {
+interface Resume {
+  iconsToConvert: ResumeIcons;
+  canvLoaded: boolean;
+}
+
+interface ResumeIcons extends Array<ResumeIcon>{};
+interface ResumeIcon {
+  icon: JSX.Element;
+  alt: string;
+  newIconURL?: string;
+}
+
+class Resume extends Component<Props> {
+  constructor(props: Props) {
+    super(props);
+
+    //  This property is needed for converting SVG icons to images
+    //  Currently, kendo-react-pdf cannot render SVG icons
+    //  WORKAROUND: Convert them to PNG images
+    this.iconsToConvert = [
+      {
+        icon: <IoLogoLinkedin
+                className='resume-header-logo'
+              />
+      , alt: 'LI'
+      }
+    , {
+        icon: <IoLogoGithub
+                className='resume-header-logo'
+              />
+      , alt: 'GH'
+      }
+    , {
+        icon: <IoIosGlobe
+                className='resume-header-logo'
+              />
+      , alt: 'IG'
+      }
+    , {
+        icon: <IoIosMail
+                className='resume-header-logo'
+              />
+      , alt: 'IM'
+      }
+    , {
+        icon: <MdPhone
+                className='resume-header-logo'
+              />
+      , alt: 'MP'
+      }
+    , {
+        icon: <MdWork
+                className='resume-header-logo'
+              />
+      , alt: 'MW'
+      }
+    ];
+    this.canvLoaded = false;
+  }
+
+  componentDidMount() {
+    this.convertSvgToImg();
+  }
+
+  convertSvgToImg() {
+    let canv: any = this.refs.invisibleCanvas;  //  not sure if best way...
+    if (!this.canvLoaded) {
+      this.canvLoaded = true;
+      canv.getContext('2d');
+      //  Parser object
+      const parser = new Parser();
+
+      this.iconsToConvert.forEach((d, i) => {
+        //  Convert icons to SVG in string format
+        let htmlString = ReactDOMServer.renderToString(d.icon);
+        //  Then parse the string into a Document type
+        let svgDoc = parser.parseFromString(htmlString);
+        //  Put the SVG into invisible canvas
+        new canvg(canv, svgDoc);  //  Passing a string on 2nd parameter throws error
+        //  Retrieve the base64 image object
+        d.newIconURL = canv.toDataURL('image/png');
+      });
+      console.log(this.iconsToConvert);
+      console.log("Finished attempting to convert SVG icons to base64 images!");
+    }
+  }
+
   render (): JSX.Element {
     return (
       <div className='resume' id={this.props.id}>
@@ -25,9 +113,22 @@ export default class Resume extends Component<Props> {
           </div>
           <div className='resume-header-right'>
             <div className='resume-header-right-left'>
-              <IoLogoLinkedin
-                className='resume-header-logo'
-              />
+              {!this.iconsToConvert[0].newIconURL ?
+                <IoLogoLinkedin
+                  className='resume-header-logo'
+                />
+                :
+                <img
+                  src={this.iconsToConvert[0].newIconURL}
+                  key={this.iconsToConvert[0].alt}
+                  alt={this.iconsToConvert[0].alt}
+                  className='resume-header-logo'
+                  style={{
+                    height: 15
+                  , width: 15
+                  }}
+                />
+              }
               <a
                 href='https://www.linkedin.com/in/park-junha/'
                 target='_blank'
@@ -36,9 +137,22 @@ export default class Resume extends Component<Props> {
                 linkedin.com/in/park-junha
               </a>
               <br />
-              <IoLogoGithub
-                className='resume-header-logo'
-              />
+              {!this.iconsToConvert[1].newIconURL ?
+                <IoLogoGithub
+                  className='resume-header-logo'
+                />
+                :
+                <img
+                  src={this.iconsToConvert[1].newIconURL}
+                  key={this.iconsToConvert[1].alt}
+                  alt={this.iconsToConvert[1].alt}
+                  className='resume-header-logo'
+                  style={{
+                    height: 15
+                  , width: 15
+                  }}
+                />
+              }
               <a
                 href='https://github.com/park-junha'
                 target='_blank'
@@ -47,9 +161,22 @@ export default class Resume extends Component<Props> {
                 github.com/park-junha
               </a>
               <br />
-              <IoIosGlobe
-                className='resume-header-logo'
-              />
+              {!this.iconsToConvert[2].newIconURL ?
+                <IoIosGlobe
+                  className='resume-header-logo'
+                />
+                :
+                <img
+                  src={this.iconsToConvert[2].newIconURL}
+                  key={this.iconsToConvert[2].alt}
+                  alt={this.iconsToConvert[2].alt}
+                  className='resume-header-logo'
+                  style={{
+                    height: 15
+                  , width: 15
+                  }}
+                />
+              }
               <a
                 href='https://junha.netlify.app/'
                 target='_blank'
@@ -59,19 +186,58 @@ export default class Resume extends Component<Props> {
               </a>
             </div>
             <div className='resume-header-right-right'>
-              <IoIosMail
-                className='resume-header-logo'
-              />
+              {!this.iconsToConvert[3].newIconURL ?
+                <IoIosMail
+                  className='resume-header-logo'
+                />
+                :
+                <img
+                  src={this.iconsToConvert[3].newIconURL}
+                  key={this.iconsToConvert[3].alt}
+                  alt={this.iconsToConvert[3].alt}
+                  className='resume-header-logo'
+                  style={{
+                    height: 15
+                  , width: 15
+                  }}
+                />
+              }
               jpark3@scu.edu
               <br />
-              <MdPhone
-                className='resume-header-logo'
-              />
+              {!this.iconsToConvert[4].newIconURL ?
+                <MdPhone
+                  className='resume-header-logo'
+                />
+                :
+                <img
+                  src={this.iconsToConvert[4].newIconURL}
+                  key={this.iconsToConvert[4].alt}
+                  alt={this.iconsToConvert[4].alt}
+                  className='resume-header-logo'
+                  style={{
+                    height: 15
+                  , width: 15
+                  }}
+                />
+              }
               (971) 230-8858
               <br />
-              <MdWork
-                className='resume-header-logo'
-              />
+              {!this.iconsToConvert[5].newIconURL ?
+                <MdWork
+                  className='resume-header-logo'
+                />
+                :
+                <img
+                  src={this.iconsToConvert[5].newIconURL}
+                  key={this.iconsToConvert[5].alt}
+                  alt={this.iconsToConvert[5].alt}
+                  className='resume-header-logo'
+                  style={{
+                    height: 15
+                  , width: 15
+                  }}
+                />
+              }
               US Citizen, No Visa Required
             </div>
           </div>
@@ -143,18 +309,6 @@ export default class Resume extends Component<Props> {
           </div>
           <div className='resume-body-right'>
             <h5 className='resume-body-header'>Professional Experience</h5>
-            {/*
-            <h6>
-              <strong>Full Stack Software Engineer</strong>, HCL Technologies
-              <span className='resume-date-range'>5/20 - Now</span>
-            </h6>
-            <strong className='resume-text'>
-              BigFix
-            </strong>
-            <ul className='resume-text'>
-              <li><i>Full Stack Software Engineer</i> for a B2B software product facilitating administrators to maintain hundreds of thousands of computers.</li>
-            </ul>
-            */}
             <h6>
               <strong>Full Stack Software Engineer</strong>, Infinite Options
               <span className='resume-date-range'>9/19 - Now</span>
@@ -224,7 +378,17 @@ export default class Resume extends Component<Props> {
             </ul>
           </div>
         </div>
+        {/* Insivible canvas for converting SVGs to PNGs */}
+        {!this.canvLoaded &&
+          <canvas
+            ref='invisibleCanvas'
+            style={{ display: 'none' }}
+          >
+          </canvas>
+        }
       </div>
     );
   };
 }
+
+export default Resume;

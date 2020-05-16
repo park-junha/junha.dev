@@ -1,5 +1,4 @@
 import { savePDF } from '@progress/kendo-react-pdf';
-import canvg from 'canvg';
 
 class DocService {
   createPdf = (html) => {
