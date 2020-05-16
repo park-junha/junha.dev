@@ -6,7 +6,6 @@ import PdfContainer from '../PdfExporter/PdfContainer';
 import './DejaVuSerif.css';
 
 export default class ViewResume extends Component {
-
   createPdf = (html: HTMLElement) => Doc.createPdf(html);
 
   render (): JSX.Element {
