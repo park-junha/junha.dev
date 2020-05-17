@@ -250,7 +250,8 @@ class Resume extends Component<Props> {
             <p className='resume-text'>
               <strong>Santa Clara University</strong>
               <div>Computer Science, B.S.</div>
-              <div>Mathematics Minor</div>
+              <div>Mathematics, Minor</div>
+              <div>Attended 9/15 - 7/20</div>
             </p>
             <h5 className='resume-body-header'>Technical Skills</h5>
             <h6><strong>Codebases</strong></h6>
@@ -305,8 +306,7 @@ class Resume extends Component<Props> {
             </ul>
             <h6><strong>Other</strong></h6>
             <ul className='resume-text'>
-              <li>Linux / POSIX</li>
-              <li>Git</li>
+              <li>Linux / Git</li>
             </ul>
           </div>
           <div className='resume-body-right'>
@@ -324,7 +324,7 @@ class Resume extends Component<Props> {
               <li><strong>Web</strong>: Developed a <strong>React</strong> user interface and <strong>Flask</strong> REST APIs to facilitate data flow between the browser and the database.</li>
               <li><strong>Database</strong>: Designed schema and developed a <strong>MySQL</strong> database.</li>
               <li><strong>Automation</strong>: Created a <strong>Python</strong> script to automate user subscription renewal and deployed it to run in the background of a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
-              <li><strong>Cloud</strong>: Delivered the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
+              <li><strong>Cloud</strong>: Launched the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
               <li><strong>Other</strong>: Performed 100+ code reviews, merges, and interactive rebases with <strong>Git</strong> to ensure high quality code across a cross-functional team of 10+ engineers.</li>
             </ul>
             <strong className='resume-text'>
