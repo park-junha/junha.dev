@@ -22,7 +22,7 @@ export default (props) => {
           </Button>
         </a>
         <a
-          href='https://www.dropbox.com/s/ec06jhsa72yc4wf/ResumeJunhaPark.pd    f?dl=0'
+          href='https://www.dropbox.com/s/ogp11ktp9gycz5h/ResumeJunhaPark.pdf?dl=0'
           target='_blank'
           rel='noopener noreferrer'
         >

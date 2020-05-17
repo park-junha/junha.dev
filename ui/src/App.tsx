@@ -10,7 +10,7 @@ import {
 
 import './App.css';
 
-const currentVersion = '1.5.3';
+const currentVersion = '1.5.4';
 const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
 //const API_URL = 'http://localhost:3080';
 

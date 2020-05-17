@@ -250,7 +250,8 @@ class Resume extends Component<Props> {
             <p className='resume-text'>
               <strong>Santa Clara University</strong>
               <div>Computer Science, B.S.</div>
-              <div>Mathematics Minor</div>
+              <div>Mathematics, Minor</div>
+              <div>Attended 9/15 - 7/20</div>
             </p>
             <h5 className='resume-body-header'>Technical Skills</h5>
             <h6><strong>Codebases</strong></h6>
@@ -305,8 +306,7 @@ class Resume extends Component<Props> {
             </ul>
             <h6><strong>Other</strong></h6>
             <ul className='resume-text'>
-              <li>Linux / POSIX</li>
-              <li>Git</li>
+              <li>Linux / Git</li>
             </ul>
           </div>
           <div className='resume-body-right'>
@@ -321,10 +321,10 @@ class Resume extends Component<Props> {
             <ul className='resume-text'>
               <li><i>Software Team Lead</i> for a Web-based, customer-facing e-commerce <a href='https://preptoyourdoor.netlify.app/' target='_blank' rel='noopener noreferrer'>platform</a>.</li>
               <li><strong>Codebase</strong>: Largely written in <strong>Python</strong> and <strong>JavaScript.</strong></li>
-              <li><strong>Web</strong>: Developed a <strong>React</strong> user interface and <strong>Flask</strong> REST APIs to facilitate data flow between the browser and the database.</li>
-              <li><strong>Database</strong>: Designed schema and developed a <strong>MySQL</strong> database.</li>
-              <li><strong>Automation</strong>: Created a <strong>Python</strong> script to automate user subscription renewal and deployed it to run in the background of a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
-              <li><strong>Cloud</strong>: Delivered the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
+              <li><strong>Web</strong>: Launched a <strong>React</strong> user interface and <strong>Flask</strong> REST APIs to facilitate data flow between the browser and the database.</li>
+              <li><strong>Database</strong>: Designed and developed a <strong>MySQL</strong> database.</li>
+              <li><strong>Automation</strong>: Created <strong>Python</strong> and <strong>Shell</strong> scripts to automate user subscription renewal and deployed it to run on a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
+              <li><strong>Cloud</strong>: Launched the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
               <li><strong>Other</strong>: Performed 100+ code reviews, merges, and interactive rebases with <strong>Git</strong> to ensure high quality code across a cross-functional team of 10+ engineers.</li>
             </ul>
             <strong className='resume-text'>
@@ -335,7 +335,7 @@ class Resume extends Component<Props> {
               <li><strong>Codebase</strong>: Largely written in <strong>Python</strong> (web), <strong>HTML</strong> (web), and <strong>C#</strong> (mobile).</li>
               <li><strong>Web</strong>: Developed <strong>Flask</strong> REST APIs to facilitate data flow between the database, web, and mobile interfaces.</li>
               <li><strong>Database</strong>: Scaled and manipulated a <strong>DynamoDB</strong> database.</li>
-              <li><strong>Mobile</strong>: Developed a cross-platform <strong>Xamarin</strong> mobile user interface and delivered it to the <a href='https://apps.apple.com/us/app/serving-now/id1467700794' target='_blank' rel='noopener noreferrer'>Apple</a> and <a href='https://play.google.com/store/apps/details?id=com.infiniteoptions.tiffen.InfiniteMeals&hl=en_US' target='_blank' rel='noopener noreferrer'>Play</a> Stores.</li>
+              <li><strong>Mobile</strong>: Maintained a cross-platform <strong>Xamarin</strong> mobile user interface and delivered it to the <a href='https://apps.apple.com/us/app/serving-now/id1467700794' target='_blank' rel='noopener noreferrer'>Apple</a> and <a href='https://play.google.com/store/apps/details?id=com.infiniteoptions.tiffen.InfiniteMeals&hl=en_US' target='_blank' rel='noopener noreferrer'>Play</a> Stores.</li>
               <li><strong>Other</strong>: Resolved merge conflicts on <strong>Git</strong> as necessary.</li>
             </ul>
             <h6>
@@ -365,11 +365,11 @@ class Resume extends Component<Props> {
               <li>Developed with <strong>React</strong> and connected to a <strong>MongoDB</strong> backend through <strong>Flask</strong> APIs.</li>
             </ul>
             <h6>
-              <strong>Google Chrome V8 Engine</strong>, C++
+              <strong>Chrome V8</strong>, C++
               <span className='resume-date-range'>4/20 - Now</span>
             </h6>
             <ul className='resume-text'>
-              <li><i>Open Source Contributor</i> for Google Chrome&#39;s JavaScript engine.</li>
+              <li><i>Open Source Contributor</i> for the JavaScript engine powering Google Chrome and Node.js.</li>
             </ul>
             <h6>
               <strong>CovidSweeper</strong>, JavaScript
