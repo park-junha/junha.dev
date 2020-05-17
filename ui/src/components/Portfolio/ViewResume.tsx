@@ -11,13 +11,9 @@ export default class ViewResume extends Component {
   render (): JSX.Element {
     return (
       <div className='fadein'>
-        {/*
         <PdfContainer createPdf={this.createPdf}>
-        */}
           <Resume id='the-resume' />
-        {/*
         </PdfContainer>
-        */}
       </div>
     );
   };

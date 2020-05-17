@@ -1,13 +1,52 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
 export default (props) => {
   const bodyRef = React.createRef();
   const createPdf = () => props.createPdf(bodyRef.current);
   return (
     <section className="pdf-container">
-      <div className="centered-text">(Note: The Download as PDF feature is still experimental and may not work as expected.)</div>
       <section className="pdf-toolbar centered-horizontally">
-        <button onClick={createPdf}>Download as PDF</button>
+        <a
+          href='https://junha-park.s3-us-west-1.amazonaws.com/Resume.pdf'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Button
+            variant='secondary'
+            style={{
+              margin: '0px 4px'
+            }}
+          >
+            View PDF (Amazon S3)
+          </Button>
+        </a>
+        <a
+          href='https://www.dropbox.com/s/ec06jhsa72yc4wf/ResumeJunhaPark.pd    f?dl=0'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Button
+            variant='secondary'
+            style={{
+              margin: '0px 4px'
+            }}
+          >
+            View PDF (DropBox)
+          </Button>
+        </a>
+        {/*
+        <Button
+          variant='secondary'
+          style={{
+            margin: '0px 4px'
+          }}
+          onClick={createPdf}
+          disabled
+        >
+          Download as PDF
+        </Button>
+        */}
       </section>
       <section className="pdf-body" ref={bodyRef}>
         {props.children}

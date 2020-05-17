@@ -1,4 +1,4 @@
-## PersonalWebsite/ui/
+## Web UI
 
 Directory for web frontend.
 
