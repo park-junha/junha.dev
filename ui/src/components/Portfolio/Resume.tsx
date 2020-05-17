@@ -1,3 +1,5 @@
+//  Uncomment contents of componentDidMount() when PDF export is fixed
+
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {
