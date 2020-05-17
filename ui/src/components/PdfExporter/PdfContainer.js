@@ -18,7 +18,7 @@ export default (props) => {
               margin: '0px 4px'
             }}
           >
-            View PDF (Amazon S3)
+            View PDF (AWS)
           </Button>
         </a>
         <a
@@ -32,7 +32,7 @@ export default (props) => {
               margin: '0px 4px'
             }}
           >
-            View PDF (DropBox)
+            View PDF (Dropbox)
           </Button>
         </a>
         {/*
