@@ -258,43 +258,40 @@ class Resume extends Component<Props> {
             <ul className='resume-text'>
               <li>Python</li>
               <li>JavaScript</li>
+              <ul className='resume-text'>
+                <li>Node.js</li>
+                <li>TypeScript</li>
+              </ul>
               <li>Bash / Shell</li>
-              <li>C / C++</li>
+              <li>Go</li>
             </ul>
             <h6><strong>Full Web Stack</strong></h6>
             <ul className='resume-text'>
-              <li>Web UI</li>
+              <li>Web Frontend</li>
               <ul className='resume-text'>
                 <li>React</li>
                 <li>HTML / CSS</li>
                 <li>Bootstrap</li>
               </ul>
-              <li>Web API</li>
+              <li>Web Backend</li>
               <ul className='resume-text'>
                 <li>Flask</li>
                 <li>Express</li>
-                <li>REST / HTTP</li>
               </ul>
-              <li>Web Server</li>
+              <li>Web Protocols</li>
               <ul className='resume-text'>
-                <li>Node.js</li>
-                <li>Apache</li>
+                <li>REST</li>
+                <li>HTTP</li>
+                <li>JSON</li>
               </ul>
             </ul>
             <h6><strong>Databases</strong></h6>
             <ul className='resume-text'>
-              <li>SQL</li>
-              <ul className='resume-text'>
-                <li>MySQL</li>
-                <li>PostgreSQL</li>
-              </ul>
-              <li>NoSQL</li>
-              <ul className='resume-text'>
-                <li>MongoDB</li>
-                <li>DynamoDB</li>
-              </ul>
+              <li>MySQL</li>
+              <li>SQL Server</li>
+              <li>MongoDB</li>
             </ul>
-            <h6><strong>Cloud Computing</strong></h6>
+            <h6><strong>Cloud Services</strong></h6>
             <ul className='resume-text'>
               <li>AWS</li>
               <ul className='resume-text'>
@@ -306,7 +303,8 @@ class Resume extends Component<Props> {
             </ul>
             <h6><strong>Other</strong></h6>
             <ul className='resume-text'>
-              <li>Linux / Git</li>
+              <li>Linux</li>
+              <li>Git</li>
             </ul>
           </div>
           <div className='resume-body-right'>
