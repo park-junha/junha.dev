@@ -1,5 +1,3 @@
-//  Uncomment contents of componentDidMount() when PDF export is fixed
-
 import React, { Component } from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {
@@ -13,6 +11,7 @@ import {
 , MdWork
 } from 'react-icons/md';
 import canvg, { Parser } from 'canvg';
+import './ExportResumeStyle.css';
 
 interface Props {
   id: string;
@@ -79,7 +78,7 @@ class Resume extends Component<Props> {
   }
 
   componentDidMount() {
-//  this.convertSvgToImg();
+    this.convertSvgToImg();
   }
 
   convertSvgToImg() {

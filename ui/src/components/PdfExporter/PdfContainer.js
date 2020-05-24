@@ -35,18 +35,15 @@ export default (props) => {
             View PDF (Dropbox)
           </Button>
         </a>
-        {/*
         <Button
           variant='secondary'
           style={{
             margin: '0px 4px'
           }}
           onClick={createPdf}
-          disabled
         >
           Download as PDF
         </Button>
-        */}
       </section>
       <section className="pdf-body" ref={bodyRef}>
         {props.children}
