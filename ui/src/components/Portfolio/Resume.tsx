@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import img_linkedin from '../../img/logo-linkedin.png';
 import img_github from '../../img/logo-github.png';
 import img_website from '../../img/globe-outline.png';
-import img_email from '../../img/mail-outline.png';
-import img_phone from '../../img/call-outline.png';
-import img_work from '../../img/briefcase-outline.png';
+import img_email from '../../img/mail.png';
+import img_phone from '../../img/call.png';
+import img_work from '../../img/briefcase.png';
 import './ExportResumeStyle.css';
 
 interface Props {
