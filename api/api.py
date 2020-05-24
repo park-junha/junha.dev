@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS
-from werkzeug.exceptions import BadRequest, NotFound
+from werkzeug.exceptions import BadRequest
 
 # MongoDB
 from pymongo import MongoClient
