@@ -1,109 +1,17 @@
 import React, { Component } from 'react';
-import ReactDOMServer from 'react-dom/server';
-import {
-  IoLogoLinkedin
-, IoLogoGithub
-, IoIosGlobe
-, IoIosMail
-} from 'react-icons/io';
-import {
-  MdPhone
-, MdWork
-} from 'react-icons/md';
-import canvg, { Parser } from 'canvg';
+import img_linkedin from '../../img/logo-linkedin.png';
+import img_github from '../../img/logo-github.png';
+import img_website from '../../img/globe-outline.png';
+import img_email from '../../img/mail-outline.png';
+import img_phone from '../../img/call-outline.png';
+import img_work from '../../img/briefcase-outline.png';
 import './ExportResumeStyle.css';
 
 interface Props {
   id: string;
 }
 
-interface Resume {
-  iconsToConvert: ResumeIcons;
-  canvLoaded: boolean;
-}
-
-interface ResumeIcons extends Array<ResumeIcon>{};
-interface ResumeIcon {
-  icon: JSX.Element;
-  alt: string;
-  newIconURL?: string;
-}
-
 class Resume extends Component<Props> {
-  constructor(props: Props) {
-    super(props);
-
-    //  This property is needed for converting SVG icons to images
-    //  Currently, kendo-react-pdf cannot render SVG icons
-    //  WORKAROUND: Convert them to PNG images
-    this.iconsToConvert = [
-      {
-        icon: <IoLogoLinkedin
-                className='resume-header-logo'
-              />
-      , alt: 'LI'
-      }
-    , {
-        icon: <IoLogoGithub
-                className='resume-header-logo'
-              />
-      , alt: 'GH'
-      }
-    , {
-        icon: <IoIosGlobe
-                className='resume-header-logo'
-              />
-      , alt: 'IG'
-      }
-    , {
-        icon: <IoIosMail
-                className='resume-header-logo'
-              />
-      , alt: 'IM'
-      }
-    , {
-        icon: <MdPhone
-                className='resume-header-logo'
-              />
-      , alt: 'MP'
-      }
-    , {
-        icon: <MdWork
-                className='resume-header-logo'
-              />
-      , alt: 'MW'
-      }
-    ];
-    this.canvLoaded = false;
-  }
-
-  componentDidMount() {
-    this.convertSvgToImg();
-  }
-
-  convertSvgToImg() {
-    let canv: any = this.refs.invisibleCanvas;  //  not sure if best way...
-    if (!this.canvLoaded) {
-      this.canvLoaded = true;
-      canv.getContext('2d');
-      //  Parser object
-      const parser = new Parser();
-
-      this.iconsToConvert.forEach((d, i) => {
-        //  Convert icons to SVG in string format
-        let htmlString = ReactDOMServer.renderToString(d.icon);
-        //  Then parse the string into a Document type
-        let svgDoc = parser.parseFromString(htmlString);
-        //  Put the SVG into invisible canvas
-        new canvg(canv, svgDoc);  //  Passing a string on 2nd parameter throws error
-        //  Retrieve the base64 image object
-        d.newIconURL = canv.toDataURL('image/png');
-      });
-      console.log(this.iconsToConvert);
-      console.log("Finished attempting to convert SVG icons to base64 images!");
-    }
-  }
-
   render (): JSX.Element {
     return (
       <div className='resume' id={this.props.id}>
@@ -114,22 +22,11 @@ class Resume extends Component<Props> {
           </div>
           <div className='resume-header-right'>
             <div className='resume-header-right-left'>
-              {!this.iconsToConvert[0].newIconURL ?
-                <IoLogoLinkedin
-                  className='resume-header-logo'
-                />
-                :
-                <img
-                  src={this.iconsToConvert[0].newIconURL}
-                  key={this.iconsToConvert[0].alt}
-                  alt={this.iconsToConvert[0].alt}
-                  className='resume-header-logo'
-                  style={{
-                    height: 15
-                  , width: 15
-                  }}
-                />
-              }
+              <img
+                src={img_linkedin}
+                alt="li"
+                className='resume-header-logo'
+              />
               <a
                 href='https://www.linkedin.com/in/park-junha/'
                 target='_blank'
@@ -138,22 +35,11 @@ class Resume extends Component<Props> {
                 linkedin.com/in/park-junha
               </a>
               <br />
-              {!this.iconsToConvert[1].newIconURL ?
-                <IoLogoGithub
-                  className='resume-header-logo'
-                />
-                :
-                <img
-                  src={this.iconsToConvert[1].newIconURL}
-                  key={this.iconsToConvert[1].alt}
-                  alt={this.iconsToConvert[1].alt}
-                  className='resume-header-logo'
-                  style={{
-                    height: 15
-                  , width: 15
-                  }}
-                />
-              }
+              <img
+                src={img_github}
+                alt="gh"
+                className='resume-header-logo'
+              />
               <a
                 href='https://github.com/park-junha'
                 target='_blank'
@@ -162,22 +48,11 @@ class Resume extends Component<Props> {
                 github.com/park-junha
               </a>
               <br />
-              {!this.iconsToConvert[2].newIconURL ?
-                <IoIosGlobe
-                  className='resume-header-logo'
-                />
-                :
-                <img
-                  src={this.iconsToConvert[2].newIconURL}
-                  key={this.iconsToConvert[2].alt}
-                  alt={this.iconsToConvert[2].alt}
-                  className='resume-header-logo'
-                  style={{
-                    height: 15
-                  , width: 15
-                  }}
-                />
-              }
+              <img
+                src={img_website}
+                alt="ws"
+                className='resume-header-logo'
+              />
               <a
                 href='https://junha.netlify.app/'
                 target='_blank'
@@ -187,58 +62,25 @@ class Resume extends Component<Props> {
               </a>
             </div>
             <div className='resume-header-right-right'>
-              {!this.iconsToConvert[3].newIconURL ?
-                <IoIosMail
-                  className='resume-header-logo'
-                />
-                :
-                <img
-                  src={this.iconsToConvert[3].newIconURL}
-                  key={this.iconsToConvert[3].alt}
-                  alt={this.iconsToConvert[3].alt}
-                  className='resume-header-logo'
-                  style={{
-                    height: 15
-                  , width: 15
-                  }}
-                />
-              }
+              <img
+                src={img_email}
+                alt="ml"
+                className='resume-header-logo'
+              />
               jpark3@scu.edu
               <br />
-              {!this.iconsToConvert[4].newIconURL ?
-                <MdPhone
-                  className='resume-header-logo'
-                />
-                :
-                <img
-                  src={this.iconsToConvert[4].newIconURL}
-                  key={this.iconsToConvert[4].alt}
-                  alt={this.iconsToConvert[4].alt}
-                  className='resume-header-logo'
-                  style={{
-                    height: 15
-                  , width: 15
-                  }}
-                />
-              }
+              <img
+                src={img_phone}
+                alt="ph"
+                className='resume-header-logo'
+              />
               (971) 230-8858
               <br />
-              {!this.iconsToConvert[5].newIconURL ?
-                <MdWork
-                  className='resume-header-logo'
-                />
-                :
-                <img
-                  src={this.iconsToConvert[5].newIconURL}
-                  key={this.iconsToConvert[5].alt}
-                  alt={this.iconsToConvert[5].alt}
-                  className='resume-header-logo'
-                  style={{
-                    height: 15
-                  , width: 15
-                  }}
-                />
-              }
+              <img
+                src={img_work}
+                alt="wk"
+                className='resume-header-logo'
+              />
               US Citizen, No Visa Required
             </div>
           </div>
@@ -377,14 +219,6 @@ class Resume extends Component<Props> {
             </ul>
           </div>
         </div>
-        {/* Insivible canvas for converting SVGs to PNGs */}
-        {!this.canvLoaded &&
-          <canvas
-            ref='invisibleCanvas'
-            style={{ display: 'none' }}
-          >
-          </canvas>
-        }
       </div>
     );
   };
