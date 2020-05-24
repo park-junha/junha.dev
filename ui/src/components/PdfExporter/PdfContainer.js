@@ -8,11 +8,12 @@ export default (props) => {
     <section className="pdf-container">
       <section className="pdf-toolbar centered-horizontally">
         <Button
-          variant='primary'
+          variant='secondary'
           style={{
             margin: '0px 4px'
           }}
           onClick={createPdf}
+          disabled
         >
           Download PDF
         </Button>
