@@ -48,6 +48,9 @@
 
 .resume-header-logo {
   margin: -2px 4px 2px 0px;
+  height: 15px;
+  width: 15px;
+  filter: invert(100%);
 }
 
 .resume-text {

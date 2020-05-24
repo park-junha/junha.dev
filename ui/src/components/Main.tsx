@@ -18,6 +18,7 @@ const LandingPage = lazy( () => import('./LandingPage'));
 const AboutMe = lazy( () => import('./Portfolio/AboutMe'));
 const ViewResume = lazy( () => import('./Portfolio/ViewResume'));
 const Projects = lazy( () => import('./Portfolio/Projects'));
+const Contact = lazy( () => import('./Portfolio/Contact'));
 
 const VersionLog = lazy( () => import('./VersionLog'));
 const NotFound = lazy( () => import('./ApiHandlers/404'));
@@ -34,6 +35,10 @@ export default class Main extends Component<Props> {
       case 'AboutMe':
         return (
           <AboutMe />
+        );
+      case 'Contact':
+        return (
+          <Contact />
         );
       case 'Resume':
         return (

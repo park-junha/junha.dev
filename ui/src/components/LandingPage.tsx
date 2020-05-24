@@ -38,20 +38,10 @@ export default class LandingPage extends Component<Props> {
                     className='landing-button-big'
                     size='lg'
                     variant='secondary'
-                    onClick={() => this.props.changeComponent('AboutMe')}
-                  >
-                    About Me
-                  </Button>
-                  <Button
-                    className='landing-button-big'
-                    size='lg'
-                    variant='secondary'
                     onClick={() => this.props.changeComponent('Resume')}
                   >
                     Resume
                   </Button>
-                </div>
-                <div>
                   <Button
                     className='landing-button-big'
                     size='lg'
@@ -60,13 +50,23 @@ export default class LandingPage extends Component<Props> {
                   >
                     Projects
                   </Button>
+                </div>
+                <div>
                   <Button
                     className='landing-button-big'
                     size='lg'
                     variant='secondary'
-                    disabled
+                    onClick={() => this.props.changeComponent('AboutMe')}
                   >
-                    Coming Soon!
+                    About Me
+                  </Button>
+                  <Button
+                    className='landing-button-big'
+                    size='lg'
+                    variant='secondary'
+                    onClick={() => this.props.changeComponent('Contact')}
+                  >
+                    Contact
                   </Button>
                 </div>
                 <div>

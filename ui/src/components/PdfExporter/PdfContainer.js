@@ -7,6 +7,15 @@ export default (props) => {
   return (
     <section className="pdf-container">
       <section className="pdf-toolbar centered-horizontally">
+        <Button
+          variant='primary'
+          style={{
+            margin: '0px 4px'
+          }}
+          onClick={createPdf}
+        >
+          Download PDF
+        </Button>
         <a
           href='https://junha-park.s3-us-west-1.amazonaws.com/Resume.pdf'
           target='_blank'
@@ -18,35 +27,9 @@ export default (props) => {
               margin: '0px 4px'
             }}
           >
-            View PDF (AWS)
+            View PDF
           </Button>
         </a>
-        <a
-          href='https://www.dropbox.com/s/ogp11ktp9gycz5h/ResumeJunhaPark.pdf?dl=0'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Button
-            variant='secondary'
-            style={{
-              margin: '0px 4px'
-            }}
-          >
-            View PDF (Dropbox)
-          </Button>
-        </a>
-        {/*
-        <Button
-          variant='secondary'
-          style={{
-            margin: '0px 4px'
-          }}
-          onClick={createPdf}
-          disabled
-        >
-          Download as PDF
-        </Button>
-        */}
       </section>
       <section className="pdf-body" ref={bodyRef}>
         {props.children}
