@@ -9,8 +9,9 @@ import {
 } from './interfaces/Api';
 
 import './App.css';
+import versions from './versions'
 
-const currentVersion = '1.7.0';
+const currentVersion = versions[0]['version'];
 const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
 
 interface State {
@@ -25,8 +26,7 @@ class App extends Component<{}, State> {
     //  Initializing API data state
     //  Is there a better way to do this?
   , api: {
-      'Versions': []
-    , 'Projects': []
+      'Projects': []
     , 'language_ids': {}
     }
   , api_status: 0
