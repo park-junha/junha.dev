@@ -41,10 +41,10 @@ export default class Projects extends Component<Props, State> {
   }
 
   showModal = (id: number): void => {
-    this.setState({
+    this.setState((state, props) => ({
       showModal: true
-    , onDisplay: this.props.projects[id]
-    });
+    , onDisplay: props.projects[id]
+    }));
   }
 
   hideModal = (): void => {
