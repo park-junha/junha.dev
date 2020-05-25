@@ -7,6 +7,10 @@ const versions = [
         "desc": "Separated Version Log from API and included it locally."
       },
       {
+        "label": "Feature",
+        "desc": "Added API status and LGTM code quality badges to Version Log."
+      },
+      {
         "label": "Bugfix",
         "desc": "Footer once again automatically gets most up to date version."
       }
