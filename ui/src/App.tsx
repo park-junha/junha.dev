@@ -10,7 +10,7 @@ import {
 
 import './App.css';
 
-const currentVersion = '1.6.1';
+const currentVersion = '1.6.2';
 const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
 
 interface State {
