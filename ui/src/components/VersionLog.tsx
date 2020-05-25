@@ -53,18 +53,14 @@ export default class VersionLog extends Component<Props, State> {
         <Container>
           <Row>
             <Col />
-            <Col xs={12}>
+            <Col xs={13}>
               <h2>Release Notes</h2>
               <h6>(view <a href='https://github.com/park-junha/PersonalWebsite' target='_blank' rel='noopener noreferrer'>source code</a>)</h6>
               {this.props.versionData.length > 0 ? (
                 this.props.versionData.map((release, index: number) => (
                   <Button
                     className={
-                      release.version.split('.')[0] ===
-                      this.props.versionData[0].version.split('.')[0]
-                      &&
-                      release.version.split('.')[1] ===
-                      this.props.versionData[0].version.split('.')[1]
+                      index === 0
                       ?
                       'landing-button-big' :
                       'landing-button'
@@ -75,10 +71,10 @@ export default class VersionLog extends Component<Props, State> {
                       ?
                       'primary' : (
                         release.version.split('.')[0] ===
-                        this.props.versionData[0].version.split('.')[0]
+                        this.props.versionData[1].version.split('.')[0]
                         &&
                         release.version.split('.')[1] ===
-                        this.props.versionData[0].version.split('.')[1]
+                        this.props.versionData[1].version.split('.')[1]
                         ?
                         'secondary' :
                         'dark'
