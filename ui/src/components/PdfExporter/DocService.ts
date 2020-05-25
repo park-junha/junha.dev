@@ -1,7 +1,7 @@
 import { savePDF } from '@progress/kendo-react-pdf';
 
 class DocService {
-  createPdf = (html) => {
+  createPdf = (html: HTMLElement) => {
     savePDF(html, {
       author: 'Junha Park'
     , creator: 'Junha Park'
