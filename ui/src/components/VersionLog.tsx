@@ -48,14 +48,7 @@ export default class VersionLog extends Component<{}, State> {
             <Col />
             <Col xs={13}>
               <h2>Release Notes</h2>
-              <h6>
-                (view <a href='https://github.com/park-junha/PersonalWebsite' target='_blank' rel='noopener noreferrer'>source code</a>)
-              </h6>
-              <div>
-                <a href="https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev"><img alt="API Status" src="https://img.shields.io/website?down_color=red&down_message=offline&label=api&up_message=online&url=https%3A%2F%2F2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev" className='shields-io' /></a>
-                <a href="https://lgtm.com/projects/g/park-junha/PersonalWebsite/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/park-junha/PersonalWebsite.svg?logo=lgtm&logoWidth=18" className='shields-io' /></a>
-                <a href="https://lgtm.com/projects/g/park-junha/PersonalWebsite/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/park-junha/PersonalWebsite.svg?logo=lgtm&logoWidth=18" className='shields-io' /></a>
-              </div>
+              <h6>(view <a href='https://github.com/park-junha/PersonalWebsite' target='_blank' rel='noopener noreferrer'>source code</a>)</h6>
               {versions.length > 0 ? (
                 versions.map((release, index: number) => (
                   <Button

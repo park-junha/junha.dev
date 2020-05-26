@@ -260,8 +260,3 @@ ul.resume-text {
 .footer-version:hover {
   color: rgba(255, 255, 255, 1);
 }
-
-/* Styling for shields.io images */
-.shields-io {
-  margin: 2px;
-}
