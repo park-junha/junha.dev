@@ -6,7 +6,6 @@ export interface Api {
 }
 
 export interface ApiData {
-  Versions: VersionData;
   Projects: ProjectData;
   language_ids: LanguageIds;
 }

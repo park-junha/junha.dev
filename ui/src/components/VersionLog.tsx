@@ -7,23 +7,16 @@ import {
 , Modal
 } from 'react-bootstrap';
 
-import {
-  VersionData
-, Version
-} from '../interfaces/Api';
+import { Version } from '../interfaces/Api';
 import HandleApi from './ApiHandlers/HandleApi';
-
-interface Props {
-  api_status: number;
-  versionData: VersionData;
-}
+import versions from '../versions';
 
 interface State {
   showModal: boolean;
   onDisplay: Version;
 }
 
-export default class VersionLog extends Component<Props, State> {
+export default class VersionLog extends Component<{}, State> {
   state: State = {
     showModal: false
     //  Fill in with empty Version interface
@@ -35,10 +28,10 @@ export default class VersionLog extends Component<Props, State> {
   }
 
   showModal = (id: number): void => {
-    this.setState((state, props) => ({
+    this.setState({
       showModal: true
-    , onDisplay: props.versionData[id]
-    }));
+    , onDisplay: versions[id]
+    });
   }
 
   hideModal = (): void => {
@@ -56,8 +49,8 @@ export default class VersionLog extends Component<Props, State> {
             <Col xs={13}>
               <h2>Release Notes</h2>
               <h6>(view <a href='https://github.com/park-junha/PersonalWebsite' target='_blank' rel='noopener noreferrer'>source code</a>)</h6>
-              {this.props.versionData.length > 0 ? (
-                this.props.versionData.map((release, index: number) => (
+              {versions.length > 0 ? (
+                versions.map((release, index: number) => (
                   <Button
                     className={
                       index === 0
@@ -71,10 +64,10 @@ export default class VersionLog extends Component<Props, State> {
                       ?
                       'primary' : (
                         release.version.split('.')[0] ===
-                        this.props.versionData[1].version.split('.')[0]
+                        versions[1].version.split('.')[0]
                         &&
                         release.version.split('.')[1] ===
-                        this.props.versionData[1].version.split('.')[1]
+                        versions[1].version.split('.')[1]
                         ?
                         'secondary' :
                         'dark'
@@ -87,7 +80,7 @@ export default class VersionLog extends Component<Props, State> {
                 ))
               ) : (
                 <HandleApi
-                  status={this.props.api_status}
+                  status={200}
                   success_msg='No data found.'
                 />
               )}
