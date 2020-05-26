@@ -21,18 +21,17 @@ export default (props) => {
             View PDF
           </Button>
         </a>
-        {/*
         <Button
           variant='secondary'
           style={{
             margin: '0px 4px'
+          , display: 'none'
           }}
           onClick={createPdf}
           disabled
         >
           Download PDF
         </Button>
-        */}
       </section>
       <section className="pdf-body" ref={bodyRef}>
         {props.children}
