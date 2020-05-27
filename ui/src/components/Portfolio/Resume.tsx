@@ -5,7 +5,7 @@ import img_website from '../../img/globe-outline.png';
 import img_email from '../../img/mail.png';
 import img_phone from '../../img/call.png';
 import img_work from '../../img/briefcase.png';
-import './ExportResumeStyle.css';
+import '../PdfExporter/ExportResumeStyle.css';
 
 interface Props {
   id: string;
@@ -103,8 +103,8 @@ class Resume extends Component<Props> {
                 <li>TypeScript</li>
               </ul>
               <li>Python</li>
-              <li>Go</li>
               <li>C++</li>
+              <li>Go</li>
             </ul>
             <h6><strong>Full Web Stack</strong></h6>
             <ul className='resume-text'>
