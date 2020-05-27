@@ -92,19 +92,19 @@ class Resume extends Component<Props> {
               <strong>Santa Clara University</strong>
               <div>Computer Science, B.S.</div>
               <div>Mathematics, Minor</div>
-              <div>Attended 9/15 - 7/20</div>
+              <div>Expected July 2020</div>
             </p>
             <h5 className='resume-body-header'>Technical Skills</h5>
             <h6><strong>Codebases</strong></h6>
             <ul className='resume-text'>
-              <li>Python</li>
               <li>JavaScript</li>
               <ul className='resume-text'>
                 <li>Node.js</li>
                 <li>TypeScript</li>
               </ul>
-              <li>Bash / Shell</li>
+              <li>Python</li>
               <li>Go</li>
+              <li>C++</li>
             </ul>
             <h6><strong>Full Web Stack</strong></h6>
             <ul className='resume-text'>
@@ -119,18 +119,19 @@ class Resume extends Component<Props> {
                 <li>Flask</li>
                 <li>Express</li>
               </ul>
-              <li>Web Protocols</li>
-              <ul className='resume-text'>
-                <li>REST</li>
-                <li>HTTP</li>
-                <li>JSON</li>
-              </ul>
             </ul>
             <h6><strong>Databases</strong></h6>
             <ul className='resume-text'>
-              <li>MySQL</li>
-              <li>SQL Server</li>
-              <li>MongoDB</li>
+              <li>SQL</li>
+              <ul className='resume-text'>
+                <li>MySQL</li>
+                <li>SQL Server</li>
+              </ul>
+              <li>NoSQL</li>
+              <ul className='resume-text'>
+                <li>MongoDB</li>
+                <li>DynamoDB</li>
+              </ul>
             </ul>
             <h6><strong>Cloud Services</strong></h6>
             <ul className='resume-text'>
@@ -145,6 +146,9 @@ class Resume extends Component<Props> {
             <h6><strong>Other</strong></h6>
             <ul className='resume-text'>
               <li>Linux</li>
+              <ul className='resume-text'>
+                <li>Bash</li>
+              </ul>
               <li>Git</li>
             </ul>
           </div>
