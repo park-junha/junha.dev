@@ -28,7 +28,6 @@ export default (props) => {
           , display: 'none'
           }}
           onClick={createPdf}
-          disabled
         >
           Download PDF
         </Button>

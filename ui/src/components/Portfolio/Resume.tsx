@@ -5,7 +5,7 @@ import img_website from '../../img/globe-outline.png';
 import img_email from '../../img/mail.png';
 import img_phone from '../../img/call.png';
 import img_work from '../../img/briefcase.png';
-import './ExportResumeStyle.css';
+import '../PdfExporter/ExportResumeStyle.css';
 
 interface Props {
   id: string;
@@ -92,18 +92,18 @@ class Resume extends Component<Props> {
               <strong>Santa Clara University</strong>
               <div>Computer Science, B.S.</div>
               <div>Mathematics, Minor</div>
-              <div>Attended 9/15 - 7/20</div>
+              <div>Expected July 2020</div>
             </p>
             <h5 className='resume-body-header'>Technical Skills</h5>
             <h6><strong>Codebases</strong></h6>
             <ul className='resume-text'>
-              <li>Python</li>
               <li>JavaScript</li>
               <ul className='resume-text'>
                 <li>Node.js</li>
                 <li>TypeScript</li>
               </ul>
-              <li>Bash / Shell</li>
+              <li>Python</li>
+              <li>C++</li>
               <li>Go</li>
             </ul>
             <h6><strong>Full Web Stack</strong></h6>
@@ -119,18 +119,19 @@ class Resume extends Component<Props> {
                 <li>Flask</li>
                 <li>Express</li>
               </ul>
-              <li>Web Protocols</li>
-              <ul className='resume-text'>
-                <li>REST</li>
-                <li>HTTP</li>
-                <li>JSON</li>
-              </ul>
             </ul>
             <h6><strong>Databases</strong></h6>
             <ul className='resume-text'>
-              <li>MySQL</li>
-              <li>SQL Server</li>
-              <li>MongoDB</li>
+              <li>SQL</li>
+              <ul className='resume-text'>
+                <li>MySQL</li>
+                <li>SQL Server</li>
+              </ul>
+              <li>NoSQL</li>
+              <ul className='resume-text'>
+                <li>MongoDB</li>
+                <li>DynamoDB</li>
+              </ul>
             </ul>
             <h6><strong>Cloud Services</strong></h6>
             <ul className='resume-text'>
@@ -145,6 +146,9 @@ class Resume extends Component<Props> {
             <h6><strong>Other</strong></h6>
             <ul className='resume-text'>
               <li>Linux</li>
+              <ul className='resume-text'>
+                <li>Bash</li>
+              </ul>
               <li>Git</li>
             </ul>
           </div>

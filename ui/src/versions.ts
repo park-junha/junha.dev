@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "1.7.1",
+    "notes": [
+      {
+        "label": "Feature",
+        "desc": "Slight resume update (Technical Skills)."
+      }
+    ]
+  },
+  {
     "version": "1.7.0",
     "notes": [
       {
