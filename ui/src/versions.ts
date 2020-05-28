@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "1.7.2",
+    "notes": [
+      {
+        "label": "Miscellaneous",
+        "desc": "Removed unused, deprecated CSS/TSX files (old Skills and Experience components)."
+      }
+    ]
+  },
+  {
     "version": "1.7.1",
     "notes": [
       {
