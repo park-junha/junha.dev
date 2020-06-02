@@ -8,6 +8,7 @@ export interface Api {
 export interface ApiData {
   Projects: ProjectData;
   language_ids: LanguageIds;
+  tool_ids: LanguageIds;  //  Use same interface as language IDs
 }
 
 export interface ApiResults extends Array<ApiData>{};
@@ -30,6 +31,7 @@ export interface VersionNotes extends Array<VersionNote>{};
 export interface Project {
   name: string;
   languages: string[];
+  tools: string[];
   desc: string;
   about: string | null;
   app: string | null;

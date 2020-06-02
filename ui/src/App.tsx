@@ -28,6 +28,7 @@ class App extends Component<{}, State> {
   , api: {
       'Projects': []
     , 'language_ids': {}
+    , 'tool_ids': {}
     }
   , api_status: 0
   };
