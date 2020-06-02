@@ -50,6 +50,7 @@ export default class Main extends Component<Props> {
             api_status={this.props.api_status}
             projects={this.props.api.Projects}
             languages={this.props.api.language_ids}
+            tools={this.props.api.tool_ids}
           />
         );
       case 'VersionLog':

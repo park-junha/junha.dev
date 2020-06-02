@@ -18,6 +18,7 @@ interface Props {
   api_status: number;
   projects: ProjectData;
   languages: LanguageIds;
+  tools: LanguageIds;
 }
 
 interface State {
@@ -33,6 +34,7 @@ export default class Projects extends Component<Props, State> {
   , onDisplay: {
       name: ''
     , languages: []
+    , tools: []
     , desc: ''
     , about: null
     , app: null
@@ -161,6 +163,27 @@ export default class Projects extends Component<Props, State> {
                 </span>
               </div>
             ))}
+            {this.state.onDisplay.tools.length > 0 ? (
+              <div>
+                <br />
+                <h5>Other Technologies</h5>
+                {this.state.onDisplay.tools.map(tool_id => (
+                  <div>
+                    <span
+                      className='project-language-color'
+                      style={{
+                        backgroundColor: this.props.tools[tool_id].color
+                      }}
+                    >
+                    </span>
+                    <span>
+                      {this.props.tools[tool_id].name}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            ) : null
+            }
           </Modal.Body>
         </Modal>
       </div>
