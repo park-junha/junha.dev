@@ -1,5 +1,10 @@
 const versions = [
   {
+    "version": "1.8.0",
+    "notes": [
+    ]
+  },
+  {
     "version": "1.7.3",
     "notes": [
       {
