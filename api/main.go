@@ -12,52 +12,75 @@ import (
 	"io/ioutil"
 )
 
-//Job struct
-type Job struct {
-	ID             int      `json:"id"`
-	Position       string   `json:"position"`
-	Company        string   `json:"company"`
-	Description    string   `json:"description"`
-	SkillsRequired []string `json:"skillsRequired"`
-	Location       string   `json:"location"`
-	EmploymentType string   `json:"employmentType"`
+// Data structures
+type reqBody struct {
+	Query string `json:"query"`
 }
 
-var jobType = graphql.NewObject(
+type Project struct {
+        ID              string          `json:"id"`
+        Name            string          `json:"name"`
+        Description     string          `json:"desc"`
+        About           string          `json:"about"`
+        AppSource       string          `json:"app"`
+        SourceCode      string          `json:"src"`
+        Languages       []string        `json:"languages"`
+        Tools           []string        `json:"tools"`
+}
+
+type LanguageId struct {
+        Name            string  `json:"name"`
+        Color           string  `json:"color"`
+}
+
+var projectType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "Job",
+		Name: "Project",
 		Fields: graphql.Fields{
 			"id": &graphql.Field{
-				Type: graphql.Int,
-			},
-			"position": &graphql.Field{
 				Type: graphql.String,
 			},
-			"company": &graphql.Field{
+			"name": &graphql.Field{
 				Type: graphql.String,
 			},
-			"description": &graphql.Field{
+			"desc": &graphql.Field{
 				Type: graphql.String,
 			},
-			"location": &graphql.Field{
+			"about": &graphql.Field{
 				Type: graphql.String,
 			},
-			"employmentType": &graphql.Field{
+			"app": &graphql.Field{
 				Type: graphql.String,
 			},
-			"skillsRequired": &graphql.Field{
+			"src": &graphql.Field{
+				Type: graphql.String,
+			},
+			"languages": &graphql.Field{
+				Type: graphql.NewList(graphql.String),
+			},
+			"tools": &graphql.Field{
 				Type: graphql.NewList(graphql.String),
 			},
 		},
 	},
 )
 
-type reqBody struct {
-	Query string `json:"query"`
-}
+var languageIdType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "LanguageId",
+		Fields: graphql.Fields{
+			"name": &graphql.Field{
+				Type: graphql.String,
+			},
+			"color": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	},
+)
 
+// App
 func main() {
-
 	graphiqlHandler, err := graphiql.NewGraphiqlHandler("/graphql")
 	if err != nil {
 		panic(err)
@@ -89,9 +112,9 @@ func gqlHandler() http.Handler {
 
 func processQuery(query string) (result string) {
 
-	retrieveJobs := retrieveJobsFromFile()
+	data := openJsonFile()
 
-	params := graphql.Params{Schema: gqlSchema(retrieveJobs), RequestString: query}
+	params := graphql.Params{Schema: gqlSchema(data), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
 		fmt.Printf("failed to execute graphql operation, errors: %+v", r.Errors)
@@ -102,10 +125,10 @@ func processQuery(query string) (result string) {
 
 }
 
-//Open the file sample.json and retrieve json data
-func retrieveJobsFromFile() func() []Job {
-	return func() []Job {
-		jsonf, err := os.Open("sample.json")
+//Open the file projects.json and retrieve json data
+func openJsonFile() func() []Project {
+	return func() []Project {
+		jsonf, err := os.Open("projects.json")
 
 		if err != nil {
 			fmt.Printf("failed to open json file, error: %v", err)
@@ -114,42 +137,42 @@ func retrieveJobsFromFile() func() []Job {
 		jsonDataFromFile, _ := ioutil.ReadAll(jsonf)
 		defer jsonf.Close()
 
-		var jobsData []Job
+		var jsonData []Project
 
-		err = json.Unmarshal(jsonDataFromFile, &jobsData)
+		err = json.Unmarshal(jsonDataFromFile, &jsonData)
 
 		if err != nil {
 			fmt.Printf("failed to parse json, error: %v", err)
 		}
 
-		return jobsData
+		return jsonData
 	}
 }
 
 // Define the GraphQL Schema
-func gqlSchema(queryJobs func() []Job) graphql.Schema {
+func gqlSchema(queryProjects func() []Project) graphql.Schema {
 	fields := graphql.Fields{
-		"jobs": &graphql.Field{
-			Type:        graphql.NewList(jobType),
-			Description: "All Jobs",
+		"projects": &graphql.Field{
+			Type:        graphql.NewList(projectType),
+			Description: "All Projects",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return queryJobs(), nil
+				return queryProjects(), nil
 			},
 		},
-		"job": &graphql.Field{
-			Type:        jobType,
-			Description: "Get Jobs by ID",
+		"project": &graphql.Field{
+			Type:        projectType,
+			Description: "Get Projects by ID",
 			Args: graphql.FieldConfigArgument{
 				"id": &graphql.ArgumentConfig{
-					Type: graphql.Int,
+					Type: graphql.String,
 				},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				id, success := params.Args["id"].(int)
+				id, success := params.Args["id"].(string)
 				if success {
-					for _, job := range queryJobs() {
-						if int(job.ID) == id {
-							return job, nil
+					for _, proj := range queryProjects() {
+						if proj.ID == id {
+							return proj, nil
 						}
 					}
 				}
