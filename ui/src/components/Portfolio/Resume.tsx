@@ -103,21 +103,25 @@ class Resume extends Component<Props> {
                 <li>TypeScript</li>
               </ul>
               <li>Python</li>
-              <li>C++</li>
               <li>Go</li>
+              <li>C++</li>
             </ul>
             <h6><strong>Full Web Stack</strong></h6>
             <ul className='resume-text'>
               <li>Web Frontend</li>
               <ul className='resume-text'>
                 <li>React</li>
-                <li>HTML / CSS</li>
                 <li>Bootstrap</li>
               </ul>
               <li>Web Backend</li>
               <ul className='resume-text'>
                 <li>Flask</li>
                 <li>Express</li>
+              </ul>
+              <li>API Protocols</li>
+              <ul className='resume-text'>
+                <li>REST</li>
+                <li>GraphQL</li>
               </ul>
             </ul>
             <h6><strong>Databases</strong></h6>
@@ -138,17 +142,13 @@ class Resume extends Component<Props> {
               <li>AWS</li>
               <ul className='resume-text'>
                 <li>EC2</li>
-                <li>RDS</li>
-                <li>Lambda</li>
                 <li>S3</li>
+                <li>Lambda</li>
               </ul>
             </ul>
             <h6><strong>Other</strong></h6>
             <ul className='resume-text'>
-              <li>Linux</li>
-              <ul className='resume-text'>
-                <li>Bash</li>
-              </ul>
+              <li>Linux / Bash</li>
               <li>Git</li>
             </ul>
           </div>
@@ -194,18 +194,11 @@ class Resume extends Component<Props> {
             </ul>
             <h5 className='resume-body-header'>Projects</h5>
             <h6>
-              <strong>Grad Planner</strong>, Python
-              <span className='resume-date-range'>9/19 - Now</span>
-            </h6>
-            <ul className='resume-text'>
-              <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
-            </ul>
-            <h6>
-              <strong>Personal Website</strong>, TypeScript
+              <strong>Personal Website</strong>, TypeScript / Go
               <span className='resume-date-range'>4/20 - Now</span>
             </h6>
             <ul className='resume-text'>
-              <li>Developed with <strong>React</strong> and connected to a <strong>MongoDB</strong> backend through <strong>Flask</strong> APIs.</li>
+              <li>Developed with <strong>React</strong> and connected to a <strong>GraphQL</strong> API written in <strong>Go</strong>.</li>
             </ul>
             <h6>
               <strong>Chrome V8</strong>, C++
@@ -213,6 +206,13 @@ class Resume extends Component<Props> {
             </h6>
             <ul className='resume-text'>
               <li><i>Open Source Contributor</i> for the JavaScript engine powering Google Chrome and Node.js.</li>
+            </ul>
+            <h6>
+              <strong>Grad Planner</strong>, Python
+              <span className='resume-date-range'>9/19 - 5/20</span>
+            </h6>
+            <ul className='resume-text'>
+              <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
             </ul>
             <h6>
               <strong>CovidSweeper</strong>, JavaScript
