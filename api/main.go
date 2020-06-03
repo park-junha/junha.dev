@@ -18,7 +18,7 @@ type reqBody struct {
 }
 
 type Project struct {
-        ID              string          `json:"id"`
+        UID             string          `json:"uid"`
         Name            string          `json:"name"`
         Description     string          `json:"desc"`
         About           string          `json:"about"`
@@ -33,11 +33,12 @@ type LanguageId struct {
         Color           string  `json:"color"`
 }
 
+// GraphQL Types
 var projectType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Project",
 		Fields: graphql.Fields{
-			"id": &graphql.Field{
+			"uid": &graphql.Field{
 				Type: graphql.String,
 			},
 			"name": &graphql.Field{
@@ -92,6 +93,7 @@ func main() {
 	http.ListenAndServe(":2000", nil)
 }
 
+// GraphQL API handler
 func gqlHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Body == nil {
@@ -110,6 +112,7 @@ func gqlHandler() http.Handler {
 	})
 }
 
+// GraphQL Query Handler
 func processQuery(query string) (result string) {
 
 	data := openJsonFile()
@@ -125,7 +128,7 @@ func processQuery(query string) (result string) {
 
 }
 
-//Open the file projects.json and retrieve json data
+// Open the file projects.json and retrieve json data
 func openJsonFile() func() []Project {
 	return func() []Project {
 		jsonf, err := os.Open("projects.json")
@@ -161,17 +164,17 @@ func gqlSchema(queryProjects func() []Project) graphql.Schema {
 		},
 		"project": &graphql.Field{
 			Type:        projectType,
-			Description: "Get Projects by ID",
+			Description: "Get Projects by UID",
 			Args: graphql.FieldConfigArgument{
-				"id": &graphql.ArgumentConfig{
+				"uid": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				id, success := params.Args["id"].(string)
+				uid, success := params.Args["uid"].(string)
 				if success {
 					for _, proj := range queryProjects() {
-						if proj.ID == id {
+						if proj.UID == uid {
 							return proj, nil
 						}
 					}

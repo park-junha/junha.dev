@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "uid": "1",
     "name": "Prep To Your Door",
     "desc": "A web e-commerce platform for a meal prep business based in Austin.",
     "about": "This application is a subscription-based web platform for a meal prep business who delivers straight to their customers' doorsteps. The platform is split into a model, view, and controller, developed with MySQL, React, and Flask respectively. User subscription billing is automated with Python and Shell scripts, and the web platform is deployed to AWS.",
@@ -19,7 +19,7 @@
     ]
   },
   {
-    "id": "2",
+    "uid": "2",
     "name": "Personal Website",
     "desc": "This site!",
     "about": "This website is built with a model-view-controller framework. The frontend is written with React and TypeScript and is hosted on Netlify. It is connected to a MongoDB backend with a REST API written in Flask, a Python web framework, which is deployed to AWS Lambda.",
@@ -38,7 +38,7 @@
     ]
   },
   {
-    "id": "3",
+    "uid": "3",
     "name": "V8",
     "desc": "Google's open-source JavaScript engine for Chrome and Node.js.",
     "about": "V8 is Google's open source JavaScript engine, written in C++. It is particularly known for powering Google Chrome and Node.js.",
@@ -51,7 +51,7 @@
     ]
   },
   {
-    "id": "4",
+    "uid": "4",
     "name": "Grad Planner",
     "desc": "Helping students graduate on time.",
     "about": "This software allows students to generate a four-year undergraduate plan within seconds. All they have to do is tell the application their major and classes taken, and then our super smart algorithm will give them a roadmap of their classes.",
@@ -68,7 +68,7 @@
     ]
   },
   {
-    "id": "5",
+    "uid": "5",
     "name": "CovidSweeper",
     "desc": "Minesweeper, but with a twist.",
     "about": "This is a variation of Minesweeper I developed during the early stages of the COVID-19 pandemic, mostly intended to familiarize myself with manipulating Canvas with JavaScript and also entertain myself and others.",
@@ -83,7 +83,7 @@
     ]
   },
   {
-    "id": "6",
+    "uid": "6",
     "name": "Serving Now",
     "desc": "A web and mobile meal ordering platform.",
     "about": "Farmers can upload their menu via the web platform and customers can order from farmers through the mobile application. Web platform is written with Flask and the mobile app is written in C# with Xamarin.",
@@ -100,7 +100,7 @@
     ]
   },
   {
-    "id": "7",
+    "uid": "7",
     "name": "Web App Template (FARM)",
     "desc": "A full stack web application template that uses a Python backend and a React frontend.",
     "about": "This is a template web application that uses what I like to call the FARM stack: a Flask API, Amazon Web Services, a React UI, and a MySQL database. It is designed for developers to use and build on top of this template.",
@@ -118,7 +118,7 @@
     ]
   },
   {
-    "id": "8",
+    "uid": "8",
     "name": "Leetcode",
     "desc": "My solutions to various Leetcode problems.",
     "about": null, 
