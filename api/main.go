@@ -29,6 +29,7 @@ type Project struct {
 }
 
 type LanguageId struct {
+        UID             string  `json:"uid"`
         Name            string  `json:"name"`
         Color           string  `json:"color"`
 }
@@ -70,6 +71,9 @@ var languageIdType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "LanguageId",
 		Fields: graphql.Fields{
+			"uid": &graphql.Field{
+				Type: graphql.String,
+			},
 			"name": &graphql.Field{
 				Type: graphql.String,
 			},
@@ -88,7 +92,7 @@ func main() {
 	}
 
         fmt.Println("Starting server on port 2000.")
-	http.Handle("/graphql", gqlHandler())
+	http.Handle("/", gqlHandler())
 	http.Handle("/graphiql", graphiqlHandler)
 	http.ListenAndServe(":2000", nil)
 }
@@ -114,10 +118,7 @@ func gqlHandler() http.Handler {
 
 // GraphQL Query Handler
 func processQuery(query string) (result string) {
-
-	data := openJsonFile()
-
-	params := graphql.Params{Schema: gqlSchema(data), RequestString: query}
+	params := graphql.Params{Schema: gqlSchema(), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
 		fmt.Printf("failed to execute graphql operation, errors: %+v", r.Errors)
@@ -129,37 +130,57 @@ func processQuery(query string) (result string) {
 }
 
 // Open the file projects.json and retrieve json data
-func openJsonFile() func() []Project {
-	return func() []Project {
-		jsonf, err := os.Open("projects.json")
+func getProjects() []Project {
+        jsonf, err := os.Open("projects.json")
 
-		if err != nil {
-			fmt.Printf("failed to open json file, error: %v", err)
-		}
+        if err != nil {
+                fmt.Printf("failed to open json file, error: %v", err)
+        }
 
-		jsonDataFromFile, _ := ioutil.ReadAll(jsonf)
-		defer jsonf.Close()
+        jsonDataFromFile, _ := ioutil.ReadAll(jsonf)
+        defer jsonf.Close()
 
-		var jsonData []Project
+        var jsonData []Project
 
-		err = json.Unmarshal(jsonDataFromFile, &jsonData)
+        err = json.Unmarshal(jsonDataFromFile, &jsonData)
 
-		if err != nil {
-			fmt.Printf("failed to parse json, error: %v", err)
-		}
+        if err != nil {
+                fmt.Printf("failed to parse json, error: %v", err)
+        }
 
-		return jsonData
-	}
+        return jsonData
+}
+
+// Open the file languages.json and retrieve json data
+func getLanguageIds() []LanguageId {
+        jsonf, err := os.Open("languages.json")
+
+        if err != nil {
+                fmt.Printf("failed to open json file, error: %v", err)
+        }
+
+        jsonDataFromFile, _ := ioutil.ReadAll(jsonf)
+        defer jsonf.Close()
+
+        var jsonData []LanguageId
+
+        err = json.Unmarshal(jsonDataFromFile, &jsonData)
+
+        if err != nil {
+                fmt.Printf("failed to parse json, error: %v", err)
+        }
+
+        return jsonData
 }
 
 // Define the GraphQL Schema
-func gqlSchema(queryProjects func() []Project) graphql.Schema {
+func gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
 		"projects": &graphql.Field{
 			Type:        graphql.NewList(projectType),
 			Description: "All Projects",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return queryProjects(), nil
+				return getProjects(), nil
 			},
 		},
 		"project": &graphql.Field{
@@ -173,9 +194,36 @@ func gqlSchema(queryProjects func() []Project) graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["uid"].(string)
 				if success {
-					for _, proj := range queryProjects() {
+					for _, proj := range getProjects() {
 						if proj.UID == uid {
 							return proj, nil
+						}
+					}
+				}
+				return nil, nil
+			},
+		},
+		"languages": &graphql.Field{
+			Type:        graphql.NewList(languageIdType),
+			Description: "All Language IDs",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return getLanguageIds(), nil
+			},
+		},
+		"language": &graphql.Field{
+			Type:        languageIdType,
+			Description: "Get Language IDs by UID",
+			Args: graphql.FieldConfigArgument{
+				"uid": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["uid"].(string)
+				if success {
+					for _, lid := range getLanguageIds() {
+						if lid.UID == uid {
+							return lid, nil
 						}
 					}
 				}
