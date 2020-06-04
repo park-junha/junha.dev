@@ -86,7 +86,7 @@ var languageIdType = graphql.NewObject(
 
 // App
 func main() {
-	graphiqlHandler, err := graphiql.NewGraphiqlHandler("/graphql")
+	graphiqlHandler, err := graphiql.NewGraphiqlHandler("/")
 	if err != nil {
 		panic(err)
 	}
