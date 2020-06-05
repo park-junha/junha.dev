@@ -1,5 +1,9 @@
-var file = cat('./data.json');
-var data = JSON.parse(file);
+var fp = cat('./projects.json');
+var fl = cat('./languages.json');
+var p = JSON.parse(fp);
+var l = JSON.parse(fl);
 db = db.getSiblingDB('personalwebsite');
-db.PersonalWebsite.drop();
-db.PersonalWebsite.insert(data);
+db.Projects.drop();
+db.Projects.insert(p);
+db.LanguageIds.drop();
+db.LanguageIds.insert(l);
