@@ -40,20 +40,20 @@ type reqBody struct {
 }
 
 type Project struct {
-	UID         string   `bson:"uid"`
-	Name        string   `bson:"name"`
-	Description string   `bson:"desc"`
-	About       string   `bson:"about"`
-	AppSource   string   `bson:"app"`
-	SourceCode  string   `bson:"src"`
-	Languages   []string `bson:"languages"`
-	Tools       []string `bson:"tools"`
+	UID         string   `bson:"uid"        json:"uid"`
+	Name        string   `bson:"name"       json:"name"`
+	Description string   `bson:"desc"       json:"desc"`
+	About       string   `bson:"about"      json:"about"`
+	AppSource   string   `bson:"app"        json:"app"`
+	SourceCode  string   `bson:"src"        json:"src"`
+	Languages   []string `bson:"languages"  json:"languages"`
+	Tools       []string `bson:"tools"      json:"tools"`
 }
 
 type LanguageId struct {
-	UID   string `bson:"uid"`
-	Name  string `bson:"name"`
-	Color string `bson:"color"`
+	UID   string `bson:"uid"        json:"uid"`
+	Name  string `bson:"name"       json:"name"`
+	Color string `bson:"color"      json:"color"`
 }
 
 // GraphQL Types
