@@ -1,8 +1,19 @@
-//  API interfaces
+//  GraphQL query
+export interface GQLRequest {
+  query: string;
+}
 
-export interface Api {
-  message: string;
-  result: ApiResults;
+//  API interfaces
+export interface ProjectsApi {
+  projects: ProjectData;
+}
+
+export interface LanguageIdsApi {
+  languages: LanguageIds;
+}
+
+export interface ToolIdsApi {
+  tools: LanguageIds;
 }
 
 export interface ApiData {
@@ -10,8 +21,6 @@ export interface ApiData {
   language_ids: LanguageIds;
   tool_ids: LanguageIds;  //  Use same interface as language IDs
 }
-
-export interface ApiResults extends Array<ApiData>{};
 
 //  Versions
 export interface Version {
@@ -41,11 +50,10 @@ export interface Project {
 export interface ProjectData extends Array<Project>{};
 
 //  Language IDs
-export interface LanguageIds {
-  [key: string]: LanguageId;
-}
-
 export interface LanguageId {
+  uid: string;
   name: string;
   color: string;
 }
+
+export interface LanguageIds extends Array<LanguageId>{};
