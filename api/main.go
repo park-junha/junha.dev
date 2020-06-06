@@ -23,7 +23,6 @@ import (
 type App struct {
         config          *Config
         client          *mongo.Client
-        ctx             context.Context
         db              *mongo.Database
         projCollection  *mongo.Collection
         langCollection  *mongo.Collection
@@ -140,7 +139,7 @@ func (a *App) Initialize() {
         }
 
         if len(a.config.Port) == 0 {
-                a.config.Port = "3000"
+                a.config.Port = "2000"
         }
 
         // Database
@@ -149,13 +148,12 @@ func (a *App) Initialize() {
                 fmt.Println("ERR: func (a *App) Initialize() - Client connection")
                 log.Fatal(err)
         }
-        a.ctx, _ = context.WithTimeout(context.Background(), 10*time.Second)
-        err = a.client.Connect(a.ctx)
+        ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+        err = a.client.Connect(ctx)
         if err != nil {
                 fmt.Println("ERR: func (a *App) Initialize() - Connection timeout")
                 log.Fatal(err)
         }
-        defer a.client.Disconnect(a.ctx)
 
         a.db = a.client.Database(a.config.DbName)
         a.projCollection = a.db.Collection("Projects")
@@ -216,7 +214,10 @@ func (a *App) processQuery(query string) (result string) {
 
 // Open the file projects.json and retrieve json data
 func (a *App) getProjects() []Project {
-        cursor, err := a.projCollection.Find(a.ctx, bson.M{})
+        ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+        cursor, err := a.projCollection.Find(ctx, bson.M{})
+        defer cursor.Close(ctx)
 
         if err != nil {
                 fmt.Println("ERR: func (a *App) getProjects() - Find")
@@ -225,7 +226,7 @@ func (a *App) getProjects() []Project {
 
         var jsonData []Project
 
-        if err = cursor.All(a.ctx, &jsonData); err != nil {
+        if err = cursor.All(ctx, &jsonData); err != nil {
                 fmt.Println("ERR: func (a *App) getProjects() - Cursor")
                 log.Fatal(err)
         }
@@ -235,7 +236,10 @@ func (a *App) getProjects() []Project {
 
 // Open the file languages.json and retrieve json data
 func (a *App) getLanguageIds() []LanguageId {
-        cursor, err := a.langCollection.Find(a.ctx, bson.M{})
+        ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+        cursor, err := a.langCollection.Find(ctx, bson.M{})
+        defer cursor.Close(ctx)
 
         if err != nil {
                 fmt.Println("ERR: func (a *App) getLanguageIds() - Find")
@@ -244,7 +248,7 @@ func (a *App) getLanguageIds() []LanguageId {
 
         var jsonData []LanguageId
 
-        if err = cursor.All(a.ctx, &jsonData); err != nil {
+        if err = cursor.All(ctx, &jsonData); err != nil {
                 fmt.Println("ERR: func (a *App) getLanguageIds() - Cursor")
                 log.Fatal(err)
         }
