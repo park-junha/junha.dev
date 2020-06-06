@@ -228,6 +228,21 @@ func (a *App) getProjects() []Project {
 	return jsonData
 }
 
+// Retrieve one object from Projects collection
+func (a *App) getProject(uid string) Project {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	var jsonData Project
+
+	err := a.projCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getProject() - FindOne")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
 // Retrieve data from LanguageIds collection
 func (a *App) getLanguageIds() []LanguageId {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
@@ -250,6 +265,21 @@ func (a *App) getLanguageIds() []LanguageId {
 	return jsonData
 }
 
+// Retrieve one object from LanguageIds collection
+func (a *App) getLanguageId(uid string) LanguageId {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	var jsonData LanguageId
+
+	err := a.langCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getLanguageId() - FindOne")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
 // Retrieve data from ToolIds collection
 func (a *App) getToolIds() []LanguageId {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
@@ -258,14 +288,29 @@ func (a *App) getToolIds() []LanguageId {
 	defer cursor.Close(ctx)
 
 	if err != nil {
-		fmt.Println("ERR: func (a *App) getLanguageIds() - Find")
+		fmt.Println("ERR: func (a *App) getToolIds() - Find")
 		log.Fatal(err)
 	}
 
 	var jsonData []LanguageId
 
 	if err = cursor.All(ctx, &jsonData); err != nil {
-		fmt.Println("ERR: func (a *App) getLanguageIds() - Cursor")
+		fmt.Println("ERR: func (a *App) getToolIds() - Cursor")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from ToolIds collection
+func (a *App) getToolId(uid string) LanguageId {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	var jsonData LanguageId
+
+	err := a.toolCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getToolId() - FindOne")
 		log.Fatal(err)
 	}
 
@@ -293,11 +338,7 @@ func (a *App) gqlSchema() graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["uid"].(string)
 				if success {
-					for _, proj := range a.getProjects() {
-						if proj.UID == uid {
-							return proj, nil
-						}
-					}
+					return a.getProject(uid), nil
 				}
 				return nil, nil
 			},
@@ -320,11 +361,7 @@ func (a *App) gqlSchema() graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["uid"].(string)
 				if success {
-					for _, lid := range a.getLanguageIds() {
-						if lid.UID == uid {
-							return lid, nil
-						}
-					}
+					return a.getLanguageId(uid), nil
 				}
 				return nil, nil
 			},
@@ -347,11 +384,7 @@ func (a *App) gqlSchema() graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["uid"].(string)
 				if success {
-					for _, tid := range a.getToolIds() {
-						if tid.UID == uid {
-							return tid, nil
-						}
-					}
+					return a.getToolId(uid), nil
 				}
 				return nil, nil
 			},
