@@ -1,0 +1,136 @@
+[
+  {
+    "uid": "pr01",
+    "name": "Prep To Your Door",
+    "desc": "A web e-commerce platform for a meal prep business based in Austin.",
+    "about": "This application is a subscription-based web platform for a meal prep business who delivers straight to their customers' doorsteps. The platform is split into a model, view, and controller, developed with MySQL, React, and Flask respectively. User subscription billing is automated with Python and Shell scripts, and the web platform is deployed to AWS.",
+    "app": "https://preptoyourdoor.netlify.app/",
+    "src": "https://github.com/infinite-options/Prep-To-Your-Door",
+    "languages": [
+      "la01",
+      "la02",
+      "la07"
+    ],
+    "tools": [
+      "to03",
+      "to04",
+      "to07",
+      "to01"
+    ]
+  },
+  {
+    "uid": "pr02",
+    "name": "Personal Website",
+    "desc": "This site!",
+    "about": "This website is built with a model-view-controller framework. The frontend is written with React and TypeScript and is hosted on Netlify. It is connected to a MongoDB backend with a REST API written in Flask, a Python web framework, which is deployed to AWS Lambda.",
+    "app": "https://junha.netlify.app/",
+    "src": "https://github.com/park-junha/PersonalWebsite",
+    "languages": [
+      "la04",
+      "la05",
+      "la01"
+    ],
+    "tools": [
+      "to03",
+      "to04",
+      "to02",
+      "to01"
+    ]
+  },
+  {
+    "uid": "pr03",
+    "name": "V8",
+    "desc": "Google's open-source JavaScript engine for Chrome and Node.js.",
+    "about": "V8 is Google's open source JavaScript engine, written in C++. It is particularly known for powering Google Chrome and Node.js.",
+    "app": "https://chromium.googlesource.com/v8/v8.git",
+    "src": "https://github.com/v8/v8",
+    "languages": [
+      "la03"
+    ],
+    "tools": [
+    ]
+  },
+  {
+    "uid": "pr04",
+    "name": "Grad Planner",
+    "desc": "Helping students graduate on time.",
+    "about": "This software allows students to generate a four-year undergraduate plan within seconds. All they have to do is tell the application their major and classes taken, and then our super smart algorithm will give them a roadmap of their classes.",
+    "app": "http://gradplanner.us/",
+    "src": null,
+    "languages": [
+      "la01",
+      "la09"
+    ],
+    "tools": [
+      "to04",
+      "to07",
+      "to01"
+    ]
+  },
+  {
+    "uid": "pr05",
+    "name": "CovidSweeper",
+    "desc": "Minesweeper, but with a twist.",
+    "about": "This is a variation of Minesweeper I developed during the early stages of the COVID-19 pandemic, mostly intended to familiarize myself with manipulating Canvas with JavaScript and also entertain myself and others.",
+    "app": "https://park-junha.github.io/CovidSweeper/",
+    "src": "https://github.com/park-junha/CovidSweeper",
+    "languages": [
+      "la02",
+      "la09",
+      "la05"
+    ],
+    "tools": [
+    ]
+  },
+  {
+    "uid": "pr06",
+    "name": "Serving Now",
+    "desc": "A web and mobile meal ordering platform.",
+    "about": "Farmers can upload their menu via the web platform and customers can order from farmers through the mobile application. Web platform is written with Flask and the mobile app is written in C# with Xamarin.",
+    "app": "https://servingnow.me/home",
+    "src": "https://github.com/infinite-options/serving-now-webapp",
+    "languages": [
+      "la01",
+      "la09",
+      "la08"
+    ],
+    "tools": [
+      "to04",
+      "to01"
+    ]
+  },
+  {
+    "uid": "pr07",
+    "name": "Web App Template (FARM)",
+    "desc": "A full stack web application template that uses a Python backend and a React frontend.",
+    "about": "This is a template web application that uses what I like to call the FARM stack: a Flask API, Amazon Web Services, a React UI, and a MySQL database. It is designed for developers to use and build on top of this template.",
+    "app": null,
+    "src": "https://github.com/park-junha/WebAppTemplate-FARM",
+    "languages": [
+      "la01",
+      "la02"
+    ],
+    "tools": [
+      "to04",
+      "to01",
+      "to03",
+      "to07"
+    ]
+  },
+  {
+    "uid": "pr08",
+    "name": "Leetcode",
+    "desc": "My solutions to various Leetcode problems.",
+    "about": null, 
+    "app": null,
+    "src": "https://github.com/park-junha/Leetcode",
+    "languages": [
+      "la10",
+      "la06",
+      "la01",
+      "la03"
+    ],
+    "tools": [
+    ]
+  }
+]
