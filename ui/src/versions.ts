@@ -5,6 +5,10 @@ const versions = [
       {
         "label": "Feature",
         "desc": "Replaced Flask REST API with GraphQL API, written in Go."
+      },
+      {
+        "label": "Feature",
+        "desc": "Added optional chaining and nullish coalescing to Projects.tsx for null-value handling of API responses."
       }
     ]
   },
