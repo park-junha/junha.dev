@@ -105,18 +105,12 @@ var languageIdType = graphql.NewObject(
 	},
 )
 
-// App
-func main() {
-	// Config
-	app := &App{}
-	app.Initialize()
-	app.Run()
-}
-
+// Config
 func (c *Config) GetAddr() string {
 	return fmt.Sprintf("%s:%s", c.Host, c.Port)
 }
 
+// App
 func (a *App) Initialize() {
 	// Configure the app
 	err := godotenv.Load()
@@ -399,4 +393,12 @@ func (a *App) gqlSchema() graphql.Schema {
 
 	return schema
 
+}
+
+// Main
+func main() {
+	// Config
+	app := &App{}
+	app.Initialize()
+	app.Run()
 }
