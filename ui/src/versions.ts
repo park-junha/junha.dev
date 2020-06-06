@@ -2,6 +2,10 @@ const versions = [
   {
     "version": "1.8.0",
     "notes": [
+      {
+        "label": "Feature",
+        "desc": "Replaced Flask REST API with GraphQL API, written in Go."
+      }
     ]
   },
   {

@@ -12,7 +12,8 @@ import './App.css';
 import versions from './versions'
 
 const currentVersion = versions[0]['version'];
-const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
+//const API_URL = 'https://2vkt8q67vg.execute-api.us-west-1.amazonaws.com/dev';
+const API_URL = 'http://localhost:2000/graphql'
 
 interface State {
   component: string;
