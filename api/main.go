@@ -13,7 +13,6 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/friendsofgo/graphiql"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 )
@@ -160,16 +159,8 @@ func (a *App) Initialize() {
 }
 
 func (a *App) Run() {
-	// GraphiQL stuff
-	graphiqlHandler, err := graphiql.NewGraphiqlHandler("/")
-	if err != nil {
-		fmt.Println("ERR: func (a *App) Run()")
-		panic(err)
-	}
-
 	// Routes
 	http.Handle("/", a.gqlHandler())
-	http.Handle("/graphiql", graphiqlHandler)
 
 	// Serve the app
 	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
