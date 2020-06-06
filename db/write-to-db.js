@@ -1,9 +1,13 @@
 var fp = cat('./projects.json');
 var fl = cat('./languages.json');
+var ft = cat('./tools.json');
 var p = JSON.parse(fp);
 var l = JSON.parse(fl);
+var t = JSON.parse(ft);
 db = db.getSiblingDB('personalwebsite');
 db.Projects.drop();
 db.Projects.insert(p);
 db.LanguageIds.drop();
 db.LanguageIds.insert(l);
+db.ToolIds.drop();
+db.ToolIds.insert(t);

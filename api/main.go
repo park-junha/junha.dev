@@ -25,6 +25,7 @@ type App struct {
 	db             *mongo.Database
 	projCollection *mongo.Collection
 	langCollection *mongo.Collection
+	toolCollection *mongo.Collection
 }
 
 type Config struct {
@@ -155,6 +156,7 @@ func (a *App) Initialize() {
 	a.db = a.client.Database(a.config.DbName)
 	a.projCollection = a.db.Collection("Projects")
 	a.langCollection = a.db.Collection("LanguageIds")
+	a.toolCollection = a.db.Collection("ToolIds")
 }
 
 func (a *App) Run() {
@@ -206,7 +208,7 @@ func (a *App) processQuery(query string) (result string) {
 
 }
 
-// Open the file projects.json and retrieve json data
+// Retrieve data from Projects collection
 func (a *App) getProjects() []Project {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
@@ -228,11 +230,33 @@ func (a *App) getProjects() []Project {
 	return jsonData
 }
 
-// Open the file languages.json and retrieve json data
+// Retrieve data from LanguageIds collection
 func (a *App) getLanguageIds() []LanguageId {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
 	cursor, err := a.langCollection.Find(ctx, bson.M{})
+	defer cursor.Close(ctx)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getLanguageIds() - Find")
+		log.Fatal(err)
+	}
+
+	var jsonData []LanguageId
+
+	if err = cursor.All(ctx, &jsonData); err != nil {
+		fmt.Println("ERR: func (a *App) getLanguageIds() - Cursor")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
+// Retrieve data from ToolIds collection
+func (a *App) getToolIds() []LanguageId {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	cursor, err := a.toolCollection.Find(ctx, bson.M{})
 	defer cursor.Close(ctx)
 
 	if err != nil {
@@ -301,6 +325,33 @@ func (a *App) gqlSchema() graphql.Schema {
 					for _, lid := range a.getLanguageIds() {
 						if lid.UID == uid {
 							return lid, nil
+						}
+					}
+				}
+				return nil, nil
+			},
+		},
+		"tools": &graphql.Field{
+			Type:        graphql.NewList(languageIdType),
+			Description: "All Tool IDs",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getToolIds(), nil
+			},
+		},
+		"tool": &graphql.Field{
+			Type:        languageIdType,
+			Description: "Get Tool IDs by UID",
+			Args: graphql.FieldConfigArgument{
+				"uid": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["uid"].(string)
+				if success {
+					for _, tid := range a.getToolIds() {
+						if tid.UID == uid {
+							return tid, nil
 						}
 					}
 				}
