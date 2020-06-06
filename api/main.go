@@ -180,6 +180,13 @@ func (a *App) Run() {
 // GraphQL API handler
 func (a *App) gqlHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers")
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
 		if r.Body == nil {
 			http.Error(w, "No query data", 400)
 			return
@@ -200,7 +207,7 @@ func (a *App) processQuery(query string) (result string) {
 	params := graphql.Params{Schema: a.gqlSchema(), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
-		fmt.Printf("failed to execute graphql operation, errors: %+v", r.Errors)
+		fmt.Printf("failed to execute graphql operation, errors: %+v\n", r.Errors)
 	}
 	rJSON, _ := json.Marshal(r)
 
