@@ -13,6 +13,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 )
@@ -150,16 +152,6 @@ func (a *App) Initialize() {
 	a.projCollection = a.db.Collection("Projects")
 	a.langCollection = a.db.Collection("LanguageIds")
 	a.toolCollection = a.db.Collection("ToolIds")
-}
-
-func (a *App) Run() {
-	// Routes
-	http.Handle("/", a.gqlHandler())
-
-	// Serve the app
-	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
-
-	http.ListenAndServe(a.config.GetAddr(), nil)
 }
 
 // GraphQL API handler
@@ -395,10 +387,73 @@ func (a *App) gqlSchema() graphql.Schema {
 
 }
 
-// Main
-func main() {
-	// Config
+// Run app in development mode
+func (a *App) Run() {
+	// Routes
+	http.Handle("/", a.gqlHandler())
+
+	// Serve the app
+	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
+
+	http.ListenAndServe(a.config.GetAddr(), nil)
+}
+
+// Serverless router
+func FaaSRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	switch req.HTTPMethod {
+	case "GET":
+		return events.APIGatewayProxyResponse{
+			StatusCode: 200,
+			Body:       "{}",
+		}, nil
+	case "POST":
+		return HandleFaaSRequest(req)
+	default:
+		return BadRequest(http.StatusMethodNotAllowed)
+	}
+}
+
+// Handle serverless GraphQL request
+func HandleFaaSRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	if req.Headers["content-type"] != "application/json" && req.Headers["Content-Type"] != "application/json" {
+		return BadRequest(http.StatusNotAcceptable)
+	}
 	app := &App{}
 	app.Initialize()
-	app.Run()
+
+	rBody := new(reqBody)
+	err := json.Unmarshal([]byte(req.Body), rBody)
+	if err != nil {
+		return BadRequest(http.StatusBadRequest)
+	}
+
+	res := app.processQuery(rBody.Query)
+
+	return events.APIGatewayProxyResponse{
+		StatusCode: 200,
+		Body:       res,
+	}, nil
+}
+
+// Handle bad serverless request
+func BadRequest(status int) (events.APIGatewayProxyResponse, error) {
+	return events.APIGatewayProxyResponse{
+		StatusCode: status,
+		Body:       http.StatusText(status),
+	}, nil
+}
+
+// Main
+func main() {
+	// Parse command line arguments
+	args := os.Args
+
+	// Run app in dev mode (IP/port) or serverless mode
+	if len(args) == 1 && args[1] == "dev" {
+		app := &App{}
+		app.Initialize()
+		app.Run()
+	} else {
+		lambda.Start(FaaSRouter)
+	}
 }
