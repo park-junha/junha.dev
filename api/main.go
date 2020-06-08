@@ -115,10 +115,6 @@ func (c *Config) GetAddr() string {
 // App
 func (a *App) Initialize() {
 	// Configure the app
-	err := godotenv.Load()
-	if err != nil {
-		log.Printf("Error: Could not find .env file")
-	}
 
 	a.config = &Config{
 		DbUri:  os.Getenv("DB_URI"),
@@ -134,6 +130,8 @@ func (a *App) Initialize() {
 	if len(a.config.Port) == 0 {
 		a.config.Port = "2000"
 	}
+
+	var err error
 
 	// Database
 	a.client, err = mongo.NewClient(options.Client().ApplyURI(a.config.DbUri))
@@ -449,7 +447,12 @@ func main() {
 	args := os.Args
 
 	// Run app in dev mode (IP/port) or serverless mode
-	if len(args) == 1 && args[1] == "dev" {
+	if len(args) == 2 && args[1] == "dev" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Printf("Error: Could not find .env file")
+		}
+
 		app := &App{}
 		app.Initialize()
 		app.Run()

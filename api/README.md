@@ -27,4 +27,4 @@ PORT=2000                   # App selects 2000 by default
 
 ### Developer mode
 1. Clone this repository and navigate to this (`api/`) directory
-2. Run `go run main.go`
+2. Run `go run main.go dev`
