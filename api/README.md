@@ -22,6 +22,9 @@ DB_NAME="<DATABASE-NAME>"   # Name of your MongoDB database
 HOST=127.0.0.1              # App selects 127.0.0.1 by default
 PORT=2000                   # App selects 2000 by default
 ORIGINS_ALLOWED=*           # Enable allowed origins for CORS
+
+# Not required by Go app, only required for deploy.sh
+LAMBDA_FUNCTION=<name>      # Name of your Lambda function
 ```
 
 Note that `.env` is mostly needed for running the app locally. When deploying to AWS Lambda, the environment variables should be set within the AWS Console on the respective Lambda function it is deployed to.
@@ -31,3 +34,7 @@ Note that `.env` is mostly needed for running the app locally. When deploying to
 ### Developer mode
 1. Clone this repository and navigate to this (`api/`) directory
 2. Run `go run main.go dev`, or `go build` then `./main dev`
+
+## Deploy to AWS Lambda
+
+You can deploy the Go app to AWS Lambda with `./deploy.sh`! (Assuming your AWS Lambda / API Gateway have already been configured and set up)

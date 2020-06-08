@@ -1,10 +1,27 @@
 const versions = [
   {
+    "version": "1.8.1",
+    "notes": [
+      {
+        "label": "Feature",
+        "desc": "Added Shell script for deploying Go app to AWS Lambda. (Does not yet completely automate setting up an AWS Lambda function and an API Gateway)"
+      },
+      {
+        "label": "Bugfix",
+        "desc": "CORS is now disabled by default if ORIGINS_ALLOWED is not provided in .env for Go API."
+      },
+      {
+        "label": "Miscellaneous",
+        "desc": "Updated main, api, and db READMEs."
+      }
+    ]
+  },
+  {
     "version": "1.8.0",
     "notes": [
       {
         "label": "Feature",
-        "desc": "Replaced Flask REST API with GraphQL API, written in Go."
+        "desc": "Replaced Flask REST API with GraphQL API, written in Go. New API deployed to AWS Lambda."
       },
       {
         "label": "Feature",

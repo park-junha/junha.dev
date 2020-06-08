@@ -133,6 +133,10 @@ func (a *App) Initialize() {
 		a.config.Port = "2000"
 	}
 
+	if len(a.config.ORIGINS_ALLOWED) == 0 {
+		a.config.Port = ""
+	}
+
 	var err error
 
 	// Database
