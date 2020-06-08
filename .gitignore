@@ -1,4 +1,8 @@
 *.swp
+.env
 
 # Personal JSON file containing backend data
 data.json
+projects.json
+languages.json
+tools.json

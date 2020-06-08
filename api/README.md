@@ -1,18 +1,33 @@
-## Web API
+## GraphQL API
 
 Directory for web backend.
 
 ## First-Time Setup
 
-1. Create a Python 3 virtual environment somewhere outside the project directory. Perhaps `mkdir ~/.virtualenv`, then `cd ~/.virtualenv` and run `python3 -m venv api-env`.
-2. Activate your environment with `source ~/.virtualenv/api-env/bin/activate`.
-3. Install all Python modules required by the app by (first navigating back to this directory then) running `pip3 install -r requirements.txt`.
-4. Create a `pymongocreds.py` file with the following contents:
+1. Install the following dependencies:
 ```
-CONN_STR = "endpoint-of-mongodb-database"
+go get go.mongodb.org/mongo-driver/bson
+go get go.mongodb.org/mongo-driver/mongo
+go get github.com/aws/aws-lambda-go/events
+go get github.com/aws/aws-lambda-go/lambda
+go get github.com/graphql-go/graphql
+go get github.com/joho/godotenv
 ```
+2. Create a `.env` file within this directory:
+```
+DB_URI="<ATLAS-URI>"        # URI string of MongoDB cluster with password
+DB_NAME="<DATABASE-NAME>"   # Name of your MongoDB database
+
+# Optional parameters
+HOST=127.0.0.1              # App selects 127.0.0.1 by default
+PORT=2000                   # App selects 2000 by default
+ORIGINS_ALLOWED=*           # Enable allowed origins for CORS
+```
+
+Note that `.env` is mostly needed for running the app locally. When deploying to AWS Lambda, the environment variables should be set within the AWS Console on the respective Lambda function it is deployed to.
 
 ## Run the App
 
-1. Activate your environment with `source ~/.virtualenv/api-env/bin/activate` (if you haven't already).
-2. Run `python3 api.py` to start the app on `localhost:3080`.
+### Developer mode
+1. Clone this repository and navigate to this (`api/`) directory
+2. Run `go run main.go dev`, or `go build` then `./main dev`

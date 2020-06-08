@@ -1,5 +1,13 @@
-var file = cat('./data.json');
-var data = JSON.parse(file);
+var fp = cat('./projects.json');
+var fl = cat('./languages.json');
+var ft = cat('./tools.json');
+var p = JSON.parse(fp);
+var l = JSON.parse(fl);
+var t = JSON.parse(ft);
 db = db.getSiblingDB('personalwebsite');
-db.PersonalWebsite.drop();
-db.PersonalWebsite.insert(data);
+db.Projects.drop();
+db.Projects.insert(p);
+db.LanguageIds.drop();
+db.LanguageIds.insert(l);
+db.ToolIds.drop();
+db.ToolIds.insert(t);
