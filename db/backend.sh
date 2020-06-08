@@ -1,9 +1,8 @@
 #!/bin/bash
-
 BASE_DIR="$(cd "$(dirname "$0" )" && pwd )"
 SCRIPT_DIR=$BASE_DIR"/write-to-db.js"
-DB_ENDPOINT="mongodb+srv://junha-m2byj.mongodb.net"
-DB_USER="admin"
+DB_ENDPOINT=$(grep DB_ENDPOINT $BASE_DIR/.env | cut -d '=' -f2)
+DB_USER=$(grep DB_USER $BASE_DIR/.env | cut -d '=' -f2)
 
 function usage () {
     echo "Usage:"
