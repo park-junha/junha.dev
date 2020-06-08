@@ -8,8 +8,8 @@ Directory for web backend.
 ```
 go get go.mongodb.org/mongo-driver/bson
 go get go.mongodb.org/mongo-driver/mongo
-go get go.mongodb.org/mongo-driver/mongo/options
-
+go get github.com/aws/aws-lambda-go/events
+go get github.com/aws/aws-lambda-go/lambda
 go get github.com/graphql-go/graphql
 go get github.com/joho/godotenv
 ```
@@ -23,8 +23,10 @@ HOST=127.0.0.1              # App selects 127.0.0.1 by default
 PORT=2000                   # App selects 2000 by default
 ```
 
+Note that `.env` is mostly needed for running the app locally. When deploying to AWS Lambda, the environment variables should be set within the AWS Console on the respective Lambda function it is deployed to.
+
 ## Run the App
 
 ### Developer mode
 1. Clone this repository and navigate to this (`api/`) directory
-2. Run `go run main.go dev`
+2. Run `go run main.go dev`, or `go build` then `./main dev`
