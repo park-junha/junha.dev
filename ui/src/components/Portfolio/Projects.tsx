@@ -154,12 +154,12 @@ export default class Projects extends Component<Props, State> {
                 <span
                   className='project-language-color'
                   style={{
-                    backgroundColor: this.props.languages[language_id].color
+                    backgroundColor: this.props.languages.find(key => key.uid === language_id)?.color ?? '#ededed'
                   }}
                 >
                 </span>
                 <span>
-                  {this.props.languages[language_id].name}
+                  {this.props.languages.find(key => key.uid === language_id)?.name ?? 'N/A'}
                 </span>
               </div>
             ))}
@@ -172,12 +172,12 @@ export default class Projects extends Component<Props, State> {
                     <span
                       className='project-language-color'
                       style={{
-                        backgroundColor: this.props.tools[tool_id].color
+                        backgroundColor: this.props.tools.find(key => key.uid === tool_id)?.color ?? '#ededed'
                       }}
                     >
                     </span>
                     <span>
-                      {this.props.tools[tool_id].name}
+                      {this.props.tools.find(key => key.uid === tool_id)?.name ?? 'N/A'}
                     </span>
                   </div>
                 ))}

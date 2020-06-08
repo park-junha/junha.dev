@@ -13,7 +13,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 
-	"github.com/friendsofgo/graphiql"
+	"github.com/aws/aws-lambda-go/events"
+	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 )
@@ -25,6 +26,7 @@ type App struct {
 	db             *mongo.Database
 	projCollection *mongo.Collection
 	langCollection *mongo.Collection
+	toolCollection *mongo.Collection
 }
 
 type Config struct {
@@ -39,20 +41,20 @@ type reqBody struct {
 }
 
 type Project struct {
-	UID         string   `bson:"uid"`
-	Name        string   `bson:"name"`
-	Description string   `bson:"desc"`
-	About       string   `bson:"about"`
-	AppSource   string   `bson:"app"`
-	SourceCode  string   `bson:"src"`
-	Languages   []string `bson:"languages"`
-	Tools       []string `bson:"tools"`
+	UID         string   `bson:"uid"        json:"uid"`
+	Name        string   `bson:"name"       json:"name"`
+	Description string   `bson:"desc"       json:"desc"`
+	About       string   `bson:"about"      json:"about"`
+	AppSource   string   `bson:"app"        json:"app"`
+	SourceCode  string   `bson:"src"        json:"src"`
+	Languages   []string `bson:"languages"  json:"languages"`
+	Tools       []string `bson:"tools"      json:"tools"`
 }
 
 type LanguageId struct {
-	UID   string `bson:"uid"`
-	Name  string `bson:"name"`
-	Color string `bson:"color"`
+	UID   string `bson:"uid"        json:"uid"`
+	Name  string `bson:"name"       json:"name"`
+	Color string `bson:"color"      json:"color"`
 }
 
 // GraphQL Types
@@ -105,24 +107,14 @@ var languageIdType = graphql.NewObject(
 	},
 )
 
-// App
-func main() {
-	// Config
-	app := &App{}
-	app.Initialize()
-	app.Run()
-}
-
+// Config
 func (c *Config) GetAddr() string {
 	return fmt.Sprintf("%s:%s", c.Host, c.Port)
 }
 
+// App
 func (a *App) Initialize() {
 	// Configure the app
-	err := godotenv.Load()
-	if err != nil {
-		log.Printf("Error: Could not find .env file")
-	}
 
 	a.config = &Config{
 		DbUri:  os.Getenv("DB_URI"),
@@ -138,6 +130,8 @@ func (a *App) Initialize() {
 	if len(a.config.Port) == 0 {
 		a.config.Port = "2000"
 	}
+
+	var err error
 
 	// Database
 	a.client, err = mongo.NewClient(options.Client().ApplyURI(a.config.DbUri))
@@ -155,29 +149,19 @@ func (a *App) Initialize() {
 	a.db = a.client.Database(a.config.DbName)
 	a.projCollection = a.db.Collection("Projects")
 	a.langCollection = a.db.Collection("LanguageIds")
-}
-
-func (a *App) Run() {
-	// GraphiQL stuff
-	graphiqlHandler, err := graphiql.NewGraphiqlHandler("/")
-	if err != nil {
-		fmt.Println("ERR: func (a *App) Run()")
-		panic(err)
-	}
-
-	// Routes
-	http.Handle("/", a.gqlHandler())
-	http.Handle("/graphiql", graphiqlHandler)
-
-	// Serve the app
-	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
-
-	http.ListenAndServe(a.config.GetAddr(), nil)
+	a.toolCollection = a.db.Collection("ToolIds")
 }
 
 // GraphQL API handler
 func (a *App) gqlHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers")
+		if r.Method == "OPTIONS" {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
 		if r.Body == nil {
 			http.Error(w, "No query data", 400)
 			return
@@ -198,7 +182,7 @@ func (a *App) processQuery(query string) (result string) {
 	params := graphql.Params{Schema: a.gqlSchema(), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
-		fmt.Printf("failed to execute graphql operation, errors: %+v", r.Errors)
+		fmt.Printf("failed to execute graphql operation, errors: %+v\n", r.Errors)
 	}
 	rJSON, _ := json.Marshal(r)
 
@@ -206,7 +190,7 @@ func (a *App) processQuery(query string) (result string) {
 
 }
 
-// Open the file projects.json and retrieve json data
+// Retrieve data from Projects collection
 func (a *App) getProjects() []Project {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
@@ -228,7 +212,22 @@ func (a *App) getProjects() []Project {
 	return jsonData
 }
 
-// Open the file languages.json and retrieve json data
+// Retrieve one object from Projects collection
+func (a *App) getProject(uid string) Project {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	var jsonData Project
+
+	err := a.projCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getProject() - FindOne")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
+// Retrieve data from LanguageIds collection
 func (a *App) getLanguageIds() []LanguageId {
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 
@@ -244,6 +243,58 @@ func (a *App) getLanguageIds() []LanguageId {
 
 	if err = cursor.All(ctx, &jsonData); err != nil {
 		fmt.Println("ERR: func (a *App) getLanguageIds() - Cursor")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from LanguageIds collection
+func (a *App) getLanguageId(uid string) LanguageId {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	var jsonData LanguageId
+
+	err := a.langCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getLanguageId() - FindOne")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
+// Retrieve data from ToolIds collection
+func (a *App) getToolIds() []LanguageId {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+
+	cursor, err := a.toolCollection.Find(ctx, bson.M{})
+	defer cursor.Close(ctx)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getToolIds() - Find")
+		log.Fatal(err)
+	}
+
+	var jsonData []LanguageId
+
+	if err = cursor.All(ctx, &jsonData); err != nil {
+		fmt.Println("ERR: func (a *App) getToolIds() - Cursor")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from ToolIds collection
+func (a *App) getToolId(uid string) LanguageId {
+	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
+	var jsonData LanguageId
+
+	err := a.toolCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
+
+	if err != nil {
+		fmt.Println("ERR: func (a *App) getToolId() - FindOne")
 		log.Fatal(err)
 	}
 
@@ -271,11 +322,7 @@ func (a *App) gqlSchema() graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["uid"].(string)
 				if success {
-					for _, proj := range a.getProjects() {
-						if proj.UID == uid {
-							return proj, nil
-						}
-					}
+					return a.getProject(uid), nil
 				}
 				return nil, nil
 			},
@@ -298,11 +345,30 @@ func (a *App) gqlSchema() graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["uid"].(string)
 				if success {
-					for _, lid := range a.getLanguageIds() {
-						if lid.UID == uid {
-							return lid, nil
-						}
-					}
+					return a.getLanguageId(uid), nil
+				}
+				return nil, nil
+			},
+		},
+		"tools": &graphql.Field{
+			Type:        graphql.NewList(languageIdType),
+			Description: "All Tool IDs",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getToolIds(), nil
+			},
+		},
+		"tool": &graphql.Field{
+			Type:        languageIdType,
+			Description: "Get Tool IDs by UID",
+			Args: graphql.FieldConfigArgument{
+				"uid": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["uid"].(string)
+				if success {
+					return a.getToolId(uid), nil
 				}
 				return nil, nil
 			},
@@ -317,4 +383,80 @@ func (a *App) gqlSchema() graphql.Schema {
 
 	return schema
 
+}
+
+// Run app in development mode
+func (a *App) Run() {
+	// Routes
+	http.Handle("/", a.gqlHandler())
+
+	// Serve the app
+	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
+
+	http.ListenAndServe(a.config.GetAddr(), nil)
+}
+
+// Serverless router
+func FaaSRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	switch req.HTTPMethod {
+	case "GET":
+		return events.APIGatewayProxyResponse{
+			StatusCode: 200,
+			Body:       "{}",
+		}, nil
+	case "POST":
+		return HandleFaaSRequest(req)
+	default:
+		return BadRequest(http.StatusMethodNotAllowed)
+	}
+}
+
+// Handle serverless GraphQL request
+func HandleFaaSRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	if req.Headers["content-type"] != "application/json" && req.Headers["Content-Type"] != "application/json" {
+		return BadRequest(http.StatusNotAcceptable)
+	}
+	app := &App{}
+	app.Initialize()
+
+	rBody := new(reqBody)
+	err := json.Unmarshal([]byte(req.Body), rBody)
+	if err != nil {
+		return BadRequest(http.StatusBadRequest)
+	}
+
+	res := app.processQuery(rBody.Query)
+
+	return events.APIGatewayProxyResponse{
+		StatusCode: 200,
+		Body:       res,
+	}, nil
+}
+
+// Handle bad serverless request
+func BadRequest(status int) (events.APIGatewayProxyResponse, error) {
+	return events.APIGatewayProxyResponse{
+		StatusCode: status,
+		Body:       http.StatusText(status),
+	}, nil
+}
+
+// Main
+func main() {
+	// Parse command line arguments
+	args := os.Args
+
+	// Run app in dev mode (IP/port) or serverless mode
+	if len(args) == 2 && args[1] == "dev" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Printf("Error: Could not find .env file")
+		}
+
+		app := &App{}
+		app.Initialize()
+		app.Run()
+	} else {
+		lambda.Start(FaaSRouter)
+	}
 }

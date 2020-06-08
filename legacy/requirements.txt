@@ -1,5 +1,0 @@
-flask
-flask_restful
-flask_cors
-pymongo[tls,srv]
-zappa
