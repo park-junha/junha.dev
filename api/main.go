@@ -30,10 +30,11 @@ type App struct {
 }
 
 type Config struct {
-	DbUri  string
-	DbName string
-	Host   string
-	Port   string
+	DbUri          string
+	DbName         string
+	Host           string
+	Port           string
+	AllowedOrigins string
 }
 
 type reqBody struct {
@@ -41,20 +42,20 @@ type reqBody struct {
 }
 
 type Project struct {
-	UID         string   `bson:"uid"        json:"uid"`
-	Name        string   `bson:"name"       json:"name"`
-	Description string   `bson:"desc"       json:"desc"`
-	About       string   `bson:"about"      json:"about"`
-	AppSource   string   `bson:"app"        json:"app"`
-	SourceCode  string   `bson:"src"        json:"src"`
-	Languages   []string `bson:"languages"  json:"languages"`
-	Tools       []string `bson:"tools"      json:"tools"`
+	UID         string   `bson:"uid"       json:"uid"`
+	Name        string   `bson:"name"      json:"name"`
+	Description string   `bson:"desc"      json:"desc"`
+	About       string   `bson:"about"     json:"about"`
+	AppSource   string   `bson:"app"       json:"app"`
+	SourceCode  string   `bson:"src"       json:"src"`
+	Languages   []string `bson:"languages" json:"languages"`
+	Tools       []string `bson:"tools"     json:"tools"`
 }
 
 type LanguageId struct {
-	UID   string `bson:"uid"        json:"uid"`
-	Name  string `bson:"name"       json:"name"`
-	Color string `bson:"color"      json:"color"`
+	UID   string `bson:"uid"   json:"uid"`
+	Name  string `bson:"name"  json:"name"`
+	Color string `bson:"color" json:"color"`
 }
 
 // GraphQL Types
@@ -117,10 +118,11 @@ func (a *App) Initialize() {
 	// Configure the app
 
 	a.config = &Config{
-		DbUri:  os.Getenv("DB_URI"),
-		DbName: os.Getenv("DB_NAME"),
-		Host:   os.Getenv("HOST"),
-		Port:   os.Getenv("PORT"),
+		DbUri:          os.Getenv("DB_URI"),
+		DbName:         os.Getenv("DB_NAME"),
+		Host:           os.Getenv("HOST"),
+		Port:           os.Getenv("PORT"),
+		AllowedOrigins: os.Getenv("ORIGINS_ALLOWED"),
 	}
 
 	if len(a.config.Host) == 0 {
@@ -155,7 +157,7 @@ func (a *App) Initialize() {
 // GraphQL API handler
 func (a *App) gqlHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Origin", a.config.AllowedOrigins)
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers")
 		if r.Method == "OPTIONS" {
@@ -397,47 +399,72 @@ func (a *App) Run() {
 }
 
 // Serverless router
-func FaaSRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func LambdaRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	app := &App{}
+	app.Initialize()
+
 	switch req.HTTPMethod {
+	case "OPTIONS":
+		return events.APIGatewayProxyResponse{
+			StatusCode: 200,
+			Headers: map[string]string{
+				"Access-Control-Allow-Origin":  app.config.AllowedOrigins,
+				"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+			},
+		}, nil
 	case "GET":
 		return events.APIGatewayProxyResponse{
 			StatusCode: 200,
-			Body:       "{}",
+			Headers: map[string]string{
+				"Access-Control-Allow-Origin":  app.config.AllowedOrigins,
+				"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+			},
+			Body: "{}",
 		}, nil
 	case "POST":
-		return HandleFaaSRequest(req)
+		return app.HandleLambdaRequest(req)
 	default:
-		return BadRequest(http.StatusMethodNotAllowed)
+		return app.BadLambdaRequest(http.StatusMethodNotAllowed)
 	}
 }
 
 // Handle serverless GraphQL request
-func HandleFaaSRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func (a *App) HandleLambdaRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	if req.Headers["content-type"] != "application/json" && req.Headers["Content-Type"] != "application/json" {
-		return BadRequest(http.StatusNotAcceptable)
+		return a.BadLambdaRequest(http.StatusNotAcceptable)
 	}
-	app := &App{}
-	app.Initialize()
 
 	rBody := new(reqBody)
 	err := json.Unmarshal([]byte(req.Body), rBody)
 	if err != nil {
-		return BadRequest(http.StatusBadRequest)
+		return a.BadLambdaRequest(http.StatusBadRequest)
 	}
 
-	res := app.processQuery(rBody.Query)
+	res := a.processQuery(rBody.Query)
 
 	return events.APIGatewayProxyResponse{
 		StatusCode: 200,
-		Body:       res,
+		Headers: map[string]string{
+			"Access-Control-Allow-Origin":  a.config.AllowedOrigins,
+			"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+			"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+		},
+		Body: res,
 	}, nil
 }
 
 // Handle bad serverless request
-func BadRequest(status int) (events.APIGatewayProxyResponse, error) {
+func (a *App) BadLambdaRequest(status int) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
 		StatusCode: status,
-		Body:       http.StatusText(status),
+		Headers: map[string]string{
+			"Access-Control-Allow-Origin":  a.config.AllowedOrigins,
+			"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+			"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+		},
+		Body: http.StatusText(status),
 	}, nil
 }
 
@@ -457,6 +484,6 @@ func main() {
 		app.Initialize()
 		app.Run()
 	} else {
-		lambda.Start(FaaSRouter)
+		lambda.Start(LambdaRouter)
 	}
 }

@@ -21,6 +21,7 @@ DB_NAME="<DATABASE-NAME>"   # Name of your MongoDB database
 # Optional parameters
 HOST=127.0.0.1              # App selects 127.0.0.1 by default
 PORT=2000                   # App selects 2000 by default
+ORIGINS_ALLOWED=*           # Enable allowed origins for CORS
 ```
 
 Note that `.env` is mostly needed for running the app locally. When deploying to AWS Lambda, the environment variables should be set within the AWS Console on the respective Lambda function it is deployed to.
