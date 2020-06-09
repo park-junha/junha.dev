@@ -6,8 +6,8 @@ DB_USER=$(grep DB_USER $BASE_DIR/.env | cut -d '=' -f2)
 
 function usage () {
     echo "Usage:"
-    echo "--access, -a: Log onto mongo shell"
-    echo "--write, -w: Write data.json data to mongo shell"
+    echo "--access, -a: Log onto cluster via mongo shell"
+    echo "--write, -w: Write data to cluster via mongo shell"
     exit 1;
 }
 

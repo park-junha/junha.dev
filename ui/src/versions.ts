@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "1.8.2",
+    "notes": [
+      {
+        "label": "Bugfix",
+        "desc": "Fixed misnamed Config.AllowedOrigins property check in app initialization."
+      }
+    ]
+  },
+  {
     "version": "1.8.1",
     "notes": [
       {
