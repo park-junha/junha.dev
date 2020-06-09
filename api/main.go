@@ -133,8 +133,8 @@ func (a *App) Initialize() {
 		a.config.Port = "2000"
 	}
 
-	if len(a.config.ORIGINS_ALLOWED) == 0 {
-		a.config.Port = ""
+	if len(a.config.AllowedOrigins) == 0 {
+		a.config.AllowedOrigins = ""
 	}
 
 	var err error
@@ -391,17 +391,6 @@ func (a *App) gqlSchema() graphql.Schema {
 
 }
 
-// Run app in development mode
-func (a *App) Run() {
-	// Routes
-	http.Handle("/", a.gqlHandler())
-
-	// Serve the app
-	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
-
-	http.ListenAndServe(a.config.GetAddr(), nil)
-}
-
 // Serverless router
 func LambdaRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	app := &App{}
@@ -472,22 +461,49 @@ func (a *App) BadLambdaRequest(status int) (events.APIGatewayProxyResponse, erro
 	}, nil
 }
 
+// Run app in development mode
+func (a *App) Run() {
+	// Routes
+	http.Handle("/", a.gqlHandler())
+
+	// Serve the app
+	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
+
+	http.ListenAndServe(a.config.GetAddr(), nil)
+}
+
 // Main
 func main() {
 	// Parse command line arguments
 	args := os.Args
 
-	// Run app in dev mode (IP/port) or serverless mode
-	if len(args) == 2 && args[1] == "dev" {
-		err := godotenv.Load()
-		if err != nil {
-			log.Printf("Error: Could not find .env file")
-		}
-
-		app := &App{}
-		app.Initialize()
-		app.Run()
-	} else {
+	// Run app in serverless mode (default) or another mode
+	if len(args) == 1 {
+		fmt.Printf("%s - running in lambda mode.\n", args[0])
 		lambda.Start(LambdaRouter)
+	} else if len(args) == 2 {
+		fmt.Printf("%s - running in %s mode.\n", args[0], args[1])
+		switch args[1] {
+		case "dev":
+			err := godotenv.Load()
+			if err != nil {
+				log.Printf("Error: Could not find .env file")
+			}
+
+			app := &App{}
+			app.Initialize()
+			app.Run()
+		default:
+			usage(args[0])
+		}
+	} else {
+		usage(args[0])
 	}
+}
+
+func usage(name string) {
+	fmt.Printf("usage:\n")
+	fmt.Printf("%s - (no args) run app as lambda function.\n", name)
+	fmt.Printf("%s dev - run app in dev mode.\n", name)
+	log.Fatal("err: improper usage\n")
 }
