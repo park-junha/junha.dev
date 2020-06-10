@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "1.8.3",
+    "notes": [
+      {
+        "label": "Feature",
+        "desc": "Added response body to API GET request."
+      }
+    ]
+  },
+  {
     "version": "1.8.2",
     "notes": [
       {
