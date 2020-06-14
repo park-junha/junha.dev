@@ -15,12 +15,11 @@ import './App.css';
 import versions from './versions'
 
 const currentVersion = versions[0]['version'];
-const API_URL = 'https://5f1bcaslw3.execute-api.us-west-1.amazonaws.com/dev/'
+const API_URL = 'https://5f1bcaslw3.execute-api.us-west-1.amazonaws.com/dev/';
 
 interface State {
   component: string;
   api: ApiData;
-  api_status: number;
 }
 
 class App extends Component<{}, State> {
@@ -29,45 +28,55 @@ class App extends Component<{}, State> {
     //  Initializing API data state
     //  Is there a better way to do this?
   , api: {
-      'Projects': []
-    , 'language_ids': []
-    , 'tool_ids': []
+      'Projects': {
+        'projects': []
+      , 'status': 0
+      }
+    , 'language_ids': {
+        'languages': []
+      , 'status': 0
+      }
+    , 'tool_ids': {
+        'tools': []
+      , 'status': 0
+      }
     }
-  , api_status: 0
   };
 
   async componentDidMount(): Promise<void> {
     const projs = await this.fetchApi<ProjectsApi>(API_URL, {
       query: "{ projects { uid name desc about app src languages tools } }"
     });
+    this.setState(prevState => ({
+      api: {
+        ...prevState.api
+      , 'Projects': projs
+      }
+    }));
     const langs = await this.fetchApi<LanguageIdsApi>(API_URL, {
       query: "{ languages { uid name color } }"
     });
+    this.setState(prevState => ({
+      api: {
+        ...prevState.api
+      , 'language_ids': langs
+      }
+    }));
     const tools = await this.fetchApi<ToolIdsApi>(API_URL, {
       query: "{ tools { uid name color } }"
     });
-    if (this.state.api_status === 200
-      && projs.projects.length > 0
-      && langs.languages.length > 0
-      && tools.tools.length > 0
-    ) {
-      this.setState({
-        api: {
-          'Projects': projs.projects
-        , 'language_ids': langs.languages
-        , 'tool_ids': tools.tools
-        }
-      });
-    }
+    this.setState(prevState => ({
+      api: {
+        ...prevState.api
+      , 'tool_ids': tools
+      }
+    }));
   };
 
   async fetchApi<T>(
     request: RequestInfo
   , body: GQLRequest
   ): Promise<T> {
-    this.setState({
-      api_status: 0
-    });
     const res = await fetch(request, {
       method: 'POST'
     , headers: {
@@ -75,10 +84,8 @@ class App extends Component<{}, State> {
       }
     , body: JSON.stringify(body)
     });
-    this.setState({
-      api_status: res.status
-    });
     const api = await res.json();
+    api.data.status = res.status;
     return api.data;
   }
 
@@ -93,7 +100,6 @@ class App extends Component<{}, State> {
       <div className='App'>
         <Main
           api={this.state.api}
-          api_status={this.state.api_status}
           component={this.state.component}
           changeComponent={this.changeComponent}
         />

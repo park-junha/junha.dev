@@ -80,7 +80,7 @@ export default class VersionLog extends Component<{}, State> {
                 ))
               ) : (
                 <HandleApi
-                  status={200}
+                  statuses={[]}
                   success_msg='No data found.'
                 />
               )}

@@ -6,20 +6,23 @@ export interface GQLRequest {
 //  API interfaces
 export interface ProjectsApi {
   projects: ProjectData;
+  status: number;
 }
 
 export interface LanguageIdsApi {
   languages: LanguageIds;
+  status: number;
 }
 
 export interface ToolIdsApi {
   tools: LanguageIds;
+  status: number;
 }
 
 export interface ApiData {
-  Projects: ProjectData;
-  language_ids: LanguageIds;
-  tool_ids: LanguageIds;  //  Use same interface as language IDs
+  Projects: ProjectsApi;
+  language_ids: LanguageIdsApi;
+  tool_ids: ToolIdsApi;   //  Use same interface as language IDs
 }
 
 //  Versions

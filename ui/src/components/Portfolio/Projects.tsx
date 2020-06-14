@@ -9,16 +9,16 @@ import {
 
 import HandleApi from '../ApiHandlers/HandleApi';
 import {
-  ProjectData
+  ProjectsApi
 , Project
-, LanguageIds
+, LanguageIdsApi
+, ToolIdsApi
 } from '../../interfaces/Api';
 
 interface Props {
-  api_status: number;
-  projects: ProjectData;
-  languages: LanguageIds;
-  tools: LanguageIds;
+  projects: ProjectsApi;
+  languages: LanguageIdsApi;
+  tools: ToolIdsApi;
 }
 
 interface State {
@@ -45,7 +45,7 @@ export default class Projects extends Component<Props, State> {
   showModal = (id: number): void => {
     this.setState((state, props) => ({
       showModal: true
-    , onDisplay: props.projects[id]
+    , onDisplay: props.projects.projects[id]
     }));
   }
 
@@ -65,8 +65,12 @@ export default class Projects extends Component<Props, State> {
               <h2>Projects</h2>
               <br />
               {/* Handle empty projects prop */}
-              {this.props.projects.length > 0 ? (
-                this.props.projects.map((project, index: number) => (
+              {([
+                this.props.projects.status
+              , this.props.languages.status
+              , this.props.tools.status
+              ].every((status) => (status === 200)) ) ? (
+                this.props.projects.projects.map((project, index: number) => (
                   <Button
                     className='project-card'
                     variant='secondary'
@@ -86,7 +90,11 @@ export default class Projects extends Component<Props, State> {
                 ))
               ) : (
                 <HandleApi
-                  status={this.props.api_status}
+                  statuses={[
+                    this.props.projects.status
+                  , this.props.languages.status
+                  , this.props.tools.status
+                  ]}
                   success_msg='No data found.'
                 />
               )}
@@ -154,12 +162,12 @@ export default class Projects extends Component<Props, State> {
                 <span
                   className='project-language-color'
                   style={{
-                    backgroundColor: this.props.languages.find(key => key.uid === language_id)?.color ?? '#ededed'
+                    backgroundColor: this.props.languages.languages.find(key => key.uid === language_id)?.color ?? '#ededed'
                   }}
                 >
                 </span>
                 <span>
-                  {this.props.languages.find(key => key.uid === language_id)?.name ?? 'N/A'}
+                  {this.props.languages.languages.find(key => key.uid === language_id)?.name ?? 'N/A'}
                 </span>
               </div>
             ))}
@@ -172,12 +180,12 @@ export default class Projects extends Component<Props, State> {
                     <span
                       className='project-language-color'
                       style={{
-                        backgroundColor: this.props.tools.find(key => key.uid === tool_id)?.color ?? '#ededed'
+                        backgroundColor: this.props.tools.tools.find(key => key.uid === tool_id)?.color ?? '#ededed'
                       }}
                     >
                     </span>
                     <span>
-                      {this.props.tools.find(key => key.uid === tool_id)?.name ?? 'N/A'}
+                      {this.props.tools.tools.find(key => key.uid === tool_id)?.name ?? 'N/A'}
                     </span>
                   </div>
                 ))}

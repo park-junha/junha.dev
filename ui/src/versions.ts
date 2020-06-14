@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "1.8.4",
+    "notes": [
+      {
+        "label": "Feature",
+        "desc": "Projects component now waits for all API calls to finish before rendering (prevents the No Data Found message from flashing)."
+      }
+    ]
+  },
+  {
     "version": "1.8.3",
     "notes": [
       {
