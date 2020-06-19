@@ -111,7 +111,7 @@ class Resume extends Component<Props> {
               <li>Web Frontend</li>
               <ul className='resume-text'>
                 <li>React</li>
-                <li>Bootstrap</li>
+                <li>AngularJS</li>
               </ul>
               <li>Web Backend</li>
               <ul className='resume-text'>
@@ -141,8 +141,7 @@ class Resume extends Component<Props> {
             <ul className='resume-text'>
               <li>AWS</li>
               <ul className='resume-text'>
-                <li>EC2</li>
-                <li>S3</li>
+                <li>EC2 / S3</li>
                 <li>Lambda</li>
               </ul>
             </ul>
@@ -194,32 +193,28 @@ class Resume extends Component<Props> {
             </ul>
             <h5 className='resume-body-header'>Projects</h5>
             <h6>
+              <strong>Grad Planner</strong>, Python
+            </h6>
+            <ul className='resume-text'>
+              <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
+            </ul>
+            <h6>
               <strong>Personal Website</strong>, TypeScript / Go
-              <span className='resume-date-range'>4/20 - Now</span>
             </h6>
             <ul className='resume-text'>
               <li>Developed with <strong>React</strong> and connected to a <strong>GraphQL</strong> API written in <strong>Go</strong>.</li>
             </ul>
             <h6>
               <strong>Chrome V8</strong>, C++
-              <span className='resume-date-range'>4/20 - Now</span>
             </h6>
             <ul className='resume-text'>
               <li><i>Open Source Contributor</i> for the JavaScript engine powering Google Chrome and Node.js.</li>
             </ul>
             <h6>
-              <strong>Grad Planner</strong>, Python
-              <span className='resume-date-range'>9/19 - 5/20</span>
-            </h6>
-            <ul className='resume-text'>
-              <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students stay on track for graduation.</li>
-            </ul>
-            <h6>
               <strong>CovidSweeper</strong>, JavaScript
-              <span className='resume-date-range'>3/20</span>
             </h6>
             <ul className='resume-text'>
-              <li>A more challenging <a href='https://park-junha.github.io/CovidSweeper/' target='_blank' rel='noopener noreferrer'>variation</a> of Minesweeper.</li>
+              <li>Implemented a more challenging <a href='https://park-junha.github.io/CovidSweeper/' target='_blank' rel='noopener noreferrer'>variation</a> of Minesweeper with <strong>AngularJS</strong>.</li>
             </ul>
           </div>
         </div>

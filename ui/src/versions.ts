@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "1.8.5",
+    "notes": [
+      {
+        "label": "Feature",
+        "desc": "Added AngularJS to Resume."
+      }
+    ]
+  },
+  {
     "version": "1.8.4",
     "notes": [
       {
