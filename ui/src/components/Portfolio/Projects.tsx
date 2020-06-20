@@ -81,7 +81,12 @@ export default class Projects extends Component<Props, State> {
                   </Button>
                 ))
               ) : (
-                <LoadingScreen />
+                <div>
+                  <LoadingScreen />
+                  <div
+                    className='fadein spinner'
+                  >You may need to refresh your browser.</div>
+                </div>
               )}
             </Col>
             <Col />
