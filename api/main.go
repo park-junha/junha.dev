@@ -67,7 +67,7 @@ type Tool struct {
 }
 
 // GraphQL Types
-var projectType = graphql.NewObject(
+var ProjectType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Project",
 		Fields: graphql.Fields{
@@ -90,15 +90,30 @@ var projectType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"languages": &graphql.Field{
-				Type: graphql.NewList(graphql.String),
+				Type: graphql.NewList(ToolType),
 			},
 			"tools": &graphql.Field{
-				Type: graphql.NewList(graphql.String),
+				Type: graphql.NewList(ToolType),
 			},
 		},
 	},
 )
 
+var ToolType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "Tool",
+		Fields: graphql.Fields{
+			"name": &graphql.Field{
+				Type: graphql.String,
+			},
+			"color": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
+// Convert file to string
 func FileToString(filename string) string {
 	fileContents, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -281,14 +296,14 @@ func (a *App) getProject(uid string) Project {
 func (a *App) gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
 		"projects": &graphql.Field{
-			Type:        graphql.NewList(projectType),
+			Type:        graphql.NewList(ProjectType),
 			Description: "All Projects",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				return a.getProjects(), nil
 			},
 		},
 		"project": &graphql.Field{
-			Type:        projectType,
+			Type:        ProjectType,
 			Description: "Get Projects by ID",
 			Args: graphql.FieldConfigArgument{
 				"project_id": &graphql.ArgumentConfig{
