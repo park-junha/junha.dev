@@ -7,7 +7,7 @@ import {
 , Modal
 } from 'react-bootstrap';
 
-import HandleApi from '../ApiHandlers/HandleApi';
+import LoadingScreen from '../LoadingScreen';
 import {
   ProjectsApi
 , Project
@@ -61,9 +61,7 @@ export default class Projects extends Component<Props, State> {
               <h2>Projects</h2>
               <br />
               {/* Handle empty projects prop */}
-              {([
-                this.props.projects.status
-              ].every((status) => (status === 200)) ) ? (
+              {this.props.projects.status === 200 ? (
                 this.props.projects.projects.map((project, index: number) => (
                   <Button
                     className='project-card'
@@ -83,12 +81,7 @@ export default class Projects extends Component<Props, State> {
                   </Button>
                 ))
               ) : (
-                <HandleApi
-                  statuses={[
-                    this.props.projects.status
-                  ]}
-                  success_msg='No data found.'
-                />
+                <LoadingScreen />
               )}
             </Col>
             <Col />
