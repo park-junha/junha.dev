@@ -1,40 +1,49 @@
 package main
 
 import (
-	"context"
+	"database/sql"
+	"database/sql/driver"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"time"
-
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
+	"github.com/lib/pq"
 )
+
+// Constants
+const PROJECTS_QUERY = "queries/projects.sql"
+const PROJECT_QUERY = "queries/project.sql"
 
 // Data structures
 type App struct {
-	config         *Config
-	client         *mongo.Client
-	db             *mongo.Database
-	projCollection *mongo.Collection
-	langCollection *mongo.Collection
-	toolCollection *mongo.Collection
+	config *Config
+	db     *sql.DB
 }
 
 type Config struct {
-	DbUri          string
-	DbName         string
-	Host           string
-	Port           string
+	Database       *DatabaseConfig
+	Server         *ServerConfig
 	AllowedOrigins string
+}
+
+type DatabaseConfig struct {
+	Host     string
+	Port     string
+	User     string
+	Password string
+	Schema   string
+}
+
+type ServerConfig struct {
+	Host string
+	Port string
 }
 
 type reqBody struct {
@@ -42,62 +51,58 @@ type reqBody struct {
 }
 
 type Project struct {
-	UID         string   `bson:"uid"       json:"uid"`
-	Name        string   `bson:"name"      json:"name"`
-	Description string   `bson:"desc"      json:"desc"`
-	About       string   `bson:"about"     json:"about"`
-	AppSource   string   `bson:"app"       json:"app"`
-	SourceCode  string   `bson:"src"       json:"src"`
-	Languages   []string `bson:"languages" json:"languages"`
-	Tools       []string `bson:"tools"     json:"tools"`
+	ProjectID   string `json:"project_id"`
+	Name        string `json:"title"`
+	Description string `json:"description"`
+	About       string `json:"about"`
+	AppSource   string `json:"url"`
+	SourceCode  string `json:"source_code_url"`
+	Languages   []Tool `json:"languages"`
+	Tools       []Tool `json:"tools"`
 }
 
-type LanguageId struct {
-	UID   string `bson:"uid"   json:"uid"`
-	Name  string `bson:"name"  json:"name"`
-	Color string `bson:"color" json:"color"`
+type Tool struct {
+	Name  string `json:"name"`
+	Color string `json:"color"`
 }
 
 // GraphQL Types
-var projectType = graphql.NewObject(
+var ProjectType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Project",
 		Fields: graphql.Fields{
-			"uid": &graphql.Field{
+			"project_id": &graphql.Field{
 				Type: graphql.String,
 			},
-			"name": &graphql.Field{
+			"title": &graphql.Field{
 				Type: graphql.String,
 			},
-			"desc": &graphql.Field{
+			"description": &graphql.Field{
 				Type: graphql.String,
 			},
 			"about": &graphql.Field{
 				Type: graphql.String,
 			},
-			"app": &graphql.Field{
+			"url": &graphql.Field{
 				Type: graphql.String,
 			},
-			"src": &graphql.Field{
+			"source_code_url": &graphql.Field{
 				Type: graphql.String,
 			},
 			"languages": &graphql.Field{
-				Type: graphql.NewList(graphql.String),
+				Type: graphql.NewList(ToolType),
 			},
 			"tools": &graphql.Field{
-				Type: graphql.NewList(graphql.String),
+				Type: graphql.NewList(ToolType),
 			},
 		},
 	},
 )
 
-var languageIdType = graphql.NewObject(
+var ToolType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "LanguageId",
+		Name: "Tool",
 		Fields: graphql.Fields{
-			"uid": &graphql.Field{
-				Type: graphql.String,
-			},
 			"name": &graphql.Field{
 				Type: graphql.String,
 			},
@@ -108,9 +113,44 @@ var languageIdType = graphql.NewObject(
 	},
 )
 
-// Config
-func (c *Config) GetAddr() string {
-	return fmt.Sprintf("%s:%s", c.Host, c.Port)
+// Convert file to string
+func FileToString(filename string) string {
+	fileContents, err := ioutil.ReadFile(filename)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return string(fileContents)
+}
+
+// Server Config
+func (sc *ServerConfig) GetAddr() string {
+	return fmt.Sprintf("%s:%s", sc.Host, sc.Port)
+}
+
+// Database Config
+func (dc *DatabaseConfig) GetInfo() string {
+	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		dc.Host,
+		dc.Port,
+		dc.User,
+		dc.Password,
+		dc.Schema)
+}
+
+// Implement driver.Valuer interface to Tool struct
+func (t Tool) Value() (driver.Value, error) {
+	return json.Marshal(t)
+}
+
+// Implement sql.Scanner interface to Tool struct
+func (t *Tool) Scan(value interface{}) error {
+	b, ok := value.([]byte)
+	if !ok {
+		log.Fatal("fatal err: type assertion to []byte failed\n")
+	}
+
+	return json.Unmarshal(b, &t)
 }
 
 // App
@@ -118,19 +158,26 @@ func (a *App) Initialize() {
 	// Configure the app
 
 	a.config = &Config{
-		DbUri:          os.Getenv("DB_URI"),
-		DbName:         os.Getenv("DB_NAME"),
-		Host:           os.Getenv("HOST"),
-		Port:           os.Getenv("PORT"),
+		Database: &DatabaseConfig{
+			Host:     os.Getenv("DB_HOST"),
+			Port:     os.Getenv("DB_PORT"),
+			User:     os.Getenv("DB_USER"),
+			Password: os.Getenv("DB_PASSWORD"),
+			Schema:   os.Getenv("DB_SCHEMA"),
+		},
+		Server: &ServerConfig{
+			Host: os.Getenv("HOST"),
+			Port: os.Getenv("PORT"),
+		},
 		AllowedOrigins: os.Getenv("ORIGINS_ALLOWED"),
 	}
 
-	if len(a.config.Host) == 0 {
-		a.config.Host = "127.0.0.1"
+	if len(a.config.Server.Host) == 0 {
+		a.config.Server.Host = "127.0.0.1"
 	}
 
-	if len(a.config.Port) == 0 {
-		a.config.Port = "2000"
+	if len(a.config.Server.Port) == 0 {
+		a.config.Server.Port = "2000"
 	}
 
 	if len(a.config.AllowedOrigins) == 0 {
@@ -140,22 +187,17 @@ func (a *App) Initialize() {
 	var err error
 
 	// Database
-	a.client, err = mongo.NewClient(options.Client().ApplyURI(a.config.DbUri))
+	a.db, err = sql.Open("postgres", a.config.Database.GetInfo())
 	if err != nil {
-		fmt.Println("ERR: func (a *App) Initialize() - Client connection")
-		log.Fatal(err)
-	}
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = a.client.Connect(ctx)
-	if err != nil {
-		fmt.Println("ERR: func (a *App) Initialize() - Connection timeout")
+		fmt.Println("fatal err: func (a *App) Initialize(), database connection\n")
 		log.Fatal(err)
 	}
 
-	a.db = a.client.Database(a.config.DbName)
-	a.projCollection = a.db.Collection("Projects")
-	a.langCollection = a.db.Collection("LanguageIds")
-	a.toolCollection = a.db.Collection("ToolIds")
+	err = a.db.Ping()
+	if err != nil {
+		fmt.Println("fatal err: func (a *App) Initialize(), database ping\n")
+		log.Fatal(err)
+	}
 }
 
 // GraphQL API handler
@@ -169,14 +211,14 @@ func (a *App) gqlHandler() http.Handler {
 			return
 		}
 		if r.Body == nil {
-			http.Error(w, "No query data", 400)
+			http.Error(w, "err: no query data\n", 400)
 			return
 		}
 
 		var rBody reqBody
 		err := json.NewDecoder(r.Body).Decode(&rBody)
 		if err != nil {
-			http.Error(w, "Error parsing JSON request body", 400)
+			http.Error(w, "err: could not parse JSON request body\n", 400)
 		}
 
 		fmt.Fprintf(w, "%s", a.processQuery(rBody.Query))
@@ -188,7 +230,7 @@ func (a *App) processQuery(query string) (result string) {
 	params := graphql.Params{Schema: a.gqlSchema(), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
-		fmt.Printf("failed to execute graphql operation, errors: %+v\n", r.Errors)
+		fmt.Printf("err: failed to execute graphql operation, errors: %+v\n", r.Errors)
 	}
 	rJSON, _ := json.Marshal(r)
 
@@ -198,21 +240,32 @@ func (a *App) processQuery(query string) (result string) {
 
 // Retrieve data from Projects collection
 func (a *App) getProjects() []Project {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-
-	cursor, err := a.projCollection.Find(ctx, bson.M{})
-	defer cursor.Close(ctx)
+	res, err := a.db.Query(FileToString(PROJECTS_QUERY))
 
 	if err != nil {
-		fmt.Println("ERR: func (a *App) getProjects() - Find")
+		fmt.Println("fatal err: could not run sql query\n")
 		log.Fatal(err)
 	}
+	defer res.Close()
 
 	var jsonData []Project
 
-	if err = cursor.All(ctx, &jsonData); err != nil {
-		fmt.Println("ERR: func (a *App) getProjects() - Cursor")
-		log.Fatal(err)
+	for res.Next() {
+		var row Project
+		err = res.Scan(&row.ProjectID,
+			&row.Name,
+			&row.Description,
+			&row.About,
+			&row.AppSource,
+			&row.SourceCode,
+			pq.Array(&row.Languages),
+			pq.Array(&row.Tools))
+		if err != nil {
+			fmt.Println("fatal err: scanning query result\n")
+			log.Fatal(err)
+		}
+
+		jsonData = append(jsonData, row)
 	}
 
 	return jsonData
@@ -220,87 +273,19 @@ func (a *App) getProjects() []Project {
 
 // Retrieve one object from Projects collection
 func (a *App) getProject(uid string) Project {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
 	var jsonData Project
 
-	err := a.projCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
-
+	err := a.db.QueryRow(FileToString(PROJECT_QUERY), uid).Scan(
+		&jsonData.ProjectID,
+		&jsonData.Name,
+		&jsonData.Description,
+		&jsonData.About,
+		&jsonData.AppSource,
+		&jsonData.SourceCode,
+		pq.Array(&jsonData.Languages),
+		pq.Array(&jsonData.Tools))
 	if err != nil {
-		fmt.Println("ERR: func (a *App) getProject() - FindOne")
-		log.Fatal(err)
-	}
-
-	return jsonData
-}
-
-// Retrieve data from LanguageIds collection
-func (a *App) getLanguageIds() []LanguageId {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-
-	cursor, err := a.langCollection.Find(ctx, bson.M{})
-	defer cursor.Close(ctx)
-
-	if err != nil {
-		fmt.Println("ERR: func (a *App) getLanguageIds() - Find")
-		log.Fatal(err)
-	}
-
-	var jsonData []LanguageId
-
-	if err = cursor.All(ctx, &jsonData); err != nil {
-		fmt.Println("ERR: func (a *App) getLanguageIds() - Cursor")
-		log.Fatal(err)
-	}
-
-	return jsonData
-}
-
-// Retrieve one object from LanguageIds collection
-func (a *App) getLanguageId(uid string) LanguageId {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	var jsonData LanguageId
-
-	err := a.langCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
-
-	if err != nil {
-		fmt.Println("ERR: func (a *App) getLanguageId() - FindOne")
-		log.Fatal(err)
-	}
-
-	return jsonData
-}
-
-// Retrieve data from ToolIds collection
-func (a *App) getToolIds() []LanguageId {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-
-	cursor, err := a.toolCollection.Find(ctx, bson.M{})
-	defer cursor.Close(ctx)
-
-	if err != nil {
-		fmt.Println("ERR: func (a *App) getToolIds() - Find")
-		log.Fatal(err)
-	}
-
-	var jsonData []LanguageId
-
-	if err = cursor.All(ctx, &jsonData); err != nil {
-		fmt.Println("ERR: func (a *App) getToolIds() - Cursor")
-		log.Fatal(err)
-	}
-
-	return jsonData
-}
-
-// Retrieve one object from ToolIds collection
-func (a *App) getToolId(uid string) LanguageId {
-	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	var jsonData LanguageId
-
-	err := a.toolCollection.FindOne(ctx, bson.M{"uid": uid}).Decode(&jsonData)
-
-	if err != nil {
-		fmt.Println("ERR: func (a *App) getToolId() - FindOne")
+		fmt.Println("fatal err: running and scanning single row query\n")
 		log.Fatal(err)
 	}
 
@@ -311,70 +296,24 @@ func (a *App) getToolId(uid string) LanguageId {
 func (a *App) gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
 		"projects": &graphql.Field{
-			Type:        graphql.NewList(projectType),
+			Type:        graphql.NewList(ProjectType),
 			Description: "All Projects",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				return a.getProjects(), nil
 			},
 		},
 		"project": &graphql.Field{
-			Type:        projectType,
-			Description: "Get Projects by UID",
+			Type:        ProjectType,
+			Description: "Get Projects by ID",
 			Args: graphql.FieldConfigArgument{
-				"uid": &graphql.ArgumentConfig{
+				"project_id": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				uid, success := params.Args["uid"].(string)
+				uid, success := params.Args["project_id"].(string)
 				if success {
 					return a.getProject(uid), nil
-				}
-				return nil, nil
-			},
-		},
-		"languages": &graphql.Field{
-			Type:        graphql.NewList(languageIdType),
-			Description: "All Language IDs",
-			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return a.getLanguageIds(), nil
-			},
-		},
-		"language": &graphql.Field{
-			Type:        languageIdType,
-			Description: "Get Language IDs by UID",
-			Args: graphql.FieldConfigArgument{
-				"uid": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-			},
-			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				uid, success := params.Args["uid"].(string)
-				if success {
-					return a.getLanguageId(uid), nil
-				}
-				return nil, nil
-			},
-		},
-		"tools": &graphql.Field{
-			Type:        graphql.NewList(languageIdType),
-			Description: "All Tool IDs",
-			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return a.getToolIds(), nil
-			},
-		},
-		"tool": &graphql.Field{
-			Type:        languageIdType,
-			Description: "Get Tool IDs by UID",
-			Args: graphql.FieldConfigArgument{
-				"uid": &graphql.ArgumentConfig{
-					Type: graphql.String,
-				},
-			},
-			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				uid, success := params.Args["uid"].(string)
-				if success {
-					return a.getToolId(uid), nil
 				}
 				return nil, nil
 			},
@@ -384,11 +323,10 @@ func (a *App) gqlSchema() graphql.Schema {
 	schemaConfig := graphql.SchemaConfig{Query: graphql.NewObject(rootQuery)}
 	schema, err := graphql.NewSchema(schemaConfig)
 	if err != nil {
-		fmt.Printf("failed to create new schema, error: %v", err)
+		fmt.Printf("failed to create new schema, error: %v\n", err)
 	}
 
 	return schema
-
 }
 
 // Serverless router
@@ -467,9 +405,9 @@ func (a *App) Run() {
 	http.Handle("/", a.gqlHandler())
 
 	// Serve the app
-	fmt.Printf("Serving on %s.\n", a.config.GetAddr())
+	fmt.Printf("Serving on %s.\n", a.config.Server.GetAddr())
 
-	http.ListenAndServe(a.config.GetAddr(), nil)
+	http.ListenAndServe(a.config.Server.GetAddr(), nil)
 }
 
 // Main
@@ -487,7 +425,7 @@ func main() {
 		case "dev":
 			err := godotenv.Load()
 			if err != nil {
-				log.Printf("Error: Could not find .env file")
+				log.Printf("error: could not find .env file\n")
 			}
 
 			app := &App{}
