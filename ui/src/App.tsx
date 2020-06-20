@@ -6,8 +6,6 @@ import Main from './components/Main';
 import {
   ApiData
 , ProjectsApi
-, LanguageIdsApi
-, ToolIdsApi
 , GQLRequest
 } from './interfaces/Api';
 
@@ -15,7 +13,7 @@ import './App.css';
 import versions from './versions'
 
 const currentVersion = versions[0]['version'];
-const API_URL = 'https://5f1bcaslw3.execute-api.us-west-1.amazonaws.com/dev/';
+const API_URL = 'https://i1mxgd4l94.execute-api.us-west-1.amazonaws.com/dev/';
 
 interface State {
   component: string;
@@ -32,43 +30,17 @@ class App extends Component<{}, State> {
         'projects': []
       , 'status': 0
       }
-    , 'language_ids': {
-        'languages': []
-      , 'status': 0
-      }
-    , 'tool_ids': {
-        'tools': []
-      , 'status': 0
-      }
     }
   };
 
   async componentDidMount(): Promise<void> {
     const projs = await this.fetchApi<ProjectsApi>(API_URL, {
-      query: "{ projects { uid name desc about app src languages tools } }"
+      query: "{ projects { project_id title description about url source_code_url languages { name color } tools { name color } } }"
     });
     this.setState(prevState => ({
       api: {
         ...prevState.api
       , 'Projects': projs
-      }
-    }));
-    const langs = await this.fetchApi<LanguageIdsApi>(API_URL, {
-      query: "{ languages { uid name color } }"
-    });
-    this.setState(prevState => ({
-      api: {
-        ...prevState.api
-      , 'language_ids': langs
-      }
-    }));
-    const tools = await this.fetchApi<ToolIdsApi>(API_URL, {
-      query: "{ tools { uid name color } }"
-    });
-    this.setState(prevState => ({
-      api: {
-        ...prevState.api
-      , 'tool_ids': tools
       }
     }));
   };

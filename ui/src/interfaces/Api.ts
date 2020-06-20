@@ -9,21 +9,30 @@ export interface ProjectsApi {
   status: number;
 }
 
-export interface LanguageIdsApi {
-  languages: LanguageIds;
-  status: number;
-}
-
-export interface ToolIdsApi {
-  tools: LanguageIds;
-  status: number;
-}
-
 export interface ApiData {
   Projects: ProjectsApi;
-  language_ids: LanguageIdsApi;
-  tool_ids: ToolIdsApi;   //  Use same interface as language IDs
 }
+
+//  Projects
+export interface Project {
+  title: string;
+  languages: Tools;
+  tools: Tools;
+  description: string;
+  about: string | null;
+  url: string | null;
+  source_code_url: string | null;
+}
+
+export interface ProjectData extends Array<Project>{};
+
+//  Language IDs
+export interface Tool {
+  name: string;
+  color: string;
+}
+
+export interface Tools extends Array<Tool>{};
 
 //  Versions
 export interface Version {
@@ -39,24 +48,3 @@ export interface VersionNote {
 export interface VersionData extends Array<Version>{};
 export interface VersionNotes extends Array<VersionNote>{};
 
-//  Projects
-export interface Project {
-  name: string;
-  languages: string[];
-  tools: string[];
-  desc: string;
-  about: string | null;
-  app: string | null;
-  src: string | null;
-}
-
-export interface ProjectData extends Array<Project>{};
-
-//  Language IDs
-export interface LanguageId {
-  uid: string;
-  name: string;
-  color: string;
-}
-
-export interface LanguageIds extends Array<LanguageId>{};

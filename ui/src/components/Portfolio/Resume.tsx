@@ -130,11 +130,11 @@ class Resume extends Component<Props> {
               <ul className='resume-text'>
                 <li>MySQL</li>
                 <li>SQL Server</li>
+                <li>PostgreSQL</li>
               </ul>
               <li>NoSQL</li>
               <ul className='resume-text'>
                 <li>MongoDB</li>
-                <li>DynamoDB</li>
               </ul>
             </ul>
             <h6><strong>Cloud Services</strong></h6>

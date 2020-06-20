@@ -11,14 +11,10 @@ import HandleApi from '../ApiHandlers/HandleApi';
 import {
   ProjectsApi
 , Project
-, LanguageIdsApi
-, ToolIdsApi
 } from '../../interfaces/Api';
 
 interface Props {
   projects: ProjectsApi;
-  languages: LanguageIdsApi;
-  tools: ToolIdsApi;
 }
 
 interface State {
@@ -32,13 +28,13 @@ export default class Projects extends Component<Props, State> {
     //  Fill in with empty Project interface
     //  Is there a better way to do this?
   , onDisplay: {
-      name: ''
+      title: ''
     , languages: []
     , tools: []
-    , desc: ''
+    , description: ''
     , about: null
-    , app: null
-    , src: null
+    , url: null
+    , source_code_url: null
     }
   }
 
@@ -67,8 +63,6 @@ export default class Projects extends Component<Props, State> {
               {/* Handle empty projects prop */}
               {([
                 this.props.projects.status
-              , this.props.languages.status
-              , this.props.tools.status
               ].every((status) => (status === 200)) ) ? (
                 this.props.projects.projects.map((project, index: number) => (
                   <Button
@@ -79,11 +73,11 @@ export default class Projects extends Component<Props, State> {
                     <div className='project-card-contents'>
                       <h6
                         className='project-card-header'
-                      >{project.name}</h6>
+                      >{project.title}</h6>
                       <div
                         className='project-card-text'
                       >
-                        {project.desc}
+                        {project.description}
                       </div>
                     </div>
                   </Button>
@@ -92,8 +86,6 @@ export default class Projects extends Component<Props, State> {
                 <HandleApi
                   statuses={[
                     this.props.projects.status
-                  , this.props.languages.status
-                  , this.props.tools.status
                   ]}
                   success_msg='No data found.'
                 />
@@ -110,7 +102,7 @@ export default class Projects extends Component<Props, State> {
             className='project-modal'
             closeButton
           >
-            <h4>{this.state.onDisplay.name}</h4>
+            <h4>{this.state.onDisplay.title}</h4>
           </Modal.Header>
           <Modal.Body
             className='project-modal'
@@ -123,11 +115,11 @@ export default class Projects extends Component<Props, State> {
               }
             </p>
             <p>
-              {this.state.onDisplay.app ? (
+              {this.state.onDisplay.url ? (
                 <div>
-                  View <i>{this.state.onDisplay.name + ' '}</i>
+                  View <i>{this.state.onDisplay.title + ' '}</i>
                   <a
-                    href={this.state.onDisplay.app}
+                    href={this.state.onDisplay.url}
                     target='_blank'
                     rel='noopener noreferrer'
                   >
@@ -138,11 +130,11 @@ export default class Projects extends Component<Props, State> {
               ) : 
               'No demo available.'
               }{' '}
-              {this.state.onDisplay.src ? (
+              {this.state.onDisplay.source_code_url ? (
                 <div className='project-modal-src-link'>
                   (
                   <a
-                    href={this.state.onDisplay.src}
+                    href={this.state.onDisplay.source_code_url}
                     target='_blank'
                     rel='noopener noreferrer'
                   >
@@ -157,17 +149,17 @@ export default class Projects extends Component<Props, State> {
               )}
             </p>
             <h5>Languages</h5>
-            {this.state.onDisplay.languages.map(language_id => (
+            {this.state.onDisplay.languages.map(language => (
               <div>
                 <span
                   className='project-language-color'
                   style={{
-                    backgroundColor: this.props.languages.languages.find(key => key.uid === language_id)?.color ?? '#ededed'
+                    backgroundColor: language.color ?? '#ededed'
                   }}
                 >
                 </span>
                 <span>
-                  {this.props.languages.languages.find(key => key.uid === language_id)?.name ?? 'N/A'}
+                  {language.name ?? 'N/A'}
                 </span>
               </div>
             ))}
@@ -175,17 +167,17 @@ export default class Projects extends Component<Props, State> {
               <div>
                 <br />
                 <h5>Other Technologies</h5>
-                {this.state.onDisplay.tools.map(tool_id => (
+                {this.state.onDisplay.tools.map(tool => (
                   <div>
                     <span
                       className='project-language-color'
                       style={{
-                        backgroundColor: this.props.tools.tools.find(key => key.uid === tool_id)?.color ?? '#ededed'
+                        backgroundColor: tool.color ?? '#ededed'
                       }}
                     >
                     </span>
                     <span>
-                      {this.props.tools.tools.find(key => key.uid === tool_id)?.name ?? 'N/A'}
+                      {tool.name ?? 'N/A'}
                     </span>
                   </div>
                 ))}
