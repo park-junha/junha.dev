@@ -32,6 +32,6 @@ SELECT
         ot.tool_id = project_tools
     ) ots)
 FROM
-	projects p
+  projects p
 WHERE
   project_id = $1;
