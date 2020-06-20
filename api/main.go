@@ -52,10 +52,10 @@ type reqBody struct {
 
 type Project struct {
 	ProjectID   string `json:"project_id"`
-	Name        string `json:"title"`
+	Title       string `json:"title"`
 	Description string `json:"description"`
 	About       string `json:"about"`
-	AppSource   string `json:"url"`
+	Url         string `json:"url"`
 	SourceCode  string `json:"source_code_url"`
 	Languages   []Tool `json:"languages"`
 	Tools       []Tool `json:"tools"`
@@ -253,10 +253,10 @@ func (a *App) getProjects() []Project {
 	for res.Next() {
 		var row Project
 		err = res.Scan(&row.ProjectID,
-			&row.Name,
+			&row.Title,
 			&row.Description,
 			&row.About,
-			&row.AppSource,
+			&row.Url,
 			&row.SourceCode,
 			pq.Array(&row.Languages),
 			pq.Array(&row.Tools))
@@ -277,10 +277,10 @@ func (a *App) getProject(uid string) Project {
 
 	err := a.db.QueryRow(FileToString(PROJECT_QUERY), uid).Scan(
 		&jsonData.ProjectID,
-		&jsonData.Name,
+		&jsonData.Title,
 		&jsonData.Description,
 		&jsonData.About,
-		&jsonData.AppSource,
+		&jsonData.Url,
 		&jsonData.SourceCode,
 		pq.Array(&jsonData.Languages),
 		pq.Array(&jsonData.Tools))
