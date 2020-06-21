@@ -9,7 +9,7 @@ import {
   ApiData
   , ProjectsApi
   , GQLRequest
-} from './interfaces/Api';
+} from './interfaces';
 import versions from './versions'
 
 import smoke from './img/smoke.png';
@@ -130,10 +130,11 @@ class App extends Component<{}, State> {
   };
 
   async loadProjectsApi(): Promise<void> {
-    let projs: ProjectsApi;
     let attempts: number = 0;
 
     while (attempts < MAX_API_RETRIES) {
+      let projs: ProjectsApi;
+
       try {
         projs = await this.fetchApi<ProjectsApi>(API_URL, {
           query: '{ projects { project_id title description about url source_code_url languages { name color } tools { name color } } }'

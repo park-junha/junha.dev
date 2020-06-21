@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
   Dropdown
-, Nav
-, Navbar
-, Button
+  , Nav
+  , Navbar
+  , Button
 } from 'react-bootstrap';
 import {
   MdHome

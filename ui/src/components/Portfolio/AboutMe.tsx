@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
   Container
-, Row
-, Col
-, Card
+  , Row
+  , Col
+  , Card
 } from 'react-bootstrap';
 
 export default class AboutMe extends Component {
