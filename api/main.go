@@ -39,6 +39,7 @@ type DatabaseConfig struct {
 	User     string
 	Password string
 	Schema   string
+	SslMode  string
 }
 
 type ServerConfig struct {
@@ -130,12 +131,13 @@ func (sc *ServerConfig) GetAddr() string {
 
 // Database Config
 func (dc *DatabaseConfig) GetInfo() string {
-	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		dc.Host,
 		dc.Port,
 		dc.User,
 		dc.Password,
-		dc.Schema)
+		dc.Schema,
+		dc.SslMode)
 }
 
 // Implement driver.Valuer interface to Tool struct
@@ -164,6 +166,7 @@ func (a *App) Initialize() {
 			User:     os.Getenv("DB_USER"),
 			Password: os.Getenv("DB_PASSWORD"),
 			Schema:   os.Getenv("DB_SCHEMA"),
+			SslMode:  os.Getenv("DB_SSLMODE"),
 		},
 		Server: &ServerConfig{
 			Host: os.Getenv("HOST"),
@@ -182,6 +185,10 @@ func (a *App) Initialize() {
 
 	if len(a.config.AllowedOrigins) == 0 {
 		a.config.AllowedOrigins = ""
+	}
+
+	if len(a.config.Database.SslMode) == 0 {
+		a.config.Database.SslMode = "prefer"
 	}
 
 	var err error

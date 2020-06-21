@@ -20,6 +20,7 @@ DB_PORT=5432
 DB_USER=admin
 DB_PASSWORD=samplepassword
 DB_SCHEMA=sampledb
+DB_SSLMODE=prefer
 
 # Dev server configuration
 HOST=127.0.0.1
