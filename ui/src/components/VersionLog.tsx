@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import {
   Container
-, Row
-, Col
-, Button
-, Modal
+  , Row
+  , Col
+  , Button
+  , Modal
 } from 'react-bootstrap';
 
-import { Version } from '../interfaces/Api';
+import { Version } from '../interfaces';
 import HandleApi from './ApiHandlers/HandleApi';
 import versions from '../versions';
 
@@ -21,16 +21,16 @@ export default class VersionLog extends Component<{}, State> {
     showModal: false
     //  Fill in with empty Version interface
     //  Is there a better way to do this?
-  , onDisplay: {
+    , onDisplay: {
       version: ''
-    , notes: []
+      , notes: []
     }
   }
 
   showModal = (id: number): void => {
     this.setState({
       showModal: true
-    , onDisplay: versions[id]
+      , onDisplay: versions[id]
     });
   }
 

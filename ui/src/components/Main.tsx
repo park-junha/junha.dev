@@ -1,11 +1,11 @@
 import React, {
   Component
-, Suspense
-, lazy
+  , Suspense
+  , lazy
 } from 'react';
 import LoadingScreen from './LoadingScreen';
 
-import { ApiData } from '../interfaces/Api';
+import { ApiData } from '../interfaces';
 
 interface Props {
   api: ApiData;

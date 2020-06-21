@@ -3,13 +3,13 @@ import React, {
 } from 'react';
 import {
   Container
-, Button
-, Row
-, Col
+  , Button
+  , Row
+  , Col
 } from 'react-bootstrap';
 import {
   IoLogoGithub
-, IoLogoLinkedin
+  , IoLogoLinkedin
 } from 'react-icons/io';
 
 interface Props {

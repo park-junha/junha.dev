@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {
   Container
-, Row
-, Col
-, Button
-, Modal
+  , Row
+  , Col
+  , Button
+  , Modal
 } from 'react-bootstrap';
 
 import LoadingScreen from '../LoadingScreen';
 import {
   ProjectsApi
-, Project
-} from '../../interfaces/Api';
+  , Project
+} from '../../interfaces';
 
 interface Props {
   projects: ProjectsApi;
@@ -27,14 +27,14 @@ export default class Projects extends Component<Props, State> {
     showModal: false
     //  Fill in with empty Project interface
     //  Is there a better way to do this?
-  , onDisplay: {
+    , onDisplay: {
       title: ''
-    , languages: []
-    , tools: []
-    , description: ''
-    , about: null
-    , url: null
-    , source_code_url: null
+      , languages: []
+      , tools: []
+      , description: ''
+      , about: null
+      , url: null
+      , source_code_url: null
     }
   }
 

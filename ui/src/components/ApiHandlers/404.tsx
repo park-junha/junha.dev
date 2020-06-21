@@ -3,9 +3,9 @@ import React, {
 } from 'react';
 import {
   Container
-, Row
-, Col
-, Card
+  , Row
+  , Col
+  , Card
 } from 'react-bootstrap';
 
 export default class NotFound extends Component {

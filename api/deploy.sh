@@ -10,7 +10,7 @@ cd $BASE_DIR
 echo "Building app to $TEMP_DIR..."
 env GOOS=linux GOARCH=amd64 go build -o $TEMP_DIR
 echo "Zipping app to $TEMPZIP_DIR..."
-zip -j $TEMPZIP_DIR $TEMP_DIR
+zip -j $TEMPZIP_DIR $TEMP_DIR $BASE_DIR/projects.sql $BASE_DIR/project.sql
 echo "Deploying your app to Lambda function $LAMBDA_FUNCTION..."
 aws lambda update-function-code --function-name $LAMBDA_FUNCTION --zip-file fileb://$TEMPZIP_DIR
 echo "Done!"
