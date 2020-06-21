@@ -64,16 +64,18 @@ class App extends Component<{}, State> {
 
     this.mount.appendChild(renderer.domElement);
 
+    //  Render the sick visuals
     let renderScene = function () {
       renderer.render(scene, camera);
       requestAnimationFrame(renderScene);
       cloudParticles.forEach(p => {
-        p.rotation.z -= 0.002;
+        p.rotation.z -= 0.001;
       });
     }
 
     let loader = new THREE.TextureLoader();
 
+    //  Load clouds
     loader.load(smoke, function (texture) {
       let cloudGeo = new THREE.PlaneBufferGeometry(500, 500);
       let cloudMaterial = new THREE.MeshLambertMaterial({
@@ -96,6 +98,28 @@ class App extends Component<{}, State> {
       }
     });
 
+    //  Lights
+    let directionalLight: THREE.DirectionalLight =
+      new THREE.DirectionalLight(0xff8c19);
+    let orangeLight: THREE.PointLight =
+      new THREE.PointLight(0xcc6600, 50, 450, 1.7);
+    let redLight: THREE.PointLight =
+      new THREE.PointLight(0xd8547e, 50, 450, 1.7);
+    let blueLight: THREE.PointLight =
+      new THREE.PointLight(0x3677ac, 50, 450, 1.7);
+
+    directionalLight.position.set(0, 0, 1);
+
+    orangeLight.position.set(200, 300, 100);
+    redLight.position.set(100, 300, 100);
+    blueLight.position.set(300, 300, 200);
+
+    scene.add(directionalLight);
+    scene.add(orangeLight);
+    scene.add(redLight);
+    scene.add(blueLight);
+
+    //  Resize scene on window resize
     let onWindowResize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
