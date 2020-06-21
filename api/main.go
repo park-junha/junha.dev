@@ -18,8 +18,8 @@ import (
 )
 
 // Constants
-const PROJECTS_QUERY = "queries/projects.sql"
-const PROJECT_QUERY = "queries/project.sql"
+const PROJECTS_QUERY = "projects.sql"
+const PROJECT_QUERY = "project.sql"
 
 // Data structures
 type App struct {
