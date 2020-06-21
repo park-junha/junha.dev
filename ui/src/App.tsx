@@ -7,12 +7,11 @@ import Footer from './components/Footer';
 import Main from './components/Main';
 import {
   ApiData
-, ProjectsApi
-, GQLRequest
+  , ProjectsApi
+  , GQLRequest
 } from './interfaces/Api';
 import versions from './versions'
 
-import './App.css';
 import smoke from './img/smoke.png';
 
 const API_URL = 'https://i1mxgd4l94.execute-api.us-west-1.amazonaws.com/dev/';
@@ -34,10 +33,10 @@ class App extends Component<{}, State> {
     component: 'LandingPage'
     //  Initializing API data state
     //  Is there a better way to do this?
-  , api: {
+    , api: {
       'Projects': {
         'projects': []
-      , 'status': 0
+        , 'status': 0
       }
     }
   };
@@ -90,9 +89,9 @@ class App extends Component<{}, State> {
       for(let p = 0; p < 50; p++) {
         let cloud = new THREE.Mesh(cloudGeo, cloudMaterial);
         cloud.position.set(
-          Math.random() * 800 - 400,
-          500,
-          Math.random() * 500 - 500
+          Math.random() * 800 - 400
+          , 500
+          , Math.random() * 500 - 500
         );
         cloud.rotation.x = 1.16;
         cloud.rotation.y = -0.12;
@@ -135,40 +134,52 @@ class App extends Component<{}, State> {
     let attempts: number = 0;
 
     while (attempts < MAX_API_RETRIES) {
-      projs = await this.fetchApi<ProjectsApi>(API_URL, {
-        query: '{ projects { project_id title description about url source_code_url languages { name color } tools { name color } } }'
-      });
+      try {
+        projs = await this.fetchApi<ProjectsApi>(API_URL, {
+          query: '{ projects { project_id title description about url source_code_url languages { name color } tools { name color } } }'
+        });
+      } catch (e) {
+        attempts++;
+        console.log('ERR: ' + e);
+        console.log('Failed API call attempts: ' + attempts);
+        continue;
+      }
 
       //  Try again if bad response received
       if (projs.status === 200) {
-        break;
+        this.setState(prevState => ({
+          api: {
+            ...prevState.api
+            , 'Projects': projs
+          }
+        }));
+        return;
       }
-      console.log('API call attempts: ' + attempts);
       attempts++;
+      console.log('ERR: API status code: ' + projs.status);
+      console.log('Failed API call attempts: ' + attempts);
     }
-    this.setState(prevState => ({
-      api: {
-        ...prevState.api
-      , 'Projects': projs
-      }
-    }));
+    console.log('ERR: failed to fetch from API.');
   };
 
-  async fetchApi<T>(
-    request: RequestInfo
-  , body: GQLRequest
-  ): Promise<T> {
-    const res = await fetch(request, {
-      method: 'POST'
-    , headers: {
-        'Content-Type': 'application/json'
-      }
-    , body: JSON.stringify(body)
-    });
-    const api = await res.json();
-    api.data.status = res.status;
-    return api.data;
-  }
+  async fetchApi<T>(req: RequestInfo, body: GQLRequest): Promise<T> {
+    try {
+      const res = await fetch(req, {
+        method: 'POST'
+        , headers: {
+          'Content-Type': 'application/json'
+        }
+        , body: JSON.stringify(body)
+      });
+
+      let api = await res.json();
+      api.data.status = res.status;
+      return api.data;
+
+    } catch (e) {
+      throw Error("Could not successfully make API call.");
+    }
+  };
 
   changeComponent = (newComponent: string): void => {
     this.setState({
