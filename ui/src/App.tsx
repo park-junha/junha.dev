@@ -59,7 +59,7 @@ class App extends Component<{}, State> {
 
     let cloudParticles: THREE.Mesh[] = [];
 
-    scene.fog = new THREE.FogExp2(0x012320, 0.001);
+    scene.fog = new THREE.FogExp2(0x011014, 0.001);
     renderer.setClearColor(scene.fog.color);
 
     this.mount.appendChild(renderer.domElement);
@@ -99,25 +99,20 @@ class App extends Component<{}, State> {
     });
 
     //  Lights
-    let directionalLight: THREE.DirectionalLight =
-      new THREE.DirectionalLight(0xff8c19);
-    let orangeLight: THREE.PointLight =
-      new THREE.PointLight(0xcc6600, 50, 450, 1.7);
-    let redLight: THREE.PointLight =
-      new THREE.PointLight(0xd8547e, 50, 450, 1.7);
+    let darkBlueLight: THREE.PointLight =
+      new THREE.PointLight(0x021024, 50, 450, 1.7);
     let blueLight: THREE.PointLight =
+      new THREE.PointLight(0x0000cc, 50, 450, 1.7);
+    let lochmaraLight: THREE.PointLight =
       new THREE.PointLight(0x3677ac, 50, 450, 1.7);
 
-    directionalLight.position.set(0, 0, 1);
+    darkBlueLight.position.set(100, 300, 100);
+    blueLight.position.set(100, 300, 100);
+    lochmaraLight.position.set(300, 300, 200);
 
-    orangeLight.position.set(200, 300, 100);
-    redLight.position.set(100, 300, 100);
-    blueLight.position.set(300, 300, 200);
-
-    scene.add(directionalLight);
-    scene.add(orangeLight);
-    scene.add(redLight);
+    scene.add(darkBlueLight);
     scene.add(blueLight);
+    scene.add(lochmaraLight);
 
     //  Resize scene on window resize
     let onWindowResize = function () {
