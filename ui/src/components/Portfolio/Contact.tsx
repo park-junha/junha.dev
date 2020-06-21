@@ -16,6 +16,7 @@ export default class Contact extends Component {
             <Col xs={10} sm={9} md={7} lg={5}>
               <h2 className='centered-text'>Contact Me</h2>
               <Card
+                className='transparent-dark'
                 bg='dark'
               >
                 <Card.Body>

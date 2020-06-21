@@ -19,6 +19,7 @@
     "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
     "react-scripts": "3.4.1",
+    "three": "^0.117.1",
     "typescript": "~3.7.2"
   },
   "scripts": {

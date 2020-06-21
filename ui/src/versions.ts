@@ -5,6 +5,10 @@ const versions = [
       {
         "label": "Feature",
         "desc": "Migrated to PostgreSQL and adjusted API / UI data layer accordingly."
+      },
+      {
+        "label": "Feature",
+        "desc": "Heavy visuals overhaul."
       }
     ]
   },
