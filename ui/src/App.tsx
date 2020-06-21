@@ -15,8 +15,10 @@ import versions from './versions'
 import './App.css';
 import smoke from './img/smoke.png';
 
-const currentVersion = versions[0]['version'];
 const API_URL = 'https://i1mxgd4l94.execute-api.us-west-1.amazonaws.com/dev/';
+const MAX_API_RETRIES = 3;
+
+const currentVersion = versions[0]['version'];
 
 interface State {
   component: string;
@@ -41,8 +43,11 @@ class App extends Component<{}, State> {
   };
 
   componentDidMount(): void {
+    this.renderVisuals();
     this.loadProjectsApi();
+  };
 
+  renderVisuals(): void {
     let scene: THREE.Scene = new THREE.Scene();
     let camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(60,
       window.innerWidth / window.innerHeight, 1, 1000);
@@ -123,12 +128,24 @@ class App extends Component<{}, State> {
 
     renderScene();
     window.addEventListener('resize', onWindowResize, false);
-  }
+  };
 
   async loadProjectsApi(): Promise<void> {
-    const projs = await this.fetchApi<ProjectsApi>(API_URL, {
-      query: "{ projects { project_id title description about url source_code_url languages { name color } tools { name color } } }"
-    });
+    let projs: ProjectsApi;
+    let attempts: number = 0;
+
+    while (attempts < MAX_API_RETRIES) {
+      projs = await this.fetchApi<ProjectsApi>(API_URL, {
+        query: '{ projects { project_id title description about url source_code_url languages { name color } tools { name color } } }'
+      });
+
+      //  Try again if bad response received
+      if (projs.status === 200) {
+        break;
+      }
+      console.log('API call attempts: ' + attempts);
+      attempts++;
+    }
     this.setState(prevState => ({
       api: {
         ...prevState.api
