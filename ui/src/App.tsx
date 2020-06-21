@@ -166,7 +166,7 @@ class App extends Component<{}, State> {
       >
         <div
           ref={ref => (this.mount = ref)}
-          className='background'
+          className='visuals-scene'
         ></div>
         <Main
           api={this.state.api}

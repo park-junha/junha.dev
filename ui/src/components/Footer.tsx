@@ -19,7 +19,7 @@ export default class Footer extends Component<Props, {}> {
     return (
       <div>
         <Navbar
-          className='footer-custom'
+          className='footer-custom transparent-dark'
           fixed='bottom'
           bg='dark'
           variant='dark'
@@ -28,7 +28,7 @@ export default class Footer extends Component<Props, {}> {
             <Nav.Item>
               <Button
                 variant='dark'
-                className='footer-button'
+                className='footer-button transparent-dark'
                 onClick={() => this.props.changeComponent('LandingPage')}
               >
                 <MdHome className='footer-mdicon' />
@@ -42,7 +42,7 @@ export default class Footer extends Component<Props, {}> {
                   id='navbar-main'
                   variant='dark'
                   title='Main'
-                  className='footer-button'
+                  className='footer-button transparent-dark'
                 >
                   Portfolio
                 </Dropdown.Toggle>

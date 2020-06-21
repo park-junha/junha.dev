@@ -13,7 +13,8 @@ export default (props) => {
           rel='noopener noreferrer'
         >
           <Button
-            variant='secondary'
+            variant='danger'
+            className='transparent-dark'
             style={{
               margin: '0px 4px'
             }}
@@ -23,9 +24,10 @@ export default (props) => {
         </a>
         <Button
           variant='secondary'
+          className='transparent-dark'
           style={{
             margin: '0px 4px'
-          , display: 'none'
+            , display: 'none'
           }}
           onClick={createPdf}
         >

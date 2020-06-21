@@ -4,13 +4,17 @@
   margin: 8px 8px 75px 8px;
 }
 
-.background {
+.visuals-scene {
   position: fixed;
   z-index: -1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+}
+
+.transparent-dark {
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
 
 /* Resume */
@@ -22,7 +26,7 @@
   position: relative;
   margin: auto;
   font-family: Arial;
-  background-color: #24282c;
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 8px;
   width: 8.5in;
   height: 11in;
@@ -102,6 +106,11 @@ ul.resume-text {
   max-width: 364px;
   min-height: 120px;
   max-height: 120px;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.project-card:hover {
+  background-color: rgba(0, 48, 150, 0.6) !important;
 }
 
 .project-card-contents {
@@ -123,7 +132,7 @@ ul.resume-text {
 }
 
 .project-modal {
-  background-color: #343a40;
+  background-color: rgba(0, 0, 0, 0.9) !important;
   border-color: #2a2a2a;
   color: #fff;
 }
@@ -148,6 +157,11 @@ ul.resume-text {
   max-width: 244px;
   min-height: 120px;
   max-height: 120px;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.landing-button-big:hover {
+  background-color: rgba(0, 48, 150, 0.6) !important;
 }
 
 /* Landing page regular button */
@@ -157,6 +171,11 @@ ul.resume-text {
   max-width: 120px;
   min-height: 120px;
   max-height: 120px;
+  background-color: rgba(0, 0, 0, 0.175) !important;
+}
+
+.landing-button:hover {
+  background-color: rgba(52, 104, 52, 0.25) !important;
 }
 
 /* Extra padding for text pages */
@@ -245,12 +264,13 @@ ul.resume-text {
 }
 
 .footer-dropdown {
-  background-color: #343a40;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .footer-button {
   margin: 0px 3px;
   padding: 6px 9px;
+  border: rgba(0, 0, 0, 0.6) !important;
 }
 
 .footer-mdicon {
