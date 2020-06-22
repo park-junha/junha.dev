@@ -9,6 +9,10 @@ const versions = [
       {
         "label": "Feature",
         "desc": "Heavy visuals overhaul."
+      },
+      {
+        "label": "Feature",
+        "desc": "API calls are now given 3 attempts."
       }
     ]
   },

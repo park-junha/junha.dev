@@ -10,7 +10,7 @@ import {
   , ProjectsApi
   , GQLRequest
 } from './interfaces';
-import versions from './versions'
+import versions from './CHANGELOG';
 
 import smoke from './img/smoke.png';
 

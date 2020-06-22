@@ -9,7 +9,7 @@ import {
 
 import { Version } from '../interfaces';
 import HandleApi from './ApiHandlers/HandleApi';
-import versions from '../versions';
+import versions from '../CHANGELOG';
 
 interface State {
   showModal: boolean;
