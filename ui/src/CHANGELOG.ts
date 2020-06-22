@@ -1,5 +1,22 @@
 const versions = [
   {
+    "version": "2.0.0",
+    "notes": [
+      {
+        "label": "Feature",
+        "desc": "Migrated to PostgreSQL and adjusted API / UI data layer accordingly."
+      },
+      {
+        "label": "Feature",
+        "desc": "Heavy visuals overhaul."
+      },
+      {
+        "label": "Feature",
+        "desc": "API calls are now given 3 attempts."
+      }
+    ]
+  },
+  {
     "version": "1.8.5",
     "notes": [
       {

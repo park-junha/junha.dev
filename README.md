@@ -12,6 +12,6 @@ Source code for personal website, developed on a full solution stack.
 
 **Web API**: GraphQL (Go)
 
-**Database**: MongoDB
+**Database**: PostgreSQL
 
 **Cloud**: Netlify, AWS Lambda

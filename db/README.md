@@ -6,16 +6,19 @@ Directory for database scripts.
 
 Create a `.env` file within this directory:
 ```
-DB_ENDPOINT=mongodb+srv://<your-instance>.mongodb.net
-DB_USER=<your-username>
+USER=admin
+PASSWORD=sample
+NETLOC=127.0.0.1
+PORT=5432
+DBNAME=sampledb
 ```
 
-### `backend.sh`
+### `postgres.sh`
 
 #### Available Parameters
-- `--access, -a`: Access your cluster through the `mongo` shell
-- `--write, -w`: Execute `write-to-db.js` on your MongoDB instance
+- `--access, -a`: Access your PostgreSQL database via `psql`
+- `--write, -w`: Execute `data.sql` on your PostgreSQL instance
 
-### `write-to-db.js`
+### `schema.sql`
 
-Writes the contents of `projects.json`, `languages.json`, and `tools.json` to your cluster's Projects, LanguageIds, and ToolIds collections respectively.
+Database schema.

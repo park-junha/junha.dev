@@ -1,11 +1,11 @@
 import React, {
   Component
-, Suspense
-, lazy
+  , Suspense
+  , lazy
 } from 'react';
 import LoadingScreen from './LoadingScreen';
 
-import { ApiData } from '../interfaces/Api';
+import { ApiData } from '../interfaces';
 
 interface Props {
   api: ApiData;
@@ -47,8 +47,6 @@ export default class Main extends Component<Props> {
         return (
           <Projects
             projects={this.props.api.Projects}
-            languages={this.props.api.language_ids}
-            tools={this.props.api.tool_ids}
           />
         );
       case 'VersionLog':

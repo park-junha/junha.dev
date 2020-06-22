@@ -1,5 +1,5 @@
 *.swp
-.env
+*.env
 web/
 
 # Personal JSON file containing backend data

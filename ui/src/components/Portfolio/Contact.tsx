@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
   Container
-, Row
-, Col
-, Card
+  , Row
+  , Col
+  , Card
 } from 'react-bootstrap';
 
 export default class Contact extends Component {
@@ -16,6 +16,7 @@ export default class Contact extends Component {
             <Col xs={10} sm={9} md={7} lg={5}>
               <h2 className='centered-text'>Contact Me</h2>
               <Card
+                className='transparent-dark'
                 bg='dark'
               >
                 <Card.Body>
