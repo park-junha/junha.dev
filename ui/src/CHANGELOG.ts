@@ -5,6 +5,10 @@ const versions = [
       {
         "label": "Bugfix",
         "desc": "Added missing explicit semicolons to codebase."
+      },
+      {
+        "label": "Bugfix",
+        "desc": "Projects queries now preseve original order of the arrays of languages and tools stored in database."
       }
     ]
   },
