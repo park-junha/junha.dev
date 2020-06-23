@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "2.0.1",
+    "notes": [
+      {
+        "label": "Bugfix",
+        "desc": "Added missing explicit semicolons to codebase."
+      }
+    ]
+  },
+  {
     "version": "2.0.0",
     "notes": [
       {

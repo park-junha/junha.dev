@@ -75,7 +75,7 @@ class App extends Component<{}, State> {
       cloudParticles.forEach(p => {
         p.rotation.z -= 0.001;
       });
-    }
+    };
 
     let loader = new THREE.TextureLoader();
 
@@ -123,7 +123,7 @@ class App extends Component<{}, State> {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+    };
 
     renderScene();
     window.addEventListener('resize', onWindowResize, false);
