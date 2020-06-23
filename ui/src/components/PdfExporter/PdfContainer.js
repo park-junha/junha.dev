@@ -14,20 +14,16 @@ export default (props) => {
         >
           <Button
             variant='danger'
-            className='transparent-dark'
-            style={{
-              margin: '0px 4px'
-            }}
+            className='transparent-dark pdf-toolbar-button'
           >
             View PDF
           </Button>
         </a>
         <Button
           variant='secondary'
-          className='transparent-dark'
+          className='transparent-dark pdf-toolbar-button'
           style={{
-            margin: '0px 4px'
-            , display: 'none'
+            display: 'none'
           }}
           onClick={createPdf}
         >

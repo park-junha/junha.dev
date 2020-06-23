@@ -1,5 +1,22 @@
 const versions = [
   {
+    "version": "2.0.1",
+    "notes": [
+      {
+        "label": "Bugfix",
+        "desc": "Added missing explicit semicolons to codebase."
+      },
+      {
+        "label": "Bugfix",
+        "desc": "Projects queries now preseve original order of the arrays of languages and tools stored in database."
+      },
+      {
+        "label": "Feature",
+        "desc": "View PDF button now lights up on hover."
+      }
+    ]
+  },
+  {
     "version": "2.0.0",
     "notes": [
       {
