@@ -9,6 +9,10 @@ const versions = [
       {
         "label": "Bugfix",
         "desc": "Projects queries now preseve original order of the arrays of languages and tools stored in database."
+      },
+      {
+        "label": "Feature",
+        "desc": "View PDF button now lights up on hover."
       }
     ]
   },

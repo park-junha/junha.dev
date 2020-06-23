@@ -38,6 +38,11 @@ code {
   margin: 8px 0px;
 }
 
+.pdf-toolbar-button:hover {
+  margin: 0px 4px;
+  background-color: rgba(120, 41, 39, 0.6) !important;
+}
+
 .resume {
   position: relative;
   margin: auto;
