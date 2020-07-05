@@ -8,7 +8,7 @@ Source code for personal website, developed on a full solution stack.
 
 ### Software Stack
 
-**Web UI**: Angular 10 (TypeScript)
+**Web UI**: Angular (TypeScript)
 
 **Web API**: GraphQL (Go)
 
