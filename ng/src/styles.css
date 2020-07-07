@@ -1,4 +1,8 @@
 body {
-  background-color: #181818;
+  background-color: #09101f;
   color: white;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+html, body { height: 100%; }
