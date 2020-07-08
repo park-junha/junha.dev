@@ -6,3 +6,9 @@ body {
 }
 
 html, body { height: 100%; }
+
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
