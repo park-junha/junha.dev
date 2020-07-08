@@ -1,4 +1,19 @@
-<mat-list>
-  <mat-list-item>yay</mat-list-item>
-</mat-list>
-<router-outlet></router-outlet>
+<div class="app-contents-parent">
+  <div class="app-contents-left">
+    <mat-nav-list>
+      <mat-list-item
+        *ngFor="let appRoute of appRoutes"
+        [routerLink]="destinationRoute(appRoute.route)"
+        [ngClass]="{
+          'route-link-active': routeIsActive(appRoute.route),
+          'route-link-inactive': !routeIsActive(appRoute.route)
+        }"
+      >
+        <div>{{ appRoute.label }}</div>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+  <div class="app-contents-right">
+    <router-outlet></router-outlet>
+  </div>
+</div>

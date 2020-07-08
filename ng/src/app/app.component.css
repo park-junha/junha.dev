@@ -1,3 +1,31 @@
+.app-contents-parent {
+  clear: both;
+  padding: 8px;
+}
+
+.app-contents-left {
+  width: 33%;
+  float: left;
+}
+
+.app-contents-right {
+  width: 67%;
+  float: right;
+}
+
 .mat-list-item {
+  font-size: 20px;
+  transition: color 0.3s;
+}
+
+.mat-list-item:hover {
+  color: red;
+}
+
+.route-link-active {
+  color: yellow;
+}
+
+.route-link-inactive {
   color: white;
 }
