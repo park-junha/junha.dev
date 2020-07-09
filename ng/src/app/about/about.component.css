@@ -1,0 +1,15 @@
+a.listUrl {
+  transition: color .2s;
+}
+
+a.listUrl:link, a.listUrl:visited {
+  color: white;
+}
+
+a.listUrl:hover {
+  color: yellow;
+}
+
+a.listUrl:active {
+  color: red;
+}

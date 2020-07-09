@@ -1,16 +1,14 @@
 .app-contents-parent {
-  clear: both;
+  display: flex;
   padding: 8px;
 }
 
 .app-contents-left {
-  width: 33%;
-  float: left;
+  flex: 1;
 }
 
 .app-contents-right {
-  width: 67%;
-  float: right;
+  flex: 3;
 }
 
 .mat-list-item {
