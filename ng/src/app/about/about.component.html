@@ -1,25 +1,23 @@
-<div class="div-padding">
-  <h1>{{ contents.title }}</h1>
-  <h3>{{ contents.intro }}</h3>
-  <h3>{{ contents.interests.heading }}</h3>
-  <ul class="mat-h3">
-    <li
-      *ngFor="let interest of contents.interests.items"
+<h1>{{ contents.title }}</h1>
+<h3>{{ contents.intro }}</h3>
+<h3>{{ contents.interests.heading }}</h3>
+<ul class="mat-h3">
+  <li
+    *ngFor="let interest of contents.interests.items"
+  >
+    <a
+      *ngIf="interest.url"
+      class="listUrl"
+      href="{{ interest.url }}"
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      <a
-        *ngIf="interest.url"
-        class="listUrl"
-        href="{{ interest.url }}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {{ interest.name }}
-      </a>
-      <span
-        *ngIf="!interest.url"
-      >
-        {{ interest.name }}
-      </span>
-    </li>
-  </ul>
-</div>
+      {{ interest.name }}
+    </a>
+    <span
+      *ngIf="!interest.url"
+    >
+      {{ interest.name }}
+    </span>
+  </li>
+</ul>

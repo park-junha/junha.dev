@@ -5,10 +5,24 @@
 
 .app-contents-left {
   flex: 1;
+  animation: fadeintop .2s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeintop {
+  from {
+    opacity: 0;
+    transform: translate(0, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }
 
 .app-contents-right {
   flex: 3;
+  padding: 16px;
 }
 
 .mat-list-item {

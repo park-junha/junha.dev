@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ExperienceComponent } from './experience/experience.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ProjectsComponent } from './projects/projects.component';
     NotfoundComponent,
     AboutComponent,
     ExperienceComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,

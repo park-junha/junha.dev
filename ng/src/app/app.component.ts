@@ -18,7 +18,7 @@ export class AppComponent {
   constructor(private router: Router) { }
 
   title = 'junha-angular';
-  home: string = '/';
+  home: string = '/home';
 
   appRoutes: NavRoutes = [
     {
