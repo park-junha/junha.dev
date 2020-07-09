@@ -7,6 +7,10 @@ body {
 
 html, body { height: 100%; }
 
+.div-padding {
+  padding: 16px;
+}
+
 router-outlet ~ * {
   position: absolute;
   height: 100%;

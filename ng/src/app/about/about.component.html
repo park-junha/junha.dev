@@ -1,1 +1,24 @@
-<p>about works!</p>
+<div class="div-padding">
+  <h1>{{ contents.title }}</h1>
+  <p>{{ contents.intro }}</p>
+  <div>{{ contents.interests.heading }}</div>
+  <ul>
+    <li
+      *ngFor="let interest of contents.interests.items"
+    >
+      <a
+        *ngIf="interest.url"
+        href="{{ interest.url }}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ interest.name }}
+      </a>
+      <span
+        *ngIf="!interest.url"
+      >
+        {{ interest.name }}
+      </span>
+    </li>
+  </ul>
+</div>
