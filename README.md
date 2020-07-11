@@ -15,3 +15,9 @@ Source code for personal website, developed on a full solution stack.
 **Database**: PostgreSQL
 
 **Cloud**: Netlify, AWS Lambda
+
+## Available Scripts
+
+### `./run.sh`
+
+This will run all web components in development mode.
