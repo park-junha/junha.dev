@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
+import { environment } from '../environments/environment';
+
 interface ApiResponse<T> {
   data: {
     [key: string]: T
@@ -37,8 +39,7 @@ export class ApiService {
   apiUpdate: Subject<Api> = new Subject<Api>();
 
   constructor(private http: HttpClient) {
-    this.url =
-      'https://i1mxgd4l94.execute-api.us-west-1.amazonaws.com/dev/';
+    this.url = environment.apiUrl;
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
