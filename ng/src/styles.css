@@ -10,3 +10,7 @@ html, body { height: 100%; }
 router-outlet ~ * {
   position: absolute;
 }
+
+.mat-nav-list .mat-list-item.sidebar .mat-list-item-content {
+  justify-content: flex-end;
+}

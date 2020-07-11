@@ -2,6 +2,7 @@
   <div class="app-contents-left">
     <mat-nav-list>
       <mat-list-item
+        class="sidebar"
         *ngFor="let appRoute of appRoutes"
         [routerLink]="destinationRoute(appRoute.route)"
         [ngClass]="{
