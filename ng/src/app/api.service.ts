@@ -59,7 +59,11 @@ export class ApiService {
     });
   }
 
-  get(): Array<Project> {
-    return this.api.projects;
+  get(): Api {
+    return this.api;
+  }
+
+  getProjects(): Array<Project> {
+    return this.api.projects
   }
 }

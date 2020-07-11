@@ -12,7 +12,7 @@ export class ProjectsComponent implements OnInit {
   _subscription: Subscription;
 
   constructor(private apiService: ApiService) {
-    this.projects = this.apiService.get();
+    this.projects = this.apiService.getProjects();
     this._subscription = apiService.apiUpdate.subscribe(updated => {
       this.projects = updated.projects;
     });
