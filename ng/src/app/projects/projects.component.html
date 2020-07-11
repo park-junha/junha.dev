@@ -1,7 +1,43 @@
-<ul>
-  <li
+<mat-tab-group
+  mat-tab-header-pagination
+  mat-align-tabs="start"
+>
+  <mat-tab
     *ngFor="let project of projects"
+    label="{{ project.title }}"
   >
-    <b>{{project.title}}</b>: {{project.description}}
-  </li>
-</ul>
+    <h2>Overview</h2>
+    <p>{{ project.about }}</p>
+    <h2 *ngIf="languagesExist(project)">Languages</h2>
+    <div
+      *ngFor="let language of project.languages"
+    >
+      <span
+        class="project-language-color"
+        [ngStyle]="{
+          'background-color': language.color
+        }"
+      >
+      </span>
+      <span>
+        {{ language.name }}
+      </span>
+    </div>
+    <br />
+    <h2 *ngIf="otherToolsExist(project)">Other Technologies</h2>
+    <div
+      *ngFor="let tool of project.tools"
+    >
+      <span
+        class="project-language-color"
+        [ngStyle]="{
+          'background-color': tool.color
+        }"
+      >
+      </span>
+      <span>
+        {{ tool.name }}
+      </span>
+    </div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ApiService, Project } from '../api.service';
 import { Subscription } from 'rxjs';
 
 @Component({
+  encapsulation: ViewEncapsulation.None,
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']
@@ -22,4 +23,11 @@ export class ProjectsComponent implements OnInit {
 
   }
 
+  languagesExist(project: Project): boolean {
+    return project.languages?.length > 0;
+  }
+
+  otherToolsExist(project: Project): boolean {
+    return project.tools?.length > 0;
+  }
 }

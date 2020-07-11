@@ -16,12 +16,14 @@ interface NavRoute {
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
+  private query: string;
+
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.apiService.fetch('{ projects { project_id title description \
-      about url source_code_url languages { name color } tools { name \
-      color } } }');
+    this.query = '{ projects { project_id title about url source_code_url \
+      languages { name color } tools { name color } } }';
+    this.apiService.fetch(this.query);
   }
 
   title = 'junha-angular';
