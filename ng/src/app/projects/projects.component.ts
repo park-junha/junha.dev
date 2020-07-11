@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService, Project } from '../api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-projects',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
+  projects: Array<Project>;
+  _subscription: Subscription;
 
-  constructor() { }
+  constructor(private apiService: ApiService) {
+    this.projects = this.apiService.get();
+    this._subscription = apiService.apiUpdate.subscribe(updated => {
+      this.projects = updated.projects;
+    });
+  }
 
   ngOnInit(): void {
+
   }
 
 }

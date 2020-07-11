@@ -1,1 +1,7 @@
-<p>projects works!</p>
+<ul>
+  <li
+    *ngFor="let project of projects"
+  >
+    <b>{{project.title}}</b>: {{project.description}}
+  </li>
+</ul>

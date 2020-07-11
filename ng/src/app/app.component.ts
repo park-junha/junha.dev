@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { fadeAnimation } from './app.animations';
+import { ApiService } from './api.service';
 
 interface NavRoutes extends Array<NavRoute>{};
 interface NavRoute {
@@ -14,8 +15,14 @@ interface NavRoute {
   styleUrls: ['./app.component.css'],
   animations: [fadeAnimation]
 })
-export class AppComponent {
-  constructor(private router: Router) { }
+export class AppComponent implements OnInit {
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  ngOnInit() {
+    this.apiService.fetch('{ projects { project_id title description \
+      about url source_code_url languages { name color } tools { name \
+      color } } }');
+  }
 
   title = 'junha-angular';
   home: string = '/home';
