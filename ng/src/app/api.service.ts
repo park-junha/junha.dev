@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
+interface ApiResponse<T> {
+  data: {
+    [key: string]: T
+  };
+};
+
 interface Api {
   projects: Array<Project>;
 };
@@ -42,7 +48,7 @@ export class ApiService {
   }
 
   fetch(query: string): void {
-    this.http.post<Array<Project>>(
+    this.http.post<ApiResponse<Array<Project>>>(
       this.url,
       { 'query': query },
       { 'headers': this.headers }
