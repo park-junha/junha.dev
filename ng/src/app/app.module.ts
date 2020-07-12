@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatRippleModule } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import {
   BrowserAnimationsModule
@@ -35,6 +36,7 @@ import { LandingComponent } from './landing/landing.component';
     MatCardModule,
     MatListModule,
     MatTabsModule,
+    MatRippleModule,
     FlexLayoutModule,
     HttpClientModule
   ],

@@ -9,6 +9,8 @@
     *ngFor="let project of projects"
     fxFlex="0 1 calc(50% - 8px)"
     fxFlex.lt-md="100%"
+    matRipple
+    [matRippleColor]="rippleColor"
     class="project-tile"
   >
     <mat-card-content>

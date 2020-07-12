@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService, Project } from '../api.service';
 import { Subscription } from 'rxjs';
+
+import { ApiService, Project } from '../api.service';
+import { RIPPLE_COLOR_INDIGO } from '../../environments/constants';
 
 @Component({
   selector: 'app-projects',
@@ -10,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class ProjectsComponent implements OnInit {
   projects: Array<Project>;
   _subscription: Subscription;
+  rippleColor: string = RIPPLE_COLOR_INDIGO;
 
   constructor(private apiService: ApiService) {
     this.projects = this.apiService.getProjects();

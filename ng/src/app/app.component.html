@@ -30,6 +30,8 @@
           'route-link-active': routeIsActive(appRoute.route),
           'route-link-inactive': !routeIsActive(appRoute.route)
         }"
+        matRipple
+        [matRippleColor]="rippleColor"
       >
         <div>{{ appRoute.label }}</div>
       </mat-list-item>

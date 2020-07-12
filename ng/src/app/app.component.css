@@ -37,10 +37,6 @@
   color: yellow;
 }
 
-.mat-list-item:active {
-  color: red;
-}
-
 .route-link-active {
   color: white;
 }
