@@ -1,1 +1,1 @@
-export const RIPPLE_COLOR_INDIGO: string = 'rgba(0, 0, 200, 0.1)';
+export const RIPPLE_COLOR_RED: string = 'rgba(215, 80, 80, 0.15)';

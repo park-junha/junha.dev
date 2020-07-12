@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ApiService, Project } from '../api.service';
-import { RIPPLE_COLOR_INDIGO } from '../../environments/constants';
+import { RIPPLE_COLOR_RED } from '../../environments/constants';
 
 @Component({
   selector: 'app-projects',
@@ -12,7 +12,7 @@ import { RIPPLE_COLOR_INDIGO } from '../../environments/constants';
 export class ProjectsComponent implements OnInit {
   projects: Array<Project>;
   _subscription: Subscription;
-  rippleColor: string = RIPPLE_COLOR_INDIGO;
+  rippleColor: string = RIPPLE_COLOR_RED;
 
   constructor(private apiService: ApiService) {
     this.projects = this.apiService.getProjects();

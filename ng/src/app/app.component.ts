@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { fadeAnimation } from './app.animations';
 import { ApiService } from './api.service';
-import { RIPPLE_COLOR_INDIGO } from '../environments/constants';
+import { RIPPLE_COLOR_RED } from '../environments/constants';
 
 interface NavRoutes extends Array<NavRoute>{};
 interface NavRoute {
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     return window.innerWidth <= 720;
   };
   public showMobile: boolean = this.isMobile();
-  public rippleColor: string = RIPPLE_COLOR_INDIGO;
+  public rippleColor: string = RIPPLE_COLOR_RED;
 
   constructor(private router: Router, private apiService: ApiService) { }
 
