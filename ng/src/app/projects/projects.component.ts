@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService, Project } from '../api.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  encapsulation: ViewEncapsulation.None,
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css']

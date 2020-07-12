@@ -1,43 +1,56 @@
-<mat-tab-group
-  mat-tab-header-pagination
-  mat-align-tabs="start"
+<div
+  fxLayout="row wrap"
+  fxLayout.lt-sm="column"
+  fxLayoutGap="8px"
+  fxLayoutAlign="flex-start"
+  class="projects-container"
 >
-  <mat-tab
+  <mat-card
     *ngFor="let project of projects"
-    label="{{ project.title }}"
+    fxFlex="0 1 calc(50% - 8px)"
+    fxFlex.lt-md="100%"
+    class="project-tile"
   >
-    <h2>Overview</h2>
-    <p>{{ project.about }}</p>
-    <h2 *ngIf="languagesExist(project)">Languages</h2>
-    <div
-      *ngFor="let language of project.languages"
+    <mat-card-content>
+      <h2>{{ project.title }}</h2>
+      <p>
+        {{ project.description }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+  <!--
+  <h2>Overview</h2>
+  <p>{{ project.about }}</p>
+  <h2 *ngIf="languagesExist(project)">Languages</h2>
+  <div
+    *ngFor="let language of project.languages"
+  >
+    <span
+      class="project-language-color"
+      [ngStyle]="{
+        'background-color': language.color
+      }"
     >
-      <span
-        class="project-language-color"
-        [ngStyle]="{
-          'background-color': language.color
-        }"
-      >
-      </span>
-      <span>
-        {{ language.name }}
-      </span>
-    </div>
-    <br />
-    <h2 *ngIf="otherToolsExist(project)">Other Technologies</h2>
-    <div
-      *ngFor="let tool of project.tools"
+    </span>
+    <span>
+      {{ language.name }}
+    </span>
+  </div>
+  <br />
+  <h2 *ngIf="otherToolsExist(project)">Other Technologies</h2>
+  <div
+    *ngFor="let tool of project.tools"
+  >
+    <span
+      class="project-language-color"
+      [ngStyle]="{
+        'background-color': tool.color
+      }"
     >
-      <span
-        class="project-language-color"
-        [ngStyle]="{
-          'background-color': tool.color
-        }"
-      >
-      </span>
-      <span>
-        {{ tool.name }}
-      </span>
-    </div>
-  </mat-tab>
-</mat-tab-group>
+    </span>
+    <span>
+      {{ tool.name }}
+    </span>
+  </div>
+  -->

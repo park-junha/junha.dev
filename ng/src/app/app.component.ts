@@ -25,8 +25,8 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.query = '{ projects { project_id title about url source_code_url \
-      languages { name color } tools { name color } } }';
+    this.query = '{ projects { project_id description title about url \
+      source_code_url languages { name color } tools { name color } } }';
     this.apiService.fetch(this.query);
     window.onresize = () => this.showMobile = this.isMobile();
   }

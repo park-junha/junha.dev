@@ -6,3 +6,21 @@
   display: inline-block;
   border-radius: 50%;
 }
+
+.project-tile {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px;
+  border-color: white;
+  margin-bottom: 8px;
+  max-width: 450px;
+}
+
+.project-tile h2 {
+  font-size: 18px;
+  margin: 0px 0px 8px;
+}
+
+.projects-container {
+  padding: 0px 20px;
+}
