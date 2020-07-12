@@ -5,6 +5,9 @@
 
 .app-contents-left {
   flex: 1;
+}
+
+.fadein {
   animation: fadeintop .2s;
   animation-fill-mode: both;
 }

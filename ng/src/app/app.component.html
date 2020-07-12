@@ -1,5 +1,26 @@
+<div
+  *ngIf="showMobile"
+>
+  <nav
+    mat-tab-nav-bar
+    mat-align-tabs="start"
+    class="fadein"
+  >
+    <a
+      mat-tab-link
+      *ngFor="let appRoute of appRoutes"
+      [routerLink]="destinationRoute(appRoute.route)"
+      [active]="routeIsActive(appRoute.route)"
+    >
+      {{ appRoute.label }}
+    </a>
+  </nav>
+</div>
 <div class="app-contents-parent">
-  <div class="app-contents-left">
+  <div
+    *ngIf="!showMobile"
+    class="app-contents-left fadein"
+  >
     <mat-nav-list>
       <mat-list-item
         class="sidebar"

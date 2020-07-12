@@ -17,6 +17,10 @@ interface NavRoute {
 })
 export class AppComponent implements OnInit {
   private query: string;
+  private isMobile = (): boolean => {
+    return window.innerWidth <= 720;
+  };
+  public showMobile: boolean = this.isMobile();
 
   constructor(private router: Router, private apiService: ApiService) { }
 
@@ -24,6 +28,7 @@ export class AppComponent implements OnInit {
     this.query = '{ projects { project_id title about url source_code_url \
       languages { name color } tools { name color } } }';
     this.apiService.fetch(this.query);
+    window.onresize = () => this.showMobile = this.isMobile();
   }
 
   title = 'junha-angular';
