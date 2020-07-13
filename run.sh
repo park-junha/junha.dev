@@ -24,5 +24,4 @@ function log {
 }
 
 clear
-trap 'kill %1; kill %2' SIGINT
-api | log pw3:api $API_LOG & ui | log pw3:ng $NG_LOG & wait
+(api | log pw3:api $API_LOG & ui | log pw3:ng $NG_LOG)
