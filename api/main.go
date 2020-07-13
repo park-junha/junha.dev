@@ -20,6 +20,8 @@ import (
 // Constants
 const PROJECTS_QUERY = "projects.sql"
 const PROJECT_QUERY = "project.sql"
+const EXPERIENCES_QUERY = "experiences.sql"
+const EXPERIENCE_QUERY = "experience.sql"
 
 // Data structures
 type App struct {
@@ -51,6 +53,16 @@ type reqBody struct {
 	Query string `json:"query"`
 }
 
+type Experience struct {
+	ExperienceID string   `json:"experience_id"`
+	Label        string   `json:"label"`
+	Company      string   `json:"company"`
+	Title        string   `json:"title"`
+	StartDate    string   `json:"start_date"`
+	EndDate      string   `json:"end_date"`
+	Description  []string `json:"description"`
+}
+
 type Project struct {
 	ProjectID   string `json:"project_id"`
 	Title       string `json:"title"`
@@ -68,6 +80,35 @@ type Tool struct {
 }
 
 // GraphQL Types
+var ExperienceType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "Experience",
+		Fields: graphql.Fields{
+			"experience_id": &graphql.Field{
+				Type: graphql.String,
+			},
+			"label": &graphql.Field{
+				Type: graphql.String,
+			},
+			"company": &graphql.Field{
+				Type: graphql.String,
+			},
+			"title": &graphql.Field{
+				Type: graphql.String,
+			},
+			"start_date": &graphql.Field{
+				Type: graphql.String,
+			},
+			"end_date": &graphql.Field{
+				Type: graphql.String,
+			},
+			"description": &graphql.Field{
+				Type: graphql.NewList(graphql.String),
+			},
+		},
+	},
+)
+
 var ProjectType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Project",
@@ -245,6 +286,58 @@ func (a *App) processQuery(query string) (result string) {
 
 }
 
+// Retrieve data from Experience table
+func (a *App) getExperiences() []Experience {
+	res, err := a.db.Query(FileToString(EXPERIENCES_QUERY))
+
+	if err != nil {
+		fmt.Println("fatal err: could not run sql query\n")
+		log.Fatal(err)
+	}
+	defer res.Close()
+
+	var jsonData []Experience
+
+	for res.Next() {
+		var row Experience
+		err = res.Scan(&row.ExperienceID,
+			&row.Label,
+			&row.Company,
+			&row.Title,
+			&row.StartDate,
+			&row.EndDate,
+			pq.Array(&row.Description))
+		if err != nil {
+			fmt.Println("fatal err: scanning query result\n")
+			log.Fatal(err)
+		}
+
+		jsonData = append(jsonData, row)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from Experience table
+func (a *App) getExperience(uid string) Experience {
+	var jsonData Experience
+
+	err := a.db.QueryRow(FileToString(EXPERIENCE_QUERY), uid).Scan(
+		&jsonData.ExperienceID,
+		&jsonData.Label,
+		&jsonData.Company,
+		&jsonData.Title,
+		&jsonData.StartDate,
+		&jsonData.EndDate,
+		pq.Array(&jsonData.Description))
+	if err != nil {
+		fmt.Println("fatal err: running and scanning single row query\n")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
 // Retrieve data from Projects collection
 func (a *App) getProjects() []Project {
 	res, err := a.db.Query(FileToString(PROJECTS_QUERY))
@@ -302,6 +395,29 @@ func (a *App) getProject(uid string) Project {
 // Define the GraphQL Schema
 func (a *App) gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
+		"experiences": &graphql.Field{
+			Type:        graphql.NewList(ExperienceType),
+			Description: "All Experience",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getExperiences(), nil
+			},
+		},
+		"experience": &graphql.Field{
+			Type:        ExperienceType,
+			Description: "Get Experience by ID",
+			Args: graphql.FieldConfigArgument{
+				"experience_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["experience_id"].(string)
+				if success {
+					return a.getExperience(uid), nil
+				}
+				return nil, nil
+			},
+		},
 		"projects": &graphql.Field{
 			Type:        graphql.NewList(ProjectType),
 			Description: "All Projects",
