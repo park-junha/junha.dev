@@ -11,6 +11,26 @@ h2, p, .spaced-bottom {
   margin: 0px 0px 8px;
 }
 
-span, p {
+span, p, .font-size-fifteen {
   font-size: 15px;
+}
+
+.sublabel {
+  font-size: 12px;
+}
+
+a {
+  transition: color 0.2s;
+}
+
+a:link, a:visited {
+  color: white;
+}
+
+a:hover {
+  color: yellow;
+}
+
+a:active {
+  color: red;
 }

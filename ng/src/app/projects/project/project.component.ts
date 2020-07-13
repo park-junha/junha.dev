@@ -8,15 +8,19 @@ import { Project } from '../../api.service';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent {
+  public noAbout: string = 'No description available.';
+  public noUrl: string = 'No demo available.';
+  public noSourceUrl: string = '(source code unavailable)';
+  public sourceUrlLabel: string = '(source code)';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Project) { }
 
-  languagesExist(project: Project): boolean {
-    return project.languages?.length > 0;
+  languagesExist(): boolean {
+    return this.data.languages?.length > 0;
   }
 
-  otherToolsExist(project: Project): boolean {
-    return project.tools?.length > 0;
+  otherToolsExist(): boolean {
+    return this.data.tools?.length > 0;
   }
 
 }
