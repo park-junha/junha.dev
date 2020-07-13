@@ -12,11 +12,11 @@ import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   { path: '', component: LandingComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'index', redirectTo: 'home' },
   { path: 'about', component: AboutComponent },
   { path: 'experience', component: ExperienceComponent },
   { path: 'projects', component: ProjectsComponent },
-  { path: '404', component: NotfoundComponent },
-  { path: '**', redirectTo: '404' }
+  { path: '**', component: NotfoundComponent }
 ];
 
 @NgModule({
