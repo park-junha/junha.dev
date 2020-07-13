@@ -255,10 +255,12 @@ func (a *App) gqlHandler() http.Handler {
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers")
 		if r.Method == "OPTIONS" {
+			fmt.Printf("%s %d %s\n", r.Method, http.StatusOK, r.URL)
 			w.WriteHeader(http.StatusOK)
 			return
 		}
 		if r.Body == nil {
+			fmt.Printf("%s %d %s\n", r.Method, 400, r.URL)
 			http.Error(w, "err: no query data\n", 400)
 			return
 		}
@@ -266,10 +268,13 @@ func (a *App) gqlHandler() http.Handler {
 		var rBody reqBody
 		err := json.NewDecoder(r.Body).Decode(&rBody)
 		if err != nil {
+			fmt.Printf("%s %d %s\n", r.Method, 400, r.URL)
 			http.Error(w, "err: could not parse JSON request body\n", 400)
 		}
 
 		fmt.Fprintf(w, "%s", a.processQuery(rBody.Query))
+		fmt.Printf("%s %d %s\n", r.Method, http.StatusOK, r.URL)
+		return
 	})
 }
 
