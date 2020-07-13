@@ -4,15 +4,29 @@ import { Subject } from 'rxjs';
 
 import { environment } from '../environments/environment';
 
-interface ApiResponse<T> {
+interface ApiResponse {
   data: {
-    [key: string]: T
+    experiences?: Array<Experience>;
+    experience?: Experience;
+    projects?: Array<Project>;
+    project?: Project;
   };
 };
 
 interface Api {
   projects: Array<Project>;
+  experiences: Array<Experience>;
 };
+
+export interface Experience {
+  label: string;
+  company: string;
+  title: string;
+  start_date: string;
+  end_date: string;
+  description: string[];
+}
+
 export interface Project {
   title: string;
   languages: Array<Tool>;
@@ -44,17 +58,19 @@ export class ApiService {
       'Content-Type': 'application/json'
     });
     this.api = {
+      'experiences': [],
       'projects': []
     };
   }
 
   fetch(query: string): void {
-    this.http.post<ApiResponse<Array<Project>>>(
+    this.http.post<ApiResponse>(
       this.url,
       { 'query': query },
       { 'headers': this.headers }
     ).subscribe(res => {
       this.api.projects = res.data.projects;
+      this.api.experiences = res.data.experiences;
       this.apiUpdate.next(this.api);
     });
   }
@@ -63,7 +79,11 @@ export class ApiService {
     return this.api;
   }
 
+  getExperiences(): Array<Experience> {
+    return this.api.experiences;
+  }
+
   getProjects(): Array<Project> {
-    return this.api.projects
+    return this.api.projects;
   }
 }
