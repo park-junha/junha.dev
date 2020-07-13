@@ -11,6 +11,7 @@
     fxFlex.lt-md="100%"
     matRipple
     [matRippleColor]="rippleColor"
+    (click)="showMore(project)"
     class="project-tile"
   >
     <mat-card-content>
@@ -21,38 +22,3 @@
     </mat-card-content>
   </mat-card>
 </div>
-  <!--
-  <h2>Overview</h2>
-  <p>{{ project.about }}</p>
-  <h2 *ngIf="languagesExist(project)">Languages</h2>
-  <div
-    *ngFor="let language of project.languages"
-  >
-    <span
-      class="project-language-color"
-      [ngStyle]="{
-        'background-color': language.color
-      }"
-    >
-    </span>
-    <span>
-      {{ language.name }}
-    </span>
-  </div>
-  <br />
-  <h2 *ngIf="otherToolsExist(project)">Other Technologies</h2>
-  <div
-    *ngFor="let tool of project.tools"
-  >
-    <span
-      class="project-language-color"
-      [ngStyle]="{
-        'background-color': tool.color
-      }"
-    >
-    </span>
-    <span>
-      {{ tool.name }}
-    </span>
-  </div>
-  -->

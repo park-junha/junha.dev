@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
+import { ProjectComponent } from './project/project.component';
 import { ApiService, Project } from '../api.service';
 import { RIPPLE_COLOR_RED } from '../../environments/constants';
 
@@ -14,7 +16,7 @@ export class ProjectsComponent implements OnInit {
   _subscription: Subscription;
   rippleColor: string = RIPPLE_COLOR_RED;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, public dialog: MatDialog) {
     this.projects = this.apiService.getProjects();
     this._subscription = apiService.apiUpdate.subscribe(updated => {
       this.projects = updated.projects;
@@ -25,11 +27,10 @@ export class ProjectsComponent implements OnInit {
 
   }
 
-  languagesExist(project: Project): boolean {
-    return project.languages?.length > 0;
-  }
-
-  otherToolsExist(project: Project): boolean {
-    return project.tools?.length > 0;
+  showMore(project: Project): void {
+    this.dialog.open(ProjectComponent, {
+      width: '700px',
+      data: project
+    });
   }
 }
