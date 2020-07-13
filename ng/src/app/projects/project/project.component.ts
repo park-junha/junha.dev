@@ -8,10 +8,15 @@ import { Project } from '../../api.service';
   styleUrls: ['./project.component.css']
 })
 export class ProjectComponent {
+  public aboutLabel: string = 'Overview';
+  public sourceUrlLabel: string = '(source code)';
+  public languagesLabel: string = 'Languages';
+  public otherToolsLabel: string = 'Other Technologies';
+  public closeLabel: string = 'Close';
+
   public noAbout: string = 'No description available.';
   public noUrl: string = 'No demo available.';
   public noSourceUrl: string = '(source code unavailable)';
-  public sourceUrlLabel: string = '(source code)';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Project) { }
 
