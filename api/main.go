@@ -423,8 +423,8 @@ func (a *App) getProject(uid string) Project {
 }
 
 // Retrieve data from Techs table
-func (a *App) getTechs() []TechWithID {
-	res, err := a.db.Query(FileToString(TECHS_QUERY))
+func (a *App) getTechs(filter string) []TechWithID {
+	res, err := a.db.Query(FileToString(TECHS_QUERY), filter)
 
 	if err != nil {
 		fmt.Println("fatal err: could not run sql query\n")
@@ -515,11 +515,18 @@ func (a *App) gqlSchema() graphql.Schema {
 				return nil, nil
 			},
 		},
-		"techs": &graphql.Field{
+		"languages": &graphql.Field{
 			Type:        graphql.NewList(TechTypeWithID),
-			Description: "All Techs",
+			Description: "All Language Technologies",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return a.getTechs(), nil
+				return a.getTechs("la%"), nil
+			},
+		},
+		"tools": &graphql.Field{
+			Type:        graphql.NewList(TechTypeWithID),
+			Description: "All Other Technologies",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getTechs("to%"), nil
 			},
 		},
 		"tech": &graphql.Field{

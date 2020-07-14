@@ -3,4 +3,6 @@ SELECT
   , name
   , color
 FROM
-  technologies;
+  technologies
+WHERE
+  tech_id LIKE $1;
