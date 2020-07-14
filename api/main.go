@@ -22,8 +22,8 @@ const PROJECTS_QUERY = "projects.sql"
 const PROJECT_QUERY = "project.sql"
 const EXPERIENCES_QUERY = "experiences.sql"
 const EXPERIENCE_QUERY = "experience.sql"
-const TOOLS_QUERY = "tools.sql"
-const TOOL_QUERY = "tool.sql"
+const TECHS_QUERY = "techs.sql"
+const TECH_QUERY = "tech.sql"
 
 // Data structures
 type App struct {
@@ -72,17 +72,17 @@ type Project struct {
 	About       string `json:"about"`
 	Url         string `json:"url"`
 	SourceCode  string `json:"source_code_url"`
-	Languages   []Tool `json:"languages"`
-	Tools       []Tool `json:"tools"`
+	Languages   []Tech `json:"languages"`
+	Tools       []Tech `json:"techs"`
 }
 
-type Tool struct {
+type Tech struct {
 	Name  string `json:"name"`
 	Color string `json:"color"`
 }
 
-type ToolWithID struct {
-	ToolID string `json:"tool_id"`
+type TechWithID struct {
+	TechID string `json:"tech_id"`
 	Name  string `json:"name"`
 	Color string `json:"color"`
 }
@@ -140,18 +140,18 @@ var ProjectType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"languages": &graphql.Field{
-				Type: graphql.NewList(ToolType),
+				Type: graphql.NewList(TechType),
 			},
 			"tools": &graphql.Field{
-				Type: graphql.NewList(ToolType),
+				Type: graphql.NewList(TechType),
 			},
 		},
 	},
 )
 
-var ToolType = graphql.NewObject(
+var TechType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "Tool",
+		Name: "Tech",
 		Fields: graphql.Fields{
 			"name": &graphql.Field{
 				Type: graphql.String,
@@ -163,11 +163,11 @@ var ToolType = graphql.NewObject(
 	},
 )
 
-var ToolTypeWithID = graphql.NewObject(
+var TechTypeWithID = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "ToolWithID",
+		Name: "TechWithID",
 		Fields: graphql.Fields{
-			"tool_id": &graphql.Field{
+			"tech_id": &graphql.Field{
 				Type: graphql.String,
 			},
 			"name": &graphql.Field{
@@ -206,13 +206,13 @@ func (dc *DatabaseConfig) GetInfo() string {
 		dc.SslMode)
 }
 
-// Implement driver.Valuer interface to Tool struct
-func (t Tool) Value() (driver.Value, error) {
+// Implement driver.Valuer interface to Tech struct
+func (t Tech) Value() (driver.Value, error) {
 	return json.Marshal(t)
 }
 
-// Implement sql.Scanner interface to Tool struct
-func (t *Tool) Scan(value interface{}) error {
+// Implement sql.Scanner interface to Tech struct
+func (t *Tech) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
 		log.Fatal("fatal err: type assertion to []byte failed\n")
@@ -422,9 +422,9 @@ func (a *App) getProject(uid string) Project {
 	return jsonData
 }
 
-// Retrieve data from Tools table
-func (a *App) getTools() []ToolWithID {
-	res, err := a.db.Query(FileToString(TOOLS_QUERY))
+// Retrieve data from Techs table
+func (a *App) getTechs() []TechWithID {
+	res, err := a.db.Query(FileToString(TECHS_QUERY))
 
 	if err != nil {
 		fmt.Println("fatal err: could not run sql query\n")
@@ -432,11 +432,11 @@ func (a *App) getTools() []ToolWithID {
 	}
 	defer res.Close()
 
-	var jsonData []ToolWithID
+	var jsonData []TechWithID
 
 	for res.Next() {
-		var row ToolWithID
-		err = res.Scan(&row.ToolID,
+		var row TechWithID
+		err = res.Scan(&row.TechID,
 			&row.Name,
 			&row.Color)
 		if err != nil {
@@ -450,12 +450,12 @@ func (a *App) getTools() []ToolWithID {
 	return jsonData
 }
 
-// Retrieve one object from Tools table
-func (a *App) getTool(uid string) ToolWithID {
-	var jsonData ToolWithID
+// Retrieve one object from Techs table
+func (a *App) getTech(uid string) TechWithID {
+	var jsonData TechWithID
 
-	err := a.db.QueryRow(FileToString(TOOL_QUERY), uid).Scan(
-		&jsonData.ToolID,
+	err := a.db.QueryRow(FileToString(TECH_QUERY), uid).Scan(
+		&jsonData.TechID,
 		&jsonData.Name,
 		&jsonData.Color)
 	if err != nil {
@@ -515,25 +515,25 @@ func (a *App) gqlSchema() graphql.Schema {
 				return nil, nil
 			},
 		},
-		"tools": &graphql.Field{
-			Type:        graphql.NewList(ToolTypeWithID),
-			Description: "All Tools",
+		"techs": &graphql.Field{
+			Type:        graphql.NewList(TechTypeWithID),
+			Description: "All Techs",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return a.getTools(), nil
+				return a.getTechs(), nil
 			},
 		},
-		"tool": &graphql.Field{
-			Type:        ToolTypeWithID,
-			Description: "Get Tools by ID",
+		"tech": &graphql.Field{
+			Type:        TechTypeWithID,
+			Description: "Get Techs by ID",
 			Args: graphql.FieldConfigArgument{
-				"tool_id": &graphql.ArgumentConfig{
+				"tech_id": &graphql.ArgumentConfig{
 					Type: graphql.String,
 				},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				uid, success := params.Args["tool_id"].(string)
+				uid, success := params.Args["tech_id"].(string)
 				if success {
-					return a.getTool(uid), nil
+					return a.getTech(uid), nil
 				}
 				return nil, nil
 			},

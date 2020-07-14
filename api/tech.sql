@@ -3,6 +3,6 @@ SELECT
   , name
   , color
 FROM
-  Tools
+  technologies
 WHERE
-  tool_id = $1;
+  tech_id = $1;

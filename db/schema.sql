@@ -1,4 +1,8 @@
-CREATE TABLE Experience (
+DROP TABLE IF EXISTS Experience;
+DROP TABLE IF EXISTS Technologies;
+DROP TABLE IF EXISTS Projects;
+
+CREATE TABLE IF NOT EXISTS Experience (
   experience_id CHAR(4) PRIMARY KEY
   , label TEXT NOT NULL
   , company TEXT NOT NULL
@@ -8,13 +12,13 @@ CREATE TABLE Experience (
   , description TEXT []
 );
 
-CREATE TABLE Tools (
-  tool_id CHAR(4) PRIMARY KEY
+CREATE TABLE IF NOT EXISTS Technologies (
+  tech_id CHAR(4) PRIMARY KEY
   , name TEXT
   , color CHAR(7)
 );
 
-CREATE TABLE Projects (
+CREATE TABLE IF NOT EXISTS Projects (
   project_id CHAR(4) PRIMARY KEY
   , title TEXT
   , description TEXT

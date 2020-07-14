@@ -1,6 +1,6 @@
 SELECT
-  tool_id
+  tech_id
   , name
   , color
 FROM
-  Tools;
+  technologies;

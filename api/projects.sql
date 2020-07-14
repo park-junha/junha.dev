@@ -14,9 +14,9 @@ SELECT
       FROM
         UNNEST(p.languages) WITH ORDINALITY pl(items, nr)
       LEFT JOIN
-        tools l
+        technologies l
       ON
-        l.tool_id = pl.items
+        l.tech_id = pl.items
       ORDER BY pl.nr
     ) ls
   )
@@ -29,9 +29,9 @@ SELECT
       FROM
         UNNEST(p.other_tools) WITH ORDINALITY pt(items, nr)
       LEFT JOIN
-        tools ot
+        technologies ot
       ON
-        ot.tool_id = pt.items
+        ot.tech_id = pt.items
       ORDER BY pt.nr
     ) ots
   )
