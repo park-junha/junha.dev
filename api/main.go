@@ -22,6 +22,8 @@ const PROJECTS_QUERY = "projects.sql"
 const PROJECT_QUERY = "project.sql"
 const EXPERIENCES_QUERY = "experiences.sql"
 const EXPERIENCE_QUERY = "experience.sql"
+const TOOLS_QUERY = "tools.sql"
+const TOOL_QUERY = "tool.sql"
 
 // Data structures
 type App struct {
@@ -75,6 +77,12 @@ type Project struct {
 }
 
 type Tool struct {
+	Name  string `json:"name"`
+	Color string `json:"color"`
+}
+
+type ToolWithID struct {
+	ToolID string `json:"tool_id"`
 	Name  string `json:"name"`
 	Color string `json:"color"`
 }
@@ -145,6 +153,23 @@ var ToolType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Tool",
 		Fields: graphql.Fields{
+			"name": &graphql.Field{
+				Type: graphql.String,
+			},
+			"color": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
+var ToolTypeWithID = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "Tool",
+		Fields: graphql.Fields{
+			"tool_id": &graphql.Field{
+				Type: graphql.String,
+			},
 			"name": &graphql.Field{
 				Type: graphql.String,
 			},
@@ -397,6 +422,50 @@ func (a *App) getProject(uid string) Project {
 	return jsonData
 }
 
+// Retrieve data from Tools table
+func (a *App) getTools() []ToolWithID {
+	res, err := a.db.Query(FileToString(TOOLS_QUERY))
+
+	if err != nil {
+		fmt.Println("fatal err: could not run sql query\n")
+		log.Fatal(err)
+	}
+	defer res.Close()
+
+	var jsonData []ToolWithID
+
+	for res.Next() {
+		var row ToolWithID
+		err = res.Scan(&row.ToolID,
+			&row.Name,
+			&row.Color)
+		if err != nil {
+			fmt.Println("fatal err: scanning query result\n")
+			log.Fatal(err)
+		}
+
+		jsonData = append(jsonData, row)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from Tools table
+func (a *App) getTool(uid string) ToolWithID {
+	var jsonData ToolWithID
+
+	err := a.db.QueryRow(FileToString(TOOL_QUERY), uid).Scan(
+		&jsonData.ToolID,
+		&jsonData.Name,
+		&jsonData.Color)
+	if err != nil {
+		fmt.Println("fatal err: running and scanning single row query\n")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
 // Define the GraphQL Schema
 func (a *App) gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
@@ -442,6 +511,29 @@ func (a *App) gqlSchema() graphql.Schema {
 				uid, success := params.Args["project_id"].(string)
 				if success {
 					return a.getProject(uid), nil
+				}
+				return nil, nil
+			},
+		},
+		"tools": &graphql.Field{
+			Type:        graphql.NewList(ToolTypeWithID),
+			Description: "All Tools",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getTools(), nil
+			},
+		},
+		"tool": &graphql.Field{
+			Type:        ToolTypeWithID,
+			Description: "Get Tools by ID",
+			Args: graphql.FieldConfigArgument{
+				"tool_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["tool_id"].(string)
+				if success {
+					return a.getTool(uid), nil
 				}
 				return nil, nil
 			},
