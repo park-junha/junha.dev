@@ -1,1 +1,27 @@
-<p>experience works!</p>
+<mat-accordion
+  class="exp-headers exp-body"
+  multi
+>
+  <mat-expansion-panel
+    *ngFor="let experience of experiences"
+    matRipple
+    [matRippleColor]="rippleColor"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ experience.title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <span>{{ experience.company }}</span>
+        <span>{{ getDateRange(experience) }}</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul>
+      <li
+        *ngFor="let statement of experience.description"
+      >
+        {{ statement }}
+      </li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -3,7 +3,10 @@ import { Router } from '@angular/router';
 
 import { fadeAnimation } from './app.animations';
 import { ApiService } from './api.service';
-import { RIPPLE_COLOR_RED } from '../environments/constants';
+import {
+  RIPPLE_COLOR_RED,
+  FETCH_ALL_QUERY
+} from '../environments/constants';
 
 interface NavRoutes extends Array<NavRoute>{};
 interface NavRoute {
@@ -18,7 +21,6 @@ interface NavRoute {
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
-  private query: string;
   private isMobile = (): boolean => {
     return window.innerWidth <= 720;
   };
@@ -28,9 +30,7 @@ export class AppComponent implements OnInit {
   constructor(private router: Router, private apiService: ApiService) { }
 
   ngOnInit() {
-    this.query = '{ projects { project_id description title about url \
-      source_code_url languages { name color } tools { name color } } }';
-    this.apiService.fetch(this.query);
+    this.apiService.fetch(FETCH_ALL_QUERY);
     window.onresize = () => this.showMobile = this.isMobile();
   }
 

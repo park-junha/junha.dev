@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { HttpClientModule } from '@angular/common/http';
 import {
   BrowserAnimationsModule
@@ -43,6 +44,7 @@ import { ProjectComponent } from './projects/project/project.component';
     MatTabsModule,
     MatRippleModule,
     MatDialogModule,
+    MatExpansionModule,
     FlexLayoutModule,
     HttpClientModule
   ],
