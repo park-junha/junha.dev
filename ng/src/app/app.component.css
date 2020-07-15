@@ -39,11 +39,7 @@
   transition: color 0.3s;
 }
 
-.mat-list-item:hover {
-  color: yellow;
-}
-
-.route-link-active {
+.mat-list-item:hover, .route-link-active {
   color: white;
 }
 

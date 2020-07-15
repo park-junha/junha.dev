@@ -1,11 +1,19 @@
 .mat-expansion-panel {
   background-color: rgba(0, 0, 0, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   transition: border 0.3s;
 }
 
 .exp-container {
   margin: 0px 20px;
+}
+
+.mat-expansion-panel-header {
+  transition: background-color 0.3s;
+}
+
+.mat-expansion-panel:hover {
+  border: 1px solid white;
 }
 
 .exp-headers .mat-expansion-panel-header-title,
