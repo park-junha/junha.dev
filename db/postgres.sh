@@ -1,6 +1,7 @@
 #!/bin/bash
 BASE_DIR="$(cd "$(dirname "$0" )" && pwd )"
 SCRIPT_DIR=$BASE_DIR"/data.sql"
+SCHEMA_DIR=$BASE_DIR"/schema.sql"
 USER=$(grep USER $BASE_DIR/.env | cut -d '=' -f2)
 PASSWORD=$(grep PASSWORD $BASE_DIR/.env | cut -d '=' -f2)
 NETLOC=$(grep NETLOC $BASE_DIR/.env | cut -d '=' -f2)
@@ -11,6 +12,7 @@ function usage () {
     echo "Usage:"
     echo "--access, -a: Log onto database via shell"
     echo "--write, -w: Execute script on database via shell"
+    echo "--reset, -r: Reset database schema via shell"
     exit 1;
 }
 
@@ -22,6 +24,10 @@ function write-to-db {
     psql postgres://$USER:$PASSWORD@$NETLOC:$PORT/$DBNAME < $SCRIPT_DIR
 }
 
+function reset-db {
+    psql postgres://$USER:$PASSWORD@$NETLOC:$PORT/$DBNAME < $SCHEMA_DIR
+}
+
 if [[ $# -eq 1 ]]; then
     case $1 in
     -a | --access)
@@ -30,6 +36,10 @@ if [[ $# -eq 1 ]]; then
         ;;
     -w | --write)
         write-to-db
+        exit 1
+        ;;
+    -r | --reset)
+        reset-db
         exit 1
         ;;
     *)
