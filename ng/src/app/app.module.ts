@@ -8,6 +8,9 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {
+  MatProgressSpinnerModule
+} from '@angular/material/progress-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import {
   BrowserAnimationsModule
@@ -50,6 +53,7 @@ import { FooterComponent } from './footer/footer.component';
     MatDialogModule,
     MatExpansionModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
     FlexLayoutModule,
     HttpClientModule,
     FontAwesomeModule

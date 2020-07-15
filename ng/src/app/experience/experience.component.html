@@ -1,4 +1,5 @@
 <mat-accordion
+  *ngIf="isLoaded else loading"
   class="exp-headers exp-body"
   multi
 >
@@ -25,3 +26,6 @@
     </ul>
   </mat-expansion-panel>
 </mat-accordion>
+<ng-template #loading>
+  <mat-spinner diameter="48" color="accent"></mat-spinner>
+</ng-template>

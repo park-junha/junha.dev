@@ -49,8 +49,10 @@ export class ApiService {
   private api: Api;
   private url: string;
   private headers: HttpHeaders;
+  public isLoading: boolean;
 
   apiUpdate: Subject<Api> = new Subject<Api>();
+  loadingEmitter: Subject<boolean> = new Subject<boolean>();
 
   constructor(private http: HttpClient) {
     this.url = environment.apiUrl;
@@ -61,9 +63,12 @@ export class ApiService {
       'experiences': [],
       'projects': []
     };
+    this.isLoading = false;
   }
 
   fetch(query: string): void {
+    this.isLoading = true;
+    this.loadingEmitter.next(this.isLoading);
     this.http.post<ApiResponse>(
       this.url,
       { 'query': query },
@@ -72,11 +77,17 @@ export class ApiService {
       this.api.projects = res.data.projects;
       this.api.experiences = res.data.experiences;
       this.apiUpdate.next(this.api);
+      this.isLoading = false;
+      this.loadingEmitter.next(this.isLoading);
     });
   }
 
   get(): Api {
     return this.api;
+  }
+
+  getLoadingState(): boolean {
+    return this.isLoading;
   }
 
   getExperiences(): Array<Experience> {
