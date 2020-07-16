@@ -7,14 +7,37 @@
     *ngFor="let experience of experiences"
     matRipple
     [matRippleColor]="rippleColor"
+    [ngSwitch]="layoutView"
   >
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header
+      *ngSwitchCase="'xs'"
+    >
+      <mat-panel-title>
+        {{ experience.label }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ getShortDateRange(experience) }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header
+      *ngSwitchCase="'sm'"
+    >
+      <mat-panel-title>
+        {{ experience.company }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ getShortDateRange(experience) }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-expansion-panel-header
+      *ngSwitchDefault
+    >
       <mat-panel-title>
         {{ experience.title }}
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description id="three-columns">
         <span>{{ experience.company }}</span>
-        <span>{{ getDateRange(experience) }}</span>
+        <span>{{ getShortDateRange(experience) }}</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <ul>

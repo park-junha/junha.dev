@@ -22,6 +22,10 @@
 }
 
 .exp-headers .mat-expansion-panel-header-description {
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+}
+
+#three-columns {
+  justify-content: space-between;
 }
