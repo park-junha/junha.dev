@@ -8,7 +8,7 @@
         *ngFor="let interest of contents.interests.items"
       >
         <a
-          *ngIf="interest.url"
+          *ngIf="interest.url else noInterestUrlBlock"
           class="listUrl"
           href="{{ interest.url }}"
           target="_blank"
@@ -16,11 +16,9 @@
         >
           {{ interest.name }}
         </a>
-        <span
-          *ngIf="!interest.url"
-        >
+        <ng-template #noInterestUrlBlock>
           {{ interest.name }}
-        </span>
+        </ng-template>
       </li>
     </ul>
     <h3>{{ contents.contact.heading }}</h3>
@@ -34,7 +32,7 @@
           <strong>{{ contact.subheading }}</strong>:
         </span>
         <a
-          *ngIf="contact.url"
+          *ngIf="contact.url else noContactUrlBlock"
           class="listUrl"
           href="{{ contact.url }}"
           target="_blank"
@@ -42,11 +40,9 @@
         >
           {{ contact.name }}
         </a>
-        <span
-          *ngIf="!contact.url"
-        >
+        <ng-template #noContactUrlBlock>
           {{ contact.name }}
-        </span>
+        </ng-template>
       </li>
     </ul>
   </mat-card-content>
