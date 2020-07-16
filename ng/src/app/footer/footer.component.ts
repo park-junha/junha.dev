@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faFilePdf } from '@fortawesome/free-regular-svg-icons';
 
 import { VERSION } from '../../environments/constants';
 
@@ -13,4 +14,5 @@ export class FooterComponent {
 
   faGithub = faGithub;
   faLinkedin = faLinkedin;
+  faFilePdf = faFilePdf;
 }
