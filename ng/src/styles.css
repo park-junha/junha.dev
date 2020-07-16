@@ -27,6 +27,7 @@ a:hover {
 router-outlet ~ * {
   position: absolute;
   width: 100%;
+  margin-bottom: 64px;
 }
 
 .backdrop-blur {
