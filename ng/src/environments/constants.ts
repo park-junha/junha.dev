@@ -30,14 +30,14 @@ export const FETCH_ALL_QUERY: string = '{ ' +
       'name ' + 
       'color ' + 
     '} ' + 
-  '} ' + 
-  'languages { ' + 
-    'tech_id ' + 
-    'name ' + 
-    'color ' + 
-  '} ' + 
-  'tools { ' + 
-    'tech_id ' + 
-    'name ' + 
-    'color ' + 
+//'} ' + 
+//'languages { ' + 
+//  'tech_id ' + 
+//  'name ' + 
+//  'color ' + 
+//'} ' + 
+//'tools { ' + 
+//  'tech_id ' + 
+//  'name ' + 
+//  'color ' + 
   '} }';
