@@ -7,6 +7,18 @@ body {
 
 html, body { height: 100%; }
 
+a {
+  transition: color 0.2s;
+}
+
+a:link, a:visited {
+  color: white;
+}
+
+a:hover {
+  color: rgb(244, 143, 177);
+}
+
 .router-wrapper {
   position: relative;
   width: 100%;

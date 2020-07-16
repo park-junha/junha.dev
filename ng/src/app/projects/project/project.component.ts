@@ -9,7 +9,7 @@ import { Project } from '../../api.service';
 })
 export class ProjectComponent {
   public aboutLabel: string = 'Overview';
-  public sourceUrlLabel: string = '(source code)';
+  public sourceUrlLabel: string = 'source code';
   public languagesLabel: string = 'Languages';
   public otherToolsLabel: string = 'Other Technologies';
   public closeLabel: string = 'Close';
