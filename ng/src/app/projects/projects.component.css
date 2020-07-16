@@ -1,18 +1,14 @@
 .mat-card {
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  transition: border 0.3s;
+  max-width: 420px;
 }
 
-.mat-card:hover {
-  border: 1px solid yellow;
+.mat-card-content {
+  padding: 12px 4px 4px 12px;
+  height: 96px;
 }
 
 .project-tile {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.35);
-  margin-bottom: 8px;
-  max-width: 450px;
-  height: 120px;
+  margin: 4px;
 }
 
 .project-tile h2 {
