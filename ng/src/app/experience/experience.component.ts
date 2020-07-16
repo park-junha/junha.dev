@@ -11,11 +11,17 @@ import { RIPPLE_COLOR_RED } from '../../environments/constants';
 })
 export class ExperienceComponent {
   experiences: Array<Experience>;
+  isLoaded: boolean;
   _subscription: Subscription;
+  _loadingSubscription: Subscription;
   rippleColor: string = RIPPLE_COLOR_RED;
 
   constructor(private apiService: ApiService) {
     this.experiences = this.apiService.getExperiences();
+    this.isLoaded = !this.apiService.getLoadingState();
+    this._loadingSubscription = apiService.loadingEmitter.subscribe(
+      loadingState => { this.isLoaded = !loadingState; }
+    );
     this._subscription = apiService.apiUpdate.subscribe(updated => {
       this.experiences = updated.experiences;
     });

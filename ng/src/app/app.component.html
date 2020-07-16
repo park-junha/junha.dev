@@ -41,7 +41,9 @@
     class="app-contents-right"
     [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''"
   >
-    <router-outlet #o="outlet"></router-outlet>
+    <div class="router-wrapper">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
   </div>
 </div>
 <app-footer class="footer"></app-footer>

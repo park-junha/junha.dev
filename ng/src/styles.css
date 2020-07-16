@@ -7,8 +7,18 @@ body {
 
 html, body { height: 100%; }
 
+.router-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 router-outlet ~ * {
   position: absolute;
+  width: 100%;
+}
+
+.mat-spinner {
+  margin: 0 auto;
 }
 
 .mat-nav-list .mat-list-item.sidebar .mat-list-item-content {
