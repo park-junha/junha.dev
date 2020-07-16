@@ -20,6 +20,10 @@ import (
 // Constants
 const PROJECTS_QUERY = "projects.sql"
 const PROJECT_QUERY = "project.sql"
+const EXPERIENCES_QUERY = "experiences.sql"
+const EXPERIENCE_QUERY = "experience.sql"
+const TECHS_QUERY = "techs.sql"
+const TECH_QUERY = "tech.sql"
 
 // Data structures
 type App struct {
@@ -51,6 +55,16 @@ type reqBody struct {
 	Query string `json:"query"`
 }
 
+type Experience struct {
+	ExperienceID string   `json:"experience_id"`
+	Label        string   `json:"label"`
+	Company      string   `json:"company"`
+	Title        string   `json:"title"`
+	StartDate    string   `json:"start_date"`
+	EndDate      string   `json:"end_date"`
+	Description  []string `json:"description"`
+}
+
 type Project struct {
 	ProjectID   string `json:"project_id"`
 	Title       string `json:"title"`
@@ -58,16 +72,51 @@ type Project struct {
 	About       string `json:"about"`
 	Url         string `json:"url"`
 	SourceCode  string `json:"source_code_url"`
-	Languages   []Tool `json:"languages"`
-	Tools       []Tool `json:"tools"`
+	Languages   []Tech `json:"languages"`
+	Tools       []Tech `json:"techs"`
 }
 
-type Tool struct {
+type Tech struct {
+	Name  string `json:"name"`
+	Color string `json:"color"`
+}
+
+type TechWithID struct {
+	TechID string `json:"tech_id"`
 	Name  string `json:"name"`
 	Color string `json:"color"`
 }
 
 // GraphQL Types
+var ExperienceType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "Experience",
+		Fields: graphql.Fields{
+			"experience_id": &graphql.Field{
+				Type: graphql.String,
+			},
+			"label": &graphql.Field{
+				Type: graphql.String,
+			},
+			"company": &graphql.Field{
+				Type: graphql.String,
+			},
+			"title": &graphql.Field{
+				Type: graphql.String,
+			},
+			"start_date": &graphql.Field{
+				Type: graphql.String,
+			},
+			"end_date": &graphql.Field{
+				Type: graphql.String,
+			},
+			"description": &graphql.Field{
+				Type: graphql.NewList(graphql.String),
+			},
+		},
+	},
+)
+
 var ProjectType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Project",
@@ -91,19 +140,36 @@ var ProjectType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"languages": &graphql.Field{
-				Type: graphql.NewList(ToolType),
+				Type: graphql.NewList(TechType),
 			},
 			"tools": &graphql.Field{
-				Type: graphql.NewList(ToolType),
+				Type: graphql.NewList(TechType),
 			},
 		},
 	},
 )
 
-var ToolType = graphql.NewObject(
+var TechType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "Tool",
+		Name: "Tech",
 		Fields: graphql.Fields{
+			"name": &graphql.Field{
+				Type: graphql.String,
+			},
+			"color": &graphql.Field{
+				Type: graphql.String,
+			},
+		},
+	},
+)
+
+var TechTypeWithID = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name: "TechWithID",
+		Fields: graphql.Fields{
+			"tech_id": &graphql.Field{
+				Type: graphql.String,
+			},
 			"name": &graphql.Field{
 				Type: graphql.String,
 			},
@@ -140,13 +206,13 @@ func (dc *DatabaseConfig) GetInfo() string {
 		dc.SslMode)
 }
 
-// Implement driver.Valuer interface to Tool struct
-func (t Tool) Value() (driver.Value, error) {
+// Implement driver.Valuer interface to Tech struct
+func (t Tech) Value() (driver.Value, error) {
 	return json.Marshal(t)
 }
 
-// Implement sql.Scanner interface to Tool struct
-func (t *Tool) Scan(value interface{}) error {
+// Implement sql.Scanner interface to Tech struct
+func (t *Tech) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
 		log.Fatal("fatal err: type assertion to []byte failed\n")
@@ -214,10 +280,12 @@ func (a *App) gqlHandler() http.Handler {
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers")
 		if r.Method == "OPTIONS" {
+			fmt.Printf("%s %d\n", r.Method, http.StatusOK)
 			w.WriteHeader(http.StatusOK)
 			return
 		}
 		if r.Body == nil {
+			fmt.Printf("%s %d\n", r.Method, 400)
 			http.Error(w, "err: no query data\n", 400)
 			return
 		}
@@ -225,10 +293,13 @@ func (a *App) gqlHandler() http.Handler {
 		var rBody reqBody
 		err := json.NewDecoder(r.Body).Decode(&rBody)
 		if err != nil {
+			fmt.Printf("%s %d\n", r.Method, 400)
 			http.Error(w, "err: could not parse JSON request body\n", 400)
 		}
 
 		fmt.Fprintf(w, "%s", a.processQuery(rBody.Query))
+		fmt.Printf("%s %d %s\n", r.Method, http.StatusOK, rBody.Query)
+		return
 	})
 }
 
@@ -243,6 +314,58 @@ func (a *App) processQuery(query string) (result string) {
 
 	return fmt.Sprintf("%s", rJSON)
 
+}
+
+// Retrieve data from Experience table
+func (a *App) getExperiences() []Experience {
+	res, err := a.db.Query(FileToString(EXPERIENCES_QUERY))
+
+	if err != nil {
+		fmt.Println("fatal err: could not run sql query\n")
+		log.Fatal(err)
+	}
+	defer res.Close()
+
+	var jsonData []Experience
+
+	for res.Next() {
+		var row Experience
+		err = res.Scan(&row.ExperienceID,
+			&row.Label,
+			&row.Company,
+			&row.Title,
+			&row.StartDate,
+			&row.EndDate,
+			pq.Array(&row.Description))
+		if err != nil {
+			fmt.Println("fatal err: scanning query result\n")
+			log.Fatal(err)
+		}
+
+		jsonData = append(jsonData, row)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from Experience table
+func (a *App) getExperience(uid string) Experience {
+	var jsonData Experience
+
+	err := a.db.QueryRow(FileToString(EXPERIENCE_QUERY), uid).Scan(
+		&jsonData.ExperienceID,
+		&jsonData.Label,
+		&jsonData.Company,
+		&jsonData.Title,
+		&jsonData.StartDate,
+		&jsonData.EndDate,
+		pq.Array(&jsonData.Description))
+	if err != nil {
+		fmt.Println("fatal err: running and scanning single row query\n")
+		log.Fatal(err)
+	}
+
+	return jsonData
 }
 
 // Retrieve data from Projects collection
@@ -299,9 +422,76 @@ func (a *App) getProject(uid string) Project {
 	return jsonData
 }
 
+// Retrieve data from Techs table
+func (a *App) getTechs(filter string) []TechWithID {
+	res, err := a.db.Query(FileToString(TECHS_QUERY), filter)
+
+	if err != nil {
+		fmt.Println("fatal err: could not run sql query\n")
+		log.Fatal(err)
+	}
+	defer res.Close()
+
+	var jsonData []TechWithID
+
+	for res.Next() {
+		var row TechWithID
+		err = res.Scan(&row.TechID,
+			&row.Name,
+			&row.Color)
+		if err != nil {
+			fmt.Println("fatal err: scanning query result\n")
+			log.Fatal(err)
+		}
+
+		jsonData = append(jsonData, row)
+	}
+
+	return jsonData
+}
+
+// Retrieve one object from Techs table
+func (a *App) getTech(uid string) TechWithID {
+	var jsonData TechWithID
+
+	err := a.db.QueryRow(FileToString(TECH_QUERY), uid).Scan(
+		&jsonData.TechID,
+		&jsonData.Name,
+		&jsonData.Color)
+	if err != nil {
+		fmt.Println("fatal err: running and scanning single row query\n")
+		log.Fatal(err)
+	}
+
+	return jsonData
+}
+
 // Define the GraphQL Schema
 func (a *App) gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
+		"experiences": &graphql.Field{
+			Type:        graphql.NewList(ExperienceType),
+			Description: "All Experience",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getExperiences(), nil
+			},
+		},
+		"experience": &graphql.Field{
+			Type:        ExperienceType,
+			Description: "Get Experience by ID",
+			Args: graphql.FieldConfigArgument{
+				"experience_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["experience_id"].(string)
+				if success {
+					return a.getExperience(uid), nil
+				}
+				return nil, nil
+			},
+		},
 		"projects": &graphql.Field{
 			Type:        graphql.NewList(ProjectType),
 			Description: "All Projects",
@@ -321,6 +511,36 @@ func (a *App) gqlSchema() graphql.Schema {
 				uid, success := params.Args["project_id"].(string)
 				if success {
 					return a.getProject(uid), nil
+				}
+				return nil, nil
+			},
+		},
+		"languages": &graphql.Field{
+			Type:        graphql.NewList(TechTypeWithID),
+			Description: "All Language Technologies",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getTechs("la%"), nil
+			},
+		},
+		"tools": &graphql.Field{
+			Type:        graphql.NewList(TechTypeWithID),
+			Description: "All Other Technologies",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getTechs("to%"), nil
+			},
+		},
+		"tech": &graphql.Field{
+			Type:        TechTypeWithID,
+			Description: "Get Techs by ID",
+			Args: graphql.FieldConfigArgument{
+				"tech_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["tech_id"].(string)
+				if success {
+					return a.getTech(uid), nil
 				}
 				return nil, nil
 			},

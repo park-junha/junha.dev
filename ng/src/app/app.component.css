@@ -1,0 +1,48 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.app-contents-parent {
+  display: flex;
+  padding: 8px;
+}
+
+.app-contents-left {
+  flex: 1;
+}
+
+.fadein {
+  animation: fadeintop .2s;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeintop {
+  from {
+    opacity: 0;
+    transform: translate(0, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+.app-contents-right {
+  flex: 3;
+  padding: 16px;
+}
+
+.mat-list-item {
+  font-size: 24px;
+  transition: color 0.3s;
+}
+
+.mat-list-item:hover, .route-link-active {
+  color: white;
+}
+
+.route-link-inactive {
+  color: rgba(255, 255, 255, 0.4);
+}

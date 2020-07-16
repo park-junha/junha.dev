@@ -1,0 +1,28 @@
+<div
+  *ngIf="isLoaded else loading"
+  fxLayout="row wrap"
+  fxLayout.lt-sm="column"
+  fxLayoutGap="8px grid"
+  fxLayoutAlign="flex-start"
+  class="projects-container"
+>
+  <mat-card
+    *ngFor="let project of projects"
+    fxFlex="0 1 calc(50% - 8px)"
+    fxFlex.lt-md="100%"
+    matRipple
+    [matRippleColor]="rippleColor"
+    (click)="showMore(project)"
+    class="project-tile"
+  >
+    <mat-card-content>
+      <h2>{{ project.title }}</h2>
+      <p>
+        {{ project.description }}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #loading>
+  <mat-spinner diameter="48" color="accent"></mat-spinner>
+</ng-template>

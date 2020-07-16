@@ -1,0 +1,81 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <h2>{{ aboutLabel }}</h2>
+  <p *ngIf="data.about">{{ data.about }}</p>
+  <p *ngIf="!data.about">{{ noAbout }}</p>
+  <div
+    *ngIf="data.url else noUrlBlock"
+    class="font-size-fifteen"
+  >
+    View <i>{{ data.title }}</i>&nbsp;
+    <a
+      [href]="data.url"
+      target='_blank'
+      rel='noopener noreferrer'
+    >here</a>.
+  </div>
+  <ng-template #noUrlBlock>
+    <div
+      class="font-size-fifteen"
+    >{{ noUrl }}</div>
+  </ng-template>
+  <p
+    *ngIf="data.source_code_url else noSourceUrlBlock"
+    class="sublabel"
+  >
+    (<a
+      [href]="data.source_code_url"
+      target='_blank'
+      rel='noopener noreferrer'
+    >{{ sourceUrlLabel }}</a>)
+  </p>
+  <ng-template #noSourceUrlBlock>
+    <p
+      class="sublabel"
+    >
+      {{ noSourceUrl }}
+    </p>
+  </ng-template>
+  <h2 *ngIf="languagesExist()">{{ languagesLabel }}</h2>
+  <div class="spaced-bottom">
+    <div
+      *ngFor="let language of data.languages"
+    >
+      <span
+        class="project-language-color"
+        [ngStyle]="{
+          'background-color': language.color
+        }"
+      >
+      </span>
+      <span>
+        {{ language.name }}
+      </span>
+    </div>
+  </div>
+  <h2 *ngIf="otherToolsExist()">{{ otherToolsLabel }}</h2>
+  <div class="spaced-bottom">
+    <div
+      *ngFor="let tool of data.tools"
+    >
+      <span
+        class="project-language-color"
+        [ngStyle]="{
+          'background-color': tool.color
+        }"
+      >
+      </span>
+      <span>
+        {{ tool.name }}
+      </span>
+    </div>
+  </div>
+  <br />
+</div>
+<button
+  mat-raised-button
+  mat-dialog-close
+  color="warn"
+>
+  {{ closeLabel }}
+</button>

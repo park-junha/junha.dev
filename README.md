@@ -8,10 +8,16 @@ Source code for personal website, developed on a full solution stack.
 
 ### Software Stack
 
-**Web UI**: React (TypeScript)
+**Web UI**: Angular (TypeScript)
 
 **Web API**: GraphQL (Go)
 
 **Database**: PostgreSQL
 
 **Cloud**: Netlify, AWS Lambda
+
+## Available Scripts
+
+### `./run.sh`
+
+This will run all web components in development mode.

@@ -1,0 +1,25 @@
+.footer-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-toolbar {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 56px;
+}
+
+a {
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s;
+  text-decoration: none;
+}
+
+a:hover {
+  color: white;
+}
+
+#version {
+  font-size: 18px;
+  font-weight: 300;
+  padding: 4px 4px;
+  border-radius: 8px;
+}

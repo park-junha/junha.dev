@@ -1,0 +1,20 @@
+.project-language-color {
+  position: relative;
+  margin: 1px 2px -1px 0px;
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+h2, p, .spaced-bottom {
+  margin: 0px 0px 8px;
+}
+
+span, p, .font-size-fifteen {
+  font-size: 15px;
+}
+
+.sublabel {
+  font-size: 12px;
+}
