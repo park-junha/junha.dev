@@ -3,13 +3,15 @@ import { Component } from '@angular/core';
 interface AboutContents {
   title: string;
   intro: string;
-  interests: Interests;
+  interests: Items;
+  contact: Items;
 };
-interface Interests {
+interface Items {
   heading: string;
-  items: Array<Interest>;
+  items: Array<Item>;
 };
-interface Interest {
+interface Item {
+  subheading?: string;
   name: string;
   url?: string;
 };
@@ -29,7 +31,7 @@ export class AboutComponent {
       in Full Stack Development. My primary technologies are JavaScript \
       and its various flavors and frameworks, including React, Angular, \
       TypeScript, and Node.js. Outside of the JavaScript ecosystem, I also \
-      use Python, SQL, and Go.',
+      use Python, Go, and SQL.',
     'interests': {
       'heading': 'These are some of my interests and hobbies:',
       'items': [
@@ -49,6 +51,21 @@ export class AboutComponent {
         },
         {
           'name': 'Video games'
+        }
+      ]
+    },
+    'contact': {
+      'heading': 'The best ways to contact me are:',
+      'items': [
+        {
+          'subheading': 'Email',
+          'name': 'jpark3@scu.edu',
+          'url': 'mailto:jpark3@scu.edu'
+        },
+        {
+          'subheading': 'Linkedin',
+          'name': 'linkedin.com/in/park-junha',
+          'url': 'https://www.linkedin.com/in/park-junha/'
         }
       ]
     }

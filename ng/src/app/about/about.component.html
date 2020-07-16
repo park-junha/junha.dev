@@ -23,5 +23,31 @@
         </span>
       </li>
     </ul>
+    <h3>{{ contents.contact.heading }}</h3>
+    <ul class="mat-h3">
+      <li
+        *ngFor="let contact of contents.contact.items"
+      >
+        <span
+          *ngIf="contact.subheading"
+        >
+          <strong>{{ contact.subheading }}</strong>:
+        </span>
+        <a
+          *ngIf="contact.url"
+          class="listUrl"
+          href="{{ contact.url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ contact.name }}
+        </a>
+        <span
+          *ngIf="!contact.url"
+        >
+          {{ contact.name }}
+        </span>
+      </li>
+    </ul>
   </mat-card-content>
 </mat-card>
