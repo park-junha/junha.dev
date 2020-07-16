@@ -11,6 +11,17 @@ router-outlet ~ * {
   position: absolute;
 }
 
+.mat-card {
+  transition: border 0.3s, background-color 0.3s !important;
+  background-color: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.mat-card:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+  border: 1px solid white;
+}
+
 .mat-nav-list .mat-list-item.sidebar .mat-list-item-content {
   justify-content: flex-end;
 }
