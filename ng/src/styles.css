@@ -32,6 +32,10 @@ router-outlet ~ * {
   border: 1px solid white;
 }
 
+.mat-card .mat-card-content {
+  margin-bottom: 0;
+}
+
 .mat-nav-list .mat-list-item.sidebar .mat-list-item-content {
   justify-content: flex-end;
 }
