@@ -32,6 +32,8 @@ export class ProjectsComponent {
   showMore(project: Project): void {
     this.dialog.open(ProjectComponent, {
       width: '700px',
+      backdropClass: 'backdrop-blur',
+      panelClass: 'project-dialog',
       data: project
     });
   }
