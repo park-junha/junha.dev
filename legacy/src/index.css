@@ -20,6 +20,11 @@ code {
   margin: 8px 8px 75px 8px;
 }
 
+.header-styles {
+  opacity: 0.55;
+  text-align: center;
+}
+
 .visuals-scene {
   position: fixed;
   z-index: -1;

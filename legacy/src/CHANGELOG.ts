@@ -1,5 +1,18 @@
 const versions = [
   {
+    "version": "2.1.0",
+    "notes": [
+      {
+        "label": "Security Update",
+        "desc": "Bumped lodash to 4.17.19."
+      },
+      {
+        "label": "Feature",
+        "desc": "Added a header alert to redirect users to new website."
+      }
+    ]
+  },
+  {
     "version": "2.0.1",
     "notes": [
       {
