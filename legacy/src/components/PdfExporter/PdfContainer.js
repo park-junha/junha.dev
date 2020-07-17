@@ -20,10 +20,11 @@ export default (props) => {
           </Button>
         </a>
         <Button
-          variant='secondary'
+          variant='danger'
           className='transparent-dark pdf-toolbar-button'
+//        disabled
           style={{
-            display: 'none'
+//          display: 'none'
           }}
           onClick={createPdf}
         >
