@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 import * as THREE from 'three';
 
+import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './components/Main';
 import {
@@ -197,6 +198,7 @@ class App extends Component<{}, State> {
           ref={ref => (this.mount = ref)}
           className='visuals-scene'
         ></div>
+        <Header />
         <Main
           api={this.state.api}
           component={this.state.component}
