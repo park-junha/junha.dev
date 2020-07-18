@@ -50,6 +50,7 @@ export class ExperienceComponent implements OnInit {
 
   private formatShortDate(date: string): string {
     return new Date(date).toLocaleString('default', {
+      timeZone: 'UTC',
       month: '2-digit',
       year: '2-digit'
     });
@@ -57,6 +58,7 @@ export class ExperienceComponent implements OnInit {
 
   private formatLongDate(date: string): string {
     return new Date(date).toLocaleString('default', {
+      timeZone: 'UTC',
       month: 'short',
       year: 'numeric'
     });

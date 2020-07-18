@@ -1,6 +1,7 @@
 <mat-accordion
   *ngIf="isLoaded else loading"
   class="exp-headers exp-body"
+  id="app-experience-accordion"
   multi
 >
   <mat-expansion-panel
@@ -13,27 +14,27 @@
       *ngSwitchCase="'xs'"
     >
       <mat-panel-title>
-        {{ experience.label }}
+        <span>{{ experience.label }}</span>
       </mat-panel-title>
       <mat-panel-description>
-        {{ getShortDateRange(experience) }}
+        <span>{{ getShortDateRange(experience) }}</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-expansion-panel-header
       *ngSwitchCase="'sm'"
     >
       <mat-panel-title>
-        {{ experience.company }}
+        <span>{{ experience.company }}</span>
       </mat-panel-title>
       <mat-panel-description>
-        {{ getShortDateRange(experience) }}
+        <span>{{ getShortDateRange(experience) }}</span>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <mat-expansion-panel-header
       *ngSwitchDefault
     >
       <mat-panel-title>
-        {{ experience.title }}
+        <span>{{ experience.title }}</span>
       </mat-panel-title>
       <mat-panel-description id="three-columns">
         <span>{{ experience.company }}</span>
@@ -44,11 +45,16 @@
       <li
         *ngFor="let statement of experience.description"
       >
-        {{ statement }}
+        <span>{{ statement }}</span>
       </li>
     </ul>
   </mat-expansion-panel>
 </mat-accordion>
 <ng-template #loading>
-  <mat-spinner diameter="48" color="accent"></mat-spinner>
+  <mat-spinner
+    diameter="48"
+    color="accent"
+    id="app-experience-loading"
+  >
+  </mat-spinner>
 </ng-template>
