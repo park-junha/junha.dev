@@ -1,9 +1,9 @@
 <mat-card>
   <mat-card-content>
-    <h1>{{ contents.title }}</h1>
-    <h3>{{ contents.intro }}</h3>
-    <h3>{{ contents.interests.heading }}</h3>
-    <ul class="mat-h3">
+    <h1 id="app-about-title">{{ contents.title }}</h1>
+    <h3 id="app-about-intro">{{ contents.intro }}</h3>
+    <h3 id="app-about-interests-h">{{ contents.interests.heading }}</h3>
+    <ul id="app-about-interests" class="mat-h3">
       <li
         *ngFor="let interest of contents.interests.items"
       >
@@ -21,8 +21,8 @@
         </ng-template>
       </li>
     </ul>
-    <h3>{{ contents.contact.heading }}</h3>
-    <ul class="mat-h3">
+    <h3 id="app-about-contact-h">{{ contents.contact.heading }}</h3>
+    <ul id="app-about-contact" class="mat-h3">
       <li
         *ngFor="let contact of contents.contact.items"
       >
