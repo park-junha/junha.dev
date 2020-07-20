@@ -1,11 +1,17 @@
-<h1 mat-dialog-title>{{ data.title }}</h1>
+<h1 mat-dialog-title id="app-project-title">{{ data.title }}</h1>
 <div mat-dialog-content>
-  <h2>{{ aboutLabel }}</h2>
-  <p *ngIf="data.about">{{ data.about }}</p>
-  <p *ngIf="!data.about">{{ noAbout }}</p>
+  <h2 id="app-project-about-title">{{ aboutLabel }}</h2>
+  <p
+    *ngIf="data.about else noAboutBlock"
+    id="app-project-about"
+  >{{ data.about }}</p>
+  <ng-template #noAboutBlock>
+    <p id="app-project-no-about">{{ noAbout }}</p>
+  </ng-template>
   <div
     *ngIf="data.url else noUrlBlock"
     class="font-size-fifteen"
+    id="app-project-demo"
   >
     View <i>{{ data.title }}</i>&nbsp;
     <a
@@ -17,11 +23,13 @@
   <ng-template #noUrlBlock>
     <div
       class="font-size-fifteen"
+      id="app-project-no-demo"
     >{{ noUrl }}</div>
   </ng-template>
   <p
     *ngIf="data.source_code_url else noSourceUrlBlock"
     class="sublabel"
+    id="app-project-source-code"
   >
     (<a
       [href]="data.source_code_url"
@@ -32,12 +40,16 @@
   <ng-template #noSourceUrlBlock>
     <p
       class="sublabel"
+      id="app-project-no-source-code"
     >
       {{ noSourceUrl }}
     </p>
   </ng-template>
-  <h2 *ngIf="languagesExist()">{{ languagesLabel }}</h2>
-  <div class="spaced-bottom">
+  <h2
+    *ngIf="languagesExist()"
+    id="app-project-languages-title"
+  >{{ languagesLabel }}</h2>
+  <div class="spaced-bottom" id="app-project-languages">
     <div
       *ngFor="let language of data.languages"
     >
@@ -48,13 +60,14 @@
         }"
       >
       </span>
-      <span>
-        {{ language.name }}
-      </span>
+      <span>{{ language.name }}</span>
     </div>
   </div>
-  <h2 *ngIf="otherToolsExist()">{{ otherToolsLabel }}</h2>
-  <div class="spaced-bottom">
+  <h2
+    *ngIf="otherToolsExist()"
+    id="app-project-other-tools-title"
+  >{{ otherToolsLabel }}</h2>
+  <div class="spaced-bottom" id="app-project-other-tools">
     <div
       *ngFor="let tool of data.tools"
     >
@@ -65,9 +78,7 @@
         }"
       >
       </span>
-      <span>
-        {{ tool.name }}
-      </span>
+      <span>{{ tool.name }}</span>
     </div>
   </div>
   <br />
