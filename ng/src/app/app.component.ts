@@ -7,7 +7,7 @@ import {
   RIPPLE_COLOR_RED,
   FETCH_ALL_QUERY
 } from '../environments/constants';
-import { NavRoutes, NavRoute } from '../models/nav.models';
+import { NavRoutes } from '../models/nav.models';
 
 @Component({
   selector: 'app-root',

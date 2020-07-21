@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AboutContents,
-  Items,
-  Item
+  AboutContents
 } from '../../models/about.models';
 
 @Component({
