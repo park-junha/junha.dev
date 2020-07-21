@@ -7,12 +7,7 @@ import {
   RIPPLE_COLOR_RED,
   FETCH_ALL_QUERY
 } from '../environments/constants';
-
-interface NavRoutes extends Array<NavRoute>{};
-interface NavRoute {
-  label: string;
-  route: string;
-};
+import { NavRoutes, NavRoute } from '../models/nav.models';
 
 @Component({
   selector: 'app-root',
