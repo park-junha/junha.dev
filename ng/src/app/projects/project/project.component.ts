@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Project } from '../../api.service';
+import { Project } from '../../../models/api.models';
 
 @Component({
   selector: 'app-project',

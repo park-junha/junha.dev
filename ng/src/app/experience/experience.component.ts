@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 
-import { ApiService, Experience } from '../api.service';
+import { ApiService } from '../api.service';
+import { Experience } from '../../models/api.models';
 import { RIPPLE_COLOR_RED } from '../../environments/constants';
 
 @Component({
