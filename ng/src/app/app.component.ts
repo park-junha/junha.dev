@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
     window.onresize = () => this.showMobile = this.isMobile();
   }
 
-  title = 'junha-angular';
   home: string = '/home';
 
   appRoutes: NavRoutes = [
