@@ -16,6 +16,17 @@ Source code for personal website, developed on a full solution stack.
 
 **Cloud**: Netlify, AWS Lambda
 
+### Supported Browsers
+
+This application is supported by the following browsers:
+
+- Google Chrome, latest version
+- Firefox, latest & ESR versions
+- Safari, latest 2 versions
+- Safari for iOS, latest 2 versions
+- Microsoft Edge, latest 2 versions
+- Internet Explorer 11
+
 ## Available Scripts
 
 ### `./run.sh`
