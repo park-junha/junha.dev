@@ -5,6 +5,7 @@
   fxLayoutGap="8px grid"
   fxLayoutAlign="flex-start"
   class="projects-container"
+  id="app-projects-content"
 >
   <mat-card
     *ngFor="let project of projects"
@@ -17,12 +18,15 @@
   >
     <mat-card-content>
       <h2>{{ project.title }}</h2>
-      <p>
-        {{ project.description }}
-      </p>
+      <p>{{ project.description }}</p>
     </mat-card-content>
   </mat-card>
 </div>
 <ng-template #loading>
-  <mat-spinner diameter="48" color="accent"></mat-spinner>
+  <mat-spinner
+    diameter="48"
+    color="accent"
+    id="app-projects-loading"
+  >
+  </mat-spinner>
 </ng-template>

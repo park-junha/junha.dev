@@ -5,24 +5,25 @@
     mat-tab-nav-bar
     mat-align-tabs="start"
     class="fadein"
+    id="app-mobile-navbar"
   >
     <a
       mat-tab-link
       *ngFor="let appRoute of appRoutes"
       [routerLink]="destinationRoute(appRoute.route)"
       [active]="routeIsActive(appRoute.route)"
-    >
-      {{ appRoute.label }}
-    </a>
+    >{{ appRoute.label }}</a>
   </nav>
 </div>
-<div class="app-contents-parent">
+<div id="app-contents-parent">
   <div
     *ngIf="!showMobile"
-    class="app-contents-left fadein"
+    class="fadein"
+    id="app-contents-left"
   >
     <mat-nav-list>
-      <mat-list-item
+      <a
+        mat-list-item
         class="sidebar"
         *ngFor="let appRoute of appRoutes"
         [routerLink]="destinationRoute(appRoute.route)"
@@ -34,11 +35,11 @@
         [matRippleColor]="rippleColor"
       >
         <div>{{ appRoute.label }}</div>
-      </mat-list-item>
+      </a>
     </mat-nav-list>
   </div>
   <div
-    class="app-contents-right"
+    id="app-contents-right"
     [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''"
   >
     <div class="router-wrapper">

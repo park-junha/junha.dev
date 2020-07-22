@@ -22,4 +22,8 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should be empty', () => {
+    expect(fixture.debugElement.nativeElement.innerHTML).toEqual('');
+  });
 });

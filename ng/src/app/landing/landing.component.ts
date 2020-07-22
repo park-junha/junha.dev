@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-
-interface LandingContents {
-  title: string;
-};
+import { LandingContents } from '../../models/landing.models';
 
 @Component({
   selector: 'app-landing',
