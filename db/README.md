@@ -17,7 +17,8 @@ DBNAME=sampledb
 
 #### Available Parameters
 - `--access, -a`: Access your PostgreSQL database via `psql`
-- `--write, -w`: Execute `data.sql` on your PostgreSQL instance
+- `--write, -w`: Execute `data.sql` on your PostgreSQL instance (note - you will need to make your own `data.sql` script to run)
+- `--reset, -r`: Execute `schema.sql` on your PostgreSQL instance (this will drop and re-create all tables!)
 
 ### `schema.sql`
 
