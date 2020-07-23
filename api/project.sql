@@ -38,4 +38,7 @@ SELECT
 FROM
   projects p
 WHERE
-  project_id = $1;
+  project_id = $1
+ORDER BY
+  project_id
+ASC;

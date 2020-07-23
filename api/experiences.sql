@@ -7,4 +7,7 @@ SELECT
   , COALESCE(end_date::TEXT, 'Current')
   , description
 FROM
-  Experience;
+  Experience
+ORDER BY
+  experience_id
+DESC;
