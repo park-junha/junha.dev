@@ -9,4 +9,7 @@ SELECT
 FROM
   Experience
 WHERE
-  experience_id = $1;
+  experience_id = $1
+ORDER BY
+  experience_id
+DESC;

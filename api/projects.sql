@@ -36,4 +36,7 @@ SELECT
     ) ots
   )
 FROM
-  projects p;
+  projects p
+ORDER BY
+  project_id
+ASC;
