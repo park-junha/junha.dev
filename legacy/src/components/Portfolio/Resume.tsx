@@ -190,7 +190,7 @@ class Resume extends Component<Props> {
               <strong>Web Applications</strong>
             </h6>
             <ul className='resume-text'>
-              <li><strong>Where To</strong>: A Chrome <a href='https://github.com/park-junha/WhereTo' target='_blank' rel='noopener noreferrer'>extension</a> that introduces a customizalbe New Tab interface.</li>
+              <li><strong>Where To</strong>: A Chrome <a href='https://chrome.google.com/webstore/detail/where-to/kdhcodpjaffhbbphkahnkbllddjihima?hl=en&authuser=0' target='_blank' rel='noopener noreferrer'>extension</a> that introduces a customizalbe New Tab interface.</li>
               <ul className='resume-text'>
                 <li>Written with <strong>React</strong> and <strong>TypeScript</strong>.</li>
               </ul>
