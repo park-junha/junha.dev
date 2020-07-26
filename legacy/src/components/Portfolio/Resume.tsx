@@ -92,7 +92,7 @@ class Resume extends Component<Props> {
               <strong>Santa Clara University</strong>
               <div>Computer Science, B.S.</div>
               <div>Mathematics, Minor</div>
-              <div>Expected July 2020</div>
+              <div>Completed July 2020</div>
             </p>
             <h5 className='resume-body-header'>Technical Skills</h5>
             <h6><strong>Codebases</strong></h6>
@@ -149,19 +149,20 @@ class Resume extends Component<Props> {
             <ul className='resume-text'>
               <li>Linux / Bash</li>
               <li>Git</li>
+              <li>Scrum</li>
             </ul>
           </div>
           <div className='resume-body-right'>
             <h5 className='resume-body-header'>Professional Experience</h5>
             <h6>
-              <strong>Full Stack Software Engineer</strong>, HCL Software
-              <span className='resume-date-range'>5/20 - Now</span>
+              <strong>Software Engineer</strong>, HCL Software
+              <span className='resume-date-range'>5/20 - 8/20</span>
             </h6>
             <ul className='resume-text'>
               <li><i>Software Engineer</i> for the web platform of a large <a href='https://www.hcltechsw.com/products/bigfix' target='_blank' rel='noopener noreferrer'>endpoint manager</a>.</li>
-              <li><strong>Codebase</strong>: Maintained BigFix&apos;s web platform with <strong>JavaScript</strong> and <strong>Node.js.</strong></li>
+              <li><strong>Codebase</strong>: Implemented in <strong>JavaScript</strong> and <strong>Node.js.</strong></li>
               <li><strong>Web</strong>: Launched several <strong>Angular</strong> web user interfaces and internal <strong>Express</strong> REST APIs.</li>
-              <li><strong>Database</strong>: Integrated several queries from various <strong>SQL Server</strong> and <strong>IBM DB2</strong> databases.</li>
+              <li><strong>Database</strong>: Integrated and developed several <strong>SQL Server</strong> and <strong>IBM DB2</strong> queries.</li>
               <li><strong>Automation</strong>: Automated end-to-end and unit testing with <strong>TypeScript</strong> and <strong>JavaScript</strong>.</li>
             </ul>
             <h6>
@@ -173,9 +174,20 @@ class Resume extends Component<Props> {
               <li><strong>Codebase</strong>: Largely written in <strong>Python</strong> and <strong>JavaScript.</strong></li>
               <li><strong>Web</strong>: Launched a <strong>React</strong> user interface and <strong>Flask</strong> REST APIs to facilitate data flow between the browser and the database.</li>
               <li><strong>Database</strong>: Designed and developed a <strong>MySQL</strong> database.</li>
-              <li><strong>Automation</strong>: Created <strong>Python</strong> and <strong>Shell</strong> scripts to automate user subscription renewal and deployed it to run on a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
+              <li><strong>Automation</strong>: Created <strong>Python</strong> and <strong>Bash</strong> scripts to automate user subscription renewal and deployed it to run on a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
               <li><strong>Cloud</strong>: Launched the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
               <li><strong>Other</strong>: Performed 100+ code reviews, merges, and interactive rebases with <strong>Git</strong> to ensure high quality code across a cross-functional team of 10+ engineers.</li>
+            </ul>
+            <h6>
+              <strong>Creator</strong>, Grad Planner
+              <span className='resume-date-range'>9/19 - 4/20</span>
+            </h6>
+            <ul className='resume-text'>
+              <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students graduate on time.</li>
+              <li><strong>Codebase</strong>: Largely written in <strong>Python.</strong></li>
+              <li><strong>Web</strong>: Created a <strong>Flask</strong> user interface and <strong>Python</strong> scheduling algorithm outputting optimized undergraduate plans in four or fewer years.</li>
+              <li><strong>Database</strong>: Developed and populated a <strong>MySQL</strong> database with class and degree data.</li>
+              <li><strong>Cloud</strong>: Launched the platform through <strong>AWS EC2</strong> and <strong>RDS</strong>.</li>
             </ul>
             <h6>
               <strong>IT Technician</strong>, Kett Engineering
@@ -183,20 +195,16 @@ class Resume extends Component<Props> {
             </h6>
             <ul className='resume-text'>
               <li><i>Software Tester</i> and <i>Technician</i> for an important, confidential project.</li>
-              <li><strong>Automation</strong>: Developed unique <strong>Python</strong> and <strong>Shell</strong> scripts to assist other technicians with performing software utility checks.</li>
+              <li><strong>Automation</strong>: Developed unique <strong>Python</strong> and <strong>Bash</strong> scripts to assist other technicians with performing software utility checks.</li>
             </ul>
             <h5 className='resume-body-header'>Projects</h5>
             <h6>
               <strong>Web Applications</strong>
             </h6>
             <ul className='resume-text'>
-              <li><strong>Where To</strong>: A Chrome <a href='https://chrome.google.com/webstore/detail/where-to/kdhcodpjaffhbbphkahnkbllddjihima?hl=en&authuser=0' target='_blank' rel='noopener noreferrer'>extension</a> that introduces a customizalbe New Tab interface.</li>
+              <li><strong>Where To</strong>: A Chrome <a href='https://chrome.google.com/webstore/detail/where-to/kdhcodpjaffhbbphkahnkbllddjihima?hl=en&authuser=0' target='_blank' rel='noopener noreferrer'>extension</a> that introduces a customizable New Tab interface.</li>
               <ul className='resume-text'>
                 <li>Written with <strong>React</strong> and <strong>TypeScript</strong>.</li>
-              </ul>
-              <li><strong>Grad Planner</strong>: A web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students graduate on time.</li>
-              <ul className='resume-text'>
-                <li>Built with <strong>Flask</strong> and <strong>MySQL</strong> and deployed to <strong>AWS EC2</strong>.</li>
               </ul>
               <li><strong>Personal Website</strong>: Developed with <strong>Angular</strong>, supported by a <strong>GraphQL</strong> API written in <strong>Go</strong>.</li>
               <li><strong>CovidSweeper</strong>: A fun <a href='https://park-junha.github.io/CovidSweeper/' target='_blank' rel='noopener noreferrer'> Minesweeper variant</a> built with <strong>Angular</strong>, <strong>Node.js</strong>, and <strong>MongoDB</strong>.</li>
@@ -206,6 +214,9 @@ class Resume extends Component<Props> {
             </h6>
             <ul className='resume-text'>
               <li><strong>Chrome V8</strong>: Google&apos;s JavaScript engine that powers Chrome and Node.js.</li>
+              <ul className='resume-text'>
+                <li>Implemented with <strong>C++</strong>.</li>
+              </ul>
             </ul>
           </div>
         </div>
