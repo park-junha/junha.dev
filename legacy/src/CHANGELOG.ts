@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "2.1.1",
+    "notes": [
+      {
+        "label": "Miscellaneous",
+        "desc": "Updated resume (Aug 2020)."
+      }
+    ]
+  },
+  {
     "version": "2.1.0",
     "notes": [
       {

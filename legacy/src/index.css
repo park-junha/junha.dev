@@ -43,8 +43,11 @@ code {
   margin: 8px 0px;
 }
 
-.pdf-toolbar-button:hover {
+.pdf-toolbar-button {
   margin: 0px 4px;
+}
+
+.pdf-toolbar-button:hover {
   background-color: rgba(120, 41, 39, 0.6) !important;
 }
 
@@ -106,13 +109,13 @@ h5.resume-body-header {
 
 .resume-body-left {
   padding: 8px;
-  width: 25%;
+  width: 22%;
   float: left;
 }
 
 .resume-body-right {
   padding: 8px;
-  width: 75%;
+  width: 78%;
   float: right;
 }
 
