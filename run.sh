@@ -73,8 +73,20 @@ function run-tests {
         echo
         echo "Starting end-to-end tests..."
         ng e2e
+        rc_e2e=$?
         echo "Starting unit tests..."
         ng test --karmaConfig=$UNIT_TEST_CONFIG_DIR
+        rc_units=$?
+        if [[ $rc_e2e -eq 0 ]]; then
+            echo "All end-to-end tests passed!"
+        else
+            echo "ERR: Some end-to-end tests did not pass."
+        fi
+        if [[ $rc_units -eq 0 ]]; then
+            echo "All unit tests passed!"
+        else
+            echo "ERR: Some unit tests did not pass."
+        fi
         exit 0
     else
         echo "FATAL ERR: Timeout"
