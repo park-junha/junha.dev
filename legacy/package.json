@@ -1,6 +1,6 @@
 {
-  "name": "ui",
-  "version": "0.1.0",
+  "name": "junha-react",
+  "version": "2.2.0",
   "private": true,
   "dependencies": {
     "@progress/kendo-drawing": "^1.7.0",

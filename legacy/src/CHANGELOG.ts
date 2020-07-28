@@ -1,5 +1,14 @@
 const versions = [
   {
+    "version": "2.2.0",
+    "notes": [
+      {
+        "label": "Miscellaneous",
+        "desc": "Migrated React version of app to legacy branch."
+      }
+    ]
+  },
+  {
     "version": "2.1.1",
     "notes": [
       {
