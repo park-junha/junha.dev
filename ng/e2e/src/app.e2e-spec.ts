@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser, logging } from 'protractor';
 
-describe('workspace-project App', () => {
+describe('App', () => {
   let page: AppPage;
 
   beforeEach(() => {
@@ -84,4 +84,51 @@ describe('workspace-project App', () => {
       level: logging.Level.SEVERE,
     } as logging.Entry));
   });
+});
+
+describe('App Footer', () => {
+  let page: AppPage;
+
+  beforeEach(() => {
+    page = new AppPage();
+  });
+
+  it('should open correct urls on footer button clicks', () => {
+    browser.manage().window().setSize(900, 700);
+    const expectedData = [
+      {
+        'url': 'https://github.com/park-junha',
+        'child': 1
+      },
+      {
+        //  Check base URL only to account for unauthenticated users
+        //  TODO: Write a test for authenticated user?
+        'url': 'https://www.linkedin.com',
+        'child': 2
+      },
+      {
+        'url': 'https://junha-park.s3-us-west-1.amazonaws.com/Resume.pdf',
+        'child': 3
+      },
+      {
+        'url': 'https://github.com/park-junha/PersonalWebsite',
+        'child': 5
+      }
+    ];
+    page.navigateTo('');
+    expectedData.map(item => {
+      page.clickByCss(`app-footer mat-toolbar a:nth-child(${item.child})`);
+      browser.getAllWindowHandles().then(handles => {
+        let newWindowHandle = handles[1];
+        browser.switchTo().window(newWindowHandle).then(() => {
+          expect(browser.driver.getCurrentUrl())
+            .toContain(item.url);
+          browser.driver.close().then(() => {
+            browser.switchTo().window(handles[0]);
+          });
+        });
+      });
+    });
+  });
+
 });
