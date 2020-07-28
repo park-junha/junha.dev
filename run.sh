@@ -75,9 +75,14 @@ function run-tests {
         echo "Starting end-to-end tests..."
         ng e2e
         rc_e2e=$?
-        echo "Starting unit tests..."
-        ng test --karmaConfig=$UNIT_TEST_CONFIG_DIR
-        rc_units=$?
+        if [[ $# -eq 1 ]] && [[ $1 == "e2e" ]]; then
+            echo "Skipping unit tests."
+            rc_units=-1
+        else
+            echo "Starting unit tests..."
+            ng test --karmaConfig=$UNIT_TEST_CONFIG_DIR
+            rc_units=$?
+        fi
         if [[ $rc_e2e -eq 0 ]]; then
             echo "All end-to-end tests passed!"
         else
@@ -85,6 +90,8 @@ function run-tests {
         fi
         if [[ $rc_units -eq 0 ]]; then
             echo "All unit tests passed!"
+        elif [[ $rc_units -eq -1 ]]; then
+            echo "Unit tests skipped."
         else
             echo "ERR: Some unit tests did not pass."
         fi
@@ -107,6 +114,7 @@ function usage {
     echo "-p, --production-mode: Run web UI in development mode with a production environment. This mode will NOT run the web API, since the web UI will make calls from the live web API"
     echo "-h, --host-lan: Host web UI on local IP address"
     echo "-t, --test: Run unit tests and end-to-end tests while running web API in development mode"
+    echo "-e, --e2e: Run end-to-end tests only while running web API in development mode"
 }
 
 function invalid {
@@ -165,6 +173,13 @@ elif [[ $# -eq 1 ]]; then
         echo "Starting script..." | log pw3:sh $SH_LOG
         trap "kill 0" EXIT
         (api | log pw3:api $API_LOG & run-tests | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
+        ;;
+    -e | --e2e)
+        clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
+        trap "kill 0" EXIT
+        (api | log pw3:api $API_LOG & run-tests e2e | log pw3:ng $NG_LOG)
         echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     *)
