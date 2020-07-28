@@ -7,6 +7,7 @@ DEF_LOG='\033[0m'
 API_LOG='\033[0;36m'
 NG_LOG='\033[0;31m'
 
+UNIT_TEST_CONFIG_DIR=$NG_DIR/karma.single.conf.js
 TIMEOUT=100
 
 function get-ip {
@@ -73,7 +74,7 @@ function run-tests {
         echo "Starting end-to-end tests..."
         ng e2e
         echo "Starting unit tests..."
-        ng test
+        ng test --karmaConfig=$UNIT_TEST_CONFIG_DIR
         exit 0
     else
         echo "FATAL ERR: Timeout"
