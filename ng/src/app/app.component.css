@@ -4,13 +4,18 @@
   width: 100%;
 }
 
-.app-contents-parent {
+#app-contents-parent {
   display: flex;
   padding: 8px;
 }
 
-.app-contents-left {
+#app-contents-left {
   flex: 1;
+}
+
+#app-contents-right {
+  flex: 3;
+  padding: 16px;
 }
 
 .fadein {
@@ -27,11 +32,6 @@
     opacity: 1;
     transform: translate(0, 0);
   }
-}
-
-.app-contents-right {
-  flex: 3;
-  padding: 16px;
 }
 
 .mat-list-item {

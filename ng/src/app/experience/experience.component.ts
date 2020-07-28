@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
 
-import { ApiService, Experience } from '../api.service';
+import { ApiService } from '../api.service';
+import { Experience } from '../../models/api.models';
 import { RIPPLE_COLOR_RED } from '../../environments/constants';
 
 @Component({
@@ -50,6 +51,7 @@ export class ExperienceComponent implements OnInit {
 
   private formatShortDate(date: string): string {
     return new Date(date).toLocaleString('default', {
+      timeZone: 'UTC',
       month: '2-digit',
       year: '2-digit'
     });
@@ -57,6 +59,7 @@ export class ExperienceComponent implements OnInit {
 
   private formatLongDate(date: string): string {
     return new Date(date).toLocaleString('default', {
+      timeZone: 'UTC',
       month: 'short',
       year: 'numeric'
     });

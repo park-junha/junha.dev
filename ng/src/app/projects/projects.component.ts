@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
 import { ProjectComponent } from './project/project.component';
-import { ApiService, Project } from '../api.service';
+import { ApiService } from '../api.service';
+import { Project } from '../../models/api.models';
 import { RIPPLE_COLOR_RED } from '../../environments/constants';
 
 @Component({

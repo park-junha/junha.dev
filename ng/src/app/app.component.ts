@@ -7,12 +7,7 @@ import {
   RIPPLE_COLOR_RED,
   FETCH_ALL_QUERY
 } from '../environments/constants';
-
-interface NavRoutes extends Array<NavRoute>{};
-interface NavRoute {
-  label: string;
-  route: string;
-};
+import { NavRoutes } from '../models/nav.models';
 
 @Component({
   selector: 'app-root',
@@ -34,7 +29,6 @@ export class AppComponent implements OnInit {
     window.onresize = () => this.showMobile = this.isMobile();
   }
 
-  title = 'junha-angular';
   home: string = '/home';
 
   appRoutes: NavRoutes = [

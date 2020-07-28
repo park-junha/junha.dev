@@ -1,20 +1,7 @@
 import { Component } from '@angular/core';
-
-interface AboutContents {
-  title: string;
-  intro: string;
-  interests: Items;
-  contact: Items;
-};
-interface Items {
-  heading: string;
-  items: Array<Item>;
-};
-interface Item {
-  subheading?: string;
-  name: string;
-  url?: string;
-};
+import {
+  AboutContents
+} from '../../models/about.models';
 
 @Component({
   selector: 'app-about',

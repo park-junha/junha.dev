@@ -579,7 +579,7 @@ func LambdaRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResp
 				"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
 				"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
 			},
-			Body: "{\n  \"status\": {\n    \"api\": \"up\",\n    \"ui\": \"https://junha.netlify.app/\"\n  }\n}\n",
+			Body: "{\n  \"status\": {\n    \"api\": \"up\",\n    \"ui\": \"https://junha.dev/\"\n  }\n}\n",
 		}, nil
 	case "POST":
 		return app.HandleLambdaRequest(req)
