@@ -36,7 +36,7 @@ Run web frontend only.
 
 Run the web frontend with a production environment. This will **not** run the web backend, as the development frontend will make calls to the live web API instead.
 
-#### `-h, --host-ip`
+#### `-h, --host-lan`
 
 Host the web frontend on your machine's local IP address. This will make your frontend accessible to other machines within your LAN (such as your mobile device or devices running on other operating systems).
 

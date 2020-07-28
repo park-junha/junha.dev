@@ -6,6 +6,7 @@ NG_DIR=$BASE_DIR"/ng"
 DEF_LOG='\033[0m'
 API_LOG='\033[0;36m'
 NG_LOG='\033[0;31m'
+SH_LOG='\033[0;32m'
 
 UNIT_TEST_CONFIG_DIR=$NG_DIR/karma.single.conf.js
 TIMEOUT=100
@@ -104,7 +105,7 @@ function usage {
     echo "-a, --api-only: Run web API only in development mode"
     echo "-u, --ui-only: Run web UI only in development mode"
     echo "-p, --production-mode: Run web UI in development mode with a production environment. This mode will NOT run the web API, since the web UI will make calls from the live web API"
-    echo "-h, --host-ip: Host web UI on local IP address"
+    echo "-h, --host-lan: Host web UI on local IP address"
     echo "-t, --test: Run unit tests and end-to-end tests while running web API in development mode"
 }
 
@@ -114,7 +115,9 @@ function invalid {
 
 if [[ $# -eq 0 ]]; then
     clear
+    echo "Starting script..." | log pw3:sh $SH_LOG
     (api | log pw3:api $API_LOG & ui | log pw3:ng $NG_LOG)
+    echo "Script complete." | log pw3:sh $SH_LOG
 elif [[ $# -eq 1 ]]; then
     case $1 in
     -o | --options)
@@ -123,35 +126,49 @@ elif [[ $# -eq 1 ]]; then
         ;;
     -p | --production-mode)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         (ui prod | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
-    -h | --host-ip)
+    -h | --host-lan)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         (api | log pw3:api $API_LOG & ui host | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     -hp | -ph)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         (ui prodhost | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     -a | --api-only)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         (api | log pw3:api $API_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     -u | --ui-only)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         (ui | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     -uh | -hu)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         (ui host | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     -t | --test)
         clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
         trap "kill 0" EXIT
         (api | log pw3:api $API_LOG & run-tests | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     *)
-        invalid
+        invalid | log pw3:sh $SH_LOG
         exit 1
         ;;
     esac
