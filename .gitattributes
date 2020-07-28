@@ -1,1 +1,1 @@
-*.sql linguist-detectable
+*.sql linguist-language=PLpgSQL
