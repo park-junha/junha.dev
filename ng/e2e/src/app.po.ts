@@ -10,4 +10,8 @@ export class AppPage {
       .getText() as Promise<string>;
   }
 
+  clickByCss(cssToQuery: string): Promise<unknown> {
+    return element(by.css(cssToQuery))
+      .click() as Promise<unknown>;
+  }
 }

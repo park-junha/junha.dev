@@ -31,6 +31,52 @@ describe('workspace-project App', () => {
       .toEqual('Hi. My name is Junha Park.');
   });
 
+  it('should navigate to correct routes on nonmobile navbar clicks', () => {
+    browser.manage().window().setSize(900, 700);
+    page.navigateTo('');
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(1)');
+    expect(browser.getCurrentUrl()).toMatch(/\/about$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(2)');
+    expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(3)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(3)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(1)');
+    expect(browser.getCurrentUrl()).toMatch(/\/about$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(1)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(2)');
+    expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(2)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(3)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+  });
+
+  it('should navigate to correct routes on mobile navbar clicks', () => {
+    browser.manage().window().setSize(500, 700);
+    page.navigateTo('');
+    page.clickByCss('#app-mobile-navbar a:nth-child(1)');
+    expect(browser.getCurrentUrl()).toMatch(/\/about$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(2)');
+    expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(3)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(3)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(1)');
+    expect(browser.getCurrentUrl()).toMatch(/\/about$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(1)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(2)');
+    expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(2)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(3)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+  });
+
   afterEach(async () => {
     // Assert that there are no errors emitted from the browser
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
