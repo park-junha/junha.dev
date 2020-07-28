@@ -7,8 +7,15 @@ DEF_LOG='\033[0m'
 API_LOG='\033[0;36m'
 NG_LOG='\033[0;31m'
 
+UNIT_TEST_CONFIG_DIR=$NG_DIR/karma.single.conf.js
+TIMEOUT=100
+
 function get-ip {
     echo $(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p')
+}
+
+function get-api-interface {
+    echo $(cat $API_DIR/.env | awk '/HOST/ && !/DB/' | cut -d '=' -f2):$(cat $API_DIR/.env | awk '/PORT/ && !/DB/' | cut -d '=' -f2)
 }
 
 function api {
@@ -47,6 +54,46 @@ function ui {
     fi
 }
 
+function run-tests {
+    API_INTERFACE=$(get-api-interface)
+    echo "Waiting for $API_INTERFACE..."
+    ((timer = $TIMEOUT))
+    while [[ $timer -ne 0 ]]; do
+        curl $API_INTERFACE 2> /dev/null
+        rc=$?
+        if [[ $rc -eq 0 ]]; then
+            ((timer = 1))
+        fi
+        ((timer = timer - 1))
+        sleep 1
+    done
+
+    if [[ $rc -eq 0 ]]; then
+        cd $NG_DIR
+        echo
+        echo "Starting end-to-end tests..."
+        ng e2e
+        rc_e2e=$?
+        echo "Starting unit tests..."
+        ng test --karmaConfig=$UNIT_TEST_CONFIG_DIR
+        rc_units=$?
+        if [[ $rc_e2e -eq 0 ]]; then
+            echo "All end-to-end tests passed!"
+        else
+            echo "ERR: Some end-to-end tests did not pass."
+        fi
+        if [[ $rc_units -eq 0 ]]; then
+            echo "All unit tests passed!"
+        else
+            echo "ERR: Some unit tests did not pass."
+        fi
+        exit 0
+    else
+        echo "FATAL ERR: Timeout"
+        exit 1
+    fi
+}
+
 function log {
     sed -e "s/^/`printf "${2}"`[$1] `printf "${DEF_LOG}"`/"
 }
@@ -58,6 +105,7 @@ function usage {
     echo "-u, --ui-only: Run web UI only in development mode"
     echo "-p, --production-mode: Run web UI in development mode with a production environment. This mode will NOT run the web API, since the web UI will make calls from the live web API"
     echo "-h, --host-ip: Host web UI on local IP address"
+    echo "-t, --test: Run unit tests and end-to-end tests while running web API in development mode"
 }
 
 function invalid {
@@ -96,6 +144,11 @@ elif [[ $# -eq 1 ]]; then
     -uh | -hu)
         clear
         (ui host | log pw3:ng $NG_LOG)
+        ;;
+    -t | --test)
+        clear
+        trap "kill 0" EXIT
+        (api | log pw3:api $API_LOG & run-tests | log pw3:ng $NG_LOG)
         ;;
     *)
         invalid

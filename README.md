@@ -39,3 +39,7 @@ Run the web frontend with a production environment. This will **not** run the we
 #### `-h, --host-ip`
 
 Host the web frontend on your machine's local IP address. This will make your frontend accessible to other machines within your LAN (such as your mobile device or devices running on other operating systems).
+
+#### `-t, --test`
+
+Run end-to-end tests and unit tests. This will also run the web backend before and during the tests.
