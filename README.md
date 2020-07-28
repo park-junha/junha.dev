@@ -43,3 +43,7 @@ Host the web frontend on your machine's local IP address. This will make your fr
 #### `-t, --test`
 
 Run end-to-end tests and unit tests. This will also run the web backend before and during the tests.
+
+#### `-e, --e2e`
+
+Run end-to-end tests only. This will also run the web backend before and during the tests.
