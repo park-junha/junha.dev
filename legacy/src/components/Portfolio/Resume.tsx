@@ -95,7 +95,7 @@ class Resume extends Component<Props> {
               <div>Completed July 2020</div>
             </p>
             <h5 className='resume-body-header'>Technical Skills</h5>
-            <h6><strong>Codebases</strong></h6>
+            <h6><strong>Languages</strong></h6>
             <ul className='resume-text'>
               <li>JavaScript</li>
               <ul className='resume-text'>
@@ -104,7 +104,7 @@ class Resume extends Component<Props> {
               </ul>
               <li>Python</li>
               <li>Go</li>
-              <li>C++</li>
+              <li>Bash</li>
             </ul>
             <h6><strong>Full Web Stack</strong></h6>
             <ul className='resume-text'>
@@ -137,17 +137,18 @@ class Resume extends Component<Props> {
                 <li>MongoDB</li>
               </ul>
             </ul>
-            <h6><strong>Cloud Services</strong></h6>
+            <h6><strong>DevOps</strong></h6>
             <ul className='resume-text'>
-              <li>AWS</li>
+              <li>Cloud Services</li>
               <ul className='resume-text'>
-                <li>EC2 / S3</li>
-                <li>Lambda</li>
+                <li>AWS</li>
               </ul>
-            </ul>
-            <h6><strong>Other</strong></h6>
-            <ul className='resume-text'>
-              <li>Linux / Bash</li>
+              <li>Automation</li>
+              <ul className='resume-text'>
+                <li>Jasmine</li>
+                <li>Jenkins</li>
+                <li>Protractor</li>
+              </ul>
               <li>Git</li>
               <li>Scrum</li>
             </ul>
@@ -155,15 +156,16 @@ class Resume extends Component<Props> {
           <div className='resume-body-right'>
             <h5 className='resume-body-header'>Professional Experience</h5>
             <h6>
-              <strong>Software Engineer</strong>, HCL Software
+              <strong>Software Engineer</strong>, HCL BigFix
               <span className='resume-date-range'>5/20 - 8/20</span>
             </h6>
             <ul className='resume-text'>
               <li><i>Software Engineer</i> for the web platform of a large <a href='https://www.hcltechsw.com/products/bigfix' target='_blank' rel='noopener noreferrer'>endpoint manager</a>.</li>
-              <li><strong>Codebase</strong>: Implemented in <strong>JavaScript</strong> and <strong>Node.js.</strong></li>
+              <li><strong>Languages</strong>: Implemented with <strong>Node.js</strong>, <strong>JavaScript</strong>, and <strong>TypeScript</strong>.</li>
               <li><strong>Web</strong>: Launched several <strong>Angular</strong> web user interfaces and internal <strong>Express</strong> REST APIs.</li>
               <li><strong>Database</strong>: Integrated and developed several <strong>SQL Server</strong> and <strong>IBM DB2</strong> queries.</li>
-              <li><strong>Automation</strong>: Automated end-to-end and unit testing with <strong>TypeScript</strong> and <strong>JavaScript</strong>.</li>
+              <li><strong>Automation</strong>: Created end-to-end and unit test cases with <strong>Jasmine</strong> and <strong>Protractor</strong>.</li>
+              <li><strong>Development</strong>: Monitored builds on <strong>Jenkins</strong> and delivered release items to the customer.</li>
             </ul>
             <h6>
               <strong>Software Team Lead</strong>, Infinite Options
@@ -171,12 +173,12 @@ class Resume extends Component<Props> {
             </h6>
             <ul className='resume-text'>
               <li><i>Software Team Lead</i> for a Web-based, customer-facing e-commerce <a href='https://preptoyourdoor.netlify.app/' target='_blank' rel='noopener noreferrer'>platform</a>.</li>
-              <li><strong>Codebase</strong>: Largely written in <strong>Python</strong> and <strong>JavaScript.</strong></li>
+              <li><strong>Languages</strong>: Largely written in <strong>Python</strong> and <strong>JavaScript.</strong></li>
               <li><strong>Web</strong>: Launched a <strong>React</strong> user interface and <strong>Flask</strong> REST APIs to facilitate data flow between the browser and the database.</li>
               <li><strong>Database</strong>: Designed and developed a <strong>MySQL</strong> database.</li>
               <li><strong>Automation</strong>: Created <strong>Python</strong> and <strong>Bash</strong> scripts to automate user subscription renewal and deployed it to run on a <strong>Linux</strong> virtual machine on <strong>AWS EC2</strong>.</li>
               <li><strong>Cloud</strong>: Launched the platform through <strong>AWS Lambda</strong>, <strong>RDS</strong>, and <strong>S3</strong>.</li>
-              <li><strong>Other</strong>: Performed 100+ code reviews, merges, and interactive rebases with <strong>Git</strong> to ensure high quality code across a cross-functional team of 10+ engineers.</li>
+              <li><strong>Development</strong>: Performed code reviews to ensure high quality code across a cross-functional team of 10+ engineers.</li>
             </ul>
             <h6>
               <strong>Creator</strong>, Grad Planner
@@ -184,7 +186,7 @@ class Resume extends Component<Props> {
             </h6>
             <ul className='resume-text'>
               <li><i>Creator</i> of a web <a href='http://gradplanner.us/' target='_blank' rel='noopener noreferrer'>resource</a> that helps university students graduate on time.</li>
-              <li><strong>Codebase</strong>: Largely written in <strong>Python.</strong></li>
+              <li><strong>Languages</strong>: Largely written in <strong>Python.</strong></li>
               <li><strong>Web</strong>: Created a <strong>Flask</strong> user interface and <strong>Python</strong> scheduling algorithm outputting optimized undergraduate plans in four or fewer years.</li>
               <li><strong>Database</strong>: Developed and populated a <strong>MySQL</strong> database with class and degree data.</li>
               <li><strong>Cloud</strong>: Launched the platform through <strong>AWS EC2</strong> and <strong>RDS</strong>.</li>
@@ -197,7 +199,7 @@ class Resume extends Component<Props> {
               <li><i>Software Tester</i> and <i>Technician</i> for an important, confidential project.</li>
               <li><strong>Automation</strong>: Developed unique <strong>Python</strong> and <strong>Bash</strong> scripts to assist other technicians with performing software utility checks.</li>
             </ul>
-            <h5 className='resume-body-header'>Projects</h5>
+            <h5 className='resume-body-header'>Personal Projects</h5>
             <h6>
               <strong>Web Applications</strong>
             </h6>
@@ -210,6 +212,13 @@ class Resume extends Component<Props> {
               <li><strong>CovidSweeper</strong>: A fun <a href='https://park-junha.github.io/CovidSweeper/' target='_blank' rel='noopener noreferrer'> Minesweeper variant</a> built with <strong>Angular</strong>, <strong>Node.js</strong>, and <strong>MongoDB</strong>.</li>
             </ul>
             <h6>
+              <strong>Automation Tools</strong>
+            </h6>
+            <ul className='resume-text'>
+              <li><strong>Spekkio</strong>: A set of services and APIs that automate CI/CD on GitHub developed with <strong>Go</strong>.</li>
+            </ul>
+            {/*
+            <h6>
               <strong>Open Source Software</strong>
             </h6>
             <ul className='resume-text'>
@@ -218,6 +227,7 @@ class Resume extends Component<Props> {
                 <li>Implemented with <strong>C++</strong>.</li>
               </ul>
             </ul>
+            */}
           </div>
         </div>
       </div>
