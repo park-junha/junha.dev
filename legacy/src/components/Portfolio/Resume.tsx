@@ -168,11 +168,11 @@ class Resume extends Component<Props> {
               <li><strong>Development</strong>: Monitored builds on <strong>Jenkins</strong> and delivered release items to the customer.</li>
             </ul>
             <h6>
-              <strong>Full Stack Software Engineer</strong>, Infinite Options
+              <strong>Software Team Lead</strong>, Infinite Options
               <span className='resume-date-range'>9/19 - 5/20</span>
             </h6>
             <ul className='resume-text'>
-              <li><i>Software Team Lead</i> for a Web-based, customer-facing e-commerce <a href='https://preptoyourdoor.netlify.app/' target='_blank' rel='noopener noreferrer'>platform</a>.</li>
+              <li><i>Software Engineer</i> for a web-based, customer-facing e-commerce <a href='https://preptoyourdoor.netlify.app/' target='_blank' rel='noopener noreferrer'>platform</a>.</li>
               <li><strong>Languages</strong>: Largely written in <strong>Python</strong> and <strong>JavaScript.</strong></li>
               <li><strong>Web</strong>: Launched a <strong>React</strong> user interface and <strong>Flask</strong> REST APIs to facilitate data flow between the browser and the database.</li>
               <li><strong>Databases</strong>: Designed and developed <strong>MySQL</strong> and <strong>DynamoDB</strong> databases.</li>
@@ -212,10 +212,10 @@ class Resume extends Component<Props> {
               <li><strong>Personal Website</strong>: Developed with <strong>Angular</strong>, <strong>GraphQL</strong>, <strong>TypeScript</strong> and <strong>Go</strong>.</li>
             </ul>
             <h6>
-              <strong>Automation Tools</strong>
+              <strong>Tools and Infrastructure</strong>
             </h6>
             <ul className='resume-text'>
-              <li><strong>Spekkio</strong>: A set of tools and services that automate CI/CD on GitHub. Written with <strong>Go</strong>.</li>
+              <li><strong>Spekkio</strong>: A set of GitHub automation tools and services. Written with <strong>Go</strong>.</li>
             </ul>
           </div>
         </div>
