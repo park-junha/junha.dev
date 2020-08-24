@@ -107,7 +107,7 @@ describe('App Footer', () => {
         'child': 2
       },
       {
-        'url': 'https://junha-park.s3-us-west-1.amazonaws.com/Resume.pdf',
+        'url': 'https://park-junha.github.io/Resume',
         'child': 3
       },
       {
