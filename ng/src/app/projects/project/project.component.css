@@ -7,6 +7,18 @@
   border-radius: 50%;
 }
 
+#app-project-technologies {
+  display: flex;
+}
+
+#app-project-technologies-left {
+  flex: 1;
+}
+
+#app-project-technologies-right {
+  flex: 1;
+}
+
 h2, p, .spaced-bottom {
   margin: 0px 0px 8px;
 }

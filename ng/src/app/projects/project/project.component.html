@@ -43,40 +43,46 @@
       id="app-project-no-source-code"
     >{{ noSourceUrl }}</p>
   </ng-template>
-  <h2
-    *ngIf="languagesExist()"
-    id="app-project-languages-title"
-  >{{ languagesLabel }}</h2>
-  <div class="spaced-bottom" id="app-project-languages">
-    <div
-      *ngFor="let language of data.languages"
-    >
-      <span
-        class="project-language-color"
-        [ngStyle]="{
-          'background-color': language.color
-        }"
-      >
-      </span>
-      <span>{{ language.name }}</span>
+  <div id="app-project-technologies">
+    <div id="app-project-technologies-left">
+      <h2
+        *ngIf="languagesExist()"
+        id="app-project-languages-title"
+      >{{ languagesLabel }}</h2>
+      <div class="spaced-bottom" id="app-project-languages">
+        <div
+          *ngFor="let language of data.languages"
+        >
+          <span
+            class="project-language-color"
+            [ngStyle]="{
+              'background-color': language.color
+            }"
+          >
+          </span>
+          <span>{{ language.name }}</span>
+        </div>
+      </div>
     </div>
-  </div>
-  <h2
-    *ngIf="otherToolsExist()"
-    id="app-project-other-tools-title"
-  >{{ otherToolsLabel }}</h2>
-  <div class="spaced-bottom" id="app-project-other-tools">
-    <div
-      *ngFor="let tool of data.tools"
-    >
-      <span
-        class="project-language-color"
-        [ngStyle]="{
-          'background-color': tool.color
-        }"
-      >
-      </span>
-      <span>{{ tool.name }}</span>
+    <div id="app-project-technologies-right">
+      <h2
+        *ngIf="otherToolsExist()"
+        id="app-project-other-tools-title"
+      >{{ otherToolsLabel }}</h2>
+      <div class="spaced-bottom" id="app-project-other-tools">
+        <div
+          *ngFor="let tool of data.tools"
+        >
+          <span
+            class="project-language-color"
+            [ngStyle]="{
+              'background-color': tool.color
+            }"
+          >
+          </span>
+          <span>{{ tool.name }}</span>
+        </div>
+      </div>
     </div>
   </div>
   <br />
