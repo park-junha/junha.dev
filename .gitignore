@@ -1,6 +1,7 @@
 *.swp
 *.env
 web/
+legacy/
 
 # Personal JSON file containing backend data
 data.json
