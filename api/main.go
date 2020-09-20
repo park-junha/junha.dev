@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -295,24 +296,32 @@ func (a *app) gqlHandler() http.Handler {
 		if err != nil {
 			fmt.Printf("%s %d\n", r.Method, 400)
 			http.Error(w, "err: could not parse JSON request body\n", 400)
+			return
 		}
 
-		fmt.Fprintf(w, "%s", a.processQuery(rBody.Query))
-		fmt.Printf("%s %d %s\n", r.Method, http.StatusOK, rBody.Query)
+		response, respStatus, respErr := a.processQuery(rBody.Query)
+		if respErr != nil {
+			fmt.Printf("%s %d\n", r.Method, 400)
+			http.Error(w, respErr.Error(), respStatus)
+			return
+		}
+		fmt.Fprintf(w, "%s", response)
+		fmt.Printf("%s %d %s\n", r.Method, respStatus, rBody.Query)
 		return
 	})
 }
 
 // GraphQL Query Handler
-func (a *app) processQuery(query string) (result string) {
+func (a *app) processQuery(query string) (result string, status int, err error) {
 	params := graphql.Params{Schema: a.gqlSchema(), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
 		fmt.Printf("err: failed to execute graphql operation, errors: %+v\n", r.Errors)
+		return fmt.Sprintf("{\"error\":\"invalid operation\"}"), http.StatusBadRequest, errors.New("could not execute graphql operation")
 	}
 	rJSON, _ := json.Marshal(r)
 
-	return fmt.Sprintf("%s", rJSON)
+	return fmt.Sprintf("%s", rJSON), http.StatusOK, nil
 
 }
 
@@ -600,16 +609,28 @@ func (a *app) handleLambdaRequest(req events.APIGatewayProxyRequest) (events.API
 		return a.badLambdaRequest(http.StatusBadRequest)
 	}
 
-	res := a.processQuery(rBody.Query)
+	response, respStatus, respErr := a.processQuery(rBody.Query)
+
+	if respErr != nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: respStatus,
+			Headers: map[string]string{
+				"Access-Control-Allow-Origin":  a.config.AllowedOrigins,
+				"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+			},
+			Body: respErr.Error(),
+		}, nil
+	}
 
 	return events.APIGatewayProxyResponse{
-		StatusCode: 200,
+		StatusCode: respStatus,
 		Headers: map[string]string{
 			"Access-Control-Allow-Origin":  a.config.AllowedOrigins,
 			"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
 			"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
 		},
-		Body: res,
+		Body: response,
 	}, nil
 }
 
