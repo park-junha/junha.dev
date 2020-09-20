@@ -10,7 +10,7 @@ import { RIPPLE_COLOR_RED } from '../../environments/constants';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrls: ['./projects.component.css']
+  styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
   projects: Array<Project>;

@@ -7,7 +7,7 @@ import { VERSION } from '../../environments/constants';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+  styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
   public version: string = VERSION;

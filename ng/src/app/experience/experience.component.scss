@@ -17,14 +17,15 @@
   border: 1px solid white;
 }
 
-.exp-headers .mat-expansion-panel-header-title,
-.exp-headers .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
+.exp-headers {
+  .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
 
-.exp-headers .mat-expansion-panel-header-description {
-  justify-content: flex-end;
-  align-items: center;
+  .mat-expansion-panel-header-description {
+    justify-content: flex-end;
+    align-items: center;
+  }
 }
 
 #three-columns {
