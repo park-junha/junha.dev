@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"database/sql/driver"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -18,26 +19,26 @@ import (
 )
 
 // Constants
-const PROJECTS_QUERY = "projects.sql"
-const PROJECT_QUERY = "project.sql"
-const EXPERIENCES_QUERY = "experiences.sql"
-const EXPERIENCE_QUERY = "experience.sql"
-const TECHS_QUERY = "techs.sql"
-const TECH_QUERY = "tech.sql"
+const projectsQuery = "projects.sql"
+const projectQuery = "project.sql"
+const experiencesQuery = "experiences.sql"
+const experienceQuery = "experience.sql"
+const techsQuery = "techs.sql"
+const techQuery = "tech.sql"
 
 // Data structures
-type App struct {
-	config *Config
+type app struct {
+	config *appconfig
 	db     *sql.DB
 }
 
-type Config struct {
-	Database       *DatabaseConfig
-	Server         *ServerConfig
+type appconfig struct {
+	Database       *databaseConfig
+	Server         *serverConfig
 	AllowedOrigins string
 }
 
-type DatabaseConfig struct {
+type databaseConfig struct {
 	Host     string
 	Port     string
 	User     string
@@ -46,7 +47,7 @@ type DatabaseConfig struct {
 	SslMode  string
 }
 
-type ServerConfig struct {
+type serverConfig struct {
 	Host string
 	Port string
 }
@@ -55,7 +56,7 @@ type reqBody struct {
 	Query string `json:"query"`
 }
 
-type Experience struct {
+type experience struct {
 	ExperienceID string   `json:"experience_id"`
 	Label        string   `json:"label"`
 	Company      string   `json:"company"`
@@ -65,30 +66,30 @@ type Experience struct {
 	Description  []string `json:"description"`
 }
 
-type Project struct {
+type project struct {
 	ProjectID   string `json:"project_id"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
 	About       string `json:"about"`
 	Url         string `json:"url"`
 	SourceCode  string `json:"source_code_url"`
-	Languages   []Tech `json:"languages"`
-	Tools       []Tech `json:"techs"`
+	Languages   []tech `json:"languages"`
+	Tools       []tech `json:"techs"`
 }
 
-type Tech struct {
+type tech struct {
 	Name  string `json:"name"`
 	Color string `json:"color"`
 }
 
-type TechWithID struct {
+type techWithID struct {
 	TechID string `json:"tech_id"`
-	Name  string `json:"name"`
-	Color string `json:"color"`
+	Name   string `json:"name"`
+	Color  string `json:"color"`
 }
 
 // GraphQL Types
-var ExperienceType = graphql.NewObject(
+var experienceType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Experience",
 		Fields: graphql.Fields{
@@ -117,7 +118,7 @@ var ExperienceType = graphql.NewObject(
 	},
 )
 
-var ProjectType = graphql.NewObject(
+var projectType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Project",
 		Fields: graphql.Fields{
@@ -140,16 +141,16 @@ var ProjectType = graphql.NewObject(
 				Type: graphql.String,
 			},
 			"languages": &graphql.Field{
-				Type: graphql.NewList(TechType),
+				Type: graphql.NewList(techType),
 			},
 			"tools": &graphql.Field{
-				Type: graphql.NewList(TechType),
+				Type: graphql.NewList(techType),
 			},
 		},
 	},
 )
 
-var TechType = graphql.NewObject(
+var techType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "Tech",
 		Fields: graphql.Fields{
@@ -163,7 +164,7 @@ var TechType = graphql.NewObject(
 	},
 )
 
-var TechTypeWithID = graphql.NewObject(
+var techTypeWithID = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name: "TechWithID",
 		Fields: graphql.Fields{
@@ -181,7 +182,7 @@ var TechTypeWithID = graphql.NewObject(
 )
 
 // Convert file to string
-func FileToString(filename string) string {
+func fileToString(filename string) string {
 	fileContents, err := ioutil.ReadFile(filename)
 	if err != nil {
 		log.Fatal(err)
@@ -191,12 +192,12 @@ func FileToString(filename string) string {
 }
 
 // Server Config
-func (sc *ServerConfig) GetAddr() string {
+func (sc *serverConfig) getAddr() string {
 	return fmt.Sprintf("%s:%s", sc.Host, sc.Port)
 }
 
 // Database Config
-func (dc *DatabaseConfig) GetInfo() string {
+func (dc *databaseConfig) getInfo() string {
 	return fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s",
 		dc.Host,
 		dc.Port,
@@ -206,13 +207,13 @@ func (dc *DatabaseConfig) GetInfo() string {
 		dc.SslMode)
 }
 
-// Implement driver.Valuer interface to Tech struct
-func (t Tech) Value() (driver.Value, error) {
+// Value implements driver.Valuer interface to Tech struct
+func (t tech) Value() (driver.Value, error) {
 	return json.Marshal(t)
 }
 
-// Implement sql.Scanner interface to Tech struct
-func (t *Tech) Scan(value interface{}) error {
+// Scan implements sql.Scanner interface to tech struct
+func (t *tech) Scan(value interface{}) error {
 	b, ok := value.([]byte)
 	if !ok {
 		log.Fatal("fatal err: type assertion to []byte failed\n")
@@ -222,11 +223,11 @@ func (t *Tech) Scan(value interface{}) error {
 }
 
 // App
-func (a *App) Initialize() {
+func (a *app) initialize() {
 	// Configure the app
 
-	a.config = &Config{
-		Database: &DatabaseConfig{
+	a.config = &appconfig{
+		Database: &databaseConfig{
 			Host:     os.Getenv("DB_HOST"),
 			Port:     os.Getenv("DB_PORT"),
 			User:     os.Getenv("DB_USER"),
@@ -234,7 +235,7 @@ func (a *App) Initialize() {
 			Schema:   os.Getenv("DB_SCHEMA"),
 			SslMode:  os.Getenv("DB_SSLMODE"),
 		},
-		Server: &ServerConfig{
+		Server: &serverConfig{
 			Host: os.Getenv("HOST"),
 			Port: os.Getenv("PORT"),
 		},
@@ -260,21 +261,21 @@ func (a *App) Initialize() {
 	var err error
 
 	// Database
-	a.db, err = sql.Open("postgres", a.config.Database.GetInfo())
+	a.db, err = sql.Open("postgres", a.config.Database.getInfo())
 	if err != nil {
-		fmt.Println("fatal err: func (a *App) Initialize(), database connection\n")
+		fmt.Println("fatal err: func (a *app) initialize(), database connection\n")
 		log.Fatal(err)
 	}
 
 	err = a.db.Ping()
 	if err != nil {
-		fmt.Println("fatal err: func (a *App) Initialize(), database ping\n")
+		fmt.Println("fatal err: func (a *app) initialize(), database ping\n")
 		log.Fatal(err)
 	}
 }
 
 // GraphQL API handler
-func (a *App) gqlHandler() http.Handler {
+func (a *app) gqlHandler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", a.config.AllowedOrigins)
 		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
@@ -295,30 +296,38 @@ func (a *App) gqlHandler() http.Handler {
 		if err != nil {
 			fmt.Printf("%s %d\n", r.Method, 400)
 			http.Error(w, "err: could not parse JSON request body\n", 400)
+			return
 		}
 
-		fmt.Fprintf(w, "%s", a.processQuery(rBody.Query))
-		fmt.Printf("%s %d %s\n", r.Method, http.StatusOK, rBody.Query)
+		response, respStatus, respErr := a.processQuery(rBody.Query)
+		if respErr != nil {
+			fmt.Printf("%s %d\n", r.Method, 400)
+			http.Error(w, respErr.Error(), respStatus)
+			return
+		}
+		fmt.Fprintf(w, "%s", response)
+		fmt.Printf("%s %d %s\n", r.Method, respStatus, rBody.Query)
 		return
 	})
 }
 
 // GraphQL Query Handler
-func (a *App) processQuery(query string) (result string) {
+func (a *app) processQuery(query string) (result string, status int, err error) {
 	params := graphql.Params{Schema: a.gqlSchema(), RequestString: query}
 	r := graphql.Do(params)
 	if len(r.Errors) > 0 {
 		fmt.Printf("err: failed to execute graphql operation, errors: %+v\n", r.Errors)
+		return fmt.Sprintf("{\"error\":\"invalid operation\"}"), http.StatusBadRequest, errors.New("could not execute graphql operation")
 	}
 	rJSON, _ := json.Marshal(r)
 
-	return fmt.Sprintf("%s", rJSON)
+	return fmt.Sprintf("%s", rJSON), http.StatusOK, nil
 
 }
 
 // Retrieve data from Experience table
-func (a *App) getExperiences() []Experience {
-	res, err := a.db.Query(FileToString(EXPERIENCES_QUERY))
+func (a *app) getExperiences() []experience {
+	res, err := a.db.Query(fileToString(experiencesQuery))
 
 	if err != nil {
 		fmt.Println("fatal err: could not run sql query\n")
@@ -326,10 +335,10 @@ func (a *App) getExperiences() []Experience {
 	}
 	defer res.Close()
 
-	var jsonData []Experience
+	var jsonData []experience
 
 	for res.Next() {
-		var row Experience
+		var row experience
 		err = res.Scan(&row.ExperienceID,
 			&row.Label,
 			&row.Company,
@@ -349,10 +358,10 @@ func (a *App) getExperiences() []Experience {
 }
 
 // Retrieve one object from Experience table
-func (a *App) getExperience(uid string) Experience {
-	var jsonData Experience
+func (a *app) getExperience(uid string) experience {
+	var jsonData experience
 
-	err := a.db.QueryRow(FileToString(EXPERIENCE_QUERY), uid).Scan(
+	err := a.db.QueryRow(fileToString(experienceQuery), uid).Scan(
 		&jsonData.ExperienceID,
 		&jsonData.Label,
 		&jsonData.Company,
@@ -369,8 +378,8 @@ func (a *App) getExperience(uid string) Experience {
 }
 
 // Retrieve data from Projects collection
-func (a *App) getProjects() []Project {
-	res, err := a.db.Query(FileToString(PROJECTS_QUERY))
+func (a *app) getProjects() []project {
+	res, err := a.db.Query(fileToString(projectsQuery))
 
 	if err != nil {
 		fmt.Println("fatal err: could not run sql query\n")
@@ -378,10 +387,10 @@ func (a *App) getProjects() []Project {
 	}
 	defer res.Close()
 
-	var jsonData []Project
+	var jsonData []project
 
 	for res.Next() {
-		var row Project
+		var row project
 		err = res.Scan(&row.ProjectID,
 			&row.Title,
 			&row.Description,
@@ -402,10 +411,10 @@ func (a *App) getProjects() []Project {
 }
 
 // Retrieve one object from Projects collection
-func (a *App) getProject(uid string) Project {
-	var jsonData Project
+func (a *app) getProject(uid string) project {
+	var jsonData project
 
-	err := a.db.QueryRow(FileToString(PROJECT_QUERY), uid).Scan(
+	err := a.db.QueryRow(fileToString(projectQuery), uid).Scan(
 		&jsonData.ProjectID,
 		&jsonData.Title,
 		&jsonData.Description,
@@ -423,8 +432,8 @@ func (a *App) getProject(uid string) Project {
 }
 
 // Retrieve data from Techs table
-func (a *App) getTechs(filter string) []TechWithID {
-	res, err := a.db.Query(FileToString(TECHS_QUERY), filter)
+func (a *app) getTechs(filter string) []techWithID {
+	res, err := a.db.Query(fileToString(techsQuery), filter)
 
 	if err != nil {
 		fmt.Println("fatal err: could not run sql query\n")
@@ -432,10 +441,10 @@ func (a *App) getTechs(filter string) []TechWithID {
 	}
 	defer res.Close()
 
-	var jsonData []TechWithID
+	var jsonData []techWithID
 
 	for res.Next() {
-		var row TechWithID
+		var row techWithID
 		err = res.Scan(&row.TechID,
 			&row.Name,
 			&row.Color)
@@ -451,10 +460,10 @@ func (a *App) getTechs(filter string) []TechWithID {
 }
 
 // Retrieve one object from Techs table
-func (a *App) getTech(uid string) TechWithID {
-	var jsonData TechWithID
+func (a *app) getTech(uid string) techWithID {
+	var jsonData techWithID
 
-	err := a.db.QueryRow(FileToString(TECH_QUERY), uid).Scan(
+	err := a.db.QueryRow(fileToString(techQuery), uid).Scan(
 		&jsonData.TechID,
 		&jsonData.Name,
 		&jsonData.Color)
@@ -467,17 +476,17 @@ func (a *App) getTech(uid string) TechWithID {
 }
 
 // Define the GraphQL Schema
-func (a *App) gqlSchema() graphql.Schema {
+func (a *app) gqlSchema() graphql.Schema {
 	fields := graphql.Fields{
 		"experiences": &graphql.Field{
-			Type:        graphql.NewList(ExperienceType),
+			Type:        graphql.NewList(experienceType),
 			Description: "All Experience",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				return a.getExperiences(), nil
 			},
 		},
 		"experience": &graphql.Field{
-			Type:        ExperienceType,
+			Type:        experienceType,
 			Description: "Get Experience by ID",
 			Args: graphql.FieldConfigArgument{
 				"experience_id": &graphql.ArgumentConfig{
@@ -493,14 +502,14 @@ func (a *App) gqlSchema() graphql.Schema {
 			},
 		},
 		"projects": &graphql.Field{
-			Type:        graphql.NewList(ProjectType),
+			Type:        graphql.NewList(projectType),
 			Description: "All Projects",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				return a.getProjects(), nil
 			},
 		},
 		"project": &graphql.Field{
-			Type:        ProjectType,
+			Type:        projectType,
 			Description: "Get Projects by ID",
 			Args: graphql.FieldConfigArgument{
 				"project_id": &graphql.ArgumentConfig{
@@ -516,21 +525,21 @@ func (a *App) gqlSchema() graphql.Schema {
 			},
 		},
 		"languages": &graphql.Field{
-			Type:        graphql.NewList(TechTypeWithID),
+			Type:        graphql.NewList(techTypeWithID),
 			Description: "All Language Technologies",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				return a.getTechs("la%"), nil
 			},
 		},
 		"tools": &graphql.Field{
-			Type:        graphql.NewList(TechTypeWithID),
+			Type:        graphql.NewList(techTypeWithID),
 			Description: "All Other Technologies",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				return a.getTechs("to%"), nil
 			},
 		},
 		"tech": &graphql.Field{
-			Type:        TechTypeWithID,
+			Type:        techTypeWithID,
 			Description: "Get Techs by ID",
 			Args: graphql.FieldConfigArgument{
 				"tech_id": &graphql.ArgumentConfig{
@@ -557,9 +566,9 @@ func (a *App) gqlSchema() graphql.Schema {
 }
 
 // Serverless router
-func LambdaRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	app := &App{}
-	app.Initialize()
+func lambdaRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	app := &app{}
+	app.initialize()
 
 	switch req.HTTPMethod {
 	case "OPTIONS":
@@ -582,39 +591,51 @@ func LambdaRouter(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResp
 			Body: "{\n  \"status\": {\n    \"api\": \"up\",\n    \"ui\": \"https://junha.dev/\"\n  }\n}\n",
 		}, nil
 	case "POST":
-		return app.HandleLambdaRequest(req)
+		return app.handleLambdaRequest(req)
 	default:
-		return app.BadLambdaRequest(http.StatusMethodNotAllowed)
+		return app.badLambdaRequest(http.StatusMethodNotAllowed)
 	}
 }
 
 // Handle serverless GraphQL request
-func (a *App) HandleLambdaRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+func (a *app) handleLambdaRequest(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	if req.Headers["content-type"] != "application/json" && req.Headers["Content-Type"] != "application/json" {
-		return a.BadLambdaRequest(http.StatusNotAcceptable)
+		return a.badLambdaRequest(http.StatusNotAcceptable)
 	}
 
 	rBody := new(reqBody)
 	err := json.Unmarshal([]byte(req.Body), rBody)
 	if err != nil {
-		return a.BadLambdaRequest(http.StatusBadRequest)
+		return a.badLambdaRequest(http.StatusBadRequest)
 	}
 
-	res := a.processQuery(rBody.Query)
+	response, respStatus, respErr := a.processQuery(rBody.Query)
+
+	if respErr != nil {
+		return events.APIGatewayProxyResponse{
+			StatusCode: respStatus,
+			Headers: map[string]string{
+				"Access-Control-Allow-Origin":  a.config.AllowedOrigins,
+				"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+				"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
+			},
+			Body: respErr.Error(),
+		}, nil
+	}
 
 	return events.APIGatewayProxyResponse{
-		StatusCode: 200,
+		StatusCode: respStatus,
 		Headers: map[string]string{
 			"Access-Control-Allow-Origin":  a.config.AllowedOrigins,
 			"Access-Control-Allow-Methods": "POST, GET, OPTIONS",
 			"Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
 		},
-		Body: res,
+		Body: response,
 	}, nil
 }
 
 // Handle bad serverless request
-func (a *App) BadLambdaRequest(status int) (events.APIGatewayProxyResponse, error) {
+func (a *app) badLambdaRequest(status int) (events.APIGatewayProxyResponse, error) {
 	return events.APIGatewayProxyResponse{
 		StatusCode: status,
 		Headers: map[string]string{
@@ -627,14 +648,14 @@ func (a *App) BadLambdaRequest(status int) (events.APIGatewayProxyResponse, erro
 }
 
 // Run app in development mode
-func (a *App) Run() {
+func (a *app) run() {
 	// Routes
 	http.Handle("/", a.gqlHandler())
 
 	// Serve the app
-	fmt.Printf("Serving on %s.\n", a.config.Server.GetAddr())
+	fmt.Printf("Serving on %s.\n", a.config.Server.getAddr())
 
-	http.ListenAndServe(a.config.Server.GetAddr(), nil)
+	http.ListenAndServe(a.config.Server.getAddr(), nil)
 }
 
 // Main
@@ -645,7 +666,7 @@ func main() {
 	// Run app in serverless mode (default) or another mode
 	if len(args) == 1 {
 		fmt.Printf("%s - running in lambda mode.\n", args[0])
-		lambda.Start(LambdaRouter)
+		lambda.Start(lambdaRouter)
 	} else if len(args) == 2 {
 		fmt.Printf("%s - running in %s mode.\n", args[0], args[1])
 		switch args[1] {
@@ -655,9 +676,9 @@ func main() {
 				log.Printf("error: could not find .env file\n")
 			}
 
-			app := &App{}
-			app.Initialize()
-			app.Run()
+			app := &app{}
+			app.initialize()
+			app.run()
 		default:
 			usage(args[0])
 		}
