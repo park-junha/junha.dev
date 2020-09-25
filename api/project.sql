@@ -36,7 +36,7 @@ SELECT
     ) ots
   )
 FROM
-  projects p
+  %v p
 WHERE
   project_id = $1
 ORDER BY

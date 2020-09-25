@@ -36,7 +36,7 @@ SELECT
     ) ots
   )
 FROM
-  projects p
+  %v p
 ORDER BY
   project_id
 ASC;

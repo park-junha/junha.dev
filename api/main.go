@@ -13,6 +13,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
+	"github.com/friendsofgo/graphiql"
 	"github.com/graphql-go/graphql"
 	"github.com/joho/godotenv"
 	"github.com/lib/pq"
@@ -378,8 +379,9 @@ func (a *app) getExperience(uid string) experience {
 }
 
 // Retrieve data from Projects collection
-func (a *app) getProjects() []project {
-	res, err := a.db.Query(fileToString(projectsQuery))
+func (a *app) getProjects(table string) []project {
+	table = pq.QuoteIdentifier(table)
+	res, err := a.db.Query(fmt.Sprintf(fileToString(projectsQuery), table))
 
 	if err != nil {
 		fmt.Println("fatal err: could not run sql query\n")
@@ -411,10 +413,11 @@ func (a *app) getProjects() []project {
 }
 
 // Retrieve one object from Projects collection
-func (a *app) getProject(uid string) project {
+func (a *app) getProject(table string, uid string) project {
 	var jsonData project
 
-	err := a.db.QueryRow(fileToString(projectQuery), uid).Scan(
+	table = pq.QuoteIdentifier(table)
+	err := a.db.QueryRow(fmt.Sprintf(fileToString(projectQuery), table), uid).Scan(
 		&jsonData.ProjectID,
 		&jsonData.Title,
 		&jsonData.Description,
@@ -501,11 +504,80 @@ func (a *app) gqlSchema() graphql.Schema {
 				return nil, nil
 			},
 		},
+		"personal_projects": &graphql.Field{
+			Type:        graphql.NewList(projectType),
+			Description: "All Projects",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getProjects("personalprojects"), nil
+			},
+		},
+		"personal_project": &graphql.Field{
+			Type:        projectType,
+			Description: "Get Projects by ID",
+			Args: graphql.FieldConfigArgument{
+				"project_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["project_id"].(string)
+				if success {
+					return a.getProject("personalprojects", uid), nil
+				}
+				return nil, nil
+			},
+		},
+		"professional_projects": &graphql.Field{
+			Type:        graphql.NewList(projectType),
+			Description: "All Projects",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getProjects("professionalprojects"), nil
+			},
+		},
+		"professional_project": &graphql.Field{
+			Type:        projectType,
+			Description: "Get Projects by ID",
+			Args: graphql.FieldConfigArgument{
+				"project_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["project_id"].(string)
+				if success {
+					return a.getProject("professionalprojects", uid), nil
+				}
+				return nil, nil
+			},
+		},
+		"open_source_projects": &graphql.Field{
+			Type:        graphql.NewList(projectType),
+			Description: "All Projects",
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				return a.getProjects("opensourceprojects"), nil
+			},
+		},
+		"open_source_project": &graphql.Field{
+			Type:        projectType,
+			Description: "Get Projects by ID",
+			Args: graphql.FieldConfigArgument{
+				"project_id": &graphql.ArgumentConfig{
+					Type: graphql.String,
+				},
+			},
+			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+				uid, success := params.Args["project_id"].(string)
+				if success {
+					return a.getProject("opensourceprojects", uid), nil
+				}
+				return nil, nil
+			},
+		},
 		"projects": &graphql.Field{
 			Type:        graphql.NewList(projectType),
 			Description: "All Projects",
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
-				return a.getProjects(), nil
+				return a.getProjects("projects"), nil
 			},
 		},
 		"project": &graphql.Field{
@@ -519,7 +591,7 @@ func (a *app) gqlSchema() graphql.Schema {
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				uid, success := params.Args["project_id"].(string)
 				if success {
-					return a.getProject(uid), nil
+					return a.getProject("projects", uid), nil
 				}
 				return nil, nil
 			},
@@ -649,8 +721,11 @@ func (a *app) badLambdaRequest(status int) (events.APIGatewayProxyResponse, erro
 
 // Run app in development mode
 func (a *app) run() {
+	graphiqlHandler, _ := graphiql.NewGraphiqlHandler("/")
+
 	// Routes
 	http.Handle("/", a.gqlHandler())
+	http.Handle("/graphiql", graphiqlHandler)
 
 	// Serve the app
 	fmt.Printf("Serving on %s.\n", a.config.Server.getAddr())
