@@ -42,7 +42,15 @@ export class AppComponent implements OnInit {
     },
     {
       'label': 'Projects',
-      'route': '/projects'
+      'route': '/projects/personal'
+    },
+    {
+      'label': 'Enterprise',
+      'route': '/projects/enterprise'
+    },
+    {
+      'label': 'Open Source',
+      'route': '/projects/opensource'
     }
   ];
 

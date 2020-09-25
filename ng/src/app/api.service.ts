@@ -31,7 +31,9 @@ export class ApiService {
     });
     this.api = {
       'experiences': [],
-      'projects': []
+      'personal_projects': [],
+      'professional_projects': [],
+      'open_source_projects': []
     };
     this.isLoading = false;
   }
@@ -44,7 +46,9 @@ export class ApiService {
       { 'query': query },
       { 'headers': this.headers }
     ).subscribe(res => {
-      this.api.projects = res.data.projects;
+      this.api.personal_projects = res.data.personal_projects;
+      this.api.professional_projects = res.data.professional_projects;
+      this.api.open_source_projects = res.data.open_source_projects;
       this.api.experiences = res.data.experiences;
       this.apiUpdate.next(this.api);
       this.isLoading = false;
@@ -64,7 +68,15 @@ export class ApiService {
     return this.api.experiences;
   }
 
-  getProjects(): Array<Project> {
-    return this.api.projects;
+  getPersonalProjects(): Array<Project> {
+    return this.api.personal_projects;
+  }
+
+  getProfessionalProjects(): Array<Project> {
+    return this.api.professional_projects;
+  }
+
+  getOpenSourceProjects(): Array<Project> {
+    return this.api.open_source_projects;
   }
 }
