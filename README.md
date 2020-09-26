@@ -37,6 +37,10 @@ Run web backend only.
 
 Run web frontend only.
 
+#### `-ul, --ui-lambda`
+
+Run web frontend only with a connection established to API on AWS Lambda.
+
 #### `-p, --production-mode`
 
 Run the web frontend with a production environment. This will **not** run the web backend, as the development frontend will make calls to the live web API instead.

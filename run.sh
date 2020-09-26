@@ -32,6 +32,10 @@ function ui {
         ng serve
     elif [[ $# -eq 1 ]]; then
         case $1 in
+        lambda)
+            echo "Using AWS Lambda API environment..."
+            ng serve --configuration=lambda
+            ;;
         prod)
             echo "Using production environment..."
             ng serve --configuration=production
@@ -160,6 +164,12 @@ elif [[ $# -eq 1 ]]; then
         clear
         echo "Starting script..." | log pw3:sh $SH_LOG
         (ui | log pw3:ng $NG_LOG)
+        echo "Script complete." | log pw3:sh $SH_LOG
+        ;;
+    -ul | --ui-lambda)
+        clear
+        echo "Starting script..." | log pw3:sh $SH_LOG
+        (ui lambda | log pw3:ng $NG_LOG)
         echo "Script complete." | log pw3:sh $SH_LOG
         ;;
     -uh | -hu)
