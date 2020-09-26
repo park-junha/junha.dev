@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   HttpClientTestingModule
 } from '@angular/common/http/testing';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatRippleModule } from '@angular/material/core';
@@ -18,6 +19,20 @@ import { ApiService } from '../api.service';
 import dummyData from '../../test.data';
 
 describe('ProjectsComponent', () => {
+  let mockActivatedRoute = {
+    snapshot: {
+      params: {
+        projectType: 'personal'
+      }
+    }
+  };
+  let mockRouter = {
+    navigate: jasmine.createSpy('navigate'),
+    routeReuseStrategy: {
+      shouldReuseRoute: null
+    }
+  };
+
   let component: ProjectsComponent;
   let service: ApiService;
   let fixture: ComponentFixture<ProjectsComponent>;
@@ -33,7 +48,17 @@ describe('ProjectsComponent', () => {
         MatProgressSpinnerModule,
         BrowserAnimationsModule
       ],
-      providers: [ ApiService ]
+      providers: [
+        ApiService,
+        {
+          provide: Router,
+          useValue: mockRouter
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: mockActivatedRoute
+        }
+      ]
     })
     .compileComponents();
   }));
@@ -140,10 +165,10 @@ describe('ProjectsComponent', () => {
   });
 
   it('should display projects data correctly', () => {
-    component.projects = dummyData.projects;
+    component.projects = dummyData.personal_projects;
     fixture.detectChanges();
 
-    dummyData.projects.forEach((project, index) => {
+    dummyData.personal_projects.forEach((project, index) => {
       expect(textOf(`#app-projects-content \
         mat-card:nth-child(${index + 1}) mat-card-content h2`))
         .toEqual(project.title);
