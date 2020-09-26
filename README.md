@@ -10,13 +10,16 @@ Source code for personal website, developed on a full solution stack.
 
 ### Software Stack
 
-**Web UI**: Angular (TypeScript)
-
-**Web API**: GraphQL (Go)
-
-**Database**: PostgreSQL
-
-**Cloud**: Netlify, AWS Lambda
+- **Application UI**: TypeScript
+  - **Framework**: Angular 10.0.0
+  - **Stylesheets**: SCSS
+- **Application API**: Go
+  - **Data Protocol**: GraphQL
+- **Database**: PostgreSQL
+- **Test Automation**: Jasmine
+  - **Unit Tests**: Karma
+  - **End-to-end Tests**: Protractor
+- **Cloud**: Netlify, AWS Lambda
 
 ## Available Scripts
 
