@@ -52,16 +52,3 @@ CREATE TABLE IF NOT EXISTS OpenSourceProjects (
   , languages CHAR(4) []
   , other_tools CHAR(4) []
 );
-
--- Deprecated, only used by version 2.2+
-DROP TABLE IF EXISTS Projects;
-CREATE TABLE IF NOT EXISTS Projects (
-  project_id CHAR(4) PRIMARY KEY
-  , title TEXT
-  , description TEXT
-  , about TEXT
-  , url TEXT
-  , source_code_url TEXT
-  , languages CHAR(4) []
-  , other_tools CHAR(4) []
-);
