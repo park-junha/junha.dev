@@ -31,6 +31,14 @@
             "scripts": []
           },
           "configurations": {
+            "lambda": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.awslambda.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -67,6 +75,9 @@
             "browserTarget": "junha-angular:build"
           },
           "configurations": {
+            "lambda": {
+              "browserTarget": "junha-angular:build:lambda"
+            },
             "production": {
               "browserTarget": "junha-angular:build:production"
             }
