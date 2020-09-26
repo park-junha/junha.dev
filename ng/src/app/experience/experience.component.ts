@@ -9,7 +9,7 @@ import { RIPPLE_COLOR_RED } from '../../environments/constants';
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
-  styleUrls: ['./experience.component.css']
+  styleUrls: ['./experience.component.scss']
 })
 export class ExperienceComponent implements OnInit {
   public experiences: Array<Experience>;

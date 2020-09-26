@@ -22,11 +22,15 @@ describe('ApiService', () => {
   it('should contain no initial data', () => {
     const expectedData = {
       'experiences': [],
-      'projects': []
+      'personal_projects': [],
+      'professional_projects': [],
+      'open_source_projects': [],
     };
 
     expect(service.get()).toEqual(expectedData);
-    expect(service.getProjects()).toEqual([]);
+    expect(service.getPersonalProjects()).toEqual([]);
+    expect(service.getProfessionalProjects()).toEqual([]);
+    expect(service.getOpenSourceProjects()).toEqual([]);
     expect(service.getExperiences()).toEqual([]);
   });
 

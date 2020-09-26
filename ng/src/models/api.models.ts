@@ -2,13 +2,22 @@ export interface ApiResponse {
   data: {
     experiences?: Array<Experience>;
     experience?: Experience;
-    projects?: Array<Project>;
-    project?: Project;
+    personal_projects?: Array<Project>;
+    personal_project?: Project;
+    professional_projects?: Array<Project>;
+    professional_project?: Project;
+    open_source_projects?: Array<Project>;
+    open_source_project?: Project;
+
+    projects?: Array<Project>;  //  LEGACY
+    project?: Project;          //  LEGACY
   };
 };
 
 export interface Api {
-  projects: Array<Project>;
+  personal_projects: Array<Project>;
+  professional_projects: Array<Project>;
+  open_source_projects: Array<Project>;
   experiences: Array<Experience>;
 };
 

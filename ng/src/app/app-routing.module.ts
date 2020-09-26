@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'index', redirectTo: 'home' },
   { path: 'about', component: AboutComponent },
   { path: 'experience', component: ExperienceComponent },
-  { path: 'projects', component: ProjectsComponent },
+  { path: 'projects/:projectType', component: ProjectsComponent },
   { path: '**', component: NotfoundComponent }
 ];
 

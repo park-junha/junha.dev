@@ -38,8 +38,12 @@ describe('App', () => {
     expect(browser.getCurrentUrl()).toMatch(/\/about$/);
     page.clickByCss('#app-contents-left mat-nav-list a:nth-child(2)');
     expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(5)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/opensource$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(4)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/enterprise$/);
     page.clickByCss('#app-contents-left mat-nav-list a:nth-child(3)');
-    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/personal$/);
     page.clickByCss('#app-contents-left mat-nav-list a:nth-child(3)');
     expect(browser.getCurrentUrl()).toMatch(/\/home$/);
     page.clickByCss('#app-contents-left mat-nav-list a:nth-child(1)');
@@ -50,8 +54,14 @@ describe('App', () => {
     expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
     page.clickByCss('#app-contents-left mat-nav-list a:nth-child(2)');
     expect(browser.getCurrentUrl()).toMatch(/\/home$/);
-    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(3)');
-    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(5)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/opensource$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(5)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(4)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/enterprise$/);
+    page.clickByCss('#app-contents-left mat-nav-list a:nth-child(4)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
   });
 
   it('should navigate to correct routes on mobile navbar clicks', () => {
@@ -61,10 +71,18 @@ describe('App', () => {
     expect(browser.getCurrentUrl()).toMatch(/\/about$/);
     page.clickByCss('#app-mobile-navbar a:nth-child(2)');
     expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
+    page.clickByCss('#app-mobile-navbar .mat-tab-header-pagination-after');
+    browser.sleep(300);
+    page.clickByCss('#app-mobile-navbar a:nth-child(5)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/opensource$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(4)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/enterprise$/);
     page.clickByCss('#app-mobile-navbar a:nth-child(3)');
-    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/personal$/);
     page.clickByCss('#app-mobile-navbar a:nth-child(3)');
     expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-mobile-navbar .mat-tab-header-pagination-before');
+    browser.sleep(300);
     page.clickByCss('#app-mobile-navbar a:nth-child(1)');
     expect(browser.getCurrentUrl()).toMatch(/\/about$/);
     page.clickByCss('#app-mobile-navbar a:nth-child(1)');
@@ -73,8 +91,16 @@ describe('App', () => {
     expect(browser.getCurrentUrl()).toMatch(/\/experience$/);
     page.clickByCss('#app-mobile-navbar a:nth-child(2)');
     expect(browser.getCurrentUrl()).toMatch(/\/home$/);
-    page.clickByCss('#app-mobile-navbar a:nth-child(3)');
-    expect(browser.getCurrentUrl()).toMatch(/\/projects$/);
+    page.clickByCss('#app-mobile-navbar .mat-tab-header-pagination-after');
+    browser.sleep(300);
+    page.clickByCss('#app-mobile-navbar a:nth-child(5)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/opensource$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(5)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(4)');
+    expect(browser.getCurrentUrl()).toMatch(/\/projects\/enterprise$/);
+    page.clickByCss('#app-mobile-navbar a:nth-child(4)');
+    expect(browser.getCurrentUrl()).toMatch(/\/home$/);
   });
 
   afterEach(async () => {
@@ -102,7 +128,6 @@ describe('App Footer', () => {
       },
       {
         //  Check base URL only to account for unauthenticated users
-        //  TODO: Write a test for authenticated user?
         'url': 'https://www.linkedin.com',
         'child': 2
       },

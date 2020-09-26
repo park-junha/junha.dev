@@ -12,7 +12,7 @@ import { NavRoutes } from '../models/nav.models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
@@ -42,7 +42,15 @@ export class AppComponent implements OnInit {
     },
     {
       'label': 'Projects',
-      'route': '/projects'
+      'route': '/projects/personal'
+    },
+    {
+      'label': 'Enterprise',
+      'route': '/projects/enterprise'
+    },
+    {
+      'label': 'Open Source',
+      'route': '/projects/opensource'
     }
   ];
 

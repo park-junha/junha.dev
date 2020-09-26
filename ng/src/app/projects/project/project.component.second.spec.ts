@@ -6,7 +6,7 @@ import { ProjectComponent } from './project.component';
 import dummyData from '../../../test.data';
 
 describe('ProjectComponent', () => {
-  const testModel = dummyData.projects[1];
+  const testModel = dummyData.personal_projects[1];
 
   let component: ProjectComponent;
   let fixture: ComponentFixture<ProjectComponent>;

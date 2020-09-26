@@ -21,7 +21,93 @@ const dummyData = {
       ]
     }
   ],
-  'projects': [
+  'personal_projects': [
+    {
+      'title': 'V8',
+      'languages': [
+        {
+          'name': 'C++',
+          'color': '#f34b7d'
+        }
+      ],
+      'tools': [],
+      'description': 'JavaScript engine by Google',
+      'about': 'Runs on Chrome and Node.js',
+      'url': '',
+      'source_code_url': ''
+    },
+    {
+      'title': 'Personal Website',
+      'languages': [
+        {
+          'name': 'TypeScript',
+          'color': '#286c7f'
+        },
+        {
+          'name': 'Go',
+          'color': '#00add8'
+        }
+      ],
+      'tools': [
+        {
+          'name': 'Angular',
+          'color': '#a3112d'
+        },
+        {
+          'name': 'GraphQL',
+          'color': '#e535ab'
+        }
+      ],
+      'description': 'This site',
+      'about': 'Written in Angular with a GraphQL backend',
+      'url': 'https://junha.dev',
+      'source_code_url': 'https://github.com/park-junha/PersonalWebsite'
+    }
+  ],
+  'professional_projects': [
+    {
+      'title': 'V8',
+      'languages': [
+        {
+          'name': 'C++',
+          'color': '#f34b7d'
+        }
+      ],
+      'tools': [],
+      'description': 'JavaScript engine by Google',
+      'about': 'Runs on Chrome and Node.js',
+      'url': '',
+      'source_code_url': ''
+    },
+    {
+      'title': 'Personal Website',
+      'languages': [
+        {
+          'name': 'TypeScript',
+          'color': '#286c7f'
+        },
+        {
+          'name': 'Go',
+          'color': '#00add8'
+        }
+      ],
+      'tools': [
+        {
+          'name': 'Angular',
+          'color': '#a3112d'
+        },
+        {
+          'name': 'GraphQL',
+          'color': '#e535ab'
+        }
+      ],
+      'description': 'This site',
+      'about': 'Written in Angular with a GraphQL backend',
+      'url': 'https://junha.dev',
+      'source_code_url': 'https://github.com/park-junha/PersonalWebsite'
+    }
+  ],
+  'open_source_projects': [
     {
       'title': 'V8',
       'languages': [
