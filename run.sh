@@ -115,6 +115,7 @@ function usage {
     echo "(no flags): Run web UI and web API locally in development mode"
     echo "-a, --api-only: Run web API only in development mode"
     echo "-u, --ui-only: Run web UI only in development mode"
+    echo "-ul, --ui-lambda: Run web UI only in development mode with connection to production API on AWS Lambda"
     echo "-p, --production-mode: Run web UI in development mode with a production environment. This mode will NOT run the web API, since the web UI will make calls from the live web API"
     echo "-h, --host-lan: Host web UI on local IP address"
     echo "-t, --test: Run unit tests and end-to-end tests while running web API in development mode"
