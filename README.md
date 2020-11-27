@@ -12,7 +12,7 @@ Source code for personal website, developed on a full solution stack.
 
 - **Application UI**: TypeScript
   - **Framework**: Angular 10.0.0
-  - **Stylesheets**: SCSS
+  - **Stylesheets**: Stylus
 - **Application API**: Go
   - **Data Protocol**: GraphQL
 - **Database**: PostgreSQL

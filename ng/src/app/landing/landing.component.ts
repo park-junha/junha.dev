@@ -4,7 +4,7 @@ import { LandingContents } from '../../models/landing.models';
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
-  styleUrls: ['./landing.component.scss']
+  styleUrls: ['./landing.component.styl']
 })
 export class LandingComponent {
 
