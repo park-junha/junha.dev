@@ -6,7 +6,7 @@ import {
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss']
+  styleUrls: ['./about.component.styl']
 })
 export class AboutComponent {
 

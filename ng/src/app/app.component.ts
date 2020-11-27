@@ -12,7 +12,7 @@ import { NavRoutes } from '../models/nav.models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.styl'],
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {

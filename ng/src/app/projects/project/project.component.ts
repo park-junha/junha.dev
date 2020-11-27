@@ -5,7 +5,7 @@ import { Project } from '../../../models/api.models';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
-  styleUrls: ['./project.component.scss']
+  styleUrls: ['./project.component.styl']
 })
 export class ProjectComponent {
   public aboutLabel: string = 'Overview';
