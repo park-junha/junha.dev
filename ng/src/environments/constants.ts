@@ -1,4 +1,4 @@
-export const VERSION: string = '3.2.0';
+export const VERSION: string = '3.2.1';
 
 export const RIPPLE_COLOR_RED: string = 'rgba(215, 80, 80, 0.15)';
 export const FETCH_ALL_QUERY: string = '{ ' + 

@@ -49,6 +49,13 @@ export class ExperienceComponent implements OnInit {
     });
   }
 
+  // WORKAROUND FOR: https://github.com/angular/components/issues/13870
+  // See: https://stackblitz.com/edit/angular-issue13870-workaround
+  disableAnimation = true;
+  ngAfterViewInit(): void {
+    setTimeout(() => this.disableAnimation = false);
+  }
+
   private formatShortDate(date: string): string {
     return new Date(date).toLocaleString('default', {
       timeZone: 'UTC',

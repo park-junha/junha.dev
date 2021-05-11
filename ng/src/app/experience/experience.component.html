@@ -1,5 +1,6 @@
 <mat-accordion
   *ngIf="isLoaded else loading"
+  [@.disabled]="disableAnimation"
   class="exp-headers exp-body"
   id="app-experience-accordion"
   multi
