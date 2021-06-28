@@ -41,6 +41,7 @@ export class ProjectsComponent {
         this.projects = updated.personal_projects;
       });
       break;
+    /*
     case 'enterprise':
       this.projects = this.apiService.getProfessionalProjects();
       this.isLoaded = !this.apiService.getLoadingState();
@@ -51,6 +52,7 @@ export class ProjectsComponent {
         this.projects = updated.professional_projects;
       });
       break;
+    */
     case 'opensource':
       this.projects = this.apiService.getOpenSourceProjects();
       this.isLoaded = !this.apiService.getLoadingState();
